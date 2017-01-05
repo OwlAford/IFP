@@ -21,10 +21,10 @@ export const doubleAsync = (cb) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        dispatch(increment(getState().counter.count))
+        dispatch(increment(getState().message.count))
         cb && cb()
         resolve()
-      }, 2600)
+      }, 2000)
     })
   }
 }

@@ -55,22 +55,12 @@ export default class Sidebar extends Component {
           selectedKeys={[this.state.current]}
           mode="inline"
         >
-          <SubMenu key="sub1" title={<span><Icon type="laptop" /><span>今日实时</span></span>}>
-            <Menu.Item key="home">
-              <IndexLink to='/inmanage'>首页一览</IndexLink>
-            </Menu.Item>
-            <Menu.Item key="counter">
-              <IndexLink to='/inmanage/counter'>统计中心</IndexLink>
-            </Menu.Item>
-          </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="team" /><span>用户中心</span></span>}>
-            <Menu.Item key="user">
-              <IndexLink to='/inmanage/user'>用户信息</IndexLink>
+            <Menu.Item key="message">
+              <IndexLink to='/inmanage/main/message'>message</IndexLink>
             </Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Navigation</span></span>}>
-            <Menu.Item key="nofound">
-              <IndexLink to='/inmanage/nofound'>不存在页面</IndexLink>
+            <Menu.Item key="review">
+              <IndexLink to='/inmanage/main/review'>review</IndexLink>
             </Menu.Item>
           </SubMenu>
         </Menu>

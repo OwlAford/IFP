@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
 const error = function () {
@@ -13,7 +14,7 @@ export default class NotFound extends Component {
   componentWillMount() {
     error()
     let timer = setTimeout(() => {
-      this.context.router.replace('/')
+      this.context.router.replace(API.CONTENTNAME)
       clearTimeout(timer)
     }, 2000)
   }

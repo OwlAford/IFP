@@ -3,10 +3,10 @@ import { Row, Col, Button, Radio, Card } from 'antd'
 import echarts, { line, tooltip } from 'echarts'
 const ButtonGroup = Button.Group
 
-export default class CounterView extends Component {
+export default class MessageView extends Component {
 
   static propTypes = {
-    counter     : PropTypes.object.isRequired,
+    message     : PropTypes.object.isRequired,
     doubleAsync : PropTypes.func.isRequired,
     logtime     : PropTypes.func.isRequired,
     increment   : PropTypes.func.isRequired
@@ -28,6 +28,10 @@ export default class CounterView extends Component {
     let self = this
     self.setState({ loading: true })
     self.props.doubleAsync(() => self.setState({ loading: false }))
+  }
+
+  componentWillMount () {
+    console.log(this.props)
   }
 
   componentDidMount () {
@@ -116,7 +120,7 @@ export default class CounterView extends Component {
         <div className='content-cell'>
           <Row>
             <Col span={6}>
-              <span style={{lineHeight: '28px'}}>数字叠加器: {this.props.counter.count}</span>
+              <span style={{lineHeight: '28px'}}>数字叠加器: {this.props.message.count}</span>
             </Col>
             <Col span={8}>
               <Button type="primary" onClick={this.props.increment} className='mr10'>
@@ -127,7 +131,7 @@ export default class CounterView extends Component {
               </Button>
             </Col>
             <Col span={6}>
-              <span style={{lineHeight: '28px'}}>不定增量次数: {this.props.counter.time}</span>
+              <span style={{lineHeight: '28px'}}>不定增量次数: {this.props.message.time}</span>
             </Col>
             <Col span={4}>
               <Button type="primary" className='fr' onClick={this.props.logtime}>

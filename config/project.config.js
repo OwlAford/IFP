@@ -39,7 +39,9 @@ const config = {
     'react',
     'react-redux',
     'react-router',
-    'redux'
+    'redux',
+    // 'echarts',
+    // 'antd'
   ]
 }
 
