@@ -1,5 +1,5 @@
 import CK from 'UTIL/cookie'
-import { REQ_TYPE_LIST, ROUTER_ACTION_TYPE } from 'CONSTANT/commonTypes'
+import { REQ_TYPE_LIST, ROUTER_ACTION_TYPE } from 'CONSTANT/types/common'
 export function logger ({ dispatch, getState }) {
   return next => action => {
     if (window.globalConfig && window.globalConfig.LOG_ACTION === 'true') {

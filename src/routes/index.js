@@ -5,7 +5,7 @@ import Home from './Home'
 
 // 配置路由
 export const createRoutes = (store) => ({
-  path        : '/',
+  path        : '/inmanage',
   component   : CoreLayout,
   indexRoute  : Home,
   // 子路由不进行模块分割

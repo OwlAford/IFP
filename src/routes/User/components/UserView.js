@@ -61,8 +61,9 @@ export default class UserView extends Component {
     this.setState({
       loadUid: true
     })
-    this.props.getuidAsync((data) => {
-      this.state.uidVal = data.uid
+    this.props.getuidAsync((state, data) => {
+      if (!state)
+        this.state.uidVal = data.uid
       this.setState({
         loadUid: false
       })

@@ -67,7 +67,7 @@ export default store => next => action => {
   }
 
   const [reqType, successType, failType] = types
-  next(actionWith({ type:reqType, url:url }))
+  next(actionWith({ type:reqType, url: url }))
   if (process.env.NODE_ENV !== 'production') {
     console.log("BZ_REQUESTER action url:" + url + " body:" + finalBody)
   }

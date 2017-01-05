@@ -1,4 +1,6 @@
-import {BZ_REQUESTER} from 'UTIL/requesterMiddleware'
+import {BZ_REQUESTER} from 'MIDDLEWARE/requester'
+import { API } from 'CONSTANT/globals'
+import * as actions from 'CONSTANT/types/home'
 
 // Actions =============================================================
 
@@ -32,17 +34,18 @@ export function setname (value) {
 
 export const getuidAsync = (cb) => {
   return (dispatch, getState) => {
-    dispatch(getuidAction(cb)).then(action => {
-        dispatch(setuid(action.uid))
+    dispatch(getuidAction()).then(action => {
+        action.type != 'AUTH_MENU_FAL' && dispatch(setuid(action.data.body.uid))
+        cb && cb(action.type == 'AUTH_MENU_FAL', action.data.body)
     })
   }
 }
 
-const getuidAction = (cb) => {
+const getuidAction = () => {
   return {
     [BZ_REQUESTER] : {
-      url: 'http://amaze.qiniudn.com/user',
-      callback: cb
+      types: [actions.AUTH_MENU_REQ, actions.AUTH_MENU_SUC, actions.AUTH_MENU_FAL],
+      url: API.AUTHRESOURCE_URL
     }
   }
 }

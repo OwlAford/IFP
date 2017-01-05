@@ -17,15 +17,17 @@ import { logger } from 'MIDDLEWARE/log'
 import requester from 'MIDDLEWARE/requester'
 
 export default (initialState = {}) => {
-  // 中间件方法扩展
-  const middleware = [thunk, requester, createLogger(), logger]
   // store增强器扩展
   const enhancers = []
   // 定义合并增强器方法用户合并enhancers
   let composeEnhancers = compose
 
+  // 中间件方法扩展
+  let middleware = [thunk, requester, logger]
+
   // 在开发环境并且开启devtools的条件下，替换成devtools的增强器扩展
   if (__DEV__) {
+    middleware = [thunk, requester, createLogger(), logger]
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension

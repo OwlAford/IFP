@@ -24,7 +24,7 @@ export default class Sidebar extends Component {
   }
 
   setActiveMenu () {
-    let key = browserHistory.getCurrentLocation().pathname.split('/')[1]
+    let key = browserHistory.getCurrentLocation().pathname.split('/')[2]
     let current = 'home'
     key ? current = key : null
     this.setState({
@@ -57,20 +57,20 @@ export default class Sidebar extends Component {
         >
           <SubMenu key="sub1" title={<span><Icon type="laptop" /><span>今日实时</span></span>}>
             <Menu.Item key="home">
-              <IndexLink to='/'>首页一览</IndexLink>
+              <IndexLink to='/inmanage'>首页一览</IndexLink>
             </Menu.Item>
             <Menu.Item key="counter">
-              <IndexLink to='/counter'>统计中心</IndexLink>
+              <IndexLink to='/inmanage/counter'>统计中心</IndexLink>
             </Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="team" /><span>用户中心</span></span>}>
             <Menu.Item key="user">
-              <IndexLink to='/user'>用户信息</IndexLink>
+              <IndexLink to='/inmanage/user'>用户信息</IndexLink>
             </Menu.Item>
           </SubMenu>
           <SubMenu key="sub3" title={<span><Icon type="setting" /><span>Navigation</span></span>}>
             <Menu.Item key="nofound">
-              <IndexLink to='/nofound'>不存在页面</IndexLink>
+              <IndexLink to='/inmanage/nofound'>不存在页面</IndexLink>
             </Menu.Item>
           </SubMenu>
         </Menu>
