@@ -5,7 +5,7 @@ export const getCookieVal = (offset) => {
   return unescape(window.document.cookie.substring(offset, endstr))
 }
 
-export const GetCookie = (name) => {
+export const getCookie = (name) => {
   var arg = name + "="
   var alen = arg.length
   var clen = window.document.cookie.length
@@ -21,16 +21,16 @@ export const GetCookie = (name) => {
   return null
 }
 
-export const SetCookie = (name, value) => {
+export const setCookie = (name, value) => {
   var exp = new Date()
-  exp.setTime(exp.getTime() + (2 * 24 * 60 * 60 * 1000))
+  exp.setTime(exp.getTime() + (1 * 24 * 60 * 60 * 1000))
   window.document.cookie = `${name} = ${escape(value)}; expires=${exp.toGMTString()}; path=/`
 }
 
 
-export const DeleteCookie = (name) => {
+export const delCookie = (name) => {
   var exp = new Date()
   exp.setTime(exp.getTime() - 100)
-  var cval = GetCookie(name)
+  var cval = getCookie(name)
   window.document.cookie = `${name} = ${cval}; expires=${exp.toGMTString()}; path=/`
 }

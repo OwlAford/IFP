@@ -11,11 +11,14 @@ import makeRootReducer from './reducers'
 // 获取url更新后回调方法，用于触发新store的注入
 import { updateLocation } from './location'
 
-import requesterMiddleware from 'UTIL/requesterMiddleware'
+import createLogger from 'redux-logger'
+import { logger } from 'MIDDLEWARE/log'
+
+import requester from 'MIDDLEWARE/requester'
 
 export default (initialState = {}) => {
   // 中间件方法扩展
-  const middleware = [thunk, requesterMiddleware]
+  const middleware = [thunk, requester, createLogger(), logger]
   // store增强器扩展
   const enhancers = []
   // 定义合并增强器方法用户合并enhancers

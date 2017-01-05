@@ -1,7 +1,7 @@
 const express = require('express')
 const debug = require('debug')('app:server')
 const webpack = require('webpack')
-// const request = require('request')
+const request = require('request')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
@@ -13,6 +13,13 @@ app.use(require('connect-history-api-fallback')())
 
 // 启用gzip压缩
 app.use(compress())
+
+//代理转发，解决跨域问题
+app.use('/', function(req, res) {
+  var url = 'http://158.58.14.205:9088/inmanage' + req.url
+  console.log('[PROXY]: ' + url)
+  req.pipe(request(url)).pipe(res)
+})
 
 // 启用 Webpack HMR Middleware
 if (project.env === 'development') {
@@ -32,12 +39,6 @@ if (project.env === 'development') {
 
   app.use(express.static(project.paths.public()))
 
-  //代理转发，解决跨域问题
-  // app.use('/', function(req, res) {
-  //   var url = 'http://158.58.14.205:9088/inmanage' + req.url
-  //   console.log('[PROXY]: ' + url)
-  //   req.pipe(request(url)).pipe(res)
-  // })
 
 } else {
   debug(
