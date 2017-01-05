@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button, Radio, Card } from 'antd'
-import echarts, { line, tooltip } from 'echarts'
 const ButtonGroup = Button.Group
 
 export default class MessageView extends Component {
@@ -34,86 +33,6 @@ export default class MessageView extends Component {
     console.log(this.props)
   }
 
-  componentDidMount () {
-    let chartTheme = {
-      tooltip : {
-        trigger: 'axis'
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      grid: {
-        top: 40,
-        left: '3%',
-        right: '4%',
-        bottom: '6%',
-        containLabel: true
-      },
-      xAxis : [
-        {
-          type : 'category',
-          splitLine: {
-            lineStyle: {
-              color: '#eee'
-            }
-          },
-          boundaryGap : false
-        }
-      ],
-      yAxis : [
-        {
-          type : 'value',
-          splitLine: {
-            lineStyle: {
-              color: '#eee'
-            }
-          }
-        }
-      ]
-    }
-    echarts.init(document.getElementById('echart')).setOption(Object.assign(chartTheme, {
-      legend: {
-        data:['2015-05-05','2015-05-06','2015-05-07']
-      },
-      xAxis : [
-        {
-          data : ['6:00','7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00']
-        }
-      ],
-      series : [
-        {
-          name:'2015-05-05',
-          type:'line',
-          stack: '总量',
-          smooth: true,
-          symbolSize: 6,
-          areaStyle: {normal: {}},
-          data:[120, 132, 101, 134, 90, 230, 210, 120, 132, 101]
-        },
-        {
-          name:'2015-05-06',
-          type:'line',
-          stack: '总量',
-          smooth: true,
-          symbolSize: 6,
-          areaStyle: {normal: {}},
-          data:[220, 182, 191, 234, 290, 330, 310, 220, 182, 191]
-        },
-        {
-          name:'2015-05-07',
-          type:'line',
-          stack: '总量',
-          smooth: true,
-          symbolSize: 6,
-          areaStyle: {normal: {}},
-          data:[120, 82, 91, 134, 190, 230, 210, 120, 82, 91]
-        }
-      ]
-    }))
-  }
-
   render() {
     return (
       <div className="content">
@@ -139,9 +58,6 @@ export default class MessageView extends Component {
               </Button>
             </Col>
           </Row>
-        </div>
-        <div className='content-cell'>
-          <div style={{width: '100%', height: '360px'}} id='echart'></div>
         </div>
         <div className='content-cell'>
           <Row>
