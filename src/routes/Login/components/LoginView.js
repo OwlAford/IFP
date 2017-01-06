@@ -8,6 +8,7 @@ export default class LoginView extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLogin: 'false',
       userName: '',
       pswd: '',
       vcode: '',
@@ -27,12 +28,16 @@ export default class LoginView extends Component {
   }
 
   reloadCode() {
-    console.log('aaa')
     this.props.setSessionID()
   }
 
   componentWillMount() {
     this.reloadCode()
+  }
+
+  handleSubmit() {
+    this.props.validateLogin(this.state, this.showHome)
+    console.log('submit')
   }
 
   render() {
@@ -85,7 +90,7 @@ export default class LoginView extends Component {
             </Row>
           </div>
           <div className="row" style={{marginTop: '15px', textAlign: 'center'}}>
-            <Button type="primary" size="large">立即登录</Button>
+            <Button type="primary" size="large" onClick={(e) => this.handleSubmit()}>立即登录</Button>
           </div>
         </div>
         <div className='content-cell'>
@@ -94,7 +99,7 @@ export default class LoginView extends Component {
               {this.state.userName} ~
               {this.state.pswd} ~
               {this.state.vcode}
-              <span style={{lineHeight: '28px'}}>Triple结果: {this.props.login.count}</span>
+              <span style={{lineHeight: '28px'}}>Triple结果: {this.props.count}</span>
             </Col>
             <Col span={8}>
               <Button type="primary" onClick={this.props.triple}>
