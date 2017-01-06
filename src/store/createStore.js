@@ -27,7 +27,7 @@ export default (initialState = {}) => {
 
   // 在开发环境并且开启devtools的条件下，替换成devtools的增强器扩展
   if (__DEV__) {
-    middleware = [thunk, requester, createLogger(), logger]
+    middleware = [thunk, requester, /*createLogger(), logger*/]
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension

@@ -86,7 +86,6 @@ export function LOGONIN_FAILED() {
 
 //验证登陆
 export function validateLogin(data, callback) {
-  console.log(data)
   const newData = {
     loginName: data.userName,
     loginPassword: md5(data.pswd.toString()),

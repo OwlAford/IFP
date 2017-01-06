@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Input, Icon, Row, Col, Button } from 'antd'
 import { Link } from 'react-router'
+import { API } from 'CONSTANT/globals'
 import handleChange from 'UTIL/handleChange'
 import 'STYLE/login.scss'
 
@@ -36,8 +37,10 @@ export default class LoginView extends Component {
   }
 
   handleSubmit() {
-    this.props.validateLogin(this.state, this.showHome)
-    console.log('submit')
+    const showHome = () => {
+      this.props.router.push(API.CONTENTNAME + '/' + window.globalConfig.HOME_PATH)
+    }
+    this.props.validateLogin(this.state, showHome)
   }
 
   render() {
