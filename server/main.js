@@ -35,7 +35,7 @@ if (project.env === 'development') {
 
   //代理转发，解决跨域问题
   app.use('/inmanage', function(req, res) {
-    var url = 'http://158.58.14.205:9088/inmanage' + req.url
+    var url = 'http://139.224.128.69:8060/inmanage' + req.url
     console.log('[PROXY]: ' + url)
     req.pipe(request(url)).pipe(res)
   })

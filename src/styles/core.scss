@@ -4,7 +4,7 @@
 }
 
 $blue : #108ee9;
-$sidebarWidth : 240px;
+$sideBarWidth : 240px;
 $borderStyle : 1px solid #e9e9e9;
 
 body {
@@ -17,9 +17,9 @@ body {
   min-height: 600px;
 }
 
-.container {
+.main {
   box-sizing: border-box;
-  padding-left: $sidebarWidth;
+  padding-left: $sideBarWidth;
 }
 
 .content {

@@ -1,0 +1,17 @@
+@mixin middleCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 9
+}
+
+$foorShadow: 0 3px 12px rgba(0, 0, 0, .14);
+
+.Login .loginBox {
+  @include middleCenter;
+  width: 480px;
+  padding: 40px;
+  background-color: #fff;
+  margin: -124px 0 0 -240px;
+  box-shadow: $foorShadow;
+}

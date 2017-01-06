@@ -57,10 +57,10 @@ export default class Sidebar extends Component {
         >
           <SubMenu key="sub2" title={<span><Icon type="team" /><span>用户中心</span></span>}>
             <Menu.Item key="message">
-              <IndexLink to='/inmanage/main/message'>message</IndexLink>
+              <IndexLink to='/inmanage/message'>message</IndexLink>
             </Menu.Item>
             <Menu.Item key="review">
-              <IndexLink to='/inmanage/main/review'>review</IndexLink>
+              <IndexLink to='/inmanage/review'>review</IndexLink>
             </Menu.Item>
           </SubMenu>
         </Menu>

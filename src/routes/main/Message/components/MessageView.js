@@ -35,7 +35,7 @@ export default class MessageView extends Component {
 
   render() {
     return (
-      <div className="content">
+      <div className="main">
         <div className='content-cell'>
           <Row>
             <Col span={6}>

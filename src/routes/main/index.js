@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import { injectReducer } from 'STORE/reducers'
 
 export default (store) => ({
-  path : 'main',
+  path : '',
+  // path : 'main',
   getComponents(nextState, cb){
     require.ensure([], require => {
       cb(null, require('COMPONENT/Main').default)
