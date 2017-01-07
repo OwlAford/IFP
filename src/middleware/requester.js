@@ -1,6 +1,6 @@
 import 'isomorphic-fetch'
 import * as CK from 'UTIL/cookie'
-import { Message, Modal } from 'antd'
+import { Modal } from 'antd'
 import utils from 'UTIL/public'
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
 const sessionName = 'iCIFID'
@@ -128,7 +128,7 @@ function _getRequestBody (body, header) {
   if (!body) {
     body = {}
   }
-  //body = Object.assign(body,{userId:userId})
+  //body = Object.assign(body, {userId: userId})
   if (header.type == 'K') {
     finalBody = utils.objToKv(body)
   } else if (header.type == 'J') {

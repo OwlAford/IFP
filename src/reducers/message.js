@@ -1,7 +1,7 @@
 // 定义一个常量
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 
-// Actions =============================================================
+/*** Actions ***/
 export function increment (value = 1) {
   return {
     type    : COUNTER_INCREMENT,
@@ -29,7 +29,7 @@ export const doubleAsync = (cb) => {
   }
 }
 
-// Reducer =============================================================
+/*** Reducer ***/
 const initialState = {
   count: 0,
   time: 0

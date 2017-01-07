@@ -11,7 +11,7 @@ export const INVALIDATE_EXAMPLE = 'INVALIDATE_EXAMPLE'
 export const LOGONIN = 'LOGONIN'
 export const LOGONOUT = 'LOGONOUT'
 export const SETSESSIONID = 'SETSESSIONID'
-export const FAILED='FAILED' //登陆信息不匹配
+export const FAILED = 'FAILED'
 export const APP_MGR_REQ = 'APP_MGR_REQ'
 export const APP_MGR_SUC = 'APP_MGR_SUC'
 export const APP_MGR_FAL = 'APP_MGR_FAL'
@@ -100,11 +100,11 @@ export function validateLogin(data, callback) {
         dispatch(LOGONIN_OP(action.data.body.cstName))
         callback()
        } else {
-         if (action.data.body.errorMsg) {
-           message.error(action.data.body.errorMsg)
-         } else {
-           message.error('登录信息有误！')
-         }
+         // if (action.data.body.errorMsg) {
+         //   message.error(action.data.body.errorMsg)
+         // } else {
+         //   message.error('登录信息有误！')
+         // }
          dispatch(LOGONIN_FAILED())
          dispatch(setSessionID())
        }

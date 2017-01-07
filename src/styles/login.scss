@@ -7,6 +7,10 @@
 
 $foorShadow: 0 3px 12px rgba(0, 0, 0, .14);
 
+.Login {
+  font-size: 14px;
+}
+
 .Login .loginBox {
   @include middleCenter;
   width: 480px;

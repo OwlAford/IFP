@@ -57,6 +57,7 @@ export default class LoginView extends Component {
               suffix={suffixName}
               value={userName}
               name="userName"
+              size="large"
               onChange={this.handleChange}
               ref={node => this.userNameInput = node}
             />
@@ -69,6 +70,7 @@ export default class LoginView extends Component {
               suffix={suffixPswd}
               value={pswd}
               name="pswd"
+              size="large"
               onChange={this.handleChange}
               ref={node => this.pswdInput = node}
             />
@@ -80,12 +82,13 @@ export default class LoginView extends Component {
                   placeholder="请输入验证码"
                   value={vcode}
                   name="vcode"
+                  size="large"
                   onChange={this.handleChange}
                 />
               </Col>
               <Col span={4}>
                 <img 
-                  style={{height: '28px', width: '90px', marginLeft: '10px'}}
+                  style={{height: '32px', width: '90px', marginLeft: '10px'}}
                   src={this.props.vcodeSrc} 
                   onClick={this.reloadCode} 
                 />
