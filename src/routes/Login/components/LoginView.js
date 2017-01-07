@@ -40,7 +40,15 @@ export default class LoginView extends Component {
     const showHome = () => {
       this.props.router.push(API.CONTENTNAME + '/' + window.globalConfig.HOME_PATH)
     }
-    this.props.validateLogin(this.state, showHome)
+    if (this.state.userName.trim() == '') {
+      message.error('请输入用户名！')
+    } else if (this.state.pswd.trim() == '') {
+      message.error('请输入密码！')
+    } else if (this.state.vcode.trim() == '') {
+      message.error('请输入验证码！')
+    } else {
+      this.props.validateLogin(this.state, showHome)
+    }
   }
 
   render() {
