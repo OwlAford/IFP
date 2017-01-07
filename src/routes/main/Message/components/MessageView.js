@@ -30,7 +30,7 @@ export default class MessageView extends Component {
   }
 
   componentWillMount () {
-    console.log(this.props)
+    // console.log(this.props)
   }
 
   render() {

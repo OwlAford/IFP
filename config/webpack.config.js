@@ -21,7 +21,7 @@ const webpackConfig = {
   devtool : project.compiler_devtool,
   resolve : {
     root       : project.paths.client(),
-    extensions : ['', '.js', '.jsx', '.json'],
+    extensions : ['', '.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       // 自定义路径别名
       STORE: path.join(src, 'store'),
@@ -110,7 +110,7 @@ if (__DEV__) {
   )
 }
 
-// 在测试过程中不要分割bundle，此时仅需一个bundle
+// 在测试过程中不要分割bundle
 if (!__TEST__) {
   webpackConfig.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
@@ -142,6 +142,16 @@ webpackConfig.module.loaders.push({
     BASE_CSS_LOADER,
     'postcss',
     'sass?sourceMap'
+  ]
+})
+webpackConfig.module.loaders.push({
+  test    : /\.less$/,
+  exclude : null,
+  loaders : [
+    'style',
+    BASE_CSS_LOADER,
+    'postcss',
+    'less?sourceMap'
   ]
 })
 webpackConfig.module.loaders.push({

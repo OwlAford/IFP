@@ -1,6 +1,5 @@
 import React from 'react'
-import 'STYLE/antd.min.css'
-import 'STYLE/core.scss'
+import 'STYLE'
 
 // 构建页面主视图
 export const CoreLayout = ({ children }) => (
