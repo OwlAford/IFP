@@ -19,8 +19,8 @@ export const APP_MGR_FAL = 'APP_MGR_FAL'
 /*** Actions ***/
 export function triple(value) {
   return {
-    type    : LOGIN_TRIPLE,
-    payload : value
+    type: LOGIN_TRIPLE,
+    payload: value
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Input, Icon, Row, Col, Button } from 'antd'
+import { Input, Icon, Row, Col, Button, message } from 'antd'
 import { Link } from 'react-router'
 import { API } from 'CONSTANT/globals'
 import handleChange from 'UTIL/handleChange'
