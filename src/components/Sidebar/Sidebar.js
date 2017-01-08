@@ -12,9 +12,9 @@ export default class Sidebar extends Component {
       current: ''
     }
     // 监听 history 激活对应菜单
-    browserHistory.listen(() => {
-      this.setActiveMenu()
-    })
+    // browserHistory.listen(() => {
+    //   this.setActiveMenu()
+    // })
   }
 
   changeTheme(value) {

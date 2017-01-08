@@ -12,7 +12,7 @@ export default class LoginView extends Component {
       isLogin: 'false',
       userName: '',
       pswd: '',
-      vcode: '',
+      vcode: ''
     }
     this.handleChange = handleChange.bind(this)
     this.reloadCode = this.reloadCode.bind(this)
@@ -34,6 +34,7 @@ export default class LoginView extends Component {
 
   componentWillMount() {
     this.reloadCode()
+    console.log(this.props)
   }
 
   handleSubmit() {
@@ -112,7 +113,7 @@ export default class LoginView extends Component {
             <Col span={12}>
               {this.state.userName} ~
               {this.state.pswd} ~
-              {this.state.vcode}
+              {this.state.vcode}~
               <span style={{lineHeight: '28px'}}>Triple结果: {this.props.count}</span>
             </Col>
             <Col span={8}>

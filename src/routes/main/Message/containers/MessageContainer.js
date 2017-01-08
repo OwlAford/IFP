@@ -3,13 +3,13 @@ import { increment, doubleAsync, logtime } from 'REDUCER/message'
 import MessageView from '../components/MessageView'
 
 const mapDispatchToProps = {
-  increment : () => increment(1),
-  logtime : () => logtime(1),
+  increment: () => increment(1),
+  logtime: () => logtime(1),
   doubleAsync
 }
 
 const mapStateToProps = (state) => ({
-  message : state.message
+  message: state.message
 })
 
 // 将 mapDispatchToProps 和 mapStateToProps 连接到组件

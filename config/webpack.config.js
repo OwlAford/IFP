@@ -39,7 +39,7 @@ const webpackConfig = {
   module : {}
 }
 // 文件入口
-const APP_ENTRY = project.paths.client('main.js')
+const APP_ENTRY = project.paths.client('entry/app.js')
 
 webpackConfig.entry = {
   app : __DEV__
@@ -65,7 +65,7 @@ webpackConfig.externals['react/addons'] = true
 webpackConfig.plugins = [
   new webpack.DefinePlugin(project.globals),
   new HtmlWebpackPlugin({
-    template : project.paths.client('index.html'),
+    template : project.paths.client('entry/index.html'),
     hash     : false,
     favicon  : project.paths.public('favicon.ico'),
     filename : 'index.html',
