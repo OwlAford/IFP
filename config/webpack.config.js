@@ -24,6 +24,7 @@ const webpackConfig = {
     extensions : ['', '.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       // 自定义路径别名
+      ASSET: path.join(src, 'assets'),
       STORE: path.join(src, 'store'),
       COMPONENT: path.join(src, 'components'),
       REDUCER: path.join(src, 'reducers'),

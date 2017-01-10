@@ -1,4 +1,4 @@
-import './polyfills'
+import 'UTIL/polyfills'
 import React from 'react'
 import ReactDOM from 'react-dom'
 // createStore创建状态管理树

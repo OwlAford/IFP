@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
-import { triple, setSessionID, validateLogin } from 'REDUCER/login'
+import { setSessionID, validateLogin } from 'REDUCER/login'
 import LoginView from '../components/LoginView'
 
 const mapDispatchToProps = {
-  triple,
   setSessionID,
   validateLogin
 }
 
 const mapStateToProps = (state) => ({
-  count : state.login.count,
   vcodeSrc : state.login.checkCodeSrc
 })
 

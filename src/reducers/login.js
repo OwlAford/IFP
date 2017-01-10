@@ -4,7 +4,6 @@ import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
-export const LOGIN_TRIPLE = 'LOGIN_TRIPLE'
 export const REQUEST_EXAMPLE = 'REQUEST_EXAMPLE'
 export const RECEIVE_EXAMPLE = 'RECEIVE_EXAMPLE'
 export const INVALIDATE_EXAMPLE = 'INVALIDATE_EXAMPLE'
@@ -17,13 +16,6 @@ export const APP_MGR_SUC = 'APP_MGR_SUC'
 export const APP_MGR_FAL = 'APP_MGR_FAL'
 
 /*** Actions ***/
-export function triple(value) {
-  return {
-    type: LOGIN_TRIPLE,
-    payload: value
-  }
-}
-
 function setSessionIDAction() {
   return {
     [BZ_REQUESTER]: {
@@ -115,7 +107,6 @@ export function validateLogin(data, callback) {
 
 /*** Reducer ***/
 const initialState = {
-  count: 2,
   isLogin: 'false',
   iCIFID: '',
   time: '',
@@ -125,11 +116,6 @@ const initialState = {
 
 export default function loginReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_TRIPLE :
-      return {
-        ...state,
-        count: state.count * 3 
-      }
     case LOGONIN:
       return {
         ...state,
