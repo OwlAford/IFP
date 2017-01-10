@@ -4,68 +4,26 @@
 }
 
 $blue : #108ee9;
-$sideBarWidth : 240px;
 $borderStyle : 1px solid #e9e9e9;
 
 body {
   font-size: 14px;
-  background-color: #f7f7f7;
+  background-color: #eff4f8;
 }
 
-#root, .wrap, .container {
+#root, .app-wrap, .app-container {
   @include fullScreen;
-  min-height: 600px;
+  min-height: 500px;
 }
 
-.main {
-  box-sizing: border-box;
-  padding-left: $sideBarWidth;
-}
-
-.content {
-  width: 100%;
-  padding: 10px;
-}
-
-.content-cell {
-  padding: 15px;
+.app-content {
+  position: absolute;
+  left: 200px;
+  right: 10px;
+  bottom: 0;
+  top: 60px;
   background-color: #fff;
-  margin-bottom: 10px;
-  border: $borderStyle;
+  border: 1px solid #E2E8EC;
+  border-radius: 8px;
 }
 
-.ft16 {
-  font-size: 16px;
-}
-
-.ft18 {
-  font-size: 18px;
-}
-
-.ft20 {
-  font-size: 20px;
-}
-
-.pl10 {
-	padding-left: 10px;
-}
-
-.pb10 {
-	padding-bottom: 10px;
-}
-
-.mt10 {
-  margin-top: 10px;
-}
-
-.mr10 {
-  margin-right: 10px;
-}
-
-.fc-blue {
-  color: $blue;
-}
-
-.fr {
-  float: right;
-}

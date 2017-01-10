@@ -1,0 +1,49 @@
+.app-header {
+  height: 60px;
+  position: relative;
+  padding-left: 240px;
+}
+
+.app-header .title {
+  height: 60px;
+  width: 240px;
+  line-height: 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-left: 60px;
+  font-size: 20px;
+  font-weight: 700;
+  background: url(../../assets/img/icon.png) no-repeat 15px center / 38px auto;
+}
+
+.app-header .guide {
+  height: 60px;
+  float: left;
+  line-height: 60px;
+  font-size: 15px;
+}
+
+.app-header .guide a {
+  color: #424e67;
+  padding: 10px;
+  position: relative;
+  margin: 0 20px;
+  &:hover{
+  	color: #3b8cff;
+  }
+}
+
+.app-header .guide a.active {
+  color: #3b8cff;
+  &:after {
+  	content: "";
+  	display: block;
+  	height: 2px;
+  	background-color: #3b8cff;
+  	position: absolute;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
+  }
+}

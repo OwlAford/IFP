@@ -35,8 +35,8 @@ export default class MessageView extends Component {
 
   render() {
     return (
-      <div className="main">
-        <div className='content-cell'>
+      <div className="message">
+        <div>
           <Row>
             <Col span={6}>
               <span style={{lineHeight: '28px'}}>数字叠加器: {this.props.message.count}</span>
@@ -59,7 +59,7 @@ export default class MessageView extends Component {
             </Col>
           </Row>
         </div>
-        <div className='content-cell'>
+        <div>
           <Row>
             <Col span={12}>
               <Radio.Group value={this.state.invoiceType} onChange={this.handleSizeChange}>

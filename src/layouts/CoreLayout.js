@@ -3,7 +3,7 @@ import 'STYLE'
 
 // 构建页面主视图
 export const CoreLayout = ({ children }) => (
-  <div className='container'>
+  <div className='app-container'>
     { children }
   </div>
 )

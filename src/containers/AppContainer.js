@@ -22,7 +22,7 @@ class AppContainer extends Component {
 
   	return (
     <Provider store={store}>
-      <div className='wrap'>
+      <div className='app-wrap'>
         <Router history={browserHistory} children={routes} />
       </div>
     </Provider>

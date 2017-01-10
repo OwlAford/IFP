@@ -11,8 +11,8 @@ export default class LoginView extends Component {
     super(props)
     this.state = {
       isLogin: 'false',
-      userName: '',
-      pswd: '',
+      userName: 'admin',
+      pswd: '123456',
       vcode: ''
     }
     this.handleChange = handleChange.bind(this)
@@ -60,6 +60,7 @@ export default class LoginView extends Component {
             <i className="user"></i>
             <input
               placeholder="请输入用户名"
+              value={userName}
               name="userName"
               onChange={this.handleChange}
               onFocus={(e) => this.handleFocus(e)}

@@ -24,10 +24,10 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
 
 .Login .loginBox {
   @include middleCenter;
-  width: 440px;
+  width: 460px;
   padding: 60px 80px 40px;
   background-color: #fff;
-  margin: -124px 0 0 -240px;
+  margin: -180px 0 0 -230px;
   box-shadow: $foorShadow;
   border-radius: 8px;
 }
@@ -133,8 +133,8 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
   color: #fff;
   display: inline-block;
   width: 100%;
-  height: 44px;
-  line-height: 44px;
+  height: 48px;
+  line-height: 48px;
   border-radius: 4px;
   font-size: 16px;
   outline: none;

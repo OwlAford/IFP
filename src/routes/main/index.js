@@ -1,9 +1,13 @@
 import { connect } from 'react-redux'
 import { injectReducer } from 'STORE/reducers'
+import { API } from 'CONSTANT/globals'
 
 export default (store) => ({
-  path : '',
-  // path : 'main',
+  path : 'main',
+  indexRoute : {
+    component: require('COMPONENT/Welcome').default 
+  },
+
   getComponents(nextState, cb){
     require.ensure([], require => {
       cb(null, require('COMPONENT/Main').default)
@@ -14,7 +18,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       cb(null, [
         require('./Message').default(store),
-        // require('./Review').default(store)
+        require('./BranchManage').default(store)
       ])
     })
   }

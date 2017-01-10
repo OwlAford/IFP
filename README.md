@@ -1,3 +1,3 @@
 # IFP Internal Management System
 
-##对移动IFP后台系统管理平台进行改造
+##对IFP内部管理系统进行改造
