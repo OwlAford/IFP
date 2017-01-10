@@ -6,8 +6,16 @@ export default class Sidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      current: ''
+      sub1: false,
+      sub2: false
     }
+  }
+
+  handleSubActive(e) {
+    let target = e.currentTarget.getAttribute('data-target')
+    this.setState({
+      [target]: !this.state[target]
+    })
   }
 
   render() {
@@ -15,18 +23,39 @@ export default class Sidebar extends Component {
       <div className="app-sidebar">
         <div className="menu">
           <div className="subMenu">
-            <div className="title">机构管理</div>
-            <div className="menuList">
+            <div 
+              className={this.state.sub1 ? 'title active' : 'title'} 
+              data-target="sub1"
+              onClick={(e) => this.handleSubActive(e)}
+            >
+              机构管理
+            </div>
+            <div className={this.state.sub1 ? 'menuList active' : 'menuList'}>
               <div className="item">
-                <Link to='/inmanage/main/branchManage'  activeClassName='active'>机构管理</Link>
+                <Link to='/inmanage/main/branchManage' activeClassName='active'>机构管理</Link>
               </div>
             </div>
           </div>
           <div className="subMenu">
-            <div className="title">用户中心</div>
-            <div className="menuList">
+            <div className="title" 
+              className={this.state.sub2 ? 'title active' : 'title'} 
+              data-target="sub2"
+              onClick={(e) => this.handleSubActive(e)}
+            >
+              用户中心
+            </div>
+            <div className={this.state.sub2 ? 'menuList active' : 'menuList'}>
               <div className="item">
                 <Link to='/inmanage/main/message' activeClassName='active'>Message</Link>
+              </div>
+              <div className="item">
+                <Link to='/inmanage/main/review' activeClassName='active'>不存在页面</Link>
+              </div>
+              <div className="item">
+                <Link to='/inmanage/main/review' activeClassName='active'>不存在页面</Link>
+              </div>
+              <div className="item">
+                <Link to='/inmanage/main/review' activeClassName='active'>不存在页面</Link>
               </div>
               <div className="item">
                 <Link to='/inmanage/main/review' activeClassName='active'>不存在页面</Link>
