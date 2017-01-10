@@ -29,7 +29,7 @@ $sidebarWidth : 200px;
   display: block;
   height: 100%;
   width: 100%;
-  padding-left: 46px;
+  padding-left: 50px;
 }
 
 .app-sidebar .subMenu .title {
@@ -47,6 +47,42 @@ $sidebarWidth : 200px;
     transition: all .3s;
   }  
 }
+
+.app-sidebar .subMenu .title i {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.app-sidebar i.organization {
+  background-image: url(setBg("organization.svg"))
+}
+
+.app-sidebar i.userManage {
+  background-image: url(setBg("userManage.svg"))
+}
+
+.app-sidebar i.roleManage {
+  background-image: url(setBg("roleManage.svg"))
+}
+
+.app-sidebar i.postManage {
+  background-image: url(setBg("postManage.svg"))
+}
+
+.app-sidebar i.strategyManage {
+  background-image: url(setBg("strategyManage.svg"))
+}
+
+.app-sidebar i.reviewManage {
+  background-image: url(setBg("reviewManage.svg"))
+}
+
 .app-sidebar .subMenu .title.active {
   font-weight: 700;
   &:after {
