@@ -1,16 +1,12 @@
 .app-header {
   height: 60px;
-  position: relative;
-  padding-left: 240px;
 }
 
-.app-header .title {
+.app-header .logo {
   height: 60px;
   width: 240px;
   line-height: 60px;
-  position: absolute;
-  left: 0;
-  top: 0;
+  float: left;
   padding-left: 60px;
   font-size: 20px;
   font-weight: 700;

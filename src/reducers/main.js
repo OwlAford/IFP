@@ -60,6 +60,13 @@ export function converMenuField(menu) {
   }
 }
 
+function setBugfreeMenu(userMenu) {
+   return {
+    type: actions.SET_BUGFREE_MENU,
+    bugfreeMenu: userMenu
+  }
+}
+
 export function initUserMenu() {
   let authMenu = []
   let userMenu = []
@@ -101,6 +108,17 @@ export function initUserMenu() {
 
 /*** Reducer ***/
 const initialState = {
+  // sidebar
+  items: [],
+  bugfreeMenu: [],
+  currentCstIP: '',
+  currentLoginTime: '',
+  lastCstIP: '',
+  lastLoginTime: '',
+  loginCount: '',
+  isAuthMenuLoaded: false,
+  isUserMenuLoaded: false,
+
   currentPath: window.globalConfig.HOME_PATH,
   currentMenu: window.globalConfig.HOME_MENU,
   openKeys: [window.globalConfig.HOME_ITEM],
@@ -123,6 +141,26 @@ export default function mainReducer(state = initialState, action) {
         ...state,
         userMenu: action.userMenu
       }
+    case actions.MERGE_FINAL_MENU:
+      return {
+        ...state,
+        items: action.items
+      }
+    case actions.USER_MENU_SUC:
+      return {
+        ...state,
+        isUserMenuLoaded:true,
+        currentCstIP: action.data.body.cstCurrLoginIP,
+        currentLoginTime: action.data.body.cstCurrLoginTime,
+        lastCstIP: action.data.body.cstLastLoginIP,
+        lastLoginTime: action.data.body.cstLastLoginTime,
+        loginCount: action.data.body.cstLoginTimes
+      }
+    case actions.SET_BUGFREE_MENU:
+        return {
+          ...state,
+          bugfreeMenu: action.bugfreeMenu
+        }
     default:
       return state
   }

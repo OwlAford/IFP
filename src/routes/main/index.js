@@ -3,7 +3,7 @@ import { injectReducer } from 'STORE/reducers'
 import { API } from 'CONSTANT/globals'
 
 export default (store) => ({
-  path : 'main',
+  path : 'home',
   indexRoute : {
     component: require('COMPONENT/Welcome').default 
   },

@@ -13,7 +13,7 @@ export default class Sidebar extends Component {
                 titleIcon: 'organization',
                 subList: [
                   {
-                    href: '/inmanage/main/message',
+                    href: '/inmanage/home/message.html',
                     name: '参考模板'
                   }
                 ]
@@ -23,7 +23,7 @@ export default class Sidebar extends Component {
                 titleIcon: 'organization',
                 subList: [
                   {
-                    href: '/inmanage/main/branchManage',
+                    href: '/inmanage/home/branchManage.html',
                     name: '机构管理'
                   }
                 ]
@@ -33,7 +33,7 @@ export default class Sidebar extends Component {
                 titleIcon: 'userManage',
                 subList: [
                   {
-                    href: '/inmanage/main/userManage',
+                    href: '/inmanage/home/userManage',
                     name: '用户管理'
                   }
                 ]
@@ -43,7 +43,7 @@ export default class Sidebar extends Component {
                 titleIcon: 'roleManage',
                 subList: [
                   {
-                    href: '/inmanage/main/roleManage',
+                    href: '/inmanage/home/roleManage',
                     name: '角色管理'
                   }
                 ]
@@ -53,7 +53,7 @@ export default class Sidebar extends Component {
                 titleIcon: 'postManage',
                 subList: [
                   {
-                    href: '/inmanage/main/postManage',
+                    href: '/inmanage/home/postManage',
                     name: '岗位管理'
                   }
                 ]
@@ -63,10 +63,10 @@ export default class Sidebar extends Component {
                 titleIcon: 'strategyManage',
                 subList: [
                   {
-                    href: '/inmanage/main/reviewSetting',
+                    href: '/inmanage/home/reviewSetting',
                     name: '审查设置'
                   }, {
-                    href: '/inmanage/main/strategySetting',
+                    href: '/inmanage/home/strategySetting',
                     name: '策略设置'
                   }
                 ]
@@ -76,13 +76,13 @@ export default class Sidebar extends Component {
                 titleIcon: 'reviewManage',
                 subList: [
                   {
-                    href: '/inmanage/main/approveList',
+                    href: '/inmanage/home/approveList',
                     name: '审批列表'
                   }, {
-                    href: '/inmanage/main/approveHistory',
+                    href: '/inmanage/home/approveHistory',
                     name: '审批历史'
                   }, {
-                    href: '/inmanage/main/approveRecord',
+                    href: '/inmanage/home/approveRecord',
                     name: '审批记录'
                   }
                 ]
@@ -98,13 +98,18 @@ export default class Sidebar extends Component {
     this.setState(state)
   }
 
+  componentWillMount () {
+    console.log(this.props.menus)
+    console.log(this.props.parentUrl)
+  }
+
   render() {
     const menuListClass = (index) => {
       return this.state.menu[index].active ? 'menuList active' : 'menuList'
     }
 
     const titleClass = (index) => {
-      return this.state.menu[index].active ? 'title active' : 'title'
+      return this.state.menu[index].active ? 'title arr active' : 'title arr'
     }
 
     const Title = (name, icon, index) => {

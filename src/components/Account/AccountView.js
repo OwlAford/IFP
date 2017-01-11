@@ -31,7 +31,7 @@ export default class AccountView extends Component {
   handleLogout() {
     this.props.LOGONOUT_OP()
     this.props.logout()
-    window.location.href = API.CONTENTNAME
+    this.props.router.replace(API.CONTENTNAME)
   }
 
   updatePassword() {
@@ -40,6 +40,7 @@ export default class AccountView extends Component {
 
   render() {
     let loginInfo = this.props.loginInfo
+    // 若跳过表单登录部分，则直接刷新页面
     if (!loginInfo) {
       window.location.href = API.CONTENTNAME
     }

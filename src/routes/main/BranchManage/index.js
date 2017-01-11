@@ -2,7 +2,7 @@
 import { injectReducer } from 'STORE/reducers'
 
 export default (store) => ({
-  path : 'branchManage',
+  path : 'branchManage.html',
   // 路由匹配时异步获取组件
   getComponent (nextState, cb) {
     // webpack 打包时通过 'require.ensure' 为异步加载模块创建分割点

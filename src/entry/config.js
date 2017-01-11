@@ -1,6 +1,6 @@
 window.globalConfig = {
   CONTENTNAME: '/inmanage',
-  HOME_PATH: 'main',
+  HOME_PATH: 'home',
   HOME_MENU: '',
   HOME_ITEM: '',
   REMOTE_URL: 'http://'+window.location.host+'/inmanage',

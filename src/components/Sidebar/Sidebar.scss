@@ -35,7 +35,10 @@ $sidebarWidth : 200px;
 .app-sidebar .subMenu .title {
   color: #666;
   position: relative;
-  cursor: default;
+  cursor: pointer;
+}
+
+.app-sidebar .subMenu .title.arr {
   &:after {
     content: "";
     height: 10px;
@@ -84,7 +87,7 @@ $sidebarWidth : 200px;
   background-image: url(setBg("reviewManage.svg"))
 }
 
-.app-sidebar .subMenu .title.active {
+.app-sidebar .subMenu .title.arr.active {
   font-weight: 700;
   &:after {
     transform: rotate(90deg);
