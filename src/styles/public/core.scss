@@ -25,7 +25,9 @@ body {
   top: 60px;
   background-color: #fff;
   border: 1px solid #E2E8EC;
-  border-radius: 8px;
+  border-bottom: none;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .app-welcome {

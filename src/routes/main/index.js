@@ -10,7 +10,10 @@ export default (store) => ({
 
   getComponents(nextState, cb){
     require.ensure([], require => {
-      cb(null, require('COMPONENT/Main').default)
+      const Main = require('COMPONENT/Main').default
+      const reducer = require('REDUCER/main').default
+      injectReducer(store, { key: 'main', reducer })
+      cb(null, Main)
     }, 'main')
   },
 

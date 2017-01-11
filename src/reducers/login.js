@@ -70,9 +70,30 @@ export function LOGONIN_OP(name) {
   }
 }
 
+export function LOGONOUT_OP() {
+  return {
+    type: LOGONOUT
+  }
+}
+
 export function LOGONIN_FAILED() {
   return {
     type: FAILED
+  }
+}
+
+export function logout() {
+  return (dispatch, getState) => {
+    dispatch(logoutAction())
+  }
+}
+
+function logoutAction() {
+  return {
+    [BZ_REQUESTER]: {
+      types: [APP_MGR_REQ, APP_MGR_SUC, APP_MGR_FAL],
+      url: API.LOGOUT_URL
+    }
   }
 }
 

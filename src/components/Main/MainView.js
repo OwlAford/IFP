@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
-import Sidebar from 'COMPONENT/Sidebar'
-import Header from 'COMPONENT/Header'
+import Sidebar from '../Sidebar'
+import Header from '../Header'
 
-export default class Main extends Component {
+export default class MainView extends Component {
+
+  componentWillMount () {
+    this.props.initUserMenu()
+    // console.log(this.props.main)
+  }
 
   render() {
     return (

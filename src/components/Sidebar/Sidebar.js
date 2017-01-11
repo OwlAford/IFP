@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { browserHistory, IndexLink, Link } from 'react-router'
+import { Link } from 'react-router'
 import './Sidebar.scss'
 
 export default class Sidebar extends Component {

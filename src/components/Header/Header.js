@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import Account from '../Account'
 import './Header.scss'
 
 export const Header = () => (
@@ -8,6 +9,7 @@ export const Header = () => (
     <div className="guide">
       <Link to='/inmanage/main' activeClassName='active'>首页</Link>
     </div>
+    <Account/>
   </div>
 )
 

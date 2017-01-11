@@ -35,6 +35,7 @@ $sidebarWidth : 200px;
 .app-sidebar .subMenu .title {
   color: #666;
   position: relative;
+  cursor: default;
   &:after {
     content: "";
     height: 10px;
