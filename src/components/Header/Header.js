@@ -15,17 +15,25 @@ export default class HeaderView extends Component {
   } 
 
   handleMenu(index) {
-    this.setState({
-      currentMenus: this.props.items[index].menus[0],
-      currentUrl: this.props.items[index].url
-    })
+    try {
+      this.setState({
+        currentMenus: this.props.items[index].menus[0],
+        currentUrl: this.props.items[index].url
+      })
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   componentWillMount () {
-    this.setState({
-      currentMenus: this.props.items[0].menus[0],
-      currentUrl: this.props.items[0].url
-    })
+    try {
+      this.setState({
+        currentMenus: this.props.items[0].menus[0],
+        currentUrl: this.props.items[0].url
+      })
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   render() {
@@ -37,6 +45,7 @@ export default class HeaderView extends Component {
           (item, i) => {
             return (
               <Link 
+                key={i}
                 to={API.CONTENTNAME + '/' + item.url} 
                 activeClassName='active' 
                 onClick={(e) => this.handleMenu(i)}
