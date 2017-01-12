@@ -152,7 +152,6 @@ export default class Sidebar extends Component {
     const Menu = (dataArray) => {
       return (
         <div className="menu">
-          <div className="menu-title"><span>系统管理</span></div>
           {dataArray.map(
             (item, i) => {
               return (
