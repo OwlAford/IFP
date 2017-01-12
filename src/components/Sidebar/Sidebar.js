@@ -47,7 +47,7 @@ export default class Sidebar extends Component {
                   <div className="subMenu" key={i}>
                     <div className="title single">
                       <Link to={preUrl + item.url} activeClassName='active'>
-                        <i className={CSS[item.id]}></i>
+                        <i className={'iconfont ' + CSS[item.id]}></i>
                         {item.title}
                       </Link>
                     </div>
@@ -58,7 +58,7 @@ export default class Sidebar extends Component {
                 return (
                   <div className="subMenu" key={i}>
                     <div className="title arr" data-state="0" onClick={e => this.handleActive(e)}>
-                      <i className={CSS[item.id]}></i>
+                      <i className={'iconfont ' + CSS[item.id]}></i>
                       {item.title}
                     </div>
                     <div className="menuList">

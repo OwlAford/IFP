@@ -17,16 +17,16 @@ $sidebarWidth : 200px;
 .app-sidebar .menu .menu-title {
   text-align: center;
   width: 100%;
-  height: 55px;
-  line-height: 55px;
+  height: 58px;
+  line-height: 58px;
   border-bottom: 1px solid #e4e9ec;
 }
 
 .app-sidebar .menu .menu-title span {
   font-size: 15px;
-  padding: 5px 20px;
-  background-color: #5CD995;
-  border-radius: 15px;
+  padding: 6px 26px;
+  background-color: #3b8cff;
+  border-radius: 4px;
   color: #fff;
   cursor: default;
 }
@@ -70,14 +70,12 @@ $sidebarWidth : 200px;
 }
 
 .app-sidebar .subMenu .title i {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
   margin-right: 8px;
+  display: inline-block;
   vertical-align: middle;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
+  &:after {
+    font-weight: normal;
+  }
 }
 
 .app-sidebar .subMenu .title.single {
@@ -85,27 +83,39 @@ $sidebarWidth : 200px;
 }
 
 .app-sidebar i.organization {
-  background-image: url(setBg("organization.svg"))
+  &:after {
+    content: "\e65f";
+  }
 }
 
 .app-sidebar i.userManage {
-  background-image: url(setBg("userManage.svg"))
+  &:after {
+    content: "\e639";
+  }
 }
 
 .app-sidebar i.roleManage {
-  background-image: url(setBg("roleManage.svg"))
+  &:after {
+    content: "\e676";
+  }
 }
 
 .app-sidebar i.postManage {
-  background-image: url(setBg("postManage.svg"))
+  &:after {
+    content: "\e615";
+  }
 }
 
 .app-sidebar i.strategyManage {
-  background-image: url(setBg("strategyManage.svg"))
+  &:after {
+    content: "\e654";
+  }
 }
 
 .app-sidebar i.reviewManage {
-  background-image: url(setBg("reviewManage.svg"))
+  &:after {
+    content: "\e630";
+  }
 }
 
 .subMenu.active .title.arr {
@@ -115,6 +125,7 @@ $sidebarWidth : 200px;
   }
 }
 
+.subMenu .title.single a.active,
 .subMenu a.active {
   color: #3b8cff;
   background-color: #E4E9EC;
