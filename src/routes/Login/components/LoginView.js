@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import NProgress from 'nprogress'
 import { message } from 'antd'
 import { Link } from 'react-router'
 import { API } from 'CONSTANT/globals'
@@ -37,8 +38,10 @@ export default class LoginView extends Component {
 
   handleSubmit() {
     const showHome = () => {
+      NProgress.done()
       this.props.router.push(API.CONTENTNAME + '/' + window.globalConfig.HOME_PATH)
     }
+
     if (this.state.userName.trim() == '') {
       message.error('请输入用户名！')
     } else if (this.state.pswd.trim() == '') {
@@ -46,9 +49,14 @@ export default class LoginView extends Component {
     } else if (this.state.vcode.trim() == '') {
       message.error('请输入验证码！')
     } else {
+      NProgress.start()
       this.props.validateLogin(this.state, showHome)
     }
   }
+
+  // componentWillUnmount() {
+  //   console.log('视图销毁')
+  // }
 
   render() {
     const { userName, pswd, vcode } = this.state

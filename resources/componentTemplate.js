@@ -13,11 +13,15 @@ export default class myView extends Component {
     }
   }
   
-  componentWillMount () {
+  componentWillMount() {
     
   }
 
-  componentDidMount () {
+  componentDidMount() {
+
+  }
+
+  componentWillUnmount() {
 
   }
 

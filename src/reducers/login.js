@@ -3,6 +3,7 @@ import { md5 } from 'UTIL/md5'
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
+import NProgress from 'nprogress'
 
 export const REQUEST_EXAMPLE = 'REQUEST_EXAMPLE'
 export const RECEIVE_EXAMPLE = 'RECEIVE_EXAMPLE'
@@ -107,6 +108,7 @@ export function validateLogin(data, callback) {
   }
   return (dispatch, getState) => {
     dispatch(loginAction(newData)).then(action => {
+      NProgress.done()
       if (action.data.body.result == '1'){
         CK.setCookie('eCIFID', action.data.body.cstNo)
         CK.setCookie('cstName', action.data.body.cstName)

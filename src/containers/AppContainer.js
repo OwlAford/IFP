@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
 // 通过 Provider 将store传递给组件
 import { Provider } from 'react-redux'
+// 进度条组件样式
+import 'nprogress/nprogress.css'
 
 class AppContainer extends Component {
 

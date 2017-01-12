@@ -67,7 +67,7 @@ function setBugfreeMenu(userMenu) {
   }
 }
 
-export function initUserMenu() {
+export function initUserMenu(cb) {
   let authMenu = []
   let userMenu = []
   let topMenu = []
@@ -102,6 +102,8 @@ export function initUserMenu() {
       // 其分发的为侧边栏的 reducer
       dispatch(mergeFinalMenu(userMenu))
       dispatch(updataLoginMsg(action.data))
+      // 传入回调函数
+      if (cb) cb()
     })
   }
 }

@@ -15,25 +15,17 @@ export default class HeaderView extends Component {
   } 
 
   handleMenu(index) {
-    try {
-      this.setState({
-        currentMenus: this.props.items[index].menus[0],
-        currentUrl: this.props.items[index].url
-      })
-    } catch(e) {
-      console.log(e)
-    }
+    this.setState({
+      currentMenus: this.props.items[index].menus[0],
+      currentUrl: this.props.items[index].url
+    })
   }
 
   componentWillMount () {
-    try {
-      this.setState({
-        currentMenus: this.props.items[0].menus[0],
-        currentUrl: this.props.items[0].url
-      })
-    } catch(e) {
-      console.log(e)
-    }
+    this.setState({
+      currentMenus: this.props.items[0].menus[0],
+      currentUrl: this.props.items[0].url
+    })
   }
 
   render() {
