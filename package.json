@@ -55,6 +55,17 @@
   },
   "author": "Aford",
   "license": "MIT",
+  "babel": {
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": true
+        }
+      ]
+    ]
+  },
   "dependencies": {
     "antd": "^2.6.0",
     "babel-core": "^6.17.0",
@@ -101,6 +112,7 @@
     "yargs": "^6.3.0"
   },
   "devDependencies": {
+    "babel-plugin-import": "^1.1.0",
     "cheerio": "^0.22.0",
     "connect-history-api-fallback": "^1.3.0",
     "express": "^4.14.0",

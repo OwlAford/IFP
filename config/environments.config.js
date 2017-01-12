@@ -6,7 +6,7 @@ module.exports = {
 
   // 重新写入当 NODE_ENV === 'production'
   production : (config) => ({
-    compiler_public_path     : '/',
+    compiler_public_path     : '/inmanage/', // 此处为项目名
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
     compiler_devtool         : null,

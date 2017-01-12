@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Button, Radio, Card } from 'antd'
-const ButtonGroup = Button.Group
+import { Row, Col, Button } from 'antd'
 
 export default class BranchManageView extends Component {
 
