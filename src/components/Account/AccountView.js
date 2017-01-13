@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { API } from 'CONSTANT/globals'
-import avatarImg from 'ASSET/img/avatar.png'
+import avatarImg from 'IMAGE/avatar.png'
 import './Account.scss'
 
 export default class AccountView extends Component {
@@ -32,6 +32,7 @@ export default class AccountView extends Component {
     this.props.LOGONOUT_OP()
     this.props.logout()
     this.props.router.replace(API.CONTENTNAME)
+    this.props.updateChangePasswordVisible(false)
   }
 
   updatePassword() {

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { API } from 'CONSTANT/globals'
 import Account from '../Account'
 import Sidebar from '../Sidebar'
+import ChangePswd from '../ChangePswd'
 import './Header.scss'
 
 export default class HeaderView extends Component {
@@ -21,7 +22,13 @@ export default class HeaderView extends Component {
     })
   }
 
-  componentWillMount () {
+  initPswdModal(flag) {
+    if(flag) {
+      return(<ChangePswd router={this.props.router}/>)
+    }
+  }
+
+  componentWillMount() {
     this.setState({
       currentMenus: this.props.items[0].menus[0],
       currentUrl: this.props.items[0].url
@@ -57,6 +64,7 @@ export default class HeaderView extends Component {
         {LnkList(this.props.items)}
         <Sidebar menus={this.state.currentMenus} parentUrl={this.state.currentUrl}/>
         <Account router={this.props.router}/>
+        {this.initPswdModal(this.props.changePswdVisible)}
       </div>     
     )
   }

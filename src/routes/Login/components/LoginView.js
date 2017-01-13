@@ -4,8 +4,8 @@ import { message } from 'antd'
 import { Link } from 'react-router'
 import { API } from 'CONSTANT/globals'
 import handleChange from 'UTIL/handleChange'
-import 'STYLE/login.scss'
-import avatarImg from 'ASSET/img/avatar.png'
+import 'STYLE/pages/login.scss'
+import avatarImg from 'IMAGE/avatar.png'
 
 export default class LoginView extends Component {
   constructor(props) {

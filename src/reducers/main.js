@@ -108,6 +108,30 @@ export function initUserMenu(cb) {
   }
 }
 
+export function changePassword(data, cb) {
+  return (dispatch, getState) => {
+    dispatch(changePasswordAction(data)).then(action => {
+      const flag = action.data.body.opResult
+      if (flag=='1') {
+        message.success("修改成功")
+      } else {
+        message.error("修改失败")
+      }
+      if (cb) cb()
+    })
+  }
+}
+
+function changePasswordAction(data) {
+  return {
+    [BZ_REQUESTER]: {
+      types: [actions.APP_LIST_REQ, actions.APP_LIST_SUC, actions.APP_LIST_FAL],
+      url: API.CHANGE_PASSWORD_URL,
+      body: data
+    }
+  }
+}
+
 /*** Reducer ***/
 const initialState = {
   // sidebar

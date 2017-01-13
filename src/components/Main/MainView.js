@@ -27,7 +27,11 @@ export default class MainView extends Component {
     }
     return (
       <div className="app-main">
-        <Header router={this.props.router} items={this.props.main.items}/>
+        <Header 
+          router={this.props.router} 
+          items={this.props.main.items} 
+          changePswdVisible={this.props.main.changePasswordVisible}
+        />
         <div className="app-content">
           { this.props.children }
         </div>

@@ -1,0 +1,145 @@
+@mixin middleCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 9
+}
+
+@mixin round {
+  border-radius: 50%;
+}
+
+@function setBg($img) {
+  @return "../../img/" + $img
+}
+
+$foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
+
+.Login {
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-gradient(linear, 50% 0, 45% 100%, from(#edf3fe), to(#d5d2f0));
+}
+
+.Login .loginBox {
+  @include middleCenter;
+  width: 460px;
+  padding: 60px 80px 40px;
+  background-color: #fff;
+  margin: -180px 0 0 -230px;
+  box-shadow: $foorShadow;
+  border-radius: 8px;
+}
+
+.Login .input {
+  margin-bottom: 15px;
+  position: relative;
+  transition: border .6s;
+}
+
+.Login .input:after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 0;
+  background-color: #999;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: width .3s ease;
+}
+
+.Login .input.focus:after {
+  width: 100%;
+}
+
+.Login .input.focus.vcode:after {
+  width: 60%;
+}
+
+.Login .input.pre-icon input {
+  padding-left: 46px;
+}
+
+.Login .input.pre-icon i {
+  height: 42px;
+  width: 42px;
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  background-position: center center;
+  background-size: 20px auto;
+  background-repeat: no-repeat;
+}
+
+.pre-icon i.user {
+  background-image: url(setBg("user.svg")) 
+}
+
+.pre-icon i.pswd {
+  background-image: url(setBg("pswd.svg")) 
+}
+
+.Login input {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.Login .input.vcode input {
+  width: 60%;
+}
+
+.Login .input.vcode img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.Login .loginBox .avatar {
+  @include round;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 50%;
+  top: -60px;
+  margin-left: -60px;
+  padding: 10px;
+  background-color: #fff;
+  overflow: hidden;
+  // background: url(setBg("avatar.png")) no-repeat center center / 100% auto;
+}
+
+.Login .loginBox .avatar img {
+  @include round;
+  display: block;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 3px 12px rgba(73, 89, 238, 0.16);
+}
+
+.Login .btn-wrap {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.Login .btn-wrap button {
+  background-color: #57ACEF;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  transition: background-color .3s;
+  &:hover {
+    background-color: #297CD3
+  }
+}

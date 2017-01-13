@@ -10,7 +10,7 @@
 }
 
 @function setBg($img) {
-  @return "../assets/img/" + $img
+  @return "../img/" + $img
 }
 
 $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
@@ -43,7 +43,7 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
   display: block;
   height: 1px;
   width: 0;
-  background-color: #A67FFC;
+  background-color: #999;
   position: absolute;
   left: 0;
   bottom: 0;
