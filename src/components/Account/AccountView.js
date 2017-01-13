@@ -55,7 +55,7 @@ export default class AccountView extends Component {
           <img alt="avatar" src={avatarImg}/>
         </div>
         <span className="welcome">欢迎回来，{loginInfo.cstname}</span>
-        <span className="cancel" onClick={(e) => this.handleLogout(e)}>注销</span>
+        <span className="cancel" onClick={(e) => this.handleLogout(e)}>退出登录</span>
         <div 
           className={this.state.showCard ? "card show" : "card"}
           onMouseEnter={(e) => this.handleMouseover(e)}
@@ -67,6 +67,7 @@ export default class AccountView extends Component {
           </div>
           <div className="down">
             <div className="item" onClick={(e) => this.updatePassword(e)}>修改密码</div>
+            <div className="item" onClick={(e) => this.handleLogout(e)}>退出登录</div>
           </div>
         </div>
       </div>

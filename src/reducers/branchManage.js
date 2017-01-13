@@ -21,7 +21,7 @@ export const doubleAsync = (cb) => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        dispatch(increment(getState().message.count))
+        dispatch(increment(getState().branchManage.count))
         cb && cb()
         resolve()
       }, 2000)

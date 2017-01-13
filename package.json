@@ -55,21 +55,11 @@
   },
   "author": "Aford",
   "license": "MIT",
-  "babel": {
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "antd",
-          "style": true
-        }
-      ]
-    ]
-  },
   "dependencies": {
     "antd": "^2.6.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-import": "^1.1.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
@@ -112,7 +102,6 @@
     "yargs": "^6.3.0"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.1.0",
     "cheerio": "^0.22.0",
     "connect-history-api-fallback": "^1.3.0",
     "express": "^4.14.0",
