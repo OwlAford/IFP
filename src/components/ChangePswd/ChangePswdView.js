@@ -88,8 +88,8 @@ export default class ChangePswdView extends Component {
             </div>
           </div>
           <div className="app-double-btn">
-            <button className="app-btn" onClick={(e) => this.onClose(e)}>返回</button>
-            <button className="app-btn warn" onClick={(e) => this.onSubmit(e)}>保存</button>
+            <button className="app-btn hollow" onClick={(e) => this.onClose(e)}>返回</button>
+            <button className="app-btn" onClick={(e) => this.onSubmit(e)}>保存</button>
           </div>
           <i className="close" onClick={(e) => this.onClose(e)}></i>
         </div>

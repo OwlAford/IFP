@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { API } from 'CONSTANT/globals'
 import avatarImg from 'IMAGE/avatar.png'
+import * as CK from 'UTIL/cookie' 
 import './Account.scss'
 
 export default class AccountView extends Component {
@@ -40,11 +41,7 @@ export default class AccountView extends Component {
   }
 
   render() {
-    let loginInfo = this.props.loginInfo
-    // 若跳过了表单登录部分，则直接刷新页面
-    if (!loginInfo) {
-      window.location.href = API.CONTENTNAME
-    }
+    let userName = CK.getCookie('cstName')
     return (
       <div className="app-account">
         <div 
@@ -54,7 +51,7 @@ export default class AccountView extends Component {
         >
           <img alt="avatar" src={avatarImg}/>
         </div>
-        <span className="welcome">欢迎回来，{loginInfo.cstname}</span>
+        <span className="welcome">欢迎回来，{userName}</span>
         <span className="cancel" onClick={(e) => this.handleLogout(e)}>退出登录</span>
         <div 
           className={this.state.showCard ? "card show" : "card"}
@@ -63,7 +60,7 @@ export default class AccountView extends Component {
         >
           <div className="up">
             <div className="avatar-m"><img alt="avatar" src={avatarImg}/></div>
-            {loginInfo.cstname}
+            {userName}
           </div>
           <div className="down">
             <div className="item" onClick={(e) => this.updatePassword(e)}>修改密码</div>

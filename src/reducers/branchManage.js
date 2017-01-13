@@ -2,14 +2,14 @@
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 
 /*** Actions ***/
-export function increment (value = 1) {
+export function increment(value = 1) {
   return {
     type    : COUNTER_INCREMENT,
     payload : value
   }
 }
 
-export function logtime (value = 1) {
+export function logtime(value = 1) {
   return {
     type    : 'LOG_TIME',
     payload : value
@@ -34,7 +34,7 @@ const initialState = {
   count: 0,
   time: 0
 }
-export default function counterReducer (state = initialState, action) {
+export default function counterReducer(state = initialState, action) {
   switch (action.type) {
     case COUNTER_INCREMENT :
       return {

@@ -37,11 +37,11 @@ export default store => next => action => {
   }
   var { url, body, header, method, dataType, mode, types, session, requestType, error, success} = ifpApi
 
-  if (typeof url === 'function') {
+  if (typeof url === 'function'){
     url = url(store.getState())
   }
 
-  if (typeof url !== 'string') {
+  if (typeof url !== 'string'){
     throw new Error('Specify a string url.')
   }
 
@@ -83,7 +83,7 @@ export default store => next => action => {
   )
 }
 
-function _getRequestHeader (header, type, url) {
+function _getRequestHeader(header, type, url) {
   let finalHeader = {}
   const date = new Date()
   const channelDate = utils.getNowDateStr(date)
@@ -115,14 +115,14 @@ function _getRequestHeader (header, type, url) {
   return Object.assign({}, finalHeader, header)
 }
 
-function _getDefaultHeader (header) {
+function _getDefaultHeader(header) {
   if (header) {
     return Object.assign({}, FIXED_HEADER, header)
   }
   return FIXED_HEADER
 }
 
-function _getRequestBody (body, header) {
+function _getRequestBody(body, header) {
   let finalBody = ''
   //const userId = !!CK.getCookie('userId') ? CK.getCookie('userId') : '1000000'
   if (!body) {
@@ -139,7 +139,7 @@ function _getRequestBody (body, header) {
   return finalBody
 }
 
-function _requestSuccess (next, actionWith, successType, json, success, url) {
+function _requestSuccess(next, actionWith, successType, json, success, url) {
   if(success && typeof(success) == "function") {
     success(json)
   } else {
@@ -153,7 +153,8 @@ function _requestSuccess (next, actionWith, successType, json, success, url) {
         title: '请求失败！['+ json.body.errorCode + ']',
         content: json.body.errorMsg,
         onOk: onClose => {
-          if (json.body.errorCode == 'BLEC0001') {
+          // 数据校验失败返回登录页
+          if (json.body.errorCode == 'BLEC0001' || json.body.errorCode == 'SYEC0002') {
             window.location.href = window.globalConfig.REMOTE_URL
           }
           onClose()
@@ -164,7 +165,7 @@ function _requestSuccess (next, actionWith, successType, json, success, url) {
   return next(actionWith({ type: successType, data: json, url: url }))
 }
 
-function _requestError (next, actionWith, failType, json, error, url) {
+function _requestError(next, actionWith, failType, json, error, url) {
   if(error && typeof(error) == "function") {
     error()
   } else {
@@ -182,7 +183,7 @@ function _requestError (next, actionWith, failType, json, error, url) {
   return next(actionWith({ type: failType, data: json }))
 }
 
-function _doRequest (request) {
+function _doRequest(request) {
   return fetch(request).then(response => response.json().then(json => ({ json, response })))
     .then(({ json, response }) => {
       if (!response.ok) {
@@ -192,7 +193,7 @@ function _doRequest (request) {
   })
 }
 
-function _setActionLogToHeader (store, header, url) {
+function _setActionLogToHeader(store, header, url) {
   if (window.globalConfig && window.globalConfig.LOG_ACTION === 'true') {
     let actionLog = store.getState().common.actionLog
     if (url === window.globalConfig.ACTION_LOG_URL && store.getState().common.sendFailActionLog.length > 0) {
@@ -212,18 +213,18 @@ function _setActionLogToHeader (store, header, url) {
   return header
 }
 
-function _saveSendFailActionLog (store, header) {
+function _saveSendFailActionLog(store, header) {
   if (window.globalConfig && window.globalConfig.LOG_ACTION === 'true') {
     let sendFailActionLog = store.getState().common.sendFailActionLog
     sendFailActionLog.push(header.actionLog)
   }
 }
 
-function _getTransId () {
+function _getTransId() {
   return 'AT' + new Date().getTime()
 }
 
-function _getRequest (url, header, dataType, method, body) {
+function _getRequest(url, header, dataType, method, body) {
   let params = {
     headers: header,
     dataType: dataType ? dataType : DEFAULT_REQ.dataType,
