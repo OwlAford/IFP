@@ -1,46 +1,53 @@
+@function setBg($img) {
+  @return "../../assets/img/" + $img
+}
+
 .app-header {
   height: 60px;
-}
+  
+  .logo {
+    height: 60px;
+    width: 240px;
+    line-height: 60px;
+    float: left;
+    padding-left: 60px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    background: url(setBg('logo.png')) no-repeat 15px center / 38px auto;
+  }
 
-.app-header .logo {
-  height: 60px;
-  width: 240px;
-  line-height: 60px;
-  float: left;
-  padding-left: 60px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #333;
-  background: url(../../assets/img/logo.png) no-repeat 15px center / 38px auto;
-}
+  .guide {
+    height: 60px;
+    float: left;
+    line-height: 60px;
+    font-size: 15px;
+    
+    a {
+      color: #424e67;
+      padding: 10px;
+      position: relative;
+      margin: 0 20px;
 
-.app-header .guide {
-  height: 60px;
-  float: left;
-  line-height: 60px;
-  font-size: 15px;
-}
+      &:hover{
+        color: #3b8cff;
+      }
 
-.app-header .guide a {
-  color: #424e67;
-  padding: 10px;
-  position: relative;
-  margin: 0 20px;
-  &:hover{
-  	color: #3b8cff;
+      &.active {
+        color: #3b8cff;
+        &:after {
+          content: "";
+          display: block;
+          height: 2px;
+          background-color: #3b8cff;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
   }
 }
 
-.app-header .guide a.active {
-  color: #3b8cff;
-  &:after {
-  	content: "";
-  	display: block;
-  	height: 2px;
-  	background-color: #3b8cff;
-  	position: absolute;
-  	left: 0;
-  	bottom: 0;
-  	right: 0;
-  }
-}
+
