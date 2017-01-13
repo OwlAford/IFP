@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { API } from 'CONSTANT/globals'
 import handleChange from 'UTIL/handleChange'
+import { md5 } from 'UTIL/md5'
+import { message } from 'antd'
 
 export default class ChangePswdView extends Component {
 
@@ -18,8 +20,27 @@ export default class ChangePswdView extends Component {
     this.props.updateChangePasswordVisible(false)
   }
 
-  componentWillMount() {
-    // console.log(this.props.router)
+  onSubmit() {
+    let { oldPswd, newPswd, newAgainPswd } = this.state
+    let pswdReg = new RegExp(/^[a-zA-Z0-9]{6,10}$/)
+    if (oldPswd == "") {
+      message.error("请输入旧密码！")
+    } else if (newPswd == "" || !pswdReg.test(newPswd)) {
+      message.error("请输入正确的新密码！")
+    } else if (newAgainPswd == "" || !pswdReg.test(newAgainPswd)) {
+      message.error("请再次输入正确的新密码！")
+    } else if (oldPswd == newPswd) {
+      message.error("新密码不能和旧密码相同!")
+    } else if (newPswd !== newAgainPswd) {
+      message.error("请确认两次输入的新密码一致!")
+    } else {
+      let data = {
+        oldPassword: md5(oldPswd),
+        newPassword: md5(newPswd)
+      }
+      this.props.updateChangePasswordVisible(false)
+      this.props.changePassword(data, this.onClose)
+    }
   }
 
   render() {
@@ -36,6 +57,7 @@ export default class ChangePswdView extends Component {
                   type="password" 
                   value={oldPswd}
                   name="oldPswd"
+                  placeholder="密码为6-16位数字或字母"
                   onChange={this.handleChange}
                 />
               </div>
@@ -47,6 +69,7 @@ export default class ChangePswdView extends Component {
                   type="password" 
                   value={newPswd}
                   name="newPswd"
+                  placeholder="密码为6-16位数字或字母"
                   onChange={this.handleChange}
                 />
               </div>
@@ -58,14 +81,15 @@ export default class ChangePswdView extends Component {
                   type="password" 
                   value={newAgainPswd}
                   name="newAgainPswd"
+                  placeholder="密码为6-16位数字或字母"
                   onChange={this.handleChange}
                 />
               </div>
             </div>
           </div>
           <div className="app-double-btn">
-            <button className="app-btn">返回</button>
-            <button className="app-btn warn">保存</button>
+            <button className="app-btn" onClick={(e) => this.onClose(e)}>返回</button>
+            <button className="app-btn warn" onClick={(e) => this.onSubmit(e)}>保存</button>
           </div>
           <i className="close" onClick={(e) => this.onClose(e)}></i>
         </div>

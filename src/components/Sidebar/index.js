@@ -1,3 +1,3 @@
-import Sidebar from './Sidebar'
+import SidebarView from './SidebarView'
 
-export default Sidebar
+export default SidebarView

@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { API } from 'CONSTANT/globals'
 import './Sidebar.scss'
 
-export default class Sidebar extends Component {
+export default class SidebarView extends Component {
   constructor(props) {
     super(props)
     this.state = {

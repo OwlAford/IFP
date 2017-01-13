@@ -113,9 +113,9 @@ export function changePassword(data, cb) {
     dispatch(changePasswordAction(data)).then(action => {
       const flag = action.data.body.opResult
       if (flag=='1') {
-        message.success("修改成功")
+        message.success("密码修改成功！")
       } else {
-        message.error("修改失败")
+        message.error("密码修改失败，请重试！")
       }
       if (cb) cb()
     })

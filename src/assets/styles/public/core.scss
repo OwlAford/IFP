@@ -29,13 +29,6 @@ body {
   border-top-right-radius: 8px;
 }
 
-.app-welcome {
-  font-size: 22px;
-  text-align: center;
-  line-height: 90px;
-  font-weight: 700;
-}
-
 @font-face {font-family: "iconfont";
   src: url(setPath('iconfont.eot'));
   src: url(setPath('iconfont.eot#iefix')) format('embedded-opentype'),
@@ -103,6 +96,10 @@ body {
     &:focus {
       @include inputFocus;
     }
+    &::-webkit-input-placeholder {
+      color: #ccc;
+      font-size: 13px;
+    }
   }
 }
 
@@ -166,7 +163,7 @@ body {
   text-align: center;
 
   .app-btn {
-    margin: 0 15px;
+    margin: 0 20px;
   }
 }
 
