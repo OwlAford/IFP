@@ -1,6 +1,9 @@
 .DS_STORE
 *.log
 
+*.sublime-project
+*.sublime-workspace
+
 node_modules
 
 dist
