@@ -3,7 +3,7 @@ import utils from 'UTIL/public'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 import { sendData } from './main'
-// import { initBranchList } from './userMgr'
+// import { initBranchList } from './main'
 
 const AUTH_MENU_REQ = 'AUTH_MENU_REQ'
 const AUTH_MENU_SUC = 'AUTH_MENU_SUC'
