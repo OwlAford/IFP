@@ -50,13 +50,14 @@ export function updataLoginMsg(data) {
 
 export function converMenuField(menu) {
   return {
-    "id": menu.menuId,
-    "parentId": menu.menuParentId,
-    "logo": menu.menuLogo,
-    "url": menu.menuUrl,
-    "title": menu.menuName,
+    id: menu.menuId,
+    parentId: menu.menuParentId,
+    logo: menu.menuLogo,
+    url: menu.menuUrl,
+    title: menu.menuName,
     "level": menu.menuLevel,
-    "menus": []
+    menus: [],
+    branchList: []
   }
 }
 
@@ -132,6 +133,71 @@ function changePasswordAction(data) {
   }
 }
 
+function groupBranch(branchList, userGetBranchList) {
+  return {
+    type: actions.USER_GROUP_BRANCH,
+    branchList: branchList,
+    userGetBranchList: userGetBranchList
+  }
+}
+
+function getBranchListAction() {
+  return {
+    [BZ_REQUESTER]: {
+      types:[actions.GET_BRANCH_LIST_REQ, actions.GET_BRANCH_LIST_SUC, actions.GET_BRANCH_LIST_FAL],
+      url: API.GET_BRANCH_LIST_URL,
+      body: {
+        queryType: '1'
+      }
+    }
+  }
+}
+
+function _converRoleField(branch) {
+  return {
+    id: branch.brhId,
+    parentId: branch.brhParentId,
+    name: branch.brhName,
+    children: []
+  }
+}
+
+function getBranch(branch) {
+  return {
+        "label": branch.brhName,
+        "value": branch.brhId,
+        "key": branch.brhId,
+        "children": [],
+  }
+}
+
+function groupGetBranch(getBranchList) {
+  return {
+    type: actions.GET_BRANCH_LIST,
+    data: getBranchList
+  }
+}
+
+export function initBranchList() {
+  return (dispatch,state) => {
+    dispatch(getBranchListAction()).then(action => {
+      let branchList = action.data.body.branchList
+      let userGetBranchList = utils.groupList(action.data.body.branchList, "brhId", "brhParentId", "children", _converRoleField)
+      
+      let getBranchList = utils.groupList(action.data.body.branchList, "brhId", "brhParentId", "children", getBranch)
+      dispatch(groupGetBranch(getBranchList)) //新增的时候查机构列表
+      dispatch(groupBranch(branchList, userGetBranchList))
+    })
+  }
+}
+
+export function sendData(data) {
+  return {
+    type: actions.SENDDATA,
+    data
+  } 
+}
+
 /*** Reducer ***/
 const initialState = {
   // sidebar
@@ -152,7 +218,12 @@ const initialState = {
   topMenu: [], // 导航菜单
   changePasswordVisible: false,
   userMenu: {},
-  systemParam: []
+  systemParam: [],
+  // branch
+  branchList: [],
+  selectBranch: [],
+  getBranchList: [],
+  userGetBranchList: []
 }
 
 export default function mainReducer(state = initialState, action) {
@@ -183,10 +254,26 @@ export default function mainReducer(state = initialState, action) {
         loginCount: action.data.body.cstLoginTimes
       }
     case actions.SET_BUGFREE_MENU:
-        return {
-          ...state,
-          bugfreeMenu: action.bugfreeMenu
-        }
+      return {
+        ...state,
+        bugfreeMenu: action.bugfreeMenu
+      }
+    case actions.USER_GROUP_BRANCH:
+      return {
+        ...state,
+        branchList: action.branchList,
+        userGetBranchList: action.userGetBranchList
+      }
+    case actions.SENDDATA:
+      return {
+        ...state,
+        selectBranch: action.data
+      }
+    case actions.GET_BRANCH_LIST:
+      return {
+        ...state,
+        getBranchList: action.data
+      }
     default:
       return state
   }

@@ -1,19 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button } from 'antd'
+import BarnchTree from './BarnchTree'
+import 'STYLE/pages/branchManage.scss'
 
 export default class BranchManageView extends Component {
-
-  static propTypes = {
-    branchManage : PropTypes.object.isRequired,
-    doubleAsync  : PropTypes.func.isRequired,
-    logtime      : PropTypes.func.isRequired,
-    increment    : PropTypes.func.isRequired
-  }
 
   constructor(props) {
     super(props)
     this.state = {
-      loading: false
+
     }
   }
 
@@ -28,35 +23,24 @@ export default class BranchManageView extends Component {
   }
 
   componentWillMount () {
-    // console.log(this.props)
+    // 初始化银行列表
+    this.props.initBranchList()
   }
 
   render() {
     return (
       <div className="branchManage">
-        <div>
-          <Row>
-            <Col span={6}>
-              <span style={{lineHeight: '28px'}}>数字叠加器: {this.props.branchManage.count}</span>
-            </Col>
-            <Col span={8}>
-              <Button type="primary" onClick={this.props.increment} className='mr10'>
-                单次加一
-              </Button>
-              <Button type="primary" loading={this.state.loading} onClick={e => this.enterLoading(e)}>
-                延时异步双倍叠加
-              </Button>
-            </Col>
-            <Col span={6}>
-              <span style={{lineHeight: '28px'}}>不定增量次数: {this.props.branchManage.time}</span>
-            </Col>
-            <Col span={4}>
-              <Button type="primary" className='fr' onClick={this.props.logtime}>
-                生成
-              </Button>
-            </Col>
-          </Row>
-        </div>
+        <Row>
+          <Col span={5}>
+            <BarnchTree
+              changeBranchSelected={this.props.changeBranchSelected}
+              main={this.props.main}
+            />
+          </Col>
+          <Col span={19}>
+            main
+          </Col>
+        </Row>
       </div>
     )
   }

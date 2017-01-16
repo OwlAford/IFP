@@ -19,4 +19,13 @@ export const MERGE_FINAL_MENU = 'MERGE_FINAL_MENU'
 export const SET_BUGFREE_MENU = 'SET_BUGFREE_MENU'  
 
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'  
-export const SAVE_USER_MENU  =  'SAVE_USER_MENU'  
+export const SAVE_USER_MENU  =  'SAVE_USER_MENU'
+
+export const USER_GROUP_BRANCH  =  'USER_GROUP_BRANCH'
+
+export const SENDDATA  =  'SENDDATA'  
+
+export const GET_BRANCH_LIST  =  'GET_BRANCH_LIST'  
+export const GET_BRANCH_LIST_REQ  =  'GET_BRANCH_LIST_REQ'  
+export const GET_BRANCH_LIST_SUC  =  'GET_BRANCH_LIST_SUC'  
+export const GET_BRANCH_LIST_FAL  =  'GET_BRANCH_LIST_FAL'  
