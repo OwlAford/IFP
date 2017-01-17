@@ -4,11 +4,6 @@ import { API } from 'CONSTANT/globals'
 import './Sidebar.scss'
 
 export default class SidebarView extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
 
   handleActive(e) {
     let target = e.target
@@ -20,8 +15,6 @@ export default class SidebarView extends Component {
       parent.classList.remove('active')
       target.setAttribute('data-state', '0')
     }
-
-    console.log()
   }
 
   render() {
@@ -35,6 +28,8 @@ export default class SidebarView extends Component {
       A001B006: 'reviewManage'
     }
 
+    const { selectMenu } = this.props
+
     const Menu = (menus, preUrl) => {
       return (
         <div className="menu">
@@ -46,7 +41,11 @@ export default class SidebarView extends Component {
                 return (
                   <div className="subMenu" key={i}>
                     <div className="title single">
-                      <Link to={preUrl + item.url} activeClassName='active'>
+                      <Link 
+                        to={preUrl + item.url} 
+                        activeClassName='active' 
+                        onClick={(e) => {selectMenu(item.id)}}
+                      >
                         <i className={'iconfont ' + CSS[item.id]}></i>
                         {item.title}
                       </Link>
@@ -67,7 +66,11 @@ export default class SidebarView extends Component {
                           (item, i) => {
                             return (
                               <div className="item" key={i}>
-                                <Link to={preUrl + item.url} activeClassName='active'>
+                                <Link 
+                                  to={preUrl + item.url} 
+                                  activeClassName='active'
+                                  onClick={(e) => {selectMenu(item.id)}}
+                                >
                                   {item.title}
                                 </Link>
                               </div>

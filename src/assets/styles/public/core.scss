@@ -97,7 +97,7 @@ body {
     outline: none;
     background-color: #fcfcfc;
     margin-bottom: 20px;
-    border-radius: 20px;
+    border-radius: 4px;
 
     &:focus {
       @include inputFocus;

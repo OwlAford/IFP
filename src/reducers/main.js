@@ -5,6 +5,13 @@ import utils from 'UTIL/public'
 import { message } from 'antd'
 
 /*** Actions ***/
+export function selectMenu(currentMenu) {
+  return {
+    type: actions.SELECT_LEFT_MENU,
+    currentMenu: currentMenu
+  }
+}
+
 export function updateChangePasswordVisible(changePasswordVisible) {
   return {
     type: actions.CHANGE_PASSWORD,
@@ -109,6 +116,12 @@ export function initUserMenu(cb) {
   }
 }
 
+export function cleanBranch() {
+  return {
+    type: actions.CLEAN_BRANCH
+  }
+}
+
 export function changePassword(data, cb) {
   return (dispatch, getState) => {
     dispatch(changePasswordAction(data)).then(action => {
@@ -178,7 +191,7 @@ function groupGetBranch(getBranchList) {
   }
 }
 
-export function initBranchList() {
+export function initBranchList(cb) {
   return (dispatch,state) => {
     dispatch(getBranchListAction()).then(action => {
       let branchList = action.data.body.branchList
@@ -187,7 +200,15 @@ export function initBranchList() {
       let getBranchList = utils.groupList(action.data.body.branchList, "brhId", "brhParentId", "children", getBranch)
       dispatch(groupGetBranch(getBranchList)) //新增的时候查机构列表
       dispatch(groupBranch(branchList, userGetBranchList))
+      if (cb) cb()
     })
+  }
+}
+
+export function updateBranch(selectBranch) {
+  return {
+    type: actions.UPDATE_BRANACH,
+    selectBranch: selectBranch ? selectBranch : ''
   }
 }
 
@@ -228,6 +249,24 @@ const initialState = {
 
 export default function mainReducer(state = initialState, action) {
   switch (action.type) {
+    case actions.UPDATE_BRANACH:
+      return {
+        ...state,
+        selectBranch: action.selectBranch
+      }
+     case actions.CLEAN_BRANCH:
+      return {
+        ...state,
+        selectBranch: ''
+      }
+    case actions.SELECT_LEFT_MENU:
+      let userMenu = state.userMenu
+      userMenu = Object.assign({}, userMenu, {currentMenu: action.currentMenu})  
+      return {
+        ...state,
+        currentMenu: action.currentMenu,
+        userMenu: userMenu
+      }
     case actions.CHANGE_PASSWORD:
       return {
         ...state,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync, logtime, changeBranchSelected } from 'REDUCER/branchManage'
-import { initBranchList } from 'REDUCER/main'
+import { increment, doubleAsync, logtime, changeBranchSelected, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, resetForm } from 'REDUCER/branchManage'
+import { initBranchList, updateBranch, cleanBranch } from 'REDUCER/main'
 import BranchManageView from '../components/BranchManageView'
 
 const mapDispatchToProps = {
@@ -8,7 +8,13 @@ const mapDispatchToProps = {
   logtime: () => logtime(1),
   doubleAsync,
   changeBranchSelected,
-  initBranchList
+  initBranchList,
+  updateBranch,
+  cleanBranch,
+  cleanContrclickModify,
+  cleanContrclickDelete,
+  changeBranchOperationModify,
+  resetForm
 }
 
 const mapStateToProps = (state) => ({

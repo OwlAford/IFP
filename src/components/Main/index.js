@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import { initUserMenu } from 'REDUCER/main'
+import { initUserMenu, selectMenu } from 'REDUCER/main'
 import MainView from './MainView'
 
 const mapDispatchToProps = {
-  initUserMenu
+  initUserMenu,
+  selectMenu
 }
 
 const mapStateToProps = (state) => ({

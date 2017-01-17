@@ -55,6 +55,13 @@ const CLEAN_CONTROL_DELETE = 'CLEAN_CONTROL_DELETE'
 const CLEAN_CONTROL_MODIDFY = 'CLEAN_CONTROL_MODIDFY'
 const CONTROL_MODIDFY = 'CONTROL_MODIDFY'
 
+export function resetForm(){
+  return {
+    type: RESET_FORM,
+    data: ''
+  } 
+}
+
 //查询所有机构
 //拿指定branchId
 function getBranchAction(data) {
@@ -80,9 +87,29 @@ function ContrclickDelete() {
   } 
 }
 
+export function cleanContrclickDelete() {
+  return {
+    type: CLEAN_CONTROL_DELETE
+  } 
+}
+
 function ContrclickModify() {
   return {
     type: CONTROL_MODIDFY
+  } 
+}
+
+export function cleanContrclickModify() {
+  return {
+    type: CLEAN_CONTROL_MODIDFY
+  } 
+}
+
+//标识 修改操作
+export function changeBranchOperationModify() {
+  return {
+    type: MODIFY_BRANCH,
+    MODIFY_BRANCH
   } 
 }
 
@@ -118,12 +145,30 @@ const initialState = {
 }
 export default function counterReducer(state = initialState, action) {
   switch (action.type) {
+    case RESET_FORM:
+      return {
+        ...state,
+        selectedObject: {}
+      }
+
     case BING_GROUP_BRANCH:
       return {
         ...state,
         selectedObject: action.data, //左边机构列表选择时的那条数据
         brhId: action.data.brhId
       } 
+
+    case MODIFY_BRANCH:
+      return {
+        ...state,
+        selectedOperate: action.MODIFY_BRANCH
+      }  
+      
+    case CLEAN_CONTROL_DELETE:
+      return {
+        ...state,
+        deleteVisible: false
+      }
 
     case CONTROL_DELETE:
       return {

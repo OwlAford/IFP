@@ -22,6 +22,7 @@ export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 export const SAVE_USER_MENU  =  'SAVE_USER_MENU'
 
 export const USER_GROUP_BRANCH  =  'USER_GROUP_BRANCH'
+export const UPDATE_BRANACH  =  'UPDATE_BRANACH'
 
 export const SENDDATA  =  'SENDDATA'  
 
@@ -29,3 +30,5 @@ export const GET_BRANCH_LIST  =  'GET_BRANCH_LIST'
 export const GET_BRANCH_LIST_REQ  =  'GET_BRANCH_LIST_REQ'  
 export const GET_BRANCH_LIST_SUC  =  'GET_BRANCH_LIST_SUC'  
 export const GET_BRANCH_LIST_FAL  =  'GET_BRANCH_LIST_FAL'  
+
+export const CLEAN_BRANCH  =  'CLEAN_BRANCH'  

@@ -62,7 +62,11 @@ export default class HeaderView extends Component {
       <div className="app-header">
         <div className="logo">IFP内部管理系统</div>
         {LnkList(this.props.items)}
-        <Sidebar menus={this.state.currentMenus} parentUrl={this.state.currentUrl}/>
+        <Sidebar 
+          menus={this.state.currentMenus} 
+          parentUrl={this.state.currentUrl}
+          selectMenu={this.props.selectMenu}
+        />
         <Account router={this.props.router}/>
         {this.initPswdModal(this.props.changePswdVisible)}
       </div>     
