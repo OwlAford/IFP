@@ -3,6 +3,11 @@
 @import "./variable.scss";
 @import "./animate.scss";
 
+@mixin contentRadius {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
 body {
   background-color: #eff4f8;
 }
@@ -25,8 +30,11 @@ body {
   background-color: #fff;
   border: 1px solid #E2E8EC;
   border-bottom: none;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  @include contentRadius;
+  > * {
+    @include contentRadius;
+    background-color: #fff;
+  }
 }
 
 @font-face {font-family: "iconfont";
