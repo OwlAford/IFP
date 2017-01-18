@@ -21,7 +21,8 @@ export default (store) => ({
     require.ensure([], (require) => {
       cb(null, [
         // require('./Message').default(store),
-        require('./BranchManage').default(store)
+        require('./BranchManage').default(store),
+        require('./UserManage').default(store)
       ])
     })
   }
