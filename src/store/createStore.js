@@ -10,9 +10,8 @@ import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 // 获取url更新后回调方法，用于触发新store的注入
 import { updateLocation } from './location'
-
+// 每次action操作及对应的state变化，都可以在控制台打印打印
 import createLogger from 'redux-logger'
-import { logger } from 'MIDDLEWARE/log'
 
 import requester from 'MIDDLEWARE/requester'
 
@@ -23,11 +22,11 @@ export default (initialState = {}) => {
   let composeEnhancers = compose
 
   // 中间件方法扩展
-  let middleware = [thunk, requester, logger]
+  let middleware = [thunk, requester]
 
   // 在开发环境并且开启devtools的条件下，替换成devtools的增强器扩展
   if (__DEV__) {
-    middleware = [thunk, requester, createLogger(), logger]
+    middleware = [thunk, requester, createLogger()]
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     if (typeof composeWithDevToolsExtension === 'function') {
       composeEnhancers = composeWithDevToolsExtension
