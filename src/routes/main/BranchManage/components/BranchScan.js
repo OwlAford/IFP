@@ -35,13 +35,13 @@ let BranchScan = class BranchScan extends Component {
     }
 
     // 增删改操作后响应
-    const MsgSuc = (t, d) => {
+    const MsgSuc = (d) => {
       notification.success({
         message: '成功',
         description: d
       })
     }
-    const MsgFal = (t, d) => {
+    const MsgFal = (d) => {
       notification.warning({
         message: '失败',
         description: d
@@ -51,6 +51,7 @@ let BranchScan = class BranchScan extends Component {
       let type = afterOperateType
       switch(type) {
         case '1':
+          console.log('修改成功！')
           MsgSuc('修改成功！')
           break
         case '2':
