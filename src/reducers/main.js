@@ -242,7 +242,7 @@ const initialState = {
   systemParam: [],
   // branch
   branchList: [],
-  selectBranch: [],
+  selectBranch: '',
   getBranchList: [],
   userGetBranchList: []
 }

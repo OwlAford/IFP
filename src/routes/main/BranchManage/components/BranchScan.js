@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Row, Col, DatePicker, Select, Radio, message, Modal, TreeSelect } from 'antd'
+import { Form, Button, Input, Row, Col, DatePicker, Select, Radio, message, Modal, TreeSelect, notification } from 'antd'
+import NProgress from 'nprogress'
+import utils from 'UTIL/public'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -9,14 +11,107 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 let BranchScan = class BranchScan extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      brhId: 0
+    }
+  }
+
   componentWillUnmount() {
     this.props.resetForm()   // 清空整个表单
     this.props.cleanBranch() // 清空所属机构的选择框
   }
 
-  componentWillReceiveProps() {
-    const { resetFields } = this.props.form
-    // resetFields()
+  componentWillReceiveProps(newProps) {
+    const { resetFields, getFieldProps, getFieldValue, getFieldsValue } = this.props.form
+    const { selectedBranch, selectedOperate, selectBranchId, branchOperationModify, resetForm, cleanBranch, afterOperateType, changeBranchOperationAfterType, branchOperationDelete } = newProps
+
+    // 当选择侧边分支且分支进行了切换时
+    if (!utils.isEmptyObject(selectedBranch) && this.state.brhId != selectedBranch.brhId) {
+      this.setState({
+        brhId: selectedBranch.brhId
+      })
+      resetFields()
+    }
+
+    // 增删改操作后响应
+    const MsgSuc = (t, d) => {
+      notification.success({
+        message: '成功',
+        description: d
+      })
+    }
+    const MsgFal = (t, d) => {
+      notification.warning({
+        message: '失败',
+        description: d
+      })
+    }
+    if (afterOperateType != '0') {
+      let type = afterOperateType
+      switch(type) {
+        case '1':
+          MsgSuc('修改成功！')
+          break
+        case '2':
+          MsgFal('修改失败！')
+          break
+        case '3':
+          MsgSuc('删除成功！')
+          break
+        case '4':
+          MsgFal('删除失败！')
+          break
+        case '5':
+          MsgSuc('添加成功！')
+          break
+        case '6':
+          MsgFal('添加失败！')
+          break
+      }
+      changeBranchOperationAfterType({type: '0'})
+    }
+
+    // 当点击修改机构
+    if (selectedOperate == 'MODIFY_BRANCH') {    
+      let level = ''
+      if (!utils.isEmptyObject(selectedBranch)) {
+        let params = getFieldsValue()
+        switch (params.brhLevel) {
+          case '等级1':
+            level = '1'
+            break
+          case '等级2':
+            level = '2'
+            break
+          case '等级3':
+            level = '3'  
+            break
+        }
+      }
+      let data = Object.assign({}, getFieldsValue(), {brhLevel: level}, {brhParentId: selectBranchId})
+      if (data.brhId != '' && data.brhId !=undefined && data.brhId != null) {
+        NProgress.start()
+        branchOperationModify(data, () => {
+          NProgress.done()
+          resetForm()       // 清空整个表单
+          cleanBranch()     // 清空所属机构的选择框
+        }, NProgress.done)
+      }
+    // 当点击删除机构  
+    } else if (selectedOperate == 'DELETE_BRANCH') {
+      if (!utils.isEmptyObject(selectedBranch)) {
+        let params = getFieldsValue()
+        NProgress.start()
+        branchOperationDelete(params, () => {
+          resetForm()
+          cleanBranch()
+          NProgress.done()
+        }, NProgress.done)
+      }
+    }
+
   }
 
   render() {
@@ -55,7 +150,7 @@ let BranchScan = class BranchScan extends Component {
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes,      // 供用户选择的角色下拉列表
-      onChange: onChange,    // 改变角色的时候更新value的值
+      onChange: onChange,         // 改变角色的时候更新value的值
       value: selectBranchId,      // 选中的时候的值传给状态树，然后再提交的时候再做处理
       placeholder: "请选择",
       treeDefaultExpandAll: true,

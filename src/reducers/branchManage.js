@@ -2,42 +2,41 @@ import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import utils from 'UTIL/public'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
-import { sendData } from './main'
-// import { initBranchList } from './main'
+import { sendData, initBranchList } from './main'
 
 const AUTH_MENU_REQ = 'AUTH_MENU_REQ'
 const AUTH_MENU_SUC = 'AUTH_MENU_SUC'
 const AUTH_MENU_FAL = 'AUTH_MENU_FAL'
 
-//删除
+// 删除
 const DELETE_BRANCH = 'DELETE_BRANCH'
 
-//修改
+// 修改
 const MODIFY_BRANCH = 'MODIFY_BRANCH'
 
-//清空
+// 清空
 const EMPTY_BRANCH = 'EMPTY_BRANCH'
 
-//删除
+// 删除
 const DELETE_BRANCH_IFP = 'DELETE_BRANCH_IFP'
 
-//修改
+// 修改
 const MODIFY_BRANCH_IFP = 'MODIFY_BRANCH_IFP'
 
-//操作后的状态
+// 操作后的状态
 const BRANCH_AFTER_TYPE = 'BRANCH_AFTER_TYPE'
 
-//增加操作
+// 增加操作
 const BRANCH_ADD_REQ = 'BRANCH_ADD_REQ'
 const BRANCH_ADD_SUC = 'BRANCH_ADD_SUC'
 const BRANCH_ADD_FAL = 'BRANCH_ADD_FAL'
 
-//修改操作
+// 修改操作
 const BRACH_MODIFY_REQ = 'BRACH_MODIFY_REQ'
 const BRACH_MODIFY_SUC = 'BRACH_MODIFY_SUC'
 const BRACH_MODIFY_FAL = 'BRACH_MODIFY_FAL'
 
-//删除操作
+// 删除操作
 const BRACH_DELETE_REQ = 'BRACH_DELETE_REQ'
 const BRACH_DELETE_SUC = 'BRACH_DELETE_SUC'
 const BRACH_DELETE_FAL = 'BRACH_DELETE_FAL'
@@ -62,8 +61,8 @@ export function resetForm(){
   } 
 }
 
-//查询所有机构
-//拿指定branchId
+// 查询所有机构
+// 拿指定branchId
 function getBranchAction(data) {
   return {
     [BZ_REQUESTER]: {
@@ -105,7 +104,7 @@ export function cleanContrclickModify() {
   } 
 }
 
-//标识 修改操作
+// 标识 修改操作
 export function changeBranchOperationModify() {
   return {
     type: MODIFY_BRANCH,
@@ -113,7 +112,7 @@ export function changeBranchOperationModify() {
   } 
 }
 
-//树选择的节点
+// 树选择的节点
 export function changeBranchSelected(data) {
   return (dispatch, state) => {
     if (data.brhId != null || data.brhId != undefined) {
@@ -135,13 +134,100 @@ export function changeBranchSelected(data) {
   }
 }
 
+// 修改操作
+function modifyBranchAction(params) {
+  return {
+    [BZ_REQUESTER]: {
+      types: [BRACH_MODIFY_REQ, BRACH_MODIFY_SUC, BRACH_MODIFY_FAL],   
+      url: API.GET_BRANCH_MODIFY,
+      body: params,
+      header: {type: 'K'}
+    }
+  }
+}
+
+// 删除操作
+function deleteBranchAction(params) {
+  return {
+    [BZ_REQUESTER]: {
+      types: [BRACH_DELETE_REQ, BRACH_DELETE_SUC, BRACH_DELETE_FAL], 
+      url: API.GET_BRANCH_DELETE,
+      body: {
+        brhId: params.brhId
+      },
+      header: {type: 'K'}
+    }
+  }
+}
+
+// 标识 清空
+export function changeBranchOperationEmpty() {
+  return {
+    type: EMPTY_BRANCH,
+    EMPTY_BRANCH
+  } 
+}
+
+// 标识 操作结果 -- 默认0 修改成功1 修改失败2 删除成功3 删除失败4 增加成功5 增加失败6 
+export function changeBranchOperationAfterType(afterType) {
+  return {
+    type: BRANCH_AFTER_TYPE,
+    afterType
+  } 
+}
+
+// 后台 修改机构
+export function branchOperationModify(params, success, fail) {
+  return (dispatch,state) => {
+    dispatch(changeBranchOperationEmpty())
+    dispatch(modifyBranchAction(params)).then(action => {
+      if (action.data.body.errorCode=='0') {
+        dispatch(initBranchList())      
+        dispatch(changeBranchOperationAfterType({type: '1'}))
+      } else {   
+        dispatch(changeBranchOperationAfterType({type: '2'}))
+      }
+      if (success) success()
+    }, () => {
+      if (fail) fail()
+      dispatch(changeBranchOperationEmpty())
+    })   
+  }
+}
+
+// 标识 删除操作 
+export function changeBranchOperationDelete() {
+  return {
+    type: DELETE_BRANCH,
+    DELETE_BRANCH
+  } 
+}
+
+// 后台 删除机构
+export function branchOperationDelete(params, success, fail) {
+  return (dispatch, state) => {
+    dispatch(changeBranchOperationEmpty())
+    dispatch(deleteBranchAction(params)).then( action => {
+      if (action.data.body.errorCode == '0' && action.data.body.op_result != '0') {     
+        dispatch(changeBranchOperationAfterType({type: '3'}))
+        dispatch(initBranchList())
+      } else { 
+        dispatch(changeBranchOperationAfterType({type: '4'}))
+      }
+      if (success) success()
+    }, () => {
+      if (fail) fail()
+      dispatch(changeBranchOperationEmpty())
+    })  
+  }
+}
+
 /*** Reducer ***/
 const initialState = {
-  count: 0,
-  time: 0,
   selectedObject: {},
   deleteVisible: false,
   modifyVisible: false,
+  afterOperateType:'0',
 }
 export default function counterReducer(state = initialState, action) {
   switch (action.type) {
@@ -162,7 +248,26 @@ export default function counterReducer(state = initialState, action) {
       return {
         ...state,
         selectedOperate: action.MODIFY_BRANCH
-      }  
+      }
+
+    case DELETE_BRANCH:
+      return {
+        ...state,
+        selectedOperate: action.DELETE_BRANCH
+      }
+
+    case EMPTY_BRANCH:
+      return {
+        ...state,
+        selectedOperate: ''
+      }
+
+    // 操作完后状态
+    case BRANCH_AFTER_TYPE:
+      return {
+        ...state,
+        afterOperateType: action.afterType.type
+      } 
       
     case CLEAN_CONTROL_DELETE:
       return {

@@ -36,23 +36,16 @@ let BranchSearch = class BranchSearch extends Component {
   }
 
   modBranch() {
-    console.log('modBranch')
-    const { modifyVisible, cleanContrclickModify, changeBranchOperationModify } = this.props
-    if (modifyVisible) {
+    var Props = this.props
+    if (Props.modifyVisible) {
       Confirm({
-        title: '您是否确认要修改这项内容',
-        content: '点确认 1 秒后关闭',
+        title: '您确认修改这项内容？',
+        content: '点击确认修改',
         onOk() {
-          return new Promise((resolve) => {
-              resolve(changeBranchOperationModify())
-              cleanContrclickModify()
-              // cleanBranch() // 点击修改后清空新增里的所属机构的选择框
-            }
-          )
+          Props.changeBranchOperationModify()
+          Props.cleanContrclickModify()
         },
-        onCancel() {
-          // cleanContrclickModify()
-        }
+        onCancel() {}
       })
     } else {
       message.warning('请在机构树上先选择一个机构节点！')
@@ -61,6 +54,22 @@ let BranchSearch = class BranchSearch extends Component {
 
   delBranch() {
     console.log('delBranch')
+    var Props = this.props
+    if (Props.deleteVisible) {
+      Confirm({
+        title: '确认删除这项内容？',
+        content: '点击确认删除',
+        onOk() {
+          Props.cleanContrclickDelete()
+          Props.changeBranchOperationDelete()
+        },
+        onCancel() {
+          Props.cleanContrclickDelete()
+        }
+      })
+    } else {
+      message.warning('请在机构树上先选择一个机构节点！')
+    }
   }
 
   render() {

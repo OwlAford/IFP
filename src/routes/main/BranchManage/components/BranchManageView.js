@@ -14,7 +14,7 @@ export default class BranchManageView extends Component {
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     // 初始化银行机构列表
     NProgress.start()
     this.props.initBranchList(() => {
@@ -25,12 +25,16 @@ export default class BranchManageView extends Component {
     })
   }
 
+  componentWillUnmount() {
+    NProgress.done()
+  }
+
   render() {
     // 若数据未准备好，则放弃渲染，以免报错
     if (!this.state.loaded) {
       return false
     }
-    const { changeBranchSelected, main, branchManage, updateBranch, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, cleanBranch, resetForm } = this.props
+    const { changeBranchSelected, main, branchManage, updateBranch, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, cleanBranch, resetForm, branchOperationModify, changeBranchOperationAfterType, changeBranchOperationDelete, branchOperationDelete } = this.props
     return (
       <div className="branchManage">
         <Row>
@@ -43,12 +47,15 @@ export default class BranchManageView extends Component {
           <Col span={19}>
             <BranchSearch
               userMenu={main.userMenu}
+              resetForm = {resetForm}
+              cleanBranch = {cleanBranch}
               modifyVisible={branchManage.modifyVisible}
               deleteVisible={branchManage.deleteVisible}
               changeBranchSelected={changeBranchSelected}
               cleanContrclickModify={cleanContrclickModify}
               cleanContrclickDelete={cleanContrclickDelete}
               changeBranchOperationModify={changeBranchOperationModify}
+              changeBranchOperationDelete={changeBranchOperationDelete}
             />
             <BranchScan
               selectedBranch = {branchManage.selectedObject}
@@ -58,6 +65,10 @@ export default class BranchManageView extends Component {
               resetForm = {resetForm}
               selectedOperate = {branchManage.selectedOperate}
               selectBranchId = {main.selectBranch}
+              branchOperationModify = {branchOperationModify}
+              afterOperateType={branchManage.afterOperateType}
+              changeBranchOperationAfterType={changeBranchOperationAfterType}
+              branchOperationDelete={branchOperationDelete}
             />
           </Col>
         </Row>

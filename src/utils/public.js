@@ -254,11 +254,11 @@ utils.searchList = function (list, key, value) {
 }
 
 utils.isEmptyObject = function(obj) {
-    var name;
+    var name
     for ( name in obj ) {
-        return false;
+        return false
     }
-    return true;
+    return true
 }
 
 export default utils
