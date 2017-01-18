@@ -18,7 +18,7 @@ export const createRoutes = (store) => ({
     require.ensure([], (require) => {
       cb(null, [
         require('./main').default(store),
-        require('./Login').default(store), 
+        require('./login').default(store), 
         { 
           path: API.CONTENTNAME + '/redirect', 
           component: require('COMPONENT/Redirect').default 

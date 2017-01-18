@@ -7,7 +7,7 @@ const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
-let BranchAdd = class BranchAdd extends Component {
+let BranchAdd = class BranchAddView extends Component {
   
   constructor(props) {
     super(props)
@@ -18,7 +18,7 @@ let BranchAdd = class BranchAdd extends Component {
   }
 
   onClose() {
-    this.props.setBoxVisible(false)
+    this.props.setAddBranchVisible(false)
   }
 
   onClear() {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal } from 'antd'
-import BranchAdd from './BranchAdd'
+import BranchAdd from '../BranchAdd'
 import AU from 'UTIL/auth'
 
 const FormItem = Form.Item
 const Confirm = Modal.confirm
 
-let BranchSearch = class BranchSearch extends Component {
+let BranchSearch = class BranchSearchView extends Component {
   
   constructor(props) {
     super(props)
@@ -72,7 +72,6 @@ let BranchSearch = class BranchSearch extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { addBoxVisible, setAddBranchVisible, branchNodes, cleanBranch, selectBranchId, updateBranch, branchList, branchOperationAdd } = this.props
     const addBtn = (<Button size="large" onClick={(e) => this.addBranch()}>新增</Button>)
     const modBtn = (<Button size="large" onClick={(e) => this.modBranch()}>保存修改</Button>)
     const delBtn = (<Button size="large" onClick={(e) => this.delBranch()}>删除</Button>)
@@ -130,16 +129,7 @@ let BranchSearch = class BranchSearch extends Component {
             {AU.checkButton(this.props.userMenu, 'F004', delBtn)}
           </div>
         </Form>
-        <BranchAdd 
-          visible={addBoxVisible} 
-          cleanBranch={cleanBranch} 
-          setBoxVisible={setAddBranchVisible} 
-          branchNodes={branchNodes} 
-          selectBranchId={selectBranchId} 
-          updateBranch={updateBranch} 
-          branchList={branchList} 
-          branchOperationAdd={branchOperationAdd} 
-        />
+        <BranchAdd/>
       </div>
     )
   }

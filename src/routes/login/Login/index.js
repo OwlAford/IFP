@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setSessionID, validateLogin } from 'REDUCER/login'
-import LoginView from '../components/LoginView'
+import LoginView from './LoginView'
 
 const mapDispatchToProps = {
   setSessionID,

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Tree} from 'antd'
 const TreeNode = Tree.TreeNode
 
-export default class BarnchTree extends Component {
+export default class BranchTreeView extends Component {
   
   constructor(props) {
     super(props)

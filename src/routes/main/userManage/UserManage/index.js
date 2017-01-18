@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { increment } from 'REDUCER/userManage'
-import UserManageView from '../components/UserManageView'
+import UserManageView from './UserManageView'
 
 const mapDispatchToProps = {
   increment

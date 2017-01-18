@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { increment } from 'REDUCER/seed'
-import SeedView from '../components/SeedView'
+import SeedView from './SeedView'
 
 const mapDispatchToProps = {
   increment

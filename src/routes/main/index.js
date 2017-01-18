@@ -20,9 +20,9 @@ export default (store) => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
-        // require('./Message').default(store),
-        require('./BranchManage').default(store),
-        require('./UserManage').default(store)
+        // require('./seed').default(store),
+        require('./branchManage').default(store),
+        require('./userManage').default(store)
       ])
     })
   }
