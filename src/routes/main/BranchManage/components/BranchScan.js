@@ -23,7 +23,7 @@ let BranchScan = class BranchScan extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { resetFields, getFieldProps, getFieldValue, getFieldsValue } = this.props.form
+    const { resetFields, getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form
     const { selectedBranch, selectedOperate, selectBranchId, branchOperationModify, resetForm, cleanBranch, afterOperateType, changeBranchOperationAfterType, branchOperationDelete } = newProps
 
     // 当选择侧边分支且分支进行了切换时
@@ -115,7 +115,7 @@ let BranchScan = class BranchScan extends Component {
   }
 
   render() {
-    const { getFieldProps } = this.props.form
+    const { getFieldDecorator } = this.props.form
     const { selectedBranch, branchNodes, selectBranchId, updateBranch } = this.props
 
     const formItemLayout = {
@@ -170,16 +170,17 @@ let BranchScan = class BranchScan extends Component {
                 {...formItemLayout}
                 required
               >
-                <Input 
-                  placeholder='请输入机构编号' 
-                  size='large' 
-                  disabled   
-                  {
-                    ...getFieldProps('brhId', {
-                      initialValue: selectedBranch.brhId ? selectedBranch.brhId : ''
-                    })
-                  }
-                />
+                {
+                  getFieldDecorator('brhId', {
+                    initialValue: selectedBranch.brhId ? selectedBranch.brhId : ''
+                  })(
+                    <Input 
+                      placeholder='请输入机构编号' 
+                      size='large' 
+                      disabled   
+                    />
+                  )
+                }
               </FormItem>
             </Col>
             <Col span={12}>
@@ -188,15 +189,16 @@ let BranchScan = class BranchScan extends Component {
                 {...formItemLayout}
                 required
               >
-                <Input  
-                  placeholder='请输入机构' 
-                  size='large' 
-                  {
-                    ...getFieldProps('brhName', {
-                      initialValue: selectedBranch.brhName ? selectedBranch.brhName : ''
-                    })
-                  }
-                 />
+                {
+                  getFieldDecorator('brhName', {
+                    initialValue: selectedBranch.brhName ? selectedBranch.brhName : ''
+                  })(
+                    <Input  
+                      placeholder='请输入机构' 
+                      size='large' 
+                     />
+                  )
+                }
               </FormItem>
             </Col>
           </Row>
@@ -206,15 +208,16 @@ let BranchScan = class BranchScan extends Component {
                 label='联系人：'
                 {...formItemLayout}
               >
-                <Input 
-                  placeholder='请输入用户描述' 
-                  size='large' 
-                  {
-                    ...getFieldProps('brhPerson', {
-                      initialValue: selectedBranch.brhPerson ? selectedBranch.brhPerson : ''
-                    })
-                  }
-                 />
+                {
+                  getFieldDecorator('brhPerson', {
+                    initialValue: selectedBranch.brhPerson ? selectedBranch.brhPerson : ''
+                  })(
+                    <Input 
+                      placeholder='请输入用户描述' 
+                      size='large' 
+                     />
+                  )
+                }
               </FormItem>
             </Col>
             <Col span={12}>
@@ -223,12 +226,17 @@ let BranchScan = class BranchScan extends Component {
                 {...formItemLayout}
                 required
               >
-                <Select 
-                  placeholder='请选择机构等级'
-                  {...getFieldProps('brhLevel', {initialValue: getLevel()})}
-                >
-                  {setOptions}
-                </Select>
+                {
+                  getFieldDecorator('brhLevel', {
+                    initialValue: getLevel()
+                  })(
+                    <Select 
+                      placeholder='请选择机构等级'
+                    >
+                      {setOptions}
+                    </Select>
+                  )
+                }
               </FormItem>
             </Col>
           </Row>
@@ -238,11 +246,16 @@ let BranchScan = class BranchScan extends Component {
                 label='联系电话：'
                 {...formItemLayout}
               >
-                <Input 
-                  placeholder='请输入联系电话' 
-                  size='large' 
-                  {...getFieldProps('brhPhone', {initialValue: selectedBranch.brhPhone})}
-                />
+                {
+                  getFieldDecorator('brhPhone', {
+                    initialValue: selectedBranch.brhPhone
+                  })(
+                    <Input 
+                      placeholder='请输入联系电话' 
+                      size='large' 
+                    />
+                  )
+                }
               </FormItem>
             </Col>
             <Col span={12}>
@@ -250,13 +263,16 @@ let BranchScan = class BranchScan extends Component {
                 label='机构描述：'
                 {...formItemLayout}
               >
-                <Input 
-                  placeholder='请填写机构描述' 
-                  size='large' 
-                  {...getFieldProps('brhDesc', {
+                {
+                  getFieldDecorator('brhDesc', {
                     initialValue: selectedBranch.brhDesc ? selectedBranch.brhDesc : ''
-                  })}
-                 />
+                  })(
+                    <Input 
+                      placeholder='请填写机构描述' 
+                      size='large' 
+                     />
+                  )
+                }
               </FormItem>
             </Col>
           </Row>
@@ -266,13 +282,16 @@ let BranchScan = class BranchScan extends Component {
                 label='地区编号：'
                 {...formItemLayout}
               >
-                <Input 
-                  placeholder='请输入地区编号' 
-                  size='large' 
-                  {...getFieldProps('brhRegionId', {
+                {
+                  getFieldDecorator('brhRegionId', {
                     initialValue: selectedBranch.brhRegionId ? selectedBranch.brhRegionId : ''
-                  })}
-                />
+                  })(
+                    <Input 
+                      placeholder='请输入地区编号' 
+                      size='large' 
+                    />
+                  )
+                }
               </FormItem>   
             </Col>
             <Col span={12}>
@@ -280,13 +299,16 @@ let BranchScan = class BranchScan extends Component {
                 label='机构地址：'
                 {...formItemLayout}
               >
-                <Input 
-                  placeholder='请输入机构地址' 
-                  size='large' 
-                  {...getFieldProps('brhAddress', {
+                {
+                  getFieldDecorator('brhAddress', {
                     initialValue: selectedBranch.brhAddress ? selectedBranch.brhAddress : ''
-                  })}
-                 />
+                  })(
+                    <Input 
+                      placeholder='请输入机构地址' 
+                      size='large' 
+                     />
+                  )
+                }
               </FormItem>
             </Col>
           </Row>

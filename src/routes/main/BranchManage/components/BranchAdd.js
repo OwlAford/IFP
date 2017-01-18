@@ -83,7 +83,7 @@ let BranchAdd = class BranchAdd extends Component {
 
   render() {
     const { visible, updateBranch, branchNodes, selectBranchId } = this.props
-    const { getFieldProps } = this.props.form
+    const { getFieldDecorator } = this.props.form
 
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -157,17 +157,20 @@ let BranchAdd = class BranchAdd extends Component {
                     required
                     hasFeedback
                   >
-                    <Input  
-                      placeholder='请输入机构' 
-                      size='large' 
-                      {...getFieldProps('brhName', {
+                    {
+                      getFieldDecorator('brhName', {
                         initialValue: '',
                         rules: [{
                           required: true, 
                           message: ' '
                         }]
-                      })}
-                     />
+                      })(
+                        <Input  
+                          placeholder='请输入机构' 
+                          size='large' 
+                         />
+                      )
+                    }
                   </FormItem>
                 </Col>
                 <Col span={12}>
@@ -176,13 +179,16 @@ let BranchAdd = class BranchAdd extends Component {
                     {...formItemLayout}
                     hasFeedback
                   >
-                    <Input  
-                      placeholder='请填写联系人' 
-                      size='large' 
-                      {...getFieldProps('brhPerson', {
+                    {
+                      getFieldDecorator('brhPerson', {
                         initialValue: ''
-                      })}
-                     />
+                      })(
+                        <Input  
+                          placeholder='请填写联系人' 
+                          size='large' 
+                        />
+                      )
+                    }
                   </FormItem>
                 </Col>
               </Row>
@@ -194,18 +200,21 @@ let BranchAdd = class BranchAdd extends Component {
                     required
                     hasFeedback
                   >
-                    <Select 
-                      placeholder='请选择机构等级'
-                      {...getFieldProps('brhLevel', {
+                    {
+                      getFieldDecorator('brhLevel', {
                         initialValue: '',
                         rules: [{
                           required: true, 
                           message: ' '
                         }]
-                      })}
-                    >
-                      {setOptions}
-                    </Select>
+                      })(
+                        <Select 
+                          placeholder='请选择机构等级'
+                        >
+                          {setOptions}
+                        </Select>
+                      )
+                    }
                   </FormItem>
                 </Col>
                 <Col span={12}>
@@ -215,10 +224,8 @@ let BranchAdd = class BranchAdd extends Component {
                     required
                     hasFeedback
                   >
-                    <Input  
-                      placeholder='请输入联系电话' 
-                      size='large' 
-                      {...getFieldProps('brhPhone', {
+                    {
+                      getFieldDecorator('brhPhone', {
                         initialValue: '',
                         rules: [
                           {
@@ -228,8 +235,13 @@ let BranchAdd = class BranchAdd extends Component {
                             validator: this.phoneNumberCheck
                           }
                         ]
-                      })}
-                     />
+                      })(
+                        <Input  
+                          placeholder='请输入联系电话' 
+                          size='large' 
+                        />
+                      )
+                    }
                   </FormItem>
                 </Col>
               </Row>
@@ -240,13 +252,16 @@ let BranchAdd = class BranchAdd extends Component {
                     {...formItemLayout}
                     hasFeedback
                   >
-                    <Input  
-                      placeholder='请填写机构描述' 
-                      size='large' 
-                      {...getFieldProps('brhDesc', {
+                    {
+                      getFieldDecorator('brhDesc', {
                         initialValue: '',
-                      })}
-                     />
+                      })(
+                        <Input  
+                          placeholder='请填写机构描述' 
+                          size='large' 
+                        />
+                      )
+                    }
                   </FormItem>
                 </Col>
                 <Col span={12}>
@@ -255,13 +270,16 @@ let BranchAdd = class BranchAdd extends Component {
                     {...formItemLayout}
                     hasFeedback
                   >
-                    <Input  
-                      placeholder='请输入地区编号' 
-                      size='large' 
-                      {...getFieldProps('brhRegionId', {
+                    {
+                      getFieldDecorator('brhRegionId', {
                         initialValue: ''
-                      })}
-                     />
+                      })(
+                        <Input  
+                          placeholder='请输入地区编号' 
+                          size='large' 
+                        />
+                      )
+                    }
                   </FormItem>
                 </Col>
               </Row>
@@ -272,13 +290,16 @@ let BranchAdd = class BranchAdd extends Component {
                     {...formItemLayout}
                     hasFeedback
                   >
-                    <Input  
-                      placeholder='请输入机构地址' 
-                      size='large' 
-                      {...getFieldProps('brhAddress', {
+                    {
+                      getFieldDecorator('brhAddress', {
                         initialValue: '',
-                      })}
-                     />
+                      })(
+                        <Input  
+                          placeholder='请输入机构地址' 
+                          size='large' 
+                        />
+                      )
+                    }
                   </FormItem>
                 </Col>
                 <Col span={12}>

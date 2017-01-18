@@ -71,7 +71,7 @@ let BranchSearch = class BranchSearch extends Component {
   }
 
   render() {
-    const { getFieldProps } = this.props.form
+    const { getFieldDecorator } = this.props.form
     const { addBoxVisible, setAddBranchVisible, branchNodes, cleanBranch, selectBranchId, updateBranch, branchList, branchOperationAdd } = this.props
     const addBtn = (<Button size="large" onClick={(e) => this.addBranch()}>新增</Button>)
     const modBtn = (<Button size="large" onClick={(e) => this.modBranch()}>保存修改</Button>)
@@ -92,16 +92,17 @@ let BranchSearch = class BranchSearch extends Component {
                 label="搜索机构名称：" 
                 {...formItemLayout}
               >
-                <Input 
-                  placeholder="请输入机构搜索名称"
-                  {...getFieldProps('brhName', {
-                    rules: [{ 
-                      required: true,
-                      whitespace: true, 
-                      message: ' '
-                    }]
-                  })}
-                />
+                {getFieldDecorator('brhName', {
+                  rules: [{ 
+                    required: true,
+                    whitespace: true, 
+                    message: ' '
+                  }]
+                })(
+                  <Input 
+                    placeholder="请输入机构搜索名称"
+                  />
+                )}
               </FormItem>
             </Col>
             <Col span={12}>
