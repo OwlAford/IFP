@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeBranchSelected, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, resetForm, branchOperationModify, changeBranchOperationAfterType, changeBranchOperationDelete, branchOperationDelete } from 'REDUCER/branchManage'
+import { changeBranchSelected, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, resetForm, branchOperationModify, changeBranchOperationAfterType, changeBranchOperationDelete, branchOperationDelete, setAddBranchVisible, branchOperationAdd } from 'REDUCER/branchManage'
 import { initBranchList, updateBranch, cleanBranch } from 'REDUCER/main'
 import BranchManageView from '../components/BranchManageView'
 
@@ -15,7 +15,9 @@ const mapDispatchToProps = {
   branchOperationModify,
   changeBranchOperationAfterType,
   changeBranchOperationDelete,
-  branchOperationDelete
+  branchOperationDelete,
+  setAddBranchVisible,
+  branchOperationAdd
 }
 
 const mapStateToProps = (state) => ({

@@ -34,7 +34,7 @@ export default class BranchManageView extends Component {
     if (!this.state.loaded) {
       return false
     }
-    const { changeBranchSelected, main, branchManage, updateBranch, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, cleanBranch, resetForm, branchOperationModify, changeBranchOperationAfterType, changeBranchOperationDelete, branchOperationDelete } = this.props
+    const { changeBranchSelected, main, branchManage, updateBranch, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, cleanBranch, resetForm, branchOperationModify, changeBranchOperationAfterType, changeBranchOperationDelete, branchOperationDelete, setAddBranchVisible, branchOperationAdd } = this.props
     return (
       <div className="branchManage">
         <Row>
@@ -47,8 +47,13 @@ export default class BranchManageView extends Component {
           <Col span={19}>
             <BranchSearch
               userMenu={main.userMenu}
+              addBoxVisible={branchManage.addBranchBoxVisible}
+              branchList = {main.branchList}
               resetForm = {resetForm}
               cleanBranch = {cleanBranch}
+              branchNodes = {main.getBranchList}
+              selectBranchId = {main.selectBranch}
+              updateBranch = {updateBranch}
               modifyVisible={branchManage.modifyVisible}
               deleteVisible={branchManage.deleteVisible}
               changeBranchSelected={changeBranchSelected}
@@ -56,15 +61,17 @@ export default class BranchManageView extends Component {
               cleanContrclickDelete={cleanContrclickDelete}
               changeBranchOperationModify={changeBranchOperationModify}
               changeBranchOperationDelete={changeBranchOperationDelete}
+              setAddBranchVisible={setAddBranchVisible}
+              branchOperationAdd={branchOperationAdd}
             />
             <BranchScan
               selectedBranch = {branchManage.selectedObject}
               branchNodes = {main.getBranchList}
+              selectBranchId = {main.selectBranch}
               updateBranch = {updateBranch}
               cleanBranch = {cleanBranch}
               resetForm = {resetForm}
               selectedOperate = {branchManage.selectedOperate}
-              selectBranchId = {main.selectBranch}
               branchOperationModify = {branchOperationModify}
               afterOperateType={branchManage.afterOperateType}
               changeBranchOperationAfterType={changeBranchOperationAfterType}

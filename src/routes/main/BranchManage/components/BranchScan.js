@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Row, Col, DatePicker, Select, Radio, message, Modal, TreeSelect, notification } from 'antd'
+import { Form, Button, Input, Row, Col, DatePicker, Select, message, Modal, TreeSelect, notification } from 'antd'
 import NProgress from 'nprogress'
 import utils from 'UTIL/public'
 
 const FormItem = Form.Item
 const Option = Select.Option
-const RadioGroup = Radio.Group
 const TreeNode = TreeSelect.TreeNode
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
@@ -91,7 +90,7 @@ let BranchScan = class BranchScan extends Component {
         }
       }
       let data = Object.assign({}, getFieldsValue(), {brhLevel: level}, {brhParentId: selectBranchId})
-      if (data.brhId != '' && data.brhId !=undefined && data.brhId != null) {
+      if (data.brhId != '' && data.brhId != undefined && data.brhId != null) {
         NProgress.start()
         branchOperationModify(data, () => {
           NProgress.done()

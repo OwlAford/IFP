@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal } from 'antd'
+import BranchAdd from './BranchAdd'
 import AU from 'UTIL/auth'
 
 const FormItem = Form.Item
@@ -13,7 +14,7 @@ let BranchSearch = class BranchSearch extends Component {
 
   handleSearch() {
     const { validateFields, getFieldsValue } = this.props.form
-    const { changeBranchSelected } = this.props
+    const { changeBranchSelected, branchList } = this.props
     validateFields(['brhName'], (error, values) => {
       if (!!error) {
         message.error('请填写搜索条件!')
@@ -26,20 +27,19 @@ let BranchSearch = class BranchSearch extends Component {
   }
 
   handleClear() {
-    console.log('handleClear')
     const { resetFields } = this.props.form
     resetFields()
   }
 
   addBranch() {
-    console.log('addBranch')
+    this.props.setAddBranchVisible(true)
   }
 
   modBranch() {
-    var Props = this.props
+    let Props = this.props
     if (Props.modifyVisible) {
       Confirm({
-        title: '您确认修改这项内容？',
+        title: '确认修改这项内容？',
         content: '点击确认修改',
         onOk() {
           Props.changeBranchOperationModify()
@@ -54,7 +54,7 @@ let BranchSearch = class BranchSearch extends Component {
 
   delBranch() {
     console.log('delBranch')
-    var Props = this.props
+    let Props = this.props
     if (Props.deleteVisible) {
       Confirm({
         title: '确认删除这项内容？',
@@ -63,9 +63,7 @@ let BranchSearch = class BranchSearch extends Component {
           Props.cleanContrclickDelete()
           Props.changeBranchOperationDelete()
         },
-        onCancel() {
-          Props.cleanContrclickDelete()
-        }
+        onCancel() {}
       })
     } else {
       message.warning('请在机构树上先选择一个机构节点！')
@@ -74,6 +72,7 @@ let BranchSearch = class BranchSearch extends Component {
 
   render() {
     const { getFieldProps } = this.props.form
+    const { addBoxVisible, setAddBranchVisible, branchNodes, cleanBranch, selectBranchId, updateBranch, branchList, branchOperationAdd } = this.props
     const addBtn = (<Button size="large" onClick={(e) => this.addBranch()}>新增</Button>)
     const modBtn = (<Button size="large" onClick={(e) => this.modBranch()}>保存修改</Button>)
     const delBtn = (<Button size="large" onClick={(e) => this.delBranch()}>删除</Button>)
@@ -130,6 +129,16 @@ let BranchSearch = class BranchSearch extends Component {
             {AU.checkButton(this.props.userMenu, 'F004', delBtn)}
           </div>
         </Form>
+        <BranchAdd 
+          visible={addBoxVisible} 
+          cleanBranch={cleanBranch} 
+          setBoxVisible={setAddBranchVisible} 
+          branchNodes={branchNodes} 
+          selectBranchId={selectBranchId} 
+          updateBranch={updateBranch} 
+          branchList={branchList} 
+          branchOperationAdd={branchOperationAdd} 
+        />
       </div>
     )
   }

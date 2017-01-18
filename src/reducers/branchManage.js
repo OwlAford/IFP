@@ -54,6 +54,8 @@ const CLEAN_CONTROL_DELETE = 'CLEAN_CONTROL_DELETE'
 const CLEAN_CONTROL_MODIDFY = 'CLEAN_CONTROL_MODIDFY'
 const CONTROL_MODIDFY = 'CONTROL_MODIDFY'
 
+const SET_ADD_BRANCH_VISIBLE = 'SET_ADD_BRANCH_VISIBLE'
+
 export function resetForm(){
   return {
     type: RESET_FORM,
@@ -160,6 +162,17 @@ function deleteBranchAction(params) {
   }
 }
 
+// 增加操作
+function addBranchAction(params) {
+  return {
+    [BZ_REQUESTER]: {
+      types: [BRANCH_ADD_REQ, BRANCH_ADD_SUC, BRANCH_ADD_FAL],
+      url: API.GET_BRANCH_ADD,
+      body: params
+    }
+  }
+}
+
 // 标识 清空
 export function changeBranchOperationEmpty() {
   return {
@@ -222,15 +235,49 @@ export function branchOperationDelete(params, success, fail) {
   }
 }
 
+// 后台 添加机构
+export function branchOperationAdd(params, success, fail) {
+  return (dispatch, getState) => {
+    dispatch(changeBranchOperationEmpty())
+    dispatch(addBranchAction(params)).then(action => {
+      if(action.data.body.errorCode == '0') {
+        dispatch(initBranchList())   
+        dispatch(changeBranchOperationAfterType({type: '5'}))
+        if (success) success()
+      }
+      else{ 
+        dispatch(changeBranchOperationAfterType({type: '6'}))
+        dispatch(changeBranchOperationEmpty())
+        if (fail) fail()
+      }
+    })
+  }
+}
+
+// 设置增加分支弹框显示隐藏
+export function setAddBranchVisible(state) {
+  return {
+    type: SET_ADD_BRANCH_VISIBLE,
+    visible: state
+  }
+}
+
 /*** Reducer ***/
 const initialState = {
   selectedObject: {},
   deleteVisible: false,
   modifyVisible: false,
   afterOperateType:'0',
+  addBranchBoxVisible: false
 }
 export default function counterReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_ADD_BRANCH_VISIBLE:
+      return {
+        ...state,
+        addBranchBoxVisible: action.visible
+      }
+
     case RESET_FORM:
       return {
         ...state,
