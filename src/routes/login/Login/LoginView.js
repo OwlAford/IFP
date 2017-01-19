@@ -61,7 +61,7 @@ export default class LoginView extends Component {
   render() {
     const { userName, pswd, vcode } = this.state
     return (
-      <div className="Login">
+      <div className="pageLogin">
         <div className="loginBox">
           <div className="avatar"><img alt='avatar' src={avatarImg} /></div>
           <div className="input pre-icon">

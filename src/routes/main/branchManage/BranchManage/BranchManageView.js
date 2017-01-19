@@ -36,7 +36,7 @@ export default class BranchManageView extends Component {
       return false
     }
     return (
-      <div className="branchManage">
+      <div className="pageBranchManage">
         <Row>
           <Col span={5}>
             <BranchTree/>

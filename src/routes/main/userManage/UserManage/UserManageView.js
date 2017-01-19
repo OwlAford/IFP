@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
-import { Button } from 'antd'
+import { Row, Col } from 'antd'
+import BranchTree from '../BranchTree'
+import BranchSearch from '../BranchSearch'
+import UserQuery from '../UserQuery'
+import UserTable from '../UserTable'
+import 'STYLE/pages/userManage.scss'
 
 export default class UserManageView extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
-
-  componentWillMount () {
-    // console.log(this.props)
-  }
-
   render() {
     return (
-      <div className="userManage">
-        <span>数字: {this.props.userManage.count}</span>
-        <Button type="primary" onClick={this.props.increment}>
-          单次加一
-        </Button>
+      <div className="pageUserManage">
+        <Row>
+          <Col span={5}>
+            <BranchSearch/>
+            <BranchTree/>
+          </Col>
+          <Col span={19}>
+            <UserQuery/>
+            <UserTable/>
+          </Col>
+        </Row>
       </div>
     )
   }
