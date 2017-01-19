@@ -19,7 +19,7 @@ export function updateChangePasswordVisible(changePasswordVisible) {
   }
 }
 
-function fetchAuthMenu () {
+function fetchAuthMenu() {
   return {
     [BZ_REQUESTER]: {
       types: [actions.AUTH_MENU_REQ, actions.AUTH_MENU_SUC, actions.AUTH_MENU_FAL],

@@ -2,7 +2,7 @@
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 
 /*** Actions ***/
-export function increment () {
+export function increment() {
   return {
     type    : COUNTER_INCREMENT,
     payload : 1
@@ -14,7 +14,7 @@ export function increment () {
 const initialState = {
   count: 0
 }
-export default function counterReducer (state = initialState, action) {
+export default function counterReducer(state = initialState, action) {
   switch (action.type) {
     case COUNTER_INCREMENT :
       return {

@@ -2,7 +2,7 @@
 export const SEED_INCREMENT = 'SEED_INCREMENT'
 
 /*** Actions ***/
-export function increment () {
+export function increment() {
   return {
     type    : SEED_INCREMENT,
     payload : 1
@@ -14,7 +14,7 @@ export function increment () {
 const initialState = {
   count: 0
 }
-export default function counterReducer (state = initialState, action) {
+export default function counterReducer(state = initialState, action) {
   switch (action.type) {
     case SEED_INCREMENT :
       return {
