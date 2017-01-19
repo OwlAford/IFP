@@ -47,6 +47,12 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
       bottom: 0;
       transition: width .3s ease;
     }
+
+    &.focus {
+      &:after {
+        width: 100%;
+      }
+    }
     
     &.vcode {
       input {
@@ -59,15 +65,12 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
         margin-left: 10px;
       }
 
-      &:after{
-        width: 60%;
-      }
-      
       &.focus {
         &:after {
-          width: 100%;
+          width: 60%;
         }
-      }
+    }
+      
     }
 
 

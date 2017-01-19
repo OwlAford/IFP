@@ -19,7 +19,7 @@ let BranchSearch = class BranchSearchView extends Component {
             })(
               <Input 
                 addonAfter={
-                  <Icon type="search" onClick={(e) => this.onSubmit()} />
+                  <Icon type="search" onClick={(e) => this.onSubmit()}/>
                 } 
                 placeholder='输入机构名'
               />
