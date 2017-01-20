@@ -73,7 +73,7 @@ export default class BranchSearchView extends Component {
     )
 
     return (
-      <div className="app-search-panel white">
+      <div className="app-search-panel">
         <div className="button-group">
           {AU.checkButton(this.props.userMenu, 'F002', modBtn)}
           {AU.checkButton(this.props.userMenu, 'F001', addBtn)}

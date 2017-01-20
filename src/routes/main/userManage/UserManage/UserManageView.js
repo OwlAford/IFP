@@ -49,11 +49,13 @@ export default class UserManageView extends Component {
 
   render() {
     const { branchList } = this.props
-
+    const sideStyle = {
+      style: {height: '100%'}
+    }
     return (
       <div className="pageUserManage">
-        <Row>
-          <Col span={5}>
+        <Row {...sideStyle}>
+          <Col span={5} {...sideStyle}>
             <div className="app-left-side">
               <InputSearch
                 placeholder='请输入搜索机构名称'

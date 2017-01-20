@@ -37,11 +37,14 @@ export default class BranchManageView extends Component {
 
   render() {
     const { changeBranchSelected, branchList } = this.props
+    const sideStyle = {
+      style: {height: '100%'}
+    }
 
     return (
       <div className="pageBranchManage">
-        <Row>
-          <Col span={5}>
+        <Row {...sideStyle}>
+          <Col span={5} {...sideStyle}>
             <div className="app-left-side">
               <InputSearch
                 placeholder='请输入搜索机构名称'

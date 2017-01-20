@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import { increment } from 'REDUCER/userManage'
+import { userPageByBrh } from 'REDUCER/userManage'
 import UserQueryView from './UserQueryView'
 
 const mapDispatchToProps = {
-  increment
+  userPageByBrh
 }
 
 const mapStateToProps = (state) => ({
-  userManage: state.userManage
+  userMenu: state.main.userMenu
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserQueryView)

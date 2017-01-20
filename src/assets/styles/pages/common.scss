@@ -1,11 +1,8 @@
 .app-search-panel {
   padding: 20px 30px;
-  margin: 20px 20px 15px 0;
+  margin: 20px 20px 15px 15px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  &.white {
-    background-color: #fff;
-  }
 
   .button-group {
     text-align: right;
@@ -16,7 +13,9 @@
 }
 
 .app-left-side {
-  padding: 20px 0 0 20px;
+  padding: 20px 15px 0 20px;
+  height: 100%;
+  border-right: 1px solid #eee;
 }
 
 .app-form-scan {
