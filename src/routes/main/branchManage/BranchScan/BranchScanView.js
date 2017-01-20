@@ -24,7 +24,7 @@ let BranchScan = class BranchScanView extends Component {
 
   componentWillReceiveProps(newProps) {
     const { resetFields, getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form
-    const { selectedBranch, selectedOperate, selectBranchId, branchOperationModify, resetForm, cleanBranch, afterOperateType, changeBranchOperationAfterType, branchOperationDelete } = newProps
+    const { selectedBranch, selectedOperate, selectBranchId, branchModify, resetForm, cleanBranch, afterOperateType, changeBranchAfterType, branchDelete } = newProps
 
     // 当选择侧边分支且分支进行了切换时
     if (!utils.isEmptyObject(selectedBranch) && this.state.brhId != selectedBranch.brhId) {
@@ -70,7 +70,7 @@ let BranchScan = class BranchScanView extends Component {
           MsgFal('添加失败！')
           break
       }
-      changeBranchOperationAfterType({type: '0'})
+      changeBranchAfterType({type: '0'})
     }
 
     // 当点击修改机构
@@ -93,7 +93,7 @@ let BranchScan = class BranchScanView extends Component {
       let data = Object.assign({}, getFieldsValue(), {brhLevel: level}, {brhParentId: selectBranchId})
       if (data.brhId != '' && data.brhId != undefined && data.brhId != null) {
         NProgress.start()
-        branchOperationModify(data, () => {
+        branchModify(data, () => {
           NProgress.done()
           resetForm()       // 清空整个表单
           cleanBranch()     // 清空所属机构的选择框
@@ -104,7 +104,7 @@ let BranchScan = class BranchScanView extends Component {
       if (!utils.isEmptyObject(selectedBranch)) {
         let params = getFieldsValue()
         NProgress.start()
-        branchOperationDelete(params, () => {
+        branchDelete(params, () => {
           resetForm()
           cleanBranch()
           NProgress.done()

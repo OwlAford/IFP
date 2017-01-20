@@ -3,6 +3,9 @@
   margin: 20px 20px 15px 0;
   background-color: #f9f9f9;
   border-radius: 8px;
+  &.white {
+    background-color: #fff;
+  }
 
   .button-group {
     text-align: right;
@@ -10,6 +13,10 @@
       margin-left: 15px;
     }
   }
+}
+
+.app-left-side {
+  padding: 20px 0 0 20px;
 }
 
 .app-form-scan {

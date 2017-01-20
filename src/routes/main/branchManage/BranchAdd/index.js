@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setAddBranchVisible,  branchOperationAdd } from 'REDUCER/branchManage'
+import { setAddBranchVisible,  branchAdd } from 'REDUCER/branchManage'
 import { cleanBranch, updateBranch } from 'REDUCER/main'
 import BranchAddView from './BranchAddView'
 
@@ -7,7 +7,7 @@ const mapDispatchToProps = {
   cleanBranch,
   updateBranch,
   setAddBranchVisible,
-  branchOperationAdd
+  branchAdd
 }
 
 const mapStateToProps = (state) => ({

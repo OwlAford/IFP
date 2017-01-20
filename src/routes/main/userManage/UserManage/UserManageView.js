@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 import NProgress from 'nprogress'
 import BranchTree from 'COMPONENT/BranchTree'
-import BranchSearch from '../BranchSearch'
+import InputSearch from 'COMPONENT/InputSearch'
 import UserQuery from '../UserQuery'
 import UserTable from '../UserTable'
-import 'STYLE/pages/userManage.scss'
 
 export default class UserManageView extends Component {
 
   constructor(props) {
     super(props)
     this.branchSelected = this.branchSelected.bind(this)
+    this.onSearch = this.onSearch.bind(this)
   } 
 
   componentWillMount() {
@@ -34,6 +34,15 @@ export default class UserManageView extends Component {
     })
   }
 
+  onSearch(keyword) {
+    const { userPageByBrh } = this.props
+    userPageByBrh({
+      currentPage: '1',
+      brhId: '',
+      brhName: keyword
+    })
+  }
+
   componentWillUnmount() {
     NProgress.done()
   }
@@ -45,8 +54,12 @@ export default class UserManageView extends Component {
       <div className="pageUserManage">
         <Row>
           <Col span={5}>
-            <div className="leftSide">
-              <BranchSearch/>
+            <div className="app-left-side">
+              <InputSearch
+                placeholder='请输入搜索机构名称'
+                initialValue=''
+                onSearch={this.onSearch}
+              />
               <BranchTree
                 selected={this.branchSelected}
                 branchList={branchList}

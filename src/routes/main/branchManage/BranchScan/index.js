@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { resetForm, branchOperationModify, changeBranchOperationAfterType, branchOperationDelete } from 'REDUCER/branchManage'
+import { resetForm, branchModify, changeBranchAfterType, branchDelete } from 'REDUCER/branchManage'
 import { updateBranch, cleanBranch } from 'REDUCER/main'
 import BranchScanView from './BranchScanView'
 
@@ -7,9 +7,9 @@ const mapDispatchToProps = {
   cleanBranch,
   updateBranch,
   resetForm,
-  branchOperationModify,
-  changeBranchOperationAfterType,
-  branchOperationDelete
+  branchModify,
+  changeBranchAfterType,
+  branchDelete
 }
 
 const mapStateToProps = (state) => ({

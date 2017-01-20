@@ -28,7 +28,7 @@ let BranchAdd = class BranchAddView extends Component {
 
   onSubmit() {
     const { getFieldsValue, validateFields, resetFields } = this.props.form
-    const { selectBranchId, branchList, branchOperationAdd } = this.props
+    const { selectBranchId, branchList, branchAdd } = this.props
     validateFields((errors, values) => {
       if (!!errors) {
         message.error('填写内容有错误，请仔细填写!')
@@ -63,7 +63,7 @@ let BranchAdd = class BranchAddView extends Component {
         )
 
         NProgress.start()
-        branchOperationAdd(data, () => {
+        branchAdd(data, () => {
           NProgress.done()
           this.onClear()
           this.onClose()
@@ -101,9 +101,9 @@ let BranchAdd = class BranchAddView extends Component {
 
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
-      treeData: branchNodes,      // 供用户选择的角色下拉列表
-      onChange: onChange,         // 改变角色的时候更新value的值
-      value: selectBranchId,      // 选中的时候的值传给状态树，然后再提交的时候再做处理
+      treeData: branchNodes, 
+      onChange: onChange, 
+      value: selectBranchId,
       placeholder: "请选择",
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,

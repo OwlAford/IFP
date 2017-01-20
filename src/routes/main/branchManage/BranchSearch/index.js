@@ -1,21 +1,18 @@
 import { connect } from 'react-redux'
-import { changeBranchSelected, cleanContrclickModify, cleanContrclickDelete, changeBranchOperationModify, changeBranchOperationDelete, setAddBranchVisible } from 'REDUCER/branchManage'
+import { changeBranchSelected, changeBranchModify, changeBranchDelete, setAddBranchVisible } from 'REDUCER/branchManage'
 import BranchSearchView from './BranchSearchView'
 
 const mapDispatchToProps = {
   changeBranchSelected,
-  cleanContrclickModify,
-  cleanContrclickDelete,
-  changeBranchOperationModify,
-  changeBranchOperationDelete,
+  changeBranchModify,
+  changeBranchDelete,
   setAddBranchVisible
 }
 
 const mapStateToProps = (state) => ({
   userMenu: state.main.userMenu,
   branchList: state.main.branchList,
-  modifyVisible: state.branchManage.modifyVisible,
-  deleteVisible: state.branchManage.deleteVisible,
+  selectedBranch: state.branchManage.selectedObject
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BranchSearchView)
