@@ -1,4 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
+import NProgress from 'nprogress'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
@@ -62,6 +63,7 @@ function userPageByBrhAction(data, showNum){
 // 查询用户信息 搜索功能 分页功能
 export function userPageByBrh(data) { 
   return (dispatch, getState) => {
+    NProgress.start()
     dispatch(userPageByBrhAction(data, getState().userManage.pageData.turnPageShowNum))
     .then(action => {
       let dataBody = action.data.body
@@ -79,6 +81,7 @@ export function userPageByBrh(data) {
         currentPage: dataBody.currentPage
       })
       dispatch(pageUsers(data))
+      NProgress.done()
       message.success('查询完毕！')
     })
   }

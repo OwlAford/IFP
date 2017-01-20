@@ -1,4 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
+import NProgress from 'nprogress'
 import { API } from 'CONSTANT/globals'
 import utils from 'UTIL/public'
 import { message } from 'antd'
@@ -93,10 +94,12 @@ export function changeBranchModify() {
 export function changeBranchSelected(data) {
   return (dispatch, state) => {
     if (data.brhId != null || data.brhId != undefined) {
+        NProgress.start()
         dispatch(getBranchAction(data)).then(action => {
         let brhParentId = action.data.body.brhParentId
         dispatch(sendData(brhParentId))
         dispatch(applyBranch(action.data.body))
+        NProgress.done()
         message.success("查询完毕！")
       })
     } else {

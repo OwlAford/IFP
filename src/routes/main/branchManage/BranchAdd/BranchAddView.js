@@ -19,6 +19,7 @@ let BranchAdd = class BranchAddView extends Component {
 
   onClose() {
     this.props.setAddBranchVisible(false)
+    this.onClear()
   }
 
   onClear() {
@@ -27,8 +28,8 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onSubmit() {
-    const { getFieldsValue, validateFields, resetFields } = this.props.form
-    const { selectBranchId, branchList, branchAdd } = this.props
+    const { form, selectBranchId, branchList, branchAdd } = this.props
+    const { getFieldsValue, validateFields, resetFields } = form
     validateFields((errors, values) => {
       if (!!errors) {
         message.error('填写内容有错误，请仔细填写!')
@@ -83,7 +84,7 @@ let BranchAdd = class BranchAddView extends Component {
 
   render() {
     const { visible, updateBranch, branchNodes, selectBranchId } = this.props
-    const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator, resetFields } = this.props.form
 
     const formItemLayout = {
       labelCol: { span: 6 },

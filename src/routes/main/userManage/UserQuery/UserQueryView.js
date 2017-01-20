@@ -36,6 +36,18 @@ let UserQuery = class UserQueryView extends Component {
   searchUser() {
     const { form, userPageByBrh } = this.props
     let filter = form.getFieldsValue()
+    form.validateFields((err, fieldsValue) => {
+      if (err) {
+        return
+      } else {
+        const beginTime = fieldsValue['beginTime']
+        const endTime = fieldsValue['endTime']
+        Object.assign(filter, {
+          beginTime: beginTime ? beginTime.format('YYYY-MM-DD') : '',
+          endTime: endTime ? endTime.format('YYYY-MM-DD') : ''
+        })
+      }
+    })
     userPageByBrh({
       curPage: '1',
       brhId: '',
@@ -46,7 +58,11 @@ let UserQuery = class UserQueryView extends Component {
   render() {
     const formItemLayout = {
       labelCol: { span: 6 },
-      wrapperCol: { span: 16 }
+      wrapperCol: { span: 17 }
+    }
+
+    const datePickerConfig = {
+      rules: [{ type: 'object'}]
     }
 
     const addUserBtn = (
@@ -65,7 +81,7 @@ let UserQuery = class UserQueryView extends Component {
       <div className="app-search-panel">
         <Form horizontal>
           <Row>
-            <Col span={9}>
+            <Col span={11}>
               <FormItem 
                 label='用户编号：'
                 {...formItemLayout}
@@ -82,10 +98,11 @@ let UserQuery = class UserQueryView extends Component {
                 }
               </FormItem>
             </Col>
-            <Col span={15}>
+            <Col span={13}>
               <FormItem 
                 label='用户名称：'
-                {...formItemLayout}
+                labelCol={{ span: 4 }}
+                wrapperCol={{ span: 17 }}
               >
                 {
                   getFieldDecorator('userName', {
@@ -101,7 +118,7 @@ let UserQuery = class UserQueryView extends Component {
             </Col>
           </Row>
           <Row>
-            <Col span={9}>
+            <Col span={11}>
               <FormItem 
                 label='用户级别：'
                 {...formItemLayout}
@@ -122,34 +139,37 @@ let UserQuery = class UserQueryView extends Component {
                 }
               </FormItem>
             </Col>
-            <Col span={15}>
-              <FormItem 
-                label='创建日期：'
-                labelCol={{ span: 6 }}
-                wrapperCol={{ span: 18 }}
-              >
-                {
-                  getFieldDecorator('beginTime', {
-                    initialValue: ''
-                  })(
-                    <DatePicker
-                      style={{marginRight: '10px'}}
-                      placeholder='请选择开始日期' 
-                      disabledDate={this.disabledStartDate}
-                    />
-                  )
-                }
-                {
-                  getFieldDecorator('endTime', {
-                    initialValue: ''
-                  })(
-                    <DatePicker
-                      placeholder='请选择结束日期' 
-                      disabledDate={this.disabledEndDate}
-                    />
-                  )
-                }
-              </FormItem>
+            <Col span={13}>
+              <Row>
+                <Col span={12}>
+                  <FormItem 
+                    label='创建日期：'
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 14 }}
+                  >
+                    {
+                      getFieldDecorator('beginTime', datePickerConfig)(
+                        <DatePicker
+                          placeholder='请选择开始日期' 
+                          disabledDate={this.disabledStartDate}
+                        />
+                      )
+                    }
+                  </FormItem>
+                </Col>
+                <Col span={12}>
+                  <FormItem>
+                    {
+                      getFieldDecorator('endTime', datePickerConfig)(
+                        <DatePicker
+                          placeholder='请选择结束日期'
+                          disabledDate={this.disabledEndDate}
+                        />
+                      )
+                    }
+                  </FormItem>
+                </Col>
+              </Row>
             </Col>
           </Row>  
         </Form>

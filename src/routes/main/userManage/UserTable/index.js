@@ -7,7 +7,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  userManage: state.userManage
+  dataSource: state.userManage.userList,
+  userMenu: state.main.userMenu
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserTableView)
