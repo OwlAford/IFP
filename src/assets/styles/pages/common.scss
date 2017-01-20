@@ -1,0 +1,17 @@
+.app-search-panel {
+  padding: 20px 30px;
+  margin: 20px 20px 15px 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+
+  .button-group {
+    text-align: right;
+    .ant-btn {
+      margin-left: 15px;
+    }
+  }
+}
+
+.app-form-scan {
+  padding-top: 10px;
+}

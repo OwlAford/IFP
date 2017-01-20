@@ -82,7 +82,7 @@ let BranchSearch = class BranchSearchView extends Component {
     }
 
     return (
-      <div className="BranchSearch">
+      <div className="app-search-panel">
         <Form horizontal>
           <Row style={{height: '56px'}}>
             <Col span={12}>

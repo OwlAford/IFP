@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import { increment } from 'REDUCER/userManage'
+import { userPageByBrh } from 'REDUCER/userManage'
 import BranchSearchView from './BranchSearchView'
 
 const mapDispatchToProps = {
-  increment
+  userPageByBrh
 }
 
 const mapStateToProps = (state) => ({
-  userManage: state.userManage
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BranchSearchView)

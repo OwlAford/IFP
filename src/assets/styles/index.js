@@ -12,4 +12,5 @@ import 'antd/lib/message/style'
 import 'antd/lib/switch/style'
 import 'antd/lib/modal/style'
 
+import './pages/common.scss'
 import './public/core.scss'

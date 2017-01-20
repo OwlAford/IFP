@@ -161,7 +161,7 @@ let BranchScan = class BranchScanView extends Component {
     }
 
     return (
-      <div className="BranchScan">
+      <div className="app-form-scan">
         <Form horizontal>
           <Row>
             <Col span={12}>

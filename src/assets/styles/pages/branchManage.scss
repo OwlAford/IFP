@@ -1,23 +1,5 @@
 .pageBranchManage {
-  .BarnchTree {
+  .app-barnch-tree {
     padding: 15px 0 0 15px;
-  }
-
-  .BranchSearch {
-    padding: 20px 30px;
-    margin: 20px 20px 15px 0;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-
-    .button-group {
-      text-align: right;
-      .ant-btn {
-        margin-left: 15px;
-      }
-    }
-  }
-
-  .BranchScan {
-    padding-top: 10px;
   }
 }

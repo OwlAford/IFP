@@ -5,7 +5,16 @@ const FormItem = Form.Item
 let BranchSearch = class BranchSearchView extends Component {
 
   onSubmit() {
-    console.log('搜索')
+    const { userPageByBrh, form } = this.props
+    let data = Object.assign({
+    }, {
+      currentPage: '1'
+    }, {
+      brhId: ''
+    }, {
+      brhName: form.getFieldsValue().brhName
+    })
+    userPageByBrh(data)
   }
 
   render() {
@@ -21,7 +30,7 @@ let BranchSearch = class BranchSearchView extends Component {
                 addonAfter={
                   <Icon type="search" onClick={(e) => this.onSubmit()}/>
                 } 
-                placeholder='输入机构名'
+                placeholder='请输入机构名称'
               />
             )}
           </FormItem>

@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
-import { increment } from 'REDUCER/userManage'
+import { initBranchList } from 'REDUCER/main'
+import { userPageByBrh } from 'REDUCER/userManage'
 import UserManageView from './UserManageView'
 
 const mapDispatchToProps = {
-  increment
+  initBranchList,
+  userPageByBrh
 }
 
 const mapStateToProps = (state) => ({
-  userManage: state.userManage
+  branchList: state.main.userGetBranchList
 })
 
 // 将 mapDispatchToProps 和 mapStateToProps 连接到组件

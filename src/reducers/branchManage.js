@@ -1,6 +1,6 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import utils from 'UTIL/public'
 import { API } from 'CONSTANT/globals'
+import utils from 'UTIL/public'
 import { message } from 'antd'
 import { sendData, initBranchList } from './main'
 
@@ -270,7 +270,7 @@ const initialState = {
   afterOperateType:'0',
   addBranchBoxVisible: false
 }
-export default function counterReducer(state = initialState, action) {
+export default function branchManageReducer(state = initialState, action) {
   switch (action.type) {
     case SET_ADD_BRANCH_VISIBLE:
       return {
