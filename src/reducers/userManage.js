@@ -73,7 +73,7 @@ export function userPageByBrh(data) {
       })
       dispatch(pageUsers(data))
       NProgress.done()
-      message.success('查询完毕！')
+      message.success('加载完毕！')
     })
   }
 }

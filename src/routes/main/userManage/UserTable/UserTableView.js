@@ -8,6 +8,10 @@ export default class UserTableView extends Component {
     console.log(e)
   }
 
+  preview(e) {
+    console.log(e)
+  }
+
   render() {
     const { userMenu, dataSource, totalSize, pageData, userPageByBrh } = this.props
 
@@ -47,7 +51,7 @@ export default class UserTableView extends Component {
           }, {
             item: 'F004', button: (<a>删除</a>)
           }, {
-            item: 'F003', button: (<a>查看</a>)
+            item: 'F003', button: (<a onClick={e => this.preview(record)}>查看</a>)
           }, {
             item: 'F009', button: (<a>绑定角色</a>)
           }]

@@ -100,7 +100,7 @@ export function changeBranchSelected(data) {
         dispatch(sendData(brhParentId))
         dispatch(applyBranch(action.data.body))
         NProgress.done()
-        message.success("查询完毕！")
+        message.success("加载完毕！")
       })
     } else {
       message.warning("当前未选中机构！")

@@ -39,9 +39,9 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
     &:after {
       content: "";
       display: block;
-      height: 1px;
+      height: 0;
       width: 0;
-      background-color: #999;
+      border-bottom:1px solid #ccc;
       position: absolute;
       left: 0;
       bottom: 0;
@@ -49,6 +49,10 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
     }
 
     &.focus {
+      input {
+        border-bottom-color: transparent;
+      }
+
       &:after {
         width: 100%;
       }
