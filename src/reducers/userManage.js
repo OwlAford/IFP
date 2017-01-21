@@ -3,8 +3,6 @@ import NProgress from 'nprogress'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
-
 export const USER_COMMON_REQ = 'USER_COMMON_REQ'
 export const USER_COMMON_SUC = 'USER_COMMON_SUC'
 export const USER_COMMON_FAL = 'USER_COMMON_FAL'
@@ -12,13 +10,6 @@ export const USER_COMMON_FAL = 'USER_COMMON_FAL'
 export const PAGE_USERS = 'PAGE_USERS'
 
 /*** Actions ***/
-export function increment() {
-  return {
-    type    : COUNTER_INCREMENT,
-    payload : 1
-  }
-}
-
 function strFormat(str, dft) {
   let cmp = ''
   if (dft)
@@ -36,7 +27,7 @@ function pageUsers(data) {
   }
 }
 
-function userPageByBrhAction(data, showNum){
+function userPageByBrhAction(data, showNum) {
   return {
     [BZ_REQUESTER]: {
 
@@ -101,11 +92,6 @@ const initialState = {
 
 export default function userManageReducer(state = initialState, action) {
   switch (action.type) {
-    case COUNTER_INCREMENT:
-      return {
-        ...state,
-        count: state.count + action.payload
-      }
 
     case PAGE_USERS:
       return { 

@@ -1,14 +1,16 @@
 import { connect } from 'react-redux'
-import { increment } from 'REDUCER/userManage'
+import { userPageByBrh } from 'REDUCER/userManage'
 import UserTableView from './UserTableView'
 
 const mapDispatchToProps = {
-  increment
+  userPageByBrh
 }
 
 const mapStateToProps = (state) => ({
   dataSource: state.userManage.userList,
-  userMenu: state.main.userMenu
+  userMenu: state.main.userMenu,
+  totalSize: state.userManage.totalSize,
+  pageData: state.userManage.pageData
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserTableView)
