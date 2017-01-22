@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { API } from 'CONSTANT/globals'
 import avatarImg from 'IMAGE/avatar.png'
-import * as CK from 'UTIL/cookie' 
+import { getCookie } from 'UTIL/cookie' 
 import './Account.scss'
 
 export default class AccountView extends Component {
@@ -30,10 +30,10 @@ export default class AccountView extends Component {
   }
 
   handleLogout() {
-    this.props.LOGONOUT_OP()
-    this.props.logout()
-    this.props.router.replace(API.CONTENTNAME)
-    this.props.updateChangePasswordVisible(false)
+    const Props = this.props
+    Props.logout()
+    Props.router.replace(API.CONTENTNAME)
+    Props.updateChangePasswordVisible(false)
   }
 
   updatePassword() {
@@ -41,7 +41,7 @@ export default class AccountView extends Component {
   }
 
   render() {
-    let userName = CK.getCookie('cstName')
+    let userName = getCookie('cstName')
     return (
       <div className="app-account">
         <div 

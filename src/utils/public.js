@@ -1,4 +1,4 @@
-let utils = new Object()
+let utils = {}
 
 utils.getNowDateStr = function (date) {
 	let nowDate = new Date()
@@ -253,12 +253,18 @@ utils.searchList = function (list, key, value) {
   return false
 }
 
+// Extend By Aford
+
 utils.isEmptyObject = function(obj) {
     var name
     for ( name in obj ) {
         return false
     }
     return true
+}
+
+utils.isArray = function(obj) { 
+  return Object.prototype.toString.call(obj) === '[object Array]'
 }
 
 export default utils

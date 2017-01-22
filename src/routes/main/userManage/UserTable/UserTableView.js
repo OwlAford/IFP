@@ -34,7 +34,7 @@ export default class UserTableView extends Component {
     Props.getRoleByUser(data.userNo, () => {
       Props.setPreviewBoxVsisible(true)
       hideSpin()
-    })
+    }, hideSpin)
   }
 
   bindRole(e) {

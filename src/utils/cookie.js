@@ -1,3 +1,5 @@
+import utils from './public'
+
 export const getCookieVal = (offset) => {
   var endstr = window.document.cookie.indexOf(";", offset)
   if (endstr == -1) 
@@ -33,4 +35,10 @@ export const delCookie = (name) => {
   exp.setTime(exp.getTime() - 100)
   var cval = getCookie(name)
   window.document.cookie = `${name} = ${cval}; expires=${exp.toGMTString()}; path=/`
+}
+
+export const delCookies = (nameArray) => {
+  if (utils.isArray(nameArray)) {
+    nameArray.map(item => delCookie(item))
+  }
 }

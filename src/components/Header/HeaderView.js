@@ -16,22 +16,18 @@ export default class HeaderView extends Component {
   } 
 
   handleMenu(index) {
+    let items = this.props.items[index]
     this.setState({
-      currentMenus: this.props.items[index].menus[0],
-      currentUrl: this.props.items[index].url
+      currentMenus: items.menus[0],
+      currentUrl: items.url
     })
   }
 
-  initPswdModal(flag) {
-    if(flag) {
-      return(<ChangePswd router={this.props.router}/>)
-    }
-  }
-
   componentWillMount() {
+    let items = this.props.items[0]
     this.setState({
-      currentMenus: this.props.items[0].menus[0],
-      currentUrl: this.props.items[0].url
+      currentMenus: items.menus[0],
+      currentUrl: items.url
     })
   }
 
@@ -57,18 +53,18 @@ export default class HeaderView extends Component {
         </div>
       )
     }
-
+    const { items, router, changePswdVisible } = this.props
+    const { currentMenus, currentUrl } = this.state
     return (
       <div className="app-header">
         <div className="logo">IFP内部管理系统</div>
-        {LnkList(this.props.items)}
+        {LnkList(items)}
         <Sidebar 
-          menus={this.state.currentMenus} 
-          parentUrl={this.state.currentUrl}
-          selectMenu={this.props.selectMenu}
+          menus={currentMenus} 
+          parentUrl={currentUrl}
         />
-        <Account router={this.props.router}/>
-        {this.initPswdModal(this.props.changePswdVisible)}
+        <Account router={router}/>
+        {changePswdVisible ? <ChangePswd router={router}/> : null}
       </div>     
     )
   }

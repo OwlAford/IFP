@@ -26,17 +26,12 @@ export default class MainView extends Component {
     if (!this.state.loaded) {
       return false
     }
-    const {router, main, selectMenu} = this.props
+    const { router, children } = this.props
     return (
       <div className="app-main">
-        <Header 
-          router={router}
-          items={main.items} 
-          changePswdVisible={main.changePasswordVisible}
-          selectMenu={selectMenu}
-        />
+        <Header router={router}/>
         <div className="app-content">
-          { this.props.children }
+          { children }
         </div>
       </div>        
     )
