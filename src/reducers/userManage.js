@@ -1,5 +1,6 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import NProgress from 'nprogress'
+import { getRoleByUserAction } from './main'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
@@ -8,6 +9,9 @@ export const USER_COMMON_SUC = 'USER_COMMON_SUC'
 export const USER_COMMON_FAL = 'USER_COMMON_FAL'
 
 export const PAGE_USERS = 'PAGE_USERS'
+
+export const SET_PREVBOX_VISIBLE = 'SET_PREVBOX_VISIBLE'
+export const SET_PREVBOX_INFO = 'SET_PREVBOX_INFO'
 
 /*** Actions ***/
 function strFormat(str, dft) {
@@ -30,7 +34,6 @@ function pageUsers(data) {
 function userPageByBrhAction(data, showNum) {
   return {
     [BZ_REQUESTER]: {
-
       types: [USER_COMMON_REQ, USER_COMMON_SUC, USER_COMMON_FAL],
       url: API.USER_PAGE_BY_BRH_URL,
 
@@ -78,12 +81,41 @@ export function userPageByBrh(data) {
   }
 }
 
+export function setPreviewBoxVsisible(state) {
+  return {
+    type: SET_PREVBOX_VISIBLE,
+    visible: state
+  }
+}
+
+function setPreviewInfo(info) {
+  return {
+    type: SET_PREVBOX_INFO,
+    data: info
+  }
+}
+
+export function getRoleByUser(num, success, fail) {
+  return (dispatch, getState) => {
+    dispatch(setPreviewInfo({}))
+    dispatch(getRoleByUserAction(num)).then(action => { 
+      dispatch(setPreviewInfo(action.data.body))
+      if (success) success()
+    }, () => {
+      message.warning("获取失败！")
+      if (fail) fail()
+    })
+  }
+}
+
 
 /*** Reducer ***/
 const initialState = {
   count: 0,
   userList: [],
   totalSize: 0,
+  previewBoxVisible: false,
+  previewInfo: {},
   pageData: {
     currentPage: 1,
     turnPageShowNum: 10
@@ -92,6 +124,11 @@ const initialState = {
 
 export default function userManageReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_PREVBOX_INFO:
+      return {
+        ...state,
+        previewInfo: action.data
+      }
 
     case PAGE_USERS:
       return { 
@@ -103,8 +140,14 @@ export default function userManageReducer(state = initialState, action) {
           turnPageShowNum: action.turnPageShowNum
         }
       }
+
+      case SET_PREVBOX_VISIBLE:
+        return {
+          ...state,
+          previewBoxVisible: action.visible
+        }
           
-    default:
-      return state
+      default:
+        return state
   }
 }

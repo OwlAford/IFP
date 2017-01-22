@@ -52,7 +52,7 @@ export default class UserManageView extends Component {
     return (
       <div className="pageUserManage">
         <Row>
-          <Col span={4}>
+          <Col span={5}>
             <div className="app-left-side">
               <InputSearch
                 placeholder='请输入搜索机构名称'
@@ -65,7 +65,7 @@ export default class UserManageView extends Component {
               />
             </div>
           </Col>
-          <Col span={20}>
+          <Col span={19}>
             <UserQuery/>
             <UserTable/>
           </Col>

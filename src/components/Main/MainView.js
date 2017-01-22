@@ -11,6 +11,7 @@ export default class MainView extends Component {
   } 
 
   componentWillMount() {
+    this.props.initUserForm()
     NProgress.start()
     this.props.initUserMenu(() => {
       NProgress.done()

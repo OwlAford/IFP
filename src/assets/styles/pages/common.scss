@@ -19,3 +19,12 @@
 .app-form-scan {
   padding-top: 10px;
 }
+
+.app-spin {
+  position: fixed;
+  height: 32px;
+  width: 32px;
+  left: 50%;
+  top: 40%;
+  margin: -16px 0 0 -16px;
+}

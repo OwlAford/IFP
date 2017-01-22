@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, DatePicker, Select, message, Modal, TreeSelect, notification } from 'antd'
-import NProgress from 'nprogress'
+import Spin from 'COMPONENT/Spin'
 import utils from 'UTIL/public'
 
 const FormItem = Form.Item
@@ -13,7 +13,8 @@ let BranchScan = class BranchScanView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      brhId: 0
+      brhId: 0,
+      loading: false
     }
   }
 
@@ -45,6 +46,16 @@ let BranchScan = class BranchScanView extends Component {
       notification.warning({
         message: '失败',
         description: d
+      })
+    }
+    const showSpin = () => {
+      this.setState({
+        loading: true
+      })
+    }
+    const hideSpin = () => {
+      this.setState({
+        loading: false
       })
     }
     if (afterOperateType != '0') {
@@ -92,23 +103,23 @@ let BranchScan = class BranchScanView extends Component {
       }
       let data = Object.assign({}, getFieldsValue(), {brhLevel: level}, {brhParentId: selectBranchId})
       if (data.brhId != '' && data.brhId != undefined && data.brhId != null) {
-        NProgress.start()
+        showSpin()
         branchModify(data, () => {
-          NProgress.done()
+          hideSpin()
           resetForm()       // 清空整个表单
           cleanBranch()     // 清空所属机构的选择框
-        }, NProgress.done)
+        }, hideSpin)
       }
     // 当点击删除机构  
     } else if (selectedOperate == 'DELETE_BRANCH') {
       if (!utils.isEmptyObject(selectedBranch)) {
         let params = getFieldsValue()
-        NProgress.start()
+        showSpin()
         branchDelete(params, () => {
           resetForm()
           cleanBranch()
-          NProgress.done()
-        }, NProgress.done)
+          hideSpin()
+        }, hideSpin())
       }
     }
 
@@ -329,6 +340,7 @@ let BranchScan = class BranchScanView extends Component {
             </Col>
           </Row>
         </Form>
+        <Spin loading={this.state.loading}/>
       </div>
     )
   }

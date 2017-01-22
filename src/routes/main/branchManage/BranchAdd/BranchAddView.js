@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, Select, TreeSelect, message, Modal } from 'antd'
-import NProgress from 'nprogress'
+import Spin from 'COMPONENT/Spin'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -11,6 +11,9 @@ let BranchAdd = class BranchAddView extends Component {
   
   constructor(props) {
     super(props)
+    this.state = {
+      loading: false
+    }
   }
 
   componentWillMount() {
@@ -63,12 +66,23 @@ let BranchAdd = class BranchAddView extends Component {
           {brhParentId: selectBranchId}
         )
 
-        NProgress.start()
+        const showSpin = () => {
+          this.setState({
+            loading: true
+          })
+        }
+        const hideSpin = () => {
+          this.setState({
+            loading: false
+          })
+        }
+
+        showSpin()
         branchAdd(data, () => {
-          NProgress.done()
+          hideSpin()
           this.onClear()
           this.onClose()
-        }, NProgress.done)
+        }, hideSpin)
       }  
     })
   }
@@ -318,6 +332,7 @@ let BranchAdd = class BranchAddView extends Component {
                 </Col>
               </Row>    
             </Form>
+            <Spin loading={this.state.loading}/>
           </Modal>
       </div>
     )

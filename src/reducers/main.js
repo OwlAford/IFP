@@ -29,11 +29,11 @@ function fetchAuthMenu() {
 }
 
 function addWithoutParentNode(id, sourceList, targetList) {
-  let sourcenode = utils.getNodeFromGroupList(id, sourceList, "id", "menus", treeNodeToMenu)
+  let sourcenode = utils.getNodeFromGroupList(id, sourceList, 'id', 'menus', treeNodeToMenu)
   if (sourcenode)
     return
 
-  let node = utils.getNodeFromGroupList(id, targetList, "id", "menus", treeNodeToMenu)
+  let node = utils.getNodeFromGroupList(id, targetList, 'id', 'menus', treeNodeToMenu)
   if (!node)
     return
 
@@ -62,7 +62,7 @@ export function converMenuField(menu) {
     logo: menu.menuLogo,
     url: menu.menuUrl,
     title: menu.menuName,
-    "level": menu.menuLevel,
+    'level': menu.menuLevel,
     menus: [],
     branchList: []
   }
@@ -127,9 +127,9 @@ export function changePassword(data, cb) {
     dispatch(changePasswordAction(data)).then(action => {
       const flag = action.data.body.opResult
       if (flag=='1') {
-        message.success("密码修改成功！")
+        message.success('密码修改成功！')
       } else {
-        message.error("密码修改失败，请重试！")
+        message.error('密码修改失败，请重试！')
       }
       if (cb) cb()
     })
@@ -177,10 +177,10 @@ function _converRoleField(branch) {
 
 function getBranch(branch) {
   return {
-        "label": branch.brhName,
-        "value": branch.brhId,
-        "key": branch.brhId,
-        "children": [],
+        'label': branch.brhName,
+        'value': branch.brhId,
+        'key': branch.brhId,
+        'children': [],
   }
 }
 
@@ -195,9 +195,9 @@ export function initBranchList(cb) {
   return (dispatch,state) => {
     dispatch(getBranchListAction()).then(action => {
       let branchList = action.data.body.branchList
-      let userGetBranchList = utils.groupList(action.data.body.branchList, "brhId", "brhParentId", "children", _converRoleField)
-      
-      let getBranchList = utils.groupList(action.data.body.branchList, "brhId", "brhParentId", "children", getBranch)
+      let userGetBranchList = utils.groupList(branchList, 'brhId', 'brhParentId', 'children', _converRoleField)
+    
+      let getBranchList = utils.groupList(branchList, 'brhId', 'brhParentId', 'children', getBranch)
       dispatch(groupGetBranch(getBranchList)) //新增的时候查机构列表
       dispatch(groupBranch(branchList, userGetBranchList))
       if (cb) cb()
@@ -219,9 +219,128 @@ export function sendData(data) {
   } 
 }
 
+function getUserConfigDataAction(data) {
+  return {
+    [BZ_REQUESTER]: {
+      types: [actions.CONFIG_DATA_REQ, actions.CONFIG_DATA_SUC, actions.CONFIG_DATA_FAL],
+      url: API.GET_CONFIG_DATA_URL,
+      body: {
+        paramType: data
+      }
+    }
+  }
+}
+
+function setUserTypeLevel(certType, level) {
+  return {
+    type: actions.SET_USER_TYPE_LEVEL,
+    certType: certType,
+    level: level
+  }
+}
+
+export function getUserConfigData() {
+  return (dispatch, getState) => {
+    dispatch(getUserConfigDataAction('')).then(action => {
+      let paramList = action.data.body.paramList
+      let levelList = [],
+          certTypeList = []
+      if (paramList) {  
+        paramList.filter((item) => {
+          if (item.paramType == 'level') {
+            levelList.push(item)
+          } else if (item.paramType == 'certType') {
+            certTypeList.push(item)
+          }
+        })
+        dispatch(setUserTypeLevel(certTypeList, levelList))
+      }
+    })
+  }
+}
+
+function getRoleListAction() {
+  return {
+    [BZ_REQUESTER]: {
+      types: [actions.ROLE_QUERY_REQ, actions.ROLE_QUERY_SUC, actions.ROLE_QUERY_FAL],
+      url: API.GET_ROLE_LIST_URL,
+      body: {}
+    }
+  }
+}
+
+function roleTreeList(list) {
+  return {
+    type: actions.ROLE_TREE_LIST,
+    data: list
+  }
+}
+
+// 用户绑定角色所需要数据的类型
+function getRoleField({roleName, roleId}) {
+  return {
+    label: roleName,
+    value: roleId,
+    key: roleId,
+    children: []
+  }
+}
+
+// 查询所有角色时，树所需要的类型
+function converRoleField({roleId, rolePId, roleName, roleDesc, roleStatus, roleType}) {
+  return {
+    roleId: roleId,
+    rolePId: rolePId,
+    roleName: roleName,
+    roleDesc: roleDesc,
+    roleStatus: roleStatus,
+    roleType: roleType,
+    children: []
+  }
+}
+
+function updateRoleTree(list) {
+  return {
+    type: actions.UPDATE_ROLE_TREE,
+    data: list
+  }
+}
+
+export function getRoleTree() {
+  return (dispatch, getState) => {
+    dispatch(getRoleListAction()).then(action => {
+      let dataRoleList = action.data.body.roleList
+      let roleList = utils.groupList(dataRoleList, 'roleId', 'rolePId', 'children', converRoleField)
+      let getRoleList = utils.groupList(dataRoleList,'roleId', 'rolePId', 'children', getRoleField)
+      dispatch(roleTreeList(getRoleList))
+      dispatch(updateRoleTree(roleList))
+    })
+  }
+}
+
+// 查询用户等级 + 证件类型配置信息 + 角色树
+export function initUserForm() {
+  return (dispatch, getState) => {
+    dispatch(getUserConfigData())
+    dispatch(getRoleTree())
+  }
+}
+
+export function getRoleByUserAction(num) {
+  return {
+    [BZ_REQUESTER]: {
+      types: [actions.ROLE_QUERY_REQ, actions.ROLE_QUERY_SUC, actions.ROLE_QUERY_FAL],
+      url: API.GET_ROLE_BY_USER_URL,
+      body:{
+        userNo: num
+      }
+    }
+  }
+}
+
 /*** Reducer ***/
 const initialState = {
-  // sidebar
+
   items: [],
   bugfreeMenu: [],
   currentCstIP: '',
@@ -235,30 +354,60 @@ const initialState = {
   currentPath: window.globalConfig.HOME_PATH,
   currentMenu: window.globalConfig.HOME_MENU,
   openKeys: [window.globalConfig.HOME_ITEM],
-  queryItem: [],
-  topMenu: [], // 导航菜单
-  changePasswordVisible: false,
+
   userMenu: {},
+  topMenu: [],
+  queryItem: [],
   systemParam: [],
+  changePasswordVisible: false,
+
   // branch
-  branchList: [],
   selectBranch: '',
+  branchList: [],
   getBranchList: [],
-  userGetBranchList: []
+  userGetBranchList: [],
+
+  // user config
+  certType: [],
+  level: [],
+  getRoleList: [],
+  roleList: []
 }
 
 export default function mainReducer(state = initialState, action) {
   switch (action.type) {
+
+    case actions.SET_USER_TYPE_LEVEL:
+      return {
+        ...state,
+        certType: action.certType,
+        level: action.level
+      }
+
+     case actions.ROLE_TREE_LIST:
+      return {
+        ...state,
+        getRoleList: action.data
+      }
+
+    case actions.UPDATE_ROLE_TREE:
+      return {
+        ...state,
+        roleList: action.data
+      }
+
     case actions.UPDATE_BRANACH:
       return {
         ...state,
         selectBranch: action.selectBranch
       }
+
      case actions.CLEAN_BRANCH:
       return {
         ...state,
         selectBranch: ''
       }
+
     case actions.SELECT_LEFT_MENU:
       let userMenu = state.userMenu
       userMenu = Object.assign({}, userMenu, {currentMenu: action.currentMenu})  
@@ -267,52 +416,62 @@ export default function mainReducer(state = initialState, action) {
         currentMenu: action.currentMenu,
         userMenu: userMenu
       }
+
     case actions.CHANGE_PASSWORD:
       return {
         ...state,
         changePasswordVisible: action.changePasswordVisible
       }
+
     case actions.SAVE_USER_MENU:
       return {
         ...state,
         userMenu: action.userMenu
       }
+
     case actions.MERGE_FINAL_MENU:
       return {
         ...state,
         items: action.items
       }
+
     case actions.USER_MENU_SUC:
+      const data = action.data.body
       return {
         ...state,
         isUserMenuLoaded:true,
-        currentCstIP: action.data.body.cstCurrLoginIP,
-        currentLoginTime: action.data.body.cstCurrLoginTime,
-        lastCstIP: action.data.body.cstLastLoginIP,
-        lastLoginTime: action.data.body.cstLastLoginTime,
-        loginCount: action.data.body.cstLoginTimes
+        currentCstIP: data.cstCurrLoginIP,
+        currentLoginTime: data.cstCurrLoginTime,
+        lastCstIP: data.cstLastLoginIP,
+        lastLoginTime: data.cstLastLoginTime,
+        loginCount: data.cstLoginTimes
       }
+
     case actions.SET_BUGFREE_MENU:
       return {
         ...state,
         bugfreeMenu: action.bugfreeMenu
       }
+
     case actions.USER_GROUP_BRANCH:
       return {
         ...state,
         branchList: action.branchList,
         userGetBranchList: action.userGetBranchList
       }
+
     case actions.SENDDATA:
       return {
         ...state,
         selectBranch: action.data
       }
+
     case actions.GET_BRANCH_LIST:
       return {
         ...state,
         getBranchList: action.data
       }
+
     default:
       return state
   }
