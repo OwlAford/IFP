@@ -1,6 +1,6 @@
 import utils from 'UTIL/public'
-import { getMenuAction } from './req'
-import { refreshInfo } from 'REDUCER/main'
+import { getMenuAction } from '../request/menu'
+import { refreshInfo } from './main'
 
 const SAVE_USER_MENU = 'SAVE_USER_MENU'
 const MERGE_FINAL_MENU = 'MERGE_FINAL_MENU'

@@ -1,5 +1,5 @@
 import utils from 'UTIL/public'
-import { getUserConfigDataAction } from './req'
+import { getUserConfigDataAction } from '../request/config'
 
 const SET_USER_TYPE_LEVEL = 'SET_USER_TYPE_LEVEL'
 

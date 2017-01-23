@@ -1,5 +1,5 @@
 import utils from 'UTIL/public'
-import { getBranchListAction } from './req'
+import { getBranchListAction } from '../request/branch'
 
 const GET_BRANCH_LIST = 'GET_BRANCH_LIST'
 const USER_GROUP_BRANCH = 'USER_GROUP_BRANCH'

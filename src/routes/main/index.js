@@ -13,7 +13,7 @@ export default (store) => ({
       const Main = require('COMPONENT/Main').default
       injectReducers(store, [{ 
         key: 'main', 
-        reducer: require('REDUCER/main').default
+        reducer: require('REDUCER/common/main').default
       }, {
         key: 'menu',
         reducer: require('REDUCER/common/menu').default
@@ -34,7 +34,6 @@ export default (store) => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
-        // require('./seed').default(store),
         require('./branchManage').default(store),
         require('./userManage').default(store)
       ])

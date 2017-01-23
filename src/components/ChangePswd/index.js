@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setPasswordVisible } from 'REDUCER/main'
+import { setPasswordVisible } from 'REDUCER/common/main'
 import { changePassword } from 'REDUCER/common/password'
 import ChangePswdView from './ChangePswdView'
 

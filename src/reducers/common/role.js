@@ -1,5 +1,5 @@
 import utils from 'UTIL/public'
-import { getRoleListAction } from './req'
+import { getRoleListAction } from '../request/role'
 
 const ROLE_TREE_LIST = 'ROLE_TREE_LIST'
 const UPDATE_ROLE_TREE = 'UPDATE_ROLE_TREE'

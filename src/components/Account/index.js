@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { logout } from 'REDUCER/common/login'
-import { setPasswordVisible } from 'REDUCER/main'
+import { setPasswordVisible } from 'REDUCER/common/main'
 import AccountView from './AccountView'
 
 const mapDispatchToProps = {
