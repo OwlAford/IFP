@@ -5,12 +5,12 @@ import { API } from 'CONSTANT/globals'
 export default (store) => ({
   path : 'home',
   indexRoute : {
-    component: require('COMPONENT/Welcome').default 
+    component: require('LAYOUT/Welcome').default
   },
 
   getComponents(nextState, cb){
     require.ensure([], require => {
-      const Main = require('COMPONENT/Main').default
+      const Main = require('LAYOUT/Main').default
       injectReducers(store, [{ 
         key: 'main', 
         reducer: require('REDUCER/common/main').default
@@ -18,14 +18,11 @@ export default (store) => ({
         key: 'menu',
         reducer: require('REDUCER/common/menu').default
       }, {
-        key: 'branch',
-        reducer: require('REDUCER/common/branch').default
+        key: 'branchTree',
+        reducer: require('REDUCER/common/branchTree').default
       }, {
         key: 'config',
         reducer: require('REDUCER/common/config').default
-      }, {
-        key: 'role',
-        reducer: require('REDUCER/common/role').default
       }])
       cb(null, Main)
     }, 'main')

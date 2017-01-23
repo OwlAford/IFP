@@ -11,9 +11,9 @@ export const cleanBranch = () => ({
   type: CLEAN_BRANCH
 })
 
-export const updateBranch = selectBranch => ({
+export const updateBranch = selectBranchId => ({
   type: UPDATE_BRANACH,
-  selectBranch: selectBranch ? selectBranch : ''
+  selectBranchId: selectBranchId ? selectBranchId : ''
 })
 
 const getBranch = branch => ({
@@ -61,7 +61,7 @@ export const initBranchList = (cb) => {
 }
 
 const initialState = {
-  selectBranch: '',
+  selectBranchId: '',
   branchList: [],
   getBranchList: [],
   userGetBranchList: []
@@ -73,19 +73,19 @@ export default (state = initialState, action) => {
     case CLEAN_BRANCH:
       return {
         ...state,
-        selectBranch: ''
+        selectBranchId: ''
       }
 
     case UPDATE_BRANACH:
       return {
         ...state,
-        selectBranch: action.selectBranch
+        selectBranchId: action.selectBranchId
       }
 
     case APPLY_BRANCH_SELECT:
       return {
         ...state,
-        selectBranch: action.data
+        selectBranchId: action.data
       }
         
     case GET_BRANCH_LIST:

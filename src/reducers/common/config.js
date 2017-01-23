@@ -1,7 +1,9 @@
 import utils from 'UTIL/public'
 import { getUserConfigDataAction } from '../request/config'
+import { postListAction } from '../request/post'
 
 const SET_USER_TYPE_LEVEL = 'SET_USER_TYPE_LEVEL'
+const POST_LIST = 'POST_LIST'
 
 const setUserTypeLevel = (certType, level) => ({
   type: SET_USER_TYPE_LEVEL,
@@ -29,13 +31,32 @@ export const getUserConfigData = () => {
   }
 }
 
+// 查询所有岗位
+export const postList = data => {
+  return (dispatch, getState) => {
+    dispatch(postListAction(data)).then(action => {
+        dispatch({
+          type: POST_LIST,
+          data: action.data.body
+        })
+    })
+  }
+}
+
 const initialState = {
   certType: [],
-  level: []
+  level: [],
+  post: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+
+    case POST_LIST:
+      return {
+        ...state,
+        post: action.data
+      }
 
     case SET_USER_TYPE_LEVEL:
       return {

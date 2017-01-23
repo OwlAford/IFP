@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { initBranchList, applySelect } from './common/branch'
+import { initBranchList, applySelect } from './common/branchTree'
 import { getBranchAction, modifyBranchAction, deleteBranchAction, addBranchAction } from './request/branch'
 import { message } from 'antd'
 
@@ -89,7 +89,6 @@ export const branchModify = (params, success, fail) => {
     })   
   }
 }
-
 
 // 删除机构
 export const branchDelete = (params, success, fail) => {

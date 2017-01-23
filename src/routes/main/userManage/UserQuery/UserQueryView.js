@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, Select, DatePicker } from 'antd'
+import UserAdd from '../UserAdd'
 import AU from 'UTIL/auth'
 
 const FormItem = Form.Item
@@ -31,6 +32,9 @@ let UserQuery = class UserQueryView extends Component {
 
   handleClear() {
     this.props.form.resetFields()
+  }
+  addUser() {
+    this.props.setAddUserBoxVsisible(true)
   }
 
   searchUser() {
@@ -69,7 +73,7 @@ let UserQuery = class UserQueryView extends Component {
       <Button 
         size="large" 
         type="primary" 
-        onClick={(e) => this.AddUser()}
+        onClick={(e) => this.addUser()}
       >
         新增用户
       </Button>
@@ -189,6 +193,7 @@ let UserQuery = class UserQueryView extends Component {
           </Button>
           {AU.checkButton(this.props.userMenu, 'F001', addUserBtn)}
         </div>
+        <UserAdd/>
       </div>
     )
   }

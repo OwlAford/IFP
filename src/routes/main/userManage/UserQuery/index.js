@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import { userPageByBrh } from 'REDUCER/userManage'
+import { userPageByBrh, setAddUserBoxVsisible } from 'REDUCER/userManage'
 import UserQueryView from './UserQueryView'
 
 const mapDispatchToProps = {
-  userPageByBrh
+  userPageByBrh,
+  setAddUserBoxVsisible
 }
 
 const mapStateToProps = (state) => ({

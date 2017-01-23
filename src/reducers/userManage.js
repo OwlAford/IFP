@@ -1,11 +1,12 @@
 import { getRoleByUserAction } from './request/role'
-import { userPageByBrhAction } from './request/user'
+import { userPageByBrhAction, addUserAction } from './request/user'
 import NProgress from 'nprogress'
 import { message } from 'antd'
 
 export const PAGE_USERS = 'PAGE_USERS'
 export const SET_PREVBOX_VISIBLE = 'SET_PREVBOX_VISIBLE'
 export const SET_PREVBOX_INFO = 'SET_PREVBOX_INFO'
+export const SET_ADDUSER_VISIBLE = 'SET_ADDUSER_VISIBLE'
 
 const pageUsers = data => ({
   type: PAGE_USERS,
@@ -48,6 +49,11 @@ export const setPreviewBoxVsisible = state => ({
   visible: state
 })
 
+export const setAddUserBoxVsisible = state => ({
+  type: SET_ADDUSER_VISIBLE,
+  visible: state
+})
+
 const setPreviewInfo = info => ({
   type: SET_PREVBOX_INFO,
   data: info
@@ -66,11 +72,39 @@ export const getRoleByUser = (num, success, fail) => {
   }
 }
 
+export const addUser = (params, success, fail) => {
+  return (dispatch, getState) => {
+    dispatch(addUserAction(params)).then(action => {
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0') {
+        let dataList = {
+          brhId: params.brhId
+        }
+        dispatch(userPageByBrhAction(dataList, 10)).then(action => {
+          const dataBody = action.data.body
+          let data = {
+            totalSize: dataBody.turnPageTotalNum,
+            turnPageShowNum: dataBody.turnPageShowNum,
+            currentPage: dataBody.currentPage,
+            userList: dataBody.userList
+          }
+          dispatch(pageUsers(data))
+        })
+        message.success('用户添加成功！')
+        if (success) success()
+      } else {
+        if (fail) fail()
+      }
+    })
+  }
+}
+
 const initialState = {
   count: 0,
   userList: [],
   totalSize: 0,
   previewBoxVisible: false,
+  addUserBoxVisible: false,
   previewInfo: {},
   pageData: {
     currentPage: 1,
@@ -102,6 +136,12 @@ export default (state = initialState, action) => {
         return {
           ...state,
           previewBoxVisible: action.visible
+        }
+
+      case SET_ADDUSER_VISIBLE:
+        return {
+          ...state,
+          addUserBoxVisible: action.visible
         }
           
       default:
