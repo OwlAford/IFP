@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { selectMenu } from 'REDUCER/main'
+import { selectMenu } from 'REDUCER/common/menu'
 import SidebarView from './SidebarView'
 
 const mapDispatchToProps = {

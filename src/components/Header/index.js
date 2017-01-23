@@ -6,8 +6,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  items: state.main.items,
-  changePswdVisible: state.main.changePasswordVisible
+  items: state.menu.items,
+  passwordVisible: state.main.passwordVisible
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderView)

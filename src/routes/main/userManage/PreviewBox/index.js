@@ -8,8 +8,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   visible: state.userManage.previewBoxVisible,
-  level: state.main.level,
-  certType: state.main.certType,
+  level: state.config.level,
+  certType: state.config.certType,
   info: state.userManage.previewInfo
 })
 

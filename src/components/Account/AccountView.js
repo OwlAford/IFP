@@ -33,11 +33,11 @@ export default class AccountView extends Component {
     const Props = this.props
     Props.logout()
     Props.router.replace(API.CONTENTNAME)
-    Props.updateChangePasswordVisible(false)
+    Props.setPasswordVisible(false)
   }
 
   updatePassword() {
-    this.props.updateChangePasswordVisible(true)
+    this.props.setPasswordVisible(true)
   }
 
   render() {

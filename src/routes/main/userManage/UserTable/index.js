@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   dataSource: state.userManage.userList,
-  userMenu: state.main.userMenu,
+  userMenu: state.menu.userMenu,
   totalSize: state.userManage.totalSize,
   pageData: state.userManage.pageData
 })

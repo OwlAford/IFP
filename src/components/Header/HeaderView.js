@@ -53,7 +53,7 @@ export default class HeaderView extends Component {
         </div>
       )
     }
-    const { items, router, changePswdVisible } = this.props
+    const { items, router, passwordVisible } = this.props
     const { currentMenus, currentUrl } = this.state
     return (
       <div className="app-header">
@@ -64,7 +64,7 @@ export default class HeaderView extends Component {
           parentUrl={currentUrl}
         />
         <Account router={router}/>
-        {changePswdVisible ? <ChangePswd router={router}/> : null}
+        {passwordVisible ? <ChangePswd router={router}/> : null}
       </div>     
     )
   }

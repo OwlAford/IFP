@@ -14,10 +14,11 @@ export default class ChangePswdView extends Component {
       newAgainPswd: ''
     }
     this.handleChange = handleChange.bind(this)
+    this.onClose = this.onClose.bind(this)
   }
 
   onClose() {
-    this.props.updateChangePasswordVisible(false)
+    this.props.setPasswordVisible(false)
   }
 
   onSubmit() {
@@ -38,7 +39,7 @@ export default class ChangePswdView extends Component {
         oldPassword: md5(oldPswd),
         newPassword: md5(newPswd)
       }
-      this.props.updateChangePasswordVisible(false)
+      this.onClose()
       this.props.changePassword(data, this.onClose)
     }
   }

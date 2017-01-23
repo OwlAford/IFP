@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setAddBranchVisible,  branchAdd } from 'REDUCER/branchManage'
-import { cleanBranch, updateBranch } from 'REDUCER/main'
+import { cleanBranch, updateBranch } from 'REDUCER/common/branch'
 import BranchAddView from './BranchAddView'
 
 const mapDispatchToProps = {
@@ -12,9 +12,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   visible: state.branchManage.addBranchBoxVisible,
-  branchNodes: state.main.getBranchList,
-  selectBranchId: state.main.selectBranch,
-  branchList: state.main.branchList
+  branchNodes: state.branch.getBranchList,
+  selectBranchId: state.branch.selectBranch,
+  branchList: state.branch.branchList
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BranchAddView)

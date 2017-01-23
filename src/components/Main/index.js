@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { initUserMenu, initUserForm } from 'REDUCER/main'
+import { initUserForm } from 'REDUCER/main'
+import { initUserMenu } from 'REDUCER/common/menu'
 import MainView from './MainView'
 
 const mapDispatchToProps = {

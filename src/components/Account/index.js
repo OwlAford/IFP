@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { logout } from 'REDUCER/common/login'
-import { updateChangePasswordVisible } from 'REDUCER/main'
+import { setPasswordVisible } from 'REDUCER/main'
 import AccountView from './AccountView'
 
 const mapDispatchToProps = {
   logout,
-  updateChangePasswordVisible
+  setPasswordVisible
 }
 
 const mapStateToProps = (state) => ({

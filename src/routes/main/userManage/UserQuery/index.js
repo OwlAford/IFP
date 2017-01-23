@@ -7,7 +7,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  userMenu: state.main.userMenu
+  userMenu: state.menu.userMenu
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserQueryView)

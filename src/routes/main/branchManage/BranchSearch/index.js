@@ -10,8 +10,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  userMenu: state.main.userMenu,
-  branchList: state.main.branchList,
+  userMenu: state.menu.userMenu,
+  branchList: state.branch.branchList,
   selectedBranch: state.branchManage.selectedObject
 })
 

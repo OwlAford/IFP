@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { injectReducer } from 'STORE/reducers'
+import { injectReducers } from 'STORE/reducers'
 import { API } from 'CONSTANT/globals'
 
 export default (store) => ({
@@ -11,8 +11,22 @@ export default (store) => ({
   getComponents(nextState, cb){
     require.ensure([], require => {
       const Main = require('COMPONENT/Main').default
-      const reducer = require('REDUCER/main').default
-      injectReducer(store, { key: 'main', reducer })
+      injectReducers(store, [{ 
+        key: 'main', 
+        reducer: require('REDUCER/main').default
+      }, {
+        key: 'menu',
+        reducer: require('REDUCER/common/menu').default
+      }, {
+        key: 'branch',
+        reducer: require('REDUCER/common/branch').default
+      }, {
+        key: 'config',
+        reducer: require('REDUCER/common/config').default
+      }, {
+        key: 'role',
+        reducer: require('REDUCER/common/role').default
+      }])
       cb(null, Main)
     }, 'main')
   },

@@ -2,8 +2,8 @@ import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import NProgress from 'nprogress'
 import { API } from 'CONSTANT/globals'
 import utils from 'UTIL/public'
+import { initBranchList, applySelect } from './common/branch'
 import { message } from 'antd'
-import { sendData, initBranchList } from './main'
 
 const AUTH_MENU_REQ = 'AUTH_MENU_REQ'
 const AUTH_MENU_SUC = 'AUTH_MENU_SUC'
@@ -97,14 +97,14 @@ export function changeBranchSelected(data) {
         NProgress.start()
         dispatch(getBranchAction(data)).then(action => {
         let brhParentId = action.data.body.brhParentId
-        dispatch(sendData(brhParentId))
+        dispatch(applySelect(brhParentId))
         dispatch(applyBranch(action.data.body))
         NProgress.done()
         message.success("加载完毕！")
       })
     } else {
       message.warning("当前未选中机构！")
-      dispatch(sendData(''))
+      dispatch(applySelect(''))
       dispatch(applyBranch())
     }
   }

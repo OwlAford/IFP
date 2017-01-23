@@ -1,6 +1,6 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import NProgress from 'nprogress'
-import { getRoleByUserAction } from './main'
+import { getRoleByUserAction } from './common/role/req'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
