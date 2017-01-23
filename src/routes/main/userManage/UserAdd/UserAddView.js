@@ -5,6 +5,7 @@ import Spin from 'COMPONENT/Spin'
 const FormItem = Form.Item
 const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
+const RadioGroup = Radio.Group
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 const aCity = {11: '北京', 12: '天津', 13: '河北', 14: '山西', 15: '内蒙古', 21: '辽宁', 22: '吉林', 23: '黑龙江', 31: '上海', 32: '江苏', 33: '浙江', 34: '安徽', 35: '福建', 36: '江西', 37: '山东', 41: '河南', 42: '湖北', 43: '湖南', 44: '广东', 45: '广西', 46: '海南', 50: '重庆', 51: '四川', 52: '贵州', 53: '云南', 54: '西藏', 61: '陕西', 62: '甘肃', 63: '青海', 64: '宁夏', 65: '新疆', 71: '台湾', 81: '香港', 82: '澳门', 91: '国外'}
@@ -38,7 +39,7 @@ let BranchAdd = class BranchAddView extends Component {
     const { getFieldsValue, validateFields, resetFields } = form
     validateFields((errors, values) => {
       if (!!errors) {
-        message.error('填写内容有错误，请仔细填写!')
+        message.error('填写内容有错误，请仔细填写！')
       } else {
         let params = getFieldsValue()
 
@@ -93,7 +94,7 @@ let BranchAdd = class BranchAddView extends Component {
   phoneNumberCheck(rule, value, callback) {
     let reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/ 
     if (!reg.test(value)) { 
-      callback('请输入有效的手机号码！')
+      callback('请输入有效的手机号码')
     } else {
       callback()
     }
@@ -102,7 +103,7 @@ let BranchAdd = class BranchAddView extends Component {
   pswdCheck(rule, value, callback) {
     const reg = /^\w{6,20}$/
     !reg.test(value) ? 
-    callback([new Error('密码为6~20位字符！')]) :
+    callback([new Error('密码为6~20位字符')]) :
     callback()
   }
 
@@ -112,44 +113,47 @@ let BranchAdd = class BranchAddView extends Component {
     if (key == '1') {
       var iSum = 0
       if (!/^\d{17}(\d|x)$/i.test(value)) {
-        // callback('身份证长度或格式错误！')
+        callback('身份证长度或格式错误')
         return
       }
       value = value.replace(/x$/i,'a')
       if (!aCity[parseInt(value.substring(0,2))]) {
-        // callback('身份证地区非法！')
+        callback('身份证地区非法')
         return
       }
       let sBirthday = `${value.substr(6, 4)}/${Number(value.substr(10, 2))}/${Number(value.substr(12, 2))}`
       let birthDate = new Date(sBirthday)
       if (sBirthday != `${birthDate.getFullYear()}/${(birthDate.getMonth() + 1)}/${ birthDate.getDate()}`) {
-        // callback('身份证出生日期非法！')
+        callback('身份证出生日期非法')
         return
       }
       for (var i = 17; i >= 0; i--) {
         iSum += (Math.pow(2, i) % 11) * parseInt(value.charAt(17 - i), 11)
       }
       if (iSum % 11 != 1) {
-        // callback('身份证号非法！')
+        callback('身份证号非法')
         return
       }
       callback()
     } else if (key == '2') {
       const hureg = /^\w{7,}$/
       if (!hureg.test(value)){
-        //callback([new Error('请输入正确的护照！')])
+        callback([new Error('请输入正确的护照')])
         return
       }
       callback()
     } else if (key == '3') {
       const greg = /^[G|T|S|L|Q|D|C|W]\w{9,11}\S+$/;
       if (!greg.test(value)) {
-        //callback([new Error('请输入正确的港澳通行证！')])
+        callback([new Error('请输入正确的港澳通行证')])
         return
       }
       callback()
+    } else if (value) {
+      callback([new Error('请先选择证件类型')])
+      return
     } else {
-      callback([new Error('请先选择证件类型！')])
+      callback()
       return
     }
 
@@ -182,7 +186,7 @@ let BranchAdd = class BranchAddView extends Component {
       treeData: branchNodes, 
       onChange: onChange, 
       value: selectBranchId,
-      placeholder: "请选择",
+      placeholder: '请选择',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
       treeCheckable: false,
@@ -190,36 +194,36 @@ let BranchAdd = class BranchAddView extends Component {
     }
 
     return (
-      <div className="BranchAdd">
+      <div className='BranchAdd'>
         <Modal
-          title="新增用户"
+          title='新增用户'
           width={600}
           visible={visible}
           onOk={this.onSubmit}
           onCancel={e => this.onClose()}
           footer={[
               <Button 
-                key="back" 
-                type="ghost" 
-                size="large" 
+                key='back' 
+                type='ghost' 
+                size='large' 
                 onClick={(e) => this.onClose()}
               >
                 返 回
               </Button>,
 
               <Button 
-                key="clean" 
-                type="ghost" 
-                size="large" 
+                key='clean' 
+                type='ghost' 
+                size='large' 
                 onClick={(e) => this.onClear()}
               >
                 清除所有
               </Button>,
 
               <Button 
-                key="submit" 
-                type="primary" 
-                size="large"  
+                key='submit' 
+                type='primary' 
+                size='large'  
                 onClick={(e) => this.onSubmit()} 
               >
                 提 交
@@ -238,10 +242,12 @@ let BranchAdd = class BranchAddView extends Component {
                     {
                       getFieldDecorator('userName', {
                         initialValue: '',
-                        rules: [{
-                          required: true, 
-                          whitespace:true,
-                          message: ' '
+                        validate: [{
+                          rules: [{ 
+                            required: true,
+                            message: '请输入用户名' 
+                          }],
+                          trigger: 'onBlur'
                         }]
                       })(
                         <Input  
@@ -262,9 +268,12 @@ let BranchAdd = class BranchAddView extends Component {
                     {
                       getFieldDecorator('userLoginName', {
                         initialValue: '',
-                        rules: [{
-                          required: true, 
-                          message: ' '
+                        validate: [{
+                          rules: [{ 
+                            required: true,
+                            message: '请输入登录账号' 
+                          }],
+                          trigger: 'onBlur'
                         }]
                       })(
                         <Input  
@@ -334,13 +343,14 @@ let BranchAdd = class BranchAddView extends Component {
                         initialValue: '',
                         validate: [{
                           rules: [{ 
-                            required: true,message:' ' 
+                            required: true,
+                            message:'请输入邮箱地址' 
                           }],
                           trigger: 'onBlur',
                          }, {
                           rules: [{ 
                             type: 'email', 
-                            message: ' ' 
+                            message: '请输入正确邮箱地址' 
                           }],
                           trigger: ['onBlur', 'onChange']
                          }]
@@ -384,7 +394,7 @@ let BranchAdd = class BranchAddView extends Component {
                         initialValue: '',
                         rules: [{
                           required: true, 
-                          message: ' '
+                          message: '请选择证件类型'
                         }]
                       })(
                         <Select placeholder='请选择证件类型'>
@@ -406,7 +416,7 @@ let BranchAdd = class BranchAddView extends Component {
                         initialValue: '',
                         rules: [{
                           required: true, 
-                          message: ' '
+                          message: '请输入证件号码'
                         }, {
                           validator: this.certCheck
                         }]
@@ -464,9 +474,6 @@ let BranchAdd = class BranchAddView extends Component {
                   </FormItem>
                 </Col>
               </Row>
-
-
-
               <Row>
                 <Col span={12}>
                   <FormItem 
@@ -477,7 +484,7 @@ let BranchAdd = class BranchAddView extends Component {
                       getFieldDecorator('postId', {
                         initialValue: '',
                         rules: [{
-                          message: ' '
+                          message: '请选择岗位'
                         }]
                       })(
                         <Select placeholder='请选择岗位'>
@@ -499,7 +506,7 @@ let BranchAdd = class BranchAddView extends Component {
                         initialValue: '',
                         rules: [{
                           required: true, 
-                          message: ' '
+                          message: '请选择用户等级'
                         }]
                       })(
                         <Select placeholder='请选择用户等级'>
@@ -509,6 +516,29 @@ let BranchAdd = class BranchAddView extends Component {
                     }
                   </FormItem>
                 </Col>
+              </Row>    
+                <Col span={12}>
+                  <FormItem 
+                    label='审批权限：'
+                    {...formItemLayout}
+                    required
+                  >
+                    {
+                      getFieldDecorator('userRight', {
+                        initialValue: '00000000',
+                        rules: [{
+                          message: ' '
+                        }]
+                      })(
+                        <RadioGroup>
+                          <Radio key='a' value='00000100'>有</Radio>
+                          <Radio key='b' value='00000000'>无</Radio>
+                        </RadioGroup>
+                      )
+                    }
+                  </FormItem>
+                </Col>
+              <Row>    
               </Row>    
             </Form>
             <Spin loading={this.state.loading}/>
