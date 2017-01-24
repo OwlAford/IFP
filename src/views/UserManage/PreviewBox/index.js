@@ -1,16 +1,16 @@
 import { connect } from 'react-redux'
-import { setPreviewBoxVsisible } from 'REDUCER/userManage'
+import { closePreviewUser } from 'REDUCER/userManage'
 import PreviewBoxView from './PreviewBoxView'
 
 const mapDispatchToProps = {
-  setVisible: setPreviewBoxVsisible
+  closePreviewUser
 }
 
 const mapStateToProps = (state) => ({
-  visible: state.userManage.previewBoxVisible,
+  visible: state.userManage.previewBox.visible,
   level: state.config.level,
   certType: state.config.certType,
-  info: state.userManage.previewInfo
+  info: state.userManage.previewBox.info
 })
 
 // 将 mapDispatchToProps 和 mapStateToProps 连接到组件

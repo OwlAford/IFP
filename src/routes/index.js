@@ -21,10 +21,10 @@ export const createRoutes = (store) => ({
         require('./login').default(store), 
         { 
           path: API.CONTENTNAME + '/redirect', 
-          component: require('./Redirect').default 
+          component: require('VIEW/Redirect').default 
         }, { 
           path: API.CONTENTNAME + '/*', 
-          component: require('./NoFound').default 
+          component: require('VIEW/NoFound').default 
         }
       ])
     })

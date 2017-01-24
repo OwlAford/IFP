@@ -43,6 +43,7 @@ export const postList = data => {
   }
 }
 
+
 const initialState = {
   certType: [],
   level: [],

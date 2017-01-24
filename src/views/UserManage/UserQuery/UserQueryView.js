@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, Select, DatePicker } from 'antd'
-import UserAdd from '../UserAdd'
+import UserAddEditBox from '../UserAddEditBox'
 import AU from 'UTIL/auth'
 
 const FormItem = Form.Item
@@ -79,7 +79,13 @@ let UserQuery = class UserQueryView extends Component {
       </Button>
     )
 
-    const { getFieldDecorator } = this.props.form
+    const { form, level, userBox } = this.props
+    const { getFieldDecorator } = form
+
+    // 用户等级
+    const userLevelList = level.map(
+      item => <Option value={item.paramKey} key={item.paramKey} >{item.paramValue}</Option>
+    )
 
     return (
       <div className="app-search-panel">
@@ -135,9 +141,7 @@ let UserQuery = class UserQueryView extends Component {
                       placeholder='请选择用户级别' 
                       allowClear
                     >
-                      <Option value='1'>一级</Option>
-                      <Option value='2'>二级</Option>
-                      <Option value='3'>三级</Option>
+                      {userLevelList}
                     </Select>
                   )
                 }
@@ -193,7 +197,7 @@ let UserQuery = class UserQueryView extends Component {
           </Button>
           {AU.checkButton(this.props.userMenu, 'F001', addUserBtn)}
         </div>
-        <UserAdd/>
+        {userBox.visible ? <UserAddEditBox/> : ''}
       </div>
     )
   }

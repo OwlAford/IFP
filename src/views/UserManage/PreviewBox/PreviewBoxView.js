@@ -8,7 +8,7 @@ export default class PreviewBoxView extends Component {
   } 
 
   onClose() {
-    this.props.setVisible(false)
+    this.props.closePreviewUser()
   }
 
   render() {
@@ -58,7 +58,6 @@ export default class PreviewBoxView extends Component {
           title="查看用户基本信息"
           width={680}
           visible={visible}
-          onOk={this.onSubmit}
           onCancel={e => this.onClose()}
           footer={[
               <Button key="back" type="ghost" size="large" onClick={(e) => this.onClose()}>

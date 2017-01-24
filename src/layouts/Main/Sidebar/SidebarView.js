@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { API } from 'CONSTANT/globals'
-import './Sidebar.scss'
 
 export default class SidebarView extends Component {
 

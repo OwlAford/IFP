@@ -1,11 +1,16 @@
 import { connect } from 'react-redux'
-import { userPageByBrh, setPreviewBoxVsisible, getRoleByUser } from 'REDUCER/userManage'
+import { userPageByBrh, setPreviewBoxVsisible, setBindRoleBoxVsisible, previewUser, modifyUser, userBindRole } from 'REDUCER/userManage'
+import { getUserRoleTree } from 'REDUCER/common/bindRole'
 import UserTableView from './UserTableView'
 
 const mapDispatchToProps = {
   userPageByBrh,
   setPreviewBoxVsisible,
-  getRoleByUser
+  setBindRoleBoxVsisible,
+  previewUser,
+  modifyUser,
+  userBindRole,
+  getUserRoleTree
 }
 
 const mapStateToProps = (state) => ({

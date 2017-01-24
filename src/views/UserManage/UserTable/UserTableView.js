@@ -3,6 +3,7 @@ import { Table } from 'antd'
 import Spin from 'COMPONENT/Spin'
 import AU from 'UTIL/auth'
 import PreviewBox from '../PreviewBox'
+import BindRoleBox from '../BindRoleBox'
 
 export default class UserTableView extends Component {
 
@@ -13,32 +14,35 @@ export default class UserTableView extends Component {
     }
   }
 
-  modify(e) {
-    console.log(e)
+  setSpin(state) {
+    this.setState({
+      loading: state
+    })
+  }
+
+  modify(data) {
+    this.setSpin(true)
+    this.props.modifyUser(data.userNo, () => {
+      this.setSpin(false)
+    }, () => {
+      this.setSpin(false)
+    })
   }
 
   preview(data) {
-    console.log(data)
     let Props = this.props
-    const showSpin = () => {
-      this.setState({
-        loading: true
-      })
-    }
-    const hideSpin = () => {
-      this.setState({
-        loading: false
-      })
-    }
-    showSpin()
-    Props.getRoleByUser(data.userNo, () => {
-      Props.setPreviewBoxVsisible(true)
-      hideSpin()
-    }, hideSpin)
+    this.setSpin(true)
+    Props.previewUser(data.userNo, () => {
+      this.setSpin(false)
+    }, () => {
+      this.setSpin(false)
+    })
   }
 
-  bindRole(e) {
-    console.log(e)
+  bindRole(data) {
+    this.props.getUserRoleTree(data.userNo)
+    this.props.userBindRole(data)
+    console.log(data)
   }
 
   delUser(e) {
@@ -117,6 +121,7 @@ export default class UserTableView extends Component {
       <div className="userQuery" style={{padding: '0 20px'}}>
         <Table columns={columns} dataSource={dataSource} bordered pagination={pagination}/>
         <PreviewBox/>
+        <BindRoleBox/>
         <Spin loading={this.state.loading}/>
       </div>
     )

@@ -11,5 +11,6 @@ import 'antd/lib/message/style'
 import 'antd/lib/modal/style'
 import 'antd/lib/radio/style'
 
-import './pages/common.scss'
 import './public/core.scss'
+import './layouts'
+import './pages/common.scss'

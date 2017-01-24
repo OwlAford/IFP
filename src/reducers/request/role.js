@@ -23,3 +23,13 @@ export const getRoleByUserAction = num => ({
   }
 })
 
+export const getUserRoleListAction = userNo => ({
+  [BZ_REQUESTER]: {
+    types: [ROLE_QUERY_REQ, ROLE_QUERY_SUC, ROLE_QUERY_FAL],
+    url: API.USER_BIND_ROLE_URL,
+    body: {
+      userNo: userNo
+    }
+  }
+})
+

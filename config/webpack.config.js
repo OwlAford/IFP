@@ -26,6 +26,7 @@ const webpackConfig = {
       // 自定义路径别名
       ASSET: path.join(src, 'assets'),
       STORE: path.join(src, 'store'),
+      VIEW: path.join(src, 'views'),
       COMPONENT: path.join(src, 'components'),
       REDUCER: path.join(src, 'reducers'),
       STYLE: path.join(src, 'assets/styles'),

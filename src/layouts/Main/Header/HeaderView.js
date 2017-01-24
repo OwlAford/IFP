@@ -4,7 +4,6 @@ import { API } from 'CONSTANT/globals'
 import Account from '../Account'
 import Sidebar from '../Sidebar'
 import ChangePswd from '../ChangePswd'
-import './Header.scss'
 
 export default class HeaderView extends Component {
   constructor(props) {

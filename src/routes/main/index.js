@@ -5,7 +5,7 @@ import { API } from 'CONSTANT/globals'
 export default (store) => ({
   path : 'home',
   indexRoute : {
-    component: require('LAYOUT/Welcome').default
+    component: require('VIEW/Welcome').default
   },
 
   getComponents(nextState, cb){
@@ -17,6 +17,9 @@ export default (store) => ({
       }, {
         key: 'menu',
         reducer: require('REDUCER/common/menu').default
+      }, {
+        key: 'bindRole',
+        reducer: require('REDUCER/common/bindRole').default
       }, {
         key: 'branchTree',
         reducer: require('REDUCER/common/branchTree').default

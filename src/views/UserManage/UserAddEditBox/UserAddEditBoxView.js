@@ -15,17 +15,61 @@ let BranchAdd = class BranchAddView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false
+      loading: false,
+      initVal: {
+        userRight: '00000000',
+        userLevel: '',
+        brhId: '',
+        postId: '',
+        userMobile: '',
+        userCertNo: '',
+        userCertType: '',
+        userAddress: '',
+        userEmail: '',
+        userDesc: '',
+        userPwd: '',
+        userLoginName: '',
+        userName: ''
+      },
+      pswdChange: false,
+      defaultPassword: '',
+      boxTitle: '新增用户'
     }
     this.certCheck = this.certCheck.bind(this)
+    this.onPwdChange = this.onPwdChange.bind(this)
+  }
+
+  onPwdChange() {
+    this.setState({
+      pswdChange: true
+    })
   }
 
   componentWillMount() {
-    this.props.form.resetFields()
+    const { form, userBox, updateBranch } = this.props
+    form.resetFields()
+    if (userBox.type == 'MODIFY') {
+      this.setState({
+        defaultPassword: '000000',
+        boxTitle: '修改用户信息'
+      })
+      updateBranch(userBox.initVal.brhId)
+      let newInitVal = Object.assign(
+        {}, 
+        this.state.initVal, 
+        userBox.initVal
+      )
+      this.setState({
+        initVal: newInitVal
+      })
+    }
   }
 
   onClose() {
-    this.props.setAddUserBoxVsisible(false)
+    const { userBox, setAddUserBoxVsisible, colseModifyUser } = this.props
+    userBox.type == 'MODIFY' ? 
+    colseModifyUser() : 
+    setAddUserBoxVsisible(false)
     this.onClear()
   }
 
@@ -35,8 +79,9 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onSubmit() {
-    const { form, postList, addUser, selectBranchId, branchList, branchAdd } = this.props
+    const { form, userBox, postList, addUser, updateUser, selectBranchId, branchList, branchAdd } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
+
     validateFields((errors, values) => {
       if (!!errors) {
         message.error('填写内容有错误，请仔细填写！')
@@ -63,7 +108,8 @@ let BranchAdd = class BranchAddView extends Component {
 
         let data = Object.assign({
         }, 
-        getFieldsValue(), {
+        getFieldsValue(), 
+        {
           brhName: brhName,
           brhId: selectBranchId,
           postName: postName
@@ -79,14 +125,26 @@ let BranchAdd = class BranchAddView extends Component {
             loading: false
           })
         }
-
-        console.log(data)
         showSpin()
-        addUser(data, () => {
-          hideSpin()
-          this.onClear()
-          this.onClose()
-        }, hideSpin)
+        if (userBox.type == 'MODIFY') {
+          Object.assign(data, {
+            pswdChange: this.state.pswdChange,
+            userNo: userBox.initVal.userNo
+          })
+          // 若密码未发生改变，将保存原密码
+          this.state.pswdChange ? null : data.userPwd = userBox.initVal.userPwd
+          updateUser(data, () => {
+            hideSpin()
+            this.onClear()
+            this.onClose()
+          }, hideSpin)
+        } else {
+          addUser(data, () => {
+            hideSpin()
+            this.onClear()
+            this.onClose()
+          }, hideSpin)
+        }
       }  
     })
   }
@@ -160,8 +218,9 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   render() {
-    const { visible, certType, postList, level, updateBranch, branchNodes, selectBranchId } = this.props
+    const { userBox, certType, postList, level, updateBranch, branchNodes, selectBranchId } = this.props
     const { getFieldDecorator, resetFields } = this.props.form
+    const { initVal, defaultPassword, boxTitle } = this.state
 
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -181,11 +240,14 @@ let BranchAdd = class BranchAddView extends Component {
       item => <Option value={item.paramKey} key={item.paramKey} >{item.paramValue}</Option>
     )
 
+    // 清除按钮
+    let clearBtn = ''
+    userBox.type == 'ADD' ? clearBtn = <Button key='clean' type='ghost' size='large' onClick={(e) => this.onClear()}>清除所有</Button> : null
+
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes, 
       onChange: onChange, 
-      value: selectBranchId,
       placeholder: '请选择',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
@@ -196,9 +258,9 @@ let BranchAdd = class BranchAddView extends Component {
     return (
       <div className='BranchAdd'>
         <Modal
-          title='新增用户'
+          title= {boxTitle}
           width={600}
-          visible={visible}
+          visible={true}
           onOk={this.onSubmit}
           onCancel={e => this.onClose()}
           footer={[
@@ -211,14 +273,7 @@ let BranchAdd = class BranchAddView extends Component {
                 返 回
               </Button>,
 
-              <Button 
-                key='clean' 
-                type='ghost' 
-                size='large' 
-                onClick={(e) => this.onClear()}
-              >
-                清除所有
-              </Button>,
+              clearBtn,
 
               <Button 
                 key='submit' 
@@ -241,7 +296,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userName', {
-                        initialValue: '',
+                        initialValue: initVal.userName,
                         validate: [{
                           rules: [{ 
                             required: true,
@@ -267,7 +322,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userLoginName', {
-                        initialValue: '',
+                        initialValue: initVal.userLoginName,
                         validate: [{
                           rules: [{ 
                             required: true,
@@ -279,7 +334,7 @@ let BranchAdd = class BranchAddView extends Component {
                         <Input  
                           placeholder='请输入登录账号' 
                           size='large' 
-                         />
+                        />
                       )
                     }
                   </FormItem>
@@ -295,7 +350,8 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userPwd', {
-                        initialValue: '',
+                        initialValue: defaultPassword,
+                        onChange: this.onPwdChange,
                         rules: [{
                           required: true, 
                           message: ' '
@@ -307,7 +363,7 @@ let BranchAdd = class BranchAddView extends Component {
                           type='password'
                           placeholder='请输入密码' 
                           size='large' 
-                         />
+                        />
                       )
                     }
                   </FormItem>
@@ -319,12 +375,12 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userDesc', {
-                        initialValue: '',
+                        initialValue: initVal.userDesc,
                       })(
                         <Input  
                           placeholder='请填写用户描述' 
                           size='large' 
-                         />
+                        />
                       )
                     }
                   </FormItem>
@@ -340,25 +396,25 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userEmail', {
-                        initialValue: '',
+                        initialValue: initVal.userEmail,
                         validate: [{
                           rules: [{ 
                             required: true,
                             message:'请输入邮箱地址' 
                           }],
                           trigger: 'onBlur',
-                         }, {
+                        }, {
                           rules: [{ 
                             type: 'email', 
                             message: '请输入正确邮箱地址' 
                           }],
                           trigger: ['onBlur', 'onChange']
-                         }]
+                        }]
                       })(
                         <Input  
                           placeholder='请输入邮箱地址' 
                           size='large' 
-                         />
+                        />
                       )
                     }
                   </FormItem>
@@ -370,12 +426,12 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userAddress', {
-                        initialValue: '',
+                        initialValue: initVal.userAddress,
                       })(
                         <Input  
                           placeholder='请填写用户住址' 
                           size='large' 
-                         />
+                        />
                       )
                     }
                   </FormItem>
@@ -391,7 +447,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userCertType', {
-                        initialValue: '',
+                        initialValue: initVal.userCertType,
                         rules: [{
                           required: true, 
                           message: '请选择证件类型'
@@ -413,7 +469,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userCertNo', {
-                        initialValue: '',
+                        initialValue: initVal.userCertNo,
                         rules: [{
                           required: true, 
                           message: '请输入证件号码'
@@ -439,8 +495,8 @@ let BranchAdd = class BranchAddView extends Component {
                     hasFeedback
                   >
                     {
-                      getFieldDecorator('brhPhone', {
-                        initialValue: '',
+                      getFieldDecorator('userMobile', {
+                        initialValue: initVal.userMobile,
                         rules: [
                           {
                             required: true, 
@@ -465,12 +521,24 @@ let BranchAdd = class BranchAddView extends Component {
                     hasFeedback
                     {...formItemLayout}
                   >
-                    {<TreeSelect 
-                      placeholder='请选择所属机构' 
-                      {...treeProps}
-                      allowClear={true}
-                    >
-                    </TreeSelect>}
+                    {
+                      getFieldDecorator('brhId', {
+                        initialValue: initVal.brhId,
+                        rules: [
+                          {
+                            required: true, 
+                            message: '请选择所属机构'
+                          }
+                        ]
+                      })(
+                        <TreeSelect 
+                          placeholder='请选择所属机构' 
+                          {...treeProps}
+                          allowClear={true}
+                        >
+                        </TreeSelect>
+                      )
+                    }
                   </FormItem>
                 </Col>
               </Row>
@@ -482,7 +550,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('postId', {
-                        initialValue: '',
+                        initialValue: initVal.postId,
                         rules: [{
                           message: '请选择岗位'
                         }]
@@ -503,7 +571,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userLevel', {
-                        initialValue: '',
+                        initialValue: initVal.userLevel,
                         rules: [{
                           required: true, 
                           message: '请选择用户等级'
@@ -525,7 +593,7 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('userRight', {
-                        initialValue: '00000000',
+                        initialValue: initVal.userRight,
                         rules: [{
                           message: ' '
                         }]

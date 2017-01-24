@@ -3,8 +3,8 @@ import { Row, Col, Button } from 'antd'
 import NProgress from 'nprogress'
 import BranchTree from 'COMPONENT/BranchTree'
 import InputSearch from 'COMPONENT/InputSearch'
-import BranchSearch from '../BranchSearch'
-import BranchScan from '../BranchScan'
+import BranchSearch from './BranchSearch'
+import BranchScan from './BranchScan'
 
 export default class BranchManageView extends Component {
 

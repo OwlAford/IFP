@@ -3,8 +3,8 @@ import { Row, Col } from 'antd'
 import NProgress from 'nprogress'
 import BranchTree from 'COMPONENT/BranchTree'
 import InputSearch from 'COMPONENT/InputSearch'
-import UserQuery from '../UserQuery'
-import UserTable from '../UserTable'
+import UserQuery from './UserQuery'
+import UserTable from './UserTable'
 
 export default class UserManageView extends Component {
 

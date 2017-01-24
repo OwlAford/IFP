@@ -8,7 +8,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  userMenu: state.menu.userMenu
+  userMenu: state.menu.userMenu,
+  level: state.config.level,
+  userBox: state.userManage.userBox
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserQueryView)

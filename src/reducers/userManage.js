@@ -1,12 +1,21 @@
 import { getRoleByUserAction } from './request/role'
-import { userPageByBrhAction, addUserAction } from './request/user'
+import { userPageByBrhAction, addUserAction, updateUserAction } from './request/user'
 import NProgress from 'nprogress'
-import { message } from 'antd'
+import { message, notification } from 'antd'
 
 export const PAGE_USERS = 'PAGE_USERS'
-export const SET_PREVBOX_VISIBLE = 'SET_PREVBOX_VISIBLE'
-export const SET_PREVBOX_INFO = 'SET_PREVBOX_INFO'
+
+export const SET_PREV_USER = 'SET_PREV_USER'
+export const CLOSE_PREV_USER = 'CLOSE_PREV_USER'
+
+export const SET_BIND_USER = 'SET_BIND_USER'
+export const CLOSE_BIND_USER = 'CLOSE_BIND_USER'
+
+export const APPLY_MODIFY_USER = 'APPLY_MODIFY_USER'
+export const CLOSE_MODIFY_USER = 'CLOSE_MODIFY_USER'
+
 export const SET_ADDUSER_VISIBLE = 'SET_ADDUSER_VISIBLE'
+
 
 const pageUsers = data => ({
   type: PAGE_USERS,
@@ -44,24 +53,17 @@ export const userPageByBrh = data => {
   }
 }
 
-export const setPreviewBoxVsisible = state => ({
-  type: SET_PREVBOX_VISIBLE,
-  visible: state
-})
-
-export const setAddUserBoxVsisible = state => ({
-  type: SET_ADDUSER_VISIBLE,
-  visible: state
+export const closePreviewUser = () => ({
+  type: CLOSE_PREV_USER
 })
 
 const setPreviewInfo = info => ({
-  type: SET_PREVBOX_INFO,
+  type: SET_PREV_USER,
   data: info
 })
 
-export const getRoleByUser = (num, success, fail) => {
+export const previewUser = (num, success, fail) => {
   return (dispatch, getState) => {
-    dispatch(setPreviewInfo({}))
     dispatch(getRoleByUserAction(num)).then(action => { 
       dispatch(setPreviewInfo(action.data.body))
       if (success) success()
@@ -71,6 +73,43 @@ export const getRoleByUser = (num, success, fail) => {
     })
   }
 }
+
+export const userBindRole = info => ({
+  type: SET_BIND_USER,
+  data: info
+})
+
+export const closeBindRole = () => ({
+  type: CLOSE_BIND_USER
+})
+
+export const setAddUserBoxVsisible = state => ({
+  type: SET_ADDUSER_VISIBLE,
+  visible: state
+})
+
+const applyInitVal = info => ({
+  type: APPLY_MODIFY_USER,
+  data: info
+})
+
+export const modifyUser = (num, success, fail) => {
+  return (dispatch, getState) => {
+    dispatch(getRoleByUserAction(num)).then(action => { 
+      dispatch(applyInitVal(action.data.body))
+      if (success) success()
+    }, () => {
+      message.warning("获取失败！")
+      if (fail) fail()
+    })
+  }
+}
+
+
+export const colseModifyUser = () => ({
+  type: CLOSE_MODIFY_USER
+})
+
 
 export const addUser = (params, success, fail) => {
   return (dispatch, getState) => {
@@ -90,9 +129,43 @@ export const addUser = (params, success, fail) => {
           }
           dispatch(pageUsers(data))
         })
-        message.success('用户添加成功！')
+        notification.success({
+          message: '成功',
+          description: '用户添加成功！'
+        })
         if (success) success()
       } else {
+        notification.warning({
+          message: '失败',
+          description: '用户添加失败！'
+        })
+        if (fail) fail()
+      }
+    })
+  }
+}
+
+export const updateUser =(params, success, fail) => {
+  return (dispatch, getState) => {
+    let data = Object.assign({
+    }, {
+      currentPage: '1',
+      brhId: params.brhId,
+      brhName: ''
+    })
+    dispatch(updateUserAction(params)).then(action => {
+      if (action.data.body.errorCode == '0') {
+        dispatch(userPageByBrh(data))
+        notification.success({
+          message: '成功',
+          description: '用户修改成功！'
+        })
+        if (success) success()
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '用户修改失败！'
+        })
         if (fail) fail()
       }
     })
@@ -103,9 +176,19 @@ const initialState = {
   count: 0,
   userList: [],
   totalSize: 0,
-  previewBoxVisible: false,
-  addUserBoxVisible: false,
-  previewInfo: {},
+  userBox: {
+    visible: false,
+    initVal: {},
+    type: 'ADD'
+  },
+  previewBox: {
+    visible: false,
+    info: {}
+  },
+  bindRoleBox: {
+    visible: false,
+    info: {}
+  },
   pageData: {
     currentPage: 1,
     turnPageShowNum: 10
@@ -115,10 +198,22 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case SET_PREVBOX_INFO:
+    case SET_PREV_USER:
       return {
         ...state,
-        previewInfo: action.data
+        previewBox: {
+          visible: true,
+          info: action.data
+        }
+      }
+
+    case CLOSE_PREV_USER:
+      return {
+        ...state,
+        previewBox: {
+          visible: false,
+          info: {}
+        }
       }
 
     case PAGE_USERS:
@@ -132,19 +227,55 @@ export default (state = initialState, action) => {
         }
       }
 
-      case SET_PREVBOX_VISIBLE:
-        return {
-          ...state,
-          previewBoxVisible: action.visible
+    case SET_BIND_USER:
+      return {
+        ...state,
+        bindRoleBox: {
+          visible: true,
+          info: action.data
         }
+      }
 
-      case SET_ADDUSER_VISIBLE:
-        return {
-          ...state,
-          addUserBoxVisible: action.visible
+    case CLOSE_BIND_USER:
+      return {
+        ...state,
+        bindRoleBox: {
+          visible: false,
+          info: {}
         }
+      }
+
+    case SET_ADDUSER_VISIBLE:
+      return {
+        ...state,
+        userBox: {
+          visible: action.visible,
+          initVal: {},
+          type: 'ADD'
+        }
+      }
+
+    case APPLY_MODIFY_USER:
+      return {
+        ...state,
+        userBox: {
+          visible: true,
+          initVal: action.data,
+          type: 'MODIFY'
+        }
+      }
+
+    case CLOSE_MODIFY_USER:
+      return {
+        ...state,
+        userBox: {
+          visible: false,
+          initVal: {},
+          type: 'MODIFY'
+        }
+      }
           
-      default:
-        return state
+    default:
+      return state
   }
 }

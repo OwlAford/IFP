@@ -57,3 +57,26 @@ export const addUserAction = data => ({
   }
 })
 
+export const updateUserAction = params => ({
+  [BZ_REQUESTER]: {
+    types: [USR_ADD_REQ, USR_ADD_REQ, USR_ADD_FAL],
+    url: API.USER_UPDATE_URL,
+    body: {
+      userNo: params.userNo,
+      userName: params.userName,
+      userLoginName: params.userLoginName,
+      userPwd: params.pswdChange ? md5(params.userPwd) : params.userPwd,
+      userDesc: params.userDesc,
+      userEmail: params.userEmail,
+      userAddress: params.userAddress,
+      userCertType: params.userCertType,
+      userCertNo: params.userCertNo,
+      userMobile: params.userMobile,
+      brhId: params.brhId ? params.brhId : '',
+      userLevel: params.userLevel,
+      postId: params.postId,
+      userRight: params.userRight
+    }
+  }
+})
+

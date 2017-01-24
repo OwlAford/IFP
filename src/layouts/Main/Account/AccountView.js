@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { API } from 'CONSTANT/globals'
 import avatarImg from 'IMAGE/avatar.png'
 import { getCookie } from 'UTIL/cookie' 
-import './Account.scss'
 
 export default class AccountView extends Component {
 

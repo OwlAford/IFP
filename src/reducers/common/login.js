@@ -1,5 +1,6 @@
 import { delCookies, setCookie } from 'UTIL/cookie'
 import NProgress from 'nprogress'
+import { message } from 'antd'
 import { md5 } from 'UTIL/md5'
 import { API } from 'CONSTANT/globals'
 import { setSessionIDAction, loginAction, logoutAction } from '../request/login'
@@ -55,9 +56,8 @@ export const logout = () => {
   }
 }
 
-
 //验证登陆
-export const validateLogin = (data, cb) => {
+export const validateLogin = (data, success, fail) => {
   const newData = {
     loginName: data.userName,
     loginPassword: md5(data.pswd.toString()),
@@ -67,15 +67,19 @@ export const validateLogin = (data, cb) => {
   return (dispatch, getState) => {
     dispatch(loginAction(newData)).then(action => {
       NProgress.done()
-      if (action.data.body.result == '1') {
-        const dataBody = action.data.body
+      const dataBody = action.data.body
+      if (dataBody.result == '1') {
         setCookie('eCIFID', dataBody.cstNo)
         setCookie('cstName', dataBody.cstName)
         dispatch(login_OP(dataBody.cstName))
-        if (cb) cb()
+        if (success) success()
        } else {
-         dispatch(loginFailed())
-         dispatch(setSessionID())
+        dataBody.errorMsg ? 
+        message.error(dataBody.errorMsg) : 
+        message.error('登录信息有误！')
+        dispatch(loginFailed())
+        dispatch(setSessionID())
+        if (fail) fail()
        }
     })
   }

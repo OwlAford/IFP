@@ -1,17 +1,19 @@
 import { connect } from 'react-redux'
-import { setAddUserBoxVsisible, addUser } from 'REDUCER/userManage'
+import { setAddUserBoxVsisible, addUser, colseModifyUser, updateUser } from 'REDUCER/userManage'
 import { cleanBranch, updateBranch } from 'REDUCER/common/branchTree'
-import UserAddView from './UserAddView'
+import UserAddEditBoxView from './UserAddEditBoxView'
 
 const mapDispatchToProps = {
   cleanBranch,
   updateBranch,
   setAddUserBoxVsisible,
-  addUser
+  addUser,
+  colseModifyUser,
+  updateUser
 }
 
 const mapStateToProps = (state) => ({
-  visible: state.userManage.addUserBoxVisible,
+  userBox: state.userManage.userBox,
   branchNodes: state.branchTree.getBranchList,
   selectBranchId: state.branchTree.selectBranchId,
   branchList: state.branchTree.branchList,
@@ -20,5 +22,5 @@ const mapStateToProps = (state) => ({
   level: state.config.level
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserAddView)
+export default connect(mapStateToProps, mapDispatchToProps)(UserAddEditBoxView)
 
