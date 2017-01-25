@@ -47,8 +47,8 @@ let UserQuery = class UserQueryView extends Component {
         const beginTime = fieldsValue['beginTime']
         const endTime = fieldsValue['endTime']
         Object.assign(filter, {
-          beginTime: beginTime ? beginTime.format('YYYY-MM-DD') : '',
-          endTime: endTime ? endTime.format('YYYY-MM-DD') : ''
+          beginTime: beginTime ? beginTime.format('YYYYMMDD') : '',
+          endTime: endTime ? endTime.format('YYYYMMDD') : ''
         })
       }
     })

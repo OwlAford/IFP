@@ -1,5 +1,5 @@
 import { getRoleByUserAction } from './request/role'
-import { userPageByBrhAction, addUserAction, updateUserAction } from './request/user'
+import { userPageByBrhAction, addUserAction, updateUserAction, delUserAction } from './request/user'
 import NProgress from 'nprogress'
 import { message, notification } from 'antd'
 
@@ -171,6 +171,28 @@ export const updateUser =(params, success, fail) => {
     })
   }
 }
+
+// 删除并更新用户列表
+export const delUserUpdate = (userNo, brhId, curPage) => {
+  return (dispatch, getState) => {
+    dispatch(delUserAction(userNo)).then(action => {
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0'){
+        notification.success({
+          message: '成功',
+          description: '用户删除成功！'
+        })
+        dispatch(userPageByBrh(brhId, curPage))
+      } else {
+        notification.warning({
+          message: '失败',
+          description: `删除用户失败，errCode: ${dataBody.errorCode}，errMsg: ${dataBody.errorMsg}`
+        })
+      }
+    })
+  }
+}
+
 
 const initialState = {
   count: 0,

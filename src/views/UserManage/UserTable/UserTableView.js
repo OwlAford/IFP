@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table } from 'antd'
+import { Table, Modal } from 'antd'
 import Spin from 'COMPONENT/Spin'
 import AU from 'UTIL/auth'
 import PreviewBox from '../PreviewBox'
@@ -42,11 +42,18 @@ export default class UserTableView extends Component {
   bindRole(data) {
     this.props.getUserRoleTree(data.userNo)
     this.props.userBindRole(data)
-    console.log(data)
   }
 
-  delUser(e) {
-    console.log(e)
+  delUser(data) {
+    const { pageData, delUserUpdate } = this.props
+    const curPage = pageData.currentPage
+    Modal.confirm({
+      title: '删除用户',
+      content: '是否确认删除用户？',
+      onOk() {
+        delUserUpdate(data.userNo, data.brhId, curPage)
+      }
+    })
   }
 
   render() {

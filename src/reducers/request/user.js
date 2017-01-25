@@ -80,3 +80,13 @@ export const updateUserAction = params => ({
   }
 })
 
+
+export const delUserAction = userNo => ({
+  [BZ_REQUESTER]: {
+    types: [USER_COMMON_REQ, USER_COMMON_SUC, USER_COMMON_FAL],
+    url: API.USER_DEL_URL,
+    body: {
+      userNo: userNo
+    }
+  }
+})
