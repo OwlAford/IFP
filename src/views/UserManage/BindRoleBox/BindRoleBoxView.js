@@ -16,7 +16,22 @@ let BindRoleBox = class BindRoleBoxView extends Component {
   }
 
   onSubmit() {
+    const { info, selectRoleList, roleRelList, userRoleAssociation } = this.props
+    const { userNo, userName } = info
+    let roleList = []
+    selectRoleList.map((sr, i) => {
+      roleRelList.map((rr, j) => {
+        let outerkey = rr.roleId
+        outerkey == sr ? roleList.push({
+          roleId: sr,
+          roleName: rr.roleName
+        }) : null
+      })
+    })
 
+    // 获取所有角色和已经关联的角色
+    userRoleAssociation(userNo, userName, roleList)
+    this.onClose()
   }
 
   render() {

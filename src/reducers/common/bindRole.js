@@ -1,5 +1,6 @@
 import utils from 'UTIL/public'
-import { getUserRoleListAction } from '../request/role'
+import { getUserRoleListAction, userRoleAssociationAction } from '../request/role'
+import { notification } from 'antd'
 
 const USER_GET_ROLE = 'USER_GET_ROLE'
 const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'
@@ -37,6 +38,26 @@ export const getUserRoleTree = userNo => {
       let RoleRelList = action.data.body.userRoleRelList
       let userGetRoleList = utils.groupList(RoleRelList, 'roleId', 'rolePId', 'children', getRoleField)
       dispatch(getRoleTreeField(userGetRoleList, RoleRelList))
+    })
+  }
+}
+
+// 绑定角色的方法
+export const userRoleAssociation = (userNo, userName, roleList) => {
+    return (dispatch, getState) => {
+    dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action => {
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '綁定成功！'
+        })
+      } else {
+        notification.warning({
+          message: '失败',
+          description: `绑定失败，errCode:${dataBody.errorCode}，errMsg:${dataBody.errorMsg}`
+        })
+      }
     })
   }
 }

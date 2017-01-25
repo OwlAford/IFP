@@ -24,7 +24,7 @@ utils.getNowDateTimeStr = function (date) {
 	return nowDate.getFullYear().toString() + (nowDate.getMonth()+1).toString() + nowDate.getDate().toString() + nowDate.getHours().toString() + nowDate.getMinutes().toString() + nowDate.getSeconds().toString()
 }
 
-utils.objToKv = function (obj) {
+utils.objToKv = function(obj) {
 	if (typeof obj != 'object') {
 		throw Error('only transform simple Object to k-v params!')
 	}
@@ -33,7 +33,7 @@ utils.objToKv = function (obj) {
 		if (obj[key] instanceof Array) {
 			arrayFormatter(kvArray, key, obj[key])
 		} else {
-			kvArray.push(key + '=' + obj[key])
+			kvArray.push(`${key}=${obj[key]}`)
 		}
 	}
 	return kvArray.join('&')
@@ -43,10 +43,10 @@ function arrayFormatter (target, arrayName, array) {
 	for (let i in array) {
 		let el = array[i]
 		for (let p in el) {
-			if (typeof el[p] ==' object') {
-				target.push(`${arrayName}[${i}][${p}] = ${JSON.stringify(el[p])}`)
+			if (typeof el[p] == 'object') {
+				target.push(`${arrayName}[${i}][${p}]=${JSON.stringify(el[p])}`)
 			} else {
-				target.push(`${arrayName}[${i}][${p}] = ${el[p]}`)
+				target.push(`${arrayName}[${i}][${p}]=${el[p]}`)
 			}
 		}
 	}
