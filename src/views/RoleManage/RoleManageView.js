@@ -22,7 +22,7 @@ export default class RoleManageView extends Component {
     const { branchList } = this.props
     return (
       <div className="pageRoleManage">
-        1111111111
+        新增角色管理页面
       </div>
     )
   }
