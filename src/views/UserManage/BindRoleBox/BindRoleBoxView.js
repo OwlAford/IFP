@@ -35,8 +35,8 @@ let BindRoleBox = class BindRoleBoxView extends Component {
   }
 
   render() {
-    const { visible, treeNodes, selectRoleList, updateRoleTree } = this.props
-    const onChange = value => updateRoleTree(value)
+    const { visible, treeNodes, selectRoleList, updateSelectedRole } = this.props
+    const onChange = value => updateSelectedRole(value)
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: treeNodes,             // 供用户选择的角色下拉列表

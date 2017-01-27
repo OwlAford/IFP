@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
-import { initBranchList } from 'REDUCER/common/branchTree'
-import { userPageByBrh } from 'REDUCER/userManage'
+import { getRoleTree } from 'REDUCER/common/bindRole'
 import RoleManageView from './RoleManageView'
 
 const mapDispatchToProps = {
-  initBranchList,
-  userPageByBrh
+  getRoleTree
 }
 
 const mapStateToProps = (state) => ({
-  branchList: state.branchTree.userGetBranchList
+  roleList: state.bindRole.roleList
 })
 
 // 将 mapDispatchToProps 和 mapStateToProps 连接到组件

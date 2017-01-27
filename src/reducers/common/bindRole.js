@@ -1,9 +1,11 @@
 import utils from 'UTIL/public'
-import { getUserRoleListAction, userRoleAssociationAction } from '../request/role'
+import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../request/role'
 import { notification } from 'antd'
 
 const USER_GET_ROLE = 'USER_GET_ROLE'
 const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'
+const ROLE_TREE_LIST = 'ROLE_TREE_LIST'
+const UPDATE_ROLE_TREE = 'UPDATE_ROLE_TREE'
 
 const getRoleTreeField = (userGetRoleList, roleRelList) => ({
   type: USER_GET_ROLE,
@@ -17,6 +19,17 @@ const getRoleField = roleList => ({
   value: roleList.roleId,
   key: roleList.roleId,
   children: [] 
+})
+
+// 查询所有角色时，树所需要的类型
+const converRoleField = role => ({
+  roleId: role.roleId,
+  rolePId: role.rolePId,
+  roleName: role.roleName,
+  roleDesc: role.roleDesc,
+  roleStatus: role.roleStatus,
+  roleType: role.roleType,
+  children: []
 })
 
 // 查询用户与角色关联的
@@ -34,10 +47,10 @@ export const getUserRoleTree = userNo => {
       userRoleRelList.map(item => {
         item.state == '1' ? selectKeys.push(item.roleId) : null
       })
-      dispatch(updateRoleTree(selectKeys))
-      let RoleRelList = action.data.body.userRoleRelList
-      let userGetRoleList = utils.groupList(RoleRelList, 'roleId', 'rolePId', 'children', getRoleField)
-      dispatch(getRoleTreeField(userGetRoleList, RoleRelList))
+      dispatch(updateSelectedRole(selectKeys))
+      let roleRelList = action.data.body.userRoleRelList
+      let userGetRoleList = utils.groupList(roleRelList, 'roleId', 'rolePId', 'children', getRoleField)
+      dispatch(getRoleTreeField(userGetRoleList, roleRelList))
     })
   }
 }
@@ -62,15 +75,40 @@ export const userRoleAssociation = (userNo, userName, roleList) => {
   }
 }
 
-export const updateRoleTree = userRoleRelList => ({
+const updateRoleTree = roleList => ({
+  type: UPDATE_ROLE_TREE,
+  data: roleList
+})
+
+export const getRoleTree = () => {
+  return (dispatch, getState) => {
+    dispatch(getRoleListAction()).then(action => {
+      const dataBody = action.data.body
+      let roleList = utils.groupList(dataBody.roleList, 'roleId', 'rolePId', 'children', converRoleField)
+      let getRoleList = utils.groupList(dataBody.roleList, 'roleId', 'rolePId', 'children', getRoleField)
+      dispatch(roleTreeList(getRoleList))
+      dispatch(updateRoleTree(roleList))
+    })
+  }
+}
+
+const roleTreeList = getRoleList => ({
+  type: ROLE_TREE_LIST,
+  data: getRoleList
+})
+
+
+export const updateSelectedRole = selectedRoleList => ({
   type: UPDATE_USER_ROLE,
-  data: userRoleRelList
+  data: selectedRoleList
 })
 
 const initialState = {
+  roleList: [],
   userGetRoleList: [],
+  getRoleList: [],
   roleRelList: [],
-  updateUserRoleList: []
+  selectedRoleList: []
 }
 
 export default (state = initialState, action) => {
@@ -83,10 +121,22 @@ export default (state = initialState, action) => {
         roleRelList: action.roleRelList
       }
 
+    case UPDATE_ROLE_TREE:
+      return {
+        ...state,
+        roleList: action.data
+      }
+
     case UPDATE_USER_ROLE:
       return {
         ...state,
-        updateUserRoleList: action.data
+        selectedRoleList: action.data
+      }
+
+    case ROLE_TREE_LIST:
+      return {
+        ...state,
+        getRoleList: action.data
       }
 
     default:
