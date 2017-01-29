@@ -122,11 +122,10 @@ let RoleQuery = class RoleQueryView extends Component {
                   getFieldDecorator('userLevel')(
                     <Select 
                       placeholder='请选择状态' 
-                      placeholder='请选择状态' 
                       allowClear
                     >
-                      <Option value={true} key='00001'>可用</Option>
-                      <Option value={false} key='00000'>禁用</Option>
+                      <Option value={'true'} key='00001'>可用</Option>
+                      <Option value={'false'} key='00000'>禁用</Option>
                     </Select>
                   )
                 }
