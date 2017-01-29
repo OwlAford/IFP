@@ -47,7 +47,7 @@ const config = {
 }
 
 
-// Environment
+// 全局环境配置参数
 config.globals = {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.env)
@@ -58,7 +58,7 @@ config.globals = {
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }
 
-// Validate Vendor Dependencies
+// 校验组件模块依赖
 const pkg = require('../package.json')
 
 config.compiler_vendors = config.compiler_vendors
@@ -72,7 +72,7 @@ config.compiler_vendors = config.compiler_vendors
     )
   })
 
-// Utilities
+// 基础路径配置
 function base () {
   const args = [config.path_base].concat([].slice.call(arguments))
   return path.resolve.apply(path, args)
@@ -85,7 +85,7 @@ config.paths = {
   dist   : base.bind(null, config.dir_dist)
 }
 
-// Environment Configuration
+// 调试环境配置
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
 const environments = require('./environments.config')
 const overrides = environments[config.env]

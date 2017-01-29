@@ -1,10 +1,10 @@
 module.exports = {
-  // 重新写入当 NODE_ENV === 'development'
+  // 开发环境编译配置
   development : (config) => ({
     compiler_public_path : `http://${config.server_host}:${config.server_port}/`
   }),
 
-  // 重新写入当 NODE_ENV === 'production'
+  // 生产环境编译配置
   production : (config) => ({
     compiler_public_path     : '/inmanage/', // 此处为项目名
     compiler_fail_on_warning : false,

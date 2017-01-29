@@ -12,7 +12,6 @@ const src = path.join(rootPath, 'src')
 
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
-const __TEST__ = project.globals.__TEST__
 
 debug('Creating configuration.')
 const webpackConfig = {
@@ -74,13 +73,14 @@ webpackConfig.plugins = [
     filename : 'index.html',
     inject   : 'body',
     minify   : {
+      removeComments : true,    
       collapseWhitespace : true
     }
   })
 ]
 
-// 确保编译器存在误差在测试过程中，使他们不被跳过和误报
-if (__TEST__ && !argv.watch) {
+// 确保编译器不被跳过和误报
+if (!argv.watch) {
   webpackConfig.plugins.push(function () {
     this.plugin('done', function (stats) {
       if (stats.compilation.errors.length) {
@@ -113,14 +113,13 @@ if (__DEV__) {
   )
 }
 
-// 在测试过程中不要分割bundle
-if (!__TEST__) {
-  webpackConfig.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-      names : ['vendor']
-    })
-  )
-}
+
+webpackConfig.plugins.push(
+  new webpack.optimize.CommonsChunkPlugin({
+    names : ['vendor']
+  })
+)
+
 
 // 配置加载器
 webpackConfig.module.loaders = [{
