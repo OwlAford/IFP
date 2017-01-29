@@ -119,7 +119,7 @@ let BranchAdd = class BranchAddView extends Component {
       treeData: branchNodes, 
       onChange: onChange, 
       value: selectBranchId,
-      placeholder: "请选择",
+      placeholder: "请选择所属机构",
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
       treeCheckable: false,
@@ -217,7 +217,6 @@ let BranchAdd = class BranchAddView extends Component {
                   >
                     {
                       getFieldDecorator('brhLevel', {
-                        initialValue: '',
                         rules: [{
                           required: true, 
                           message: ' '

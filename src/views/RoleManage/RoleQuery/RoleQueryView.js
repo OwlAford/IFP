@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, Select, DatePicker } from 'antd'
-import UserAddEditBox from '../UserAddEditBox'
 import AU from 'UTIL/auth'
 
 const FormItem = Form.Item
 const Option = Select.Option
 
-let UserQuery = class UserQueryView extends Component {
+let RoleQuery = class RoleQueryView extends Component {
 
   constructor(props) {
     super(props)
@@ -93,50 +92,85 @@ let UserQuery = class UserQueryView extends Component {
           <Row>
             <Col span={11}>
               <FormItem 
-                label='用户编号：'
+                label='角色名：'
                 {...formItemLayout}
+                required
               >
                 {
                   getFieldDecorator('userNo', {
-                    initialValue: ''
+                    initialValue: '',
+                    rules: [
+                      {
+                        required: true, 
+                        message: '请输入角色名'
+                      }
+                    ]
                   })(
                     <Input 
-                      placeholder='请输入用户编号' 
+                      placeholder='请输入角色名' 
                       size='large' 
                     />
                   )
                 }
               </FormItem>
+              <FormItem 
+                label='状态：'
+                {...formItemLayout}
+                required
+              >
+                {
+                  getFieldDecorator('userLevel')(
+                    <Select 
+                      placeholder='请选择状态' 
+                      placeholder='请选择状态' 
+                      allowClear
+                    >
+                      <Option value={true} key='00001'>可用</Option>
+                      <Option value={false} key='00000'>禁用</Option>
+                    </Select>
+                  )
+                }
+              </FormItem>
+              <div className="button-group-middle">
+                <Button 
+                  size="large" 
+                  onClick={(e) => this.searchUser()}
+                >
+                  修改
+                </Button>
+                <Button 
+                  size="large" 
+                  type="ghost" 
+                  onClick={(e) => this.handleClear()}
+                >
+                  删除
+                </Button>
+              </div>
             </Col>
             <Col span={13}>
               <FormItem 
-                label='用户名称：'
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 17 }}
+                label='角色描述：'
+                {...formItemLayout}
               >
                 {
                   getFieldDecorator('userName', {
                     initialValue: ''
                   })(
                     <Input 
-                      placeholder='请输入用户名称' 
+                      placeholder='请输入角色描述' 
                       size='large' 
                     />
                   )
                 }
               </FormItem>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={11}>
               <FormItem 
-                label='用户级别：'
+                label='所属角色：'
                 {...formItemLayout}
               >
                 {
                   getFieldDecorator('userLevel')(
                     <Select 
-                      placeholder='请选择用户级别' 
+                      placeholder='请选择所属角色' 
                       allowClear
                     >
                       {userLevelList}
@@ -144,62 +178,28 @@ let UserQuery = class UserQueryView extends Component {
                   )
                 }
               </FormItem>
+              <div className="button-group-middle">
+                <Button 
+                  size="large" 
+                  onClick={(e) => this.searchUser()}
+                >
+                  关联功能
+                </Button>
+                <Button 
+                  size="large" 
+                  type="ghost" 
+                  onClick={(e) => this.handleClear()}
+                >
+                  添加角色
+                </Button>
+              </div>
             </Col>
-            <Col span={13}>
-              <Row>
-                <Col span={12}>
-                  <FormItem 
-                    label='创建日期：'
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 14 }}
-                  >
-                    {
-                      getFieldDecorator('beginTime', datePickerConfig)(
-                        <DatePicker
-                          placeholder='请选择开始日期' 
-                          disabledDate={this.disabledStartDate}
-                        />
-                      )
-                    }
-                  </FormItem>
-                </Col>
-                <Col span={12}>
-                  <FormItem>
-                    {
-                      getFieldDecorator('endTime', datePickerConfig)(
-                        <DatePicker
-                          placeholder='请选择结束日期'
-                          disabledDate={this.disabledEndDate}
-                        />
-                      )
-                    }
-                  </FormItem>
-                </Col>
-              </Row>
-            </Col>
-          </Row>  
+          </Row>
         </Form>
-        <div className="button-group">
-          <Button 
-            size="large" 
-            onClick={(e) => this.searchUser()}
-          >
-            搜索用户
-          </Button>
-          <Button 
-            size="large" 
-            type="ghost" 
-            onClick={(e) => this.handleClear()}
-          >
-            清除条件
-          </Button>
-          {AU.checkButton(this.props.userMenu, 'F001', addUserBtn)}
-        </div>
-        {userBox.visible ? <UserAddEditBox/> : ''}
-      </div>
+       </div> 
     )
   }
 
 }
 
-export default Form.create()(UserQuery)
+export default Form.create()(RoleQuery)

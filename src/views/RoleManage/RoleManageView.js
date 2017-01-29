@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 import NProgress from 'nprogress'
 import RoleTree from 'COMPONENT/RoleTree'
+import RoleQuery from './RoleQuery'
 import InputSearch from 'COMPONENT/InputSearch'
 
 
@@ -47,6 +48,7 @@ export default class RoleManageView extends Component {
             </div>
           </Col>
           <Col span={19}>
+            <RoleQuery/>
             新增角色管理页面
           </Col>
         </Row>

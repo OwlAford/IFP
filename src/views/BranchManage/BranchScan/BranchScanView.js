@@ -163,7 +163,7 @@ let BranchScan = class BranchScanView extends Component {
       treeData: branchNodes,      // 供用户选择的角色下拉列表
       onChange: onChange,         // 改变角色的时候更新value的值
       value: selectBranchId,      // 选中的时候的值传给状态树，然后再提交的时候再做处理
-      placeholder: "请选择",
+      placeholder: "请选择所属机构",
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
       treeCheckable: false,
@@ -327,7 +327,6 @@ let BranchScan = class BranchScanView extends Component {
             <Col span={12}>
               <FormItem 
                 label='所属机构：'
-                placeholder='请选择所属机构'
                 {...formItemLayout}
                 >
                   {<TreeSelect 

@@ -4,11 +4,16 @@
   background-color: #f9f9f9;
   border-radius: 8px;
 
-  .button-group {
+  .button-group,
+  .button-group-middle {
     text-align: right;
     .ant-btn {
       margin-left: 15px;
     }
+  }
+
+  .button-group-middle {
+    text-align: center;
   }
 }
 
