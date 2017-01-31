@@ -13,5 +13,4 @@ const mapStateToProps = (state) => ({
   info: state.userManage.previewBox.info
 })
 
-// 将 mapDispatchToProps 和 mapStateToProps 连接到组件
 export default connect(mapStateToProps, mapDispatchToProps)(PreviewBoxView)

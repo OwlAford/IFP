@@ -10,5 +10,4 @@ const mapStateToProps = (state) => ({
   roleList: state.bindRole.roleList
 })
 
-// 将 mapDispatchToProps 和 mapStateToProps 连接到组件
 export default connect(mapStateToProps, mapDispatchToProps)(RoleManageView)
