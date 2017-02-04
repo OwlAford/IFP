@@ -10,6 +10,7 @@ const MODIFY_BRANCH = 'MODIFY_BRANCH'
 const DELETE_BRANCH = 'DELETE_BRANCH'
 const BRANCH_AFTER_TYPE = 'BRANCH_AFTER_TYPE'
 const SET_ADD_BRANCH_VISIBLE = 'SET_ADD_BRANCH_VISIBLE'
+const SET_ADD_BRANCH_ID = 'SET_ADD_BRANCH_ID'
 
 export const resetForm = () => ({
   type: RESET_FORM
@@ -126,14 +127,28 @@ export const branchAdd = (params, success, fail) => {
   }
 }
 
+// 设置新增机构选中机构id
+export const setAddSelectBrhId = addSelectBranchId => ({
+  type: SET_ADD_BRANCH_ID,
+  addSelectBranchId
+})
+
 const initialState = {
   selectedObject: {},
   afterOperateType:'0',
-  addBranchBoxVisible: false
+  addBranchBoxVisible: false,
+  addSelectBranchId: ''
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+
+    case SET_ADD_BRANCH_ID:
+      return {
+        ...state,
+        addSelectBranchId: action.addSelectBranchId
+      }
+
     case SET_ADD_BRANCH_VISIBLE:
       return {
         ...state,

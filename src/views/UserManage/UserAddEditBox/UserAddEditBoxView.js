@@ -242,7 +242,9 @@ let BranchAdd = class BranchAddView extends Component {
 
     // 清除按钮
     let clearBtn = ''
-    userBox.type == 'ADD' ? clearBtn = <Button key='clean' type='ghost' size='large' onClick={(e) => this.onClear()}>清除所有</Button> : null
+    userBox.type == 'ADD' 
+    ? clearBtn = <Button key='clean' type='ghost' size='large' onClick={(e) => this.onClear()}>清除所有</Button> 
+    : null
 
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },

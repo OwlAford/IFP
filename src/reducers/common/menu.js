@@ -1,4 +1,5 @@
 import utils from 'UTIL/public'
+import NProgress from 'nprogress'
 import { getMenuAction } from '../request/menu'
 import { refreshInfo } from './main'
 
@@ -46,6 +47,7 @@ export const initUserMenu = (cb) => {
   let topMenu = []
   return (dispatch, getState) => {
     let currentPath = getState().main.currentPath
+    NProgress.start()
     dispatch(getMenuAction()).then(action => {
       const dataBody = action.data.body
       dispatch({
@@ -75,6 +77,7 @@ export const initUserMenu = (cb) => {
       dispatch(mergeFinalMenu(userMenu))
       dispatch(refreshInfo(action.data))
       // 传入回调函数
+      NProgress.done()
       if (cb) cb()
     })
   }

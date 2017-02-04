@@ -1,4 +1,5 @@
 import utils from 'UTIL/public'
+import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../request/role'
 import { notification } from 'antd'
 
@@ -82,12 +83,14 @@ const updateRoleTree = roleList => ({
 
 export const getRoleTree = () => {
   return (dispatch, getState) => {
+    NProgress.start()
     dispatch(getRoleListAction()).then(action => {
       const dataBody = action.data.body
       let roleList = utils.groupList(dataBody.roleList, 'roleId', 'rolePId', 'children', converRoleField)
       let getRoleList = utils.groupList(dataBody.roleList, 'roleId', 'rolePId', 'children', getRoleField)
       dispatch(roleTreeList(getRoleList))
       dispatch(updateRoleTree(roleList))
+      NProgress.done()
     })
   }
 }

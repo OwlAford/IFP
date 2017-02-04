@@ -26,7 +26,7 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onClear() {
-    this.props.cleanBranch()
+    this.props.setAddSelectBrhId('')
     this.props.form.resetFields()
   }
 
@@ -97,7 +97,7 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   render() {
-    const { visible, updateBranch, branchNodes, selectBranchId } = this.props
+    const { visible, branchNodes, selectBranchId, setAddSelectBrhId } = this.props
     const { getFieldDecorator, resetFields } = this.props.form
 
     const formItemLayout = {
@@ -106,7 +106,7 @@ let BranchAdd = class BranchAddView extends Component {
     }
 
     const onChange = (value) => {
-      updateBranch(value)
+      setAddSelectBrhId(value)
     }
 
     // 机构等级选择

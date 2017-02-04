@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import NProgress from 'nprogress'
 import BranchTree from 'COMPONENT/BranchTree'
 import InputSearch from 'COMPONENT/InputSearch'
 import UserQuery from './UserQuery'
@@ -19,13 +18,7 @@ export default class UserManageView extends Component {
 
   componentWillMount() {
     // 初始化银行机构列表
-    NProgress.start()
-    this.props.initBranchList(() => {
-      NProgress.done()
-      this.setState({
-        loaded: true
-      })
-    })
+    this.props.initBranchList()
   }
 
   branchSelected(info) {
@@ -54,7 +47,6 @@ export default class UserManageView extends Component {
   }
 
   componentWillUnmount() {
-    NProgress.done()
     this.setState({
       selectedKeys: []
     })

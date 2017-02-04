@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from './Header'
-import NProgress from 'nprogress'
 
 export default class MainView extends Component {
   constructor(props) {
@@ -12,9 +11,7 @@ export default class MainView extends Component {
 
   componentWillMount() {
     this.props.initUserForm()
-    NProgress.start()
     this.props.initUserMenu(() => {
-      NProgress.done()
       this.setState({
         loaded: true
       })

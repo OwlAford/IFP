@@ -1,3 +1,4 @@
+import NProgress from 'nprogress'
 import utils from 'UTIL/public'
 import { getBranchListAction } from '../request/branch'
 
@@ -48,6 +49,7 @@ const converRoleField = branch => ({
 
 export const initBranchList = (cb) => {
   return (dispatch,state) => {
+    NProgress.start()
     dispatch(getBranchListAction()).then(action => {
       let branchList = action.data.body.branchList
       let userGetBranchList = utils.groupList(branchList, 'brhId', 'brhParentId', 'children', converRoleField)
@@ -55,6 +57,7 @@ export const initBranchList = (cb) => {
       let getBranchList = utils.groupList(branchList, 'brhId', 'brhParentId', 'children', getBranch)
       dispatch(groupGetBranch(getBranchList)) //新增的时候查机构列表
       dispatch(groupBranch(branchList, userGetBranchList))
+      NProgress.done()
       if (cb) cb()
     })
   }

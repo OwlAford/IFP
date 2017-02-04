@@ -75,11 +75,15 @@ const applyCurRoleInfo = (info) =>({
 // 通过角色id获取当前选中角色信息
 export const getInfoByRoleId = roleId => {
   return (dispatch, getState) => {
+    NProgress.start()
     dispatch(getInfoByRoleIdAction(roleId)).then(action => {
       const dataBody = action.data.body
       if (dataBody.errorCode == '0') {
         dispatch(applyCurRoleInfo(dataBody))
+        NProgress.done()
+        message.success("加载完毕！")
       } else {
+        NProgress.done()
         message.error('获取信息失败！')
       }
     })
@@ -89,12 +93,16 @@ export const getInfoByRoleId = roleId => {
 // 通过角色名搜索相关信息
 export const getInfoByRoleName = (roleName, cb) => {
   return (dispatch, getState) => {
+    NProgress.start()
     dispatch(getInfoByRoleNameAction(roleName)).then(action => {
       const dataBody = action.data.body
       if (dataBody.errorCode == '0') {
         dispatch(applyCurRoleInfo(dataBody))
+        NProgress.done()
+        message.success("加载完毕！")
         if (cb) cb(dataBody)
       } else {
+        NProgress.done()
         message.error('获取信息失败！')
       }
     })

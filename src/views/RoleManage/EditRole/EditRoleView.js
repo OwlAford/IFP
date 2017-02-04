@@ -124,23 +124,25 @@ let EditRole = class EditRoleView extends Component {
               size="large" 
               onClick={(e) => this.searchUser()}
             >
-              修改角色
+              保存修改
             </Button>
             <Button 
               size="large" 
+              type="ghost"
               onClick={(e) => this.searchUser()}
             >
               关联功能
             </Button>
             <Button 
               size="large" 
+              type="primary" 
               onClick={(e) => this.handleClear()}
             >
               添加角色
             </Button>
             <Button 
               size="large" 
-              type="primary" 
+              type="danger" 
               onClick={(e) => this.handleClear()}
             >
               删除角色

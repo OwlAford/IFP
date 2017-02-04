@@ -48,6 +48,7 @@ export default class BranchSearchView extends Component {
     const addBtn = (
       <Button 
         size="large" 
+        type="primary" 
         onClick={(e) => this.addBranch()}
       >
         新增机构
@@ -56,7 +57,6 @@ export default class BranchSearchView extends Component {
     const modBtn = (
       <Button 
         size="large" 
-        type="ghost" 
         onClick={(e) => this.modBranch()}
       >
         保存修改
@@ -65,7 +65,7 @@ export default class BranchSearchView extends Component {
     const delBtn = (
       <Button 
         size="large" 
-        type="primary" 
+        type="danger" 
         onClick={(e) => this.delBranch()}
       >
         删除机构

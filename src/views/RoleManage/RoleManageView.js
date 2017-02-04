@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import NProgress from 'nprogress'
 import InputSearch from 'COMPONENT/InputSearch'
 import RoleTree from 'COMPONENT/RoleTree'
 import EditRole from './EditRole'
