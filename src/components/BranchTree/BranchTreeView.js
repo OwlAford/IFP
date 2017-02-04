@@ -14,13 +14,14 @@ const bindDataLoop = (item) => {
   }
 }
 
-export const BranchTreeView = ({ selected, branchList }) => {
+export const BranchTreeView = ({ selected, branchList, selectedKeys }) => {
   if (!branchList) {
     return null
   }
   return (
     <div className="app-barnch-tree">
       <Tree 
+        selectedKeys={selectedKeys ? selectedKeys : []}
         onSelect={
           (info, node) => {
             selected({

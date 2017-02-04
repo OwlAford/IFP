@@ -1,13 +1,144 @@
 import NProgress from 'nprogress'
 import { message } from 'antd'
+import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction } from './request/role'
+
+const CLEAR_TABLE_ITEMS = 'CLEAR_TABLE_ITEMS'
+const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
+const UPDATE_CUR_ROLE_INFO = 'UPDATE_CUR_ROLE_INFO'
+
+
+const updateTableItems = (tableCurPageItems, tableCurPage, tableTotalSize) => ({
+  type: UPDATE_TABLE_CUR_ITEMS,
+  data: {
+    tableCurPageItems,
+    tableCurPage,
+    tableTotalSize
+  }
+})
+
+// 清空table列表
+export const clearTableItems = () => ({
+  type: CLEAR_TABLE_ITEMS
+})
+
+// 获取角色详情和功能列表
+export const getAllRoleFnItems = (curPage, roleId, roleName, state) => {
+  return (dispatch, getState) => {
+    if (!roleId) {
+      dispatch(clearTableItems())
+    } else {
+      dispatch(getAllRoleFnItemsAction(curPage, roleId, roleName, state, getState().roleManage.pageSize)).then(action => { 
+        const dataBody = action.data.body
+        if (dataBody.errorCode == '0') {
+          const roleMenuItemRelList = dataBody.roleMenuItemRelList
+          const turnPageTotalNum = dataBody.turnPageTotalNum
+          if (state == '1') {
+            // 复制数组，并为其添加key属性，用于table遍历生成
+            let tableCurPageItems = [].concat(roleMenuItemRelList)
+            roleMenuItemRelList.map((item, i) => {
+              tableCurPageItems[i].key = item.menuItemId
+            })
+            dispatch(updateTableItems(tableCurPageItems, curPage, turnPageTotalNum))
+          }
+        } else {
+          message.error('获取列表失败！')
+        }
+
+      })
+    }
+  }
+}
+
+// 清除当前选中角色信息
+export const clearCurRoleInfo = () => ({
+  type: UPDATE_CUR_ROLE_INFO,
+  data: {
+    roleDesc: '',
+    selectModifyRole: '',
+    roleStatus: '',
+    roleName: '',
+    roleId: ''
+  }
+})
+
+const applyCurRoleInfo = (info) =>({
+  type: UPDATE_CUR_ROLE_INFO,
+  data: {
+    roleDesc: info.roleDesc,
+    selectModifyRole: info.rolePId,
+    roleStatus: info.roleStatus,
+    roleName: info.roleName,
+    roleId: info.roleId
+  }
+})
+
+// 通过角色id获取当前选中角色信息
+export const getInfoByRoleId = roleId => {
+  return (dispatch, getState) => {
+    dispatch(getInfoByRoleIdAction(roleId)).then(action => {
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0') {
+        dispatch(applyCurRoleInfo(dataBody))
+      } else {
+        message.error('获取信息失败！')
+      }
+    })
+  }
+}
+
+// 通过角色名搜索相关信息
+export const getInfoByRoleName = (roleName, cb) => {
+  return (dispatch, getState) => {
+    dispatch(getInfoByRoleNameAction(roleName)).then(action => {
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0') {
+        dispatch(applyCurRoleInfo(dataBody))
+        if (cb) cb(dataBody)
+      } else {
+        message.error('获取信息失败！')
+      }
+    })
+  }
+}
 
 
 const initialState = {
-
+  pageSize: 8,
+  tableCurPageItems: [],
+  tableCurPage: 1,
+  tableTotalSize: 0,
+  curRoleInfo: {
+    roleDesc: '',
+    selectModifyRole: '',
+    roleStatus: '',
+    roleName: '',
+    roleId: ''
+  },
+  selectModifyRole: ''
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_TABLE_ITEMS: {
+      return {
+        ...state,
+        tableCurPageItems: [],
+        tableCurPage: 1,
+        tableTotalSize: 0
+      }
+    }
+
+    case UPDATE_TABLE_CUR_ITEMS:
+      return {
+        ...state,
+        ...action.data
+      }
+
+    case UPDATE_CUR_ROLE_INFO:
+      return {
+        ...state,
+        curRoleInfo: action.data
+      }
 
     default:
       return state

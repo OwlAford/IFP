@@ -27,12 +27,12 @@ const pageUsers = data => ({
 
 
 // 查询用户信息 搜索功能 分页功能
-export const userPageByBrh = data => { 
+export const userPageByBrh = (data, cb) => { 
   return (dispatch, getState) => {
     NProgress.start()
-    dispatch(userPageByBrhAction(data, getState().userManage.pageData.turnPageShowNum))
-    .then(action => {
+    dispatch(userPageByBrhAction(data, getState().userManage.pageData.turnPageShowNum)).then(action => {
       let dataBody = action.data.body
+      console.log(dataBody)
       let userList = dataBody.userList.map(user => Object.assign(user, {
         key: user.userNo
       }))
@@ -49,6 +49,7 @@ export const userPageByBrh = data => {
       dispatch(pageUsers(data))
       NProgress.done()
       message.success('加载完毕！')
+      if (cb) cb()
     })
   }
 }

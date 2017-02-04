@@ -10,6 +10,9 @@ export default class UserManageView extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      selectedKeys: []
+    }
     this.branchSelected = this.branchSelected.bind(this)
     this.onSearch = this.onSearch.bind(this)
   } 
@@ -31,20 +34,30 @@ export default class UserManageView extends Component {
       currentPage: '1',
       brhId: info.brhId,
       brhName: info.title
+    }, () => {
+      this.setState({
+        selectedKeys: [info.brhId]
+      })
     })
   }
 
-  onSearch(keyword) {
+  onSearch(brhName) {
     const { userPageByBrh } = this.props
     userPageByBrh({
       currentPage: '1',
       brhId: '',
-      brhName: keyword
+      brhName: brhName
+    })
+    this.setState({
+      selectedKeys: []
     })
   }
 
   componentWillUnmount() {
     NProgress.done()
+    this.setState({
+      selectedKeys: []
+    })
   }
 
   render() {
@@ -60,6 +73,7 @@ export default class UserManageView extends Component {
                 onSearch={this.onSearch}
               />
               <BranchTree
+                selectedKeys={this.state.selectedKeys}
                 selected={this.branchSelected}
                 branchList={branchList}
               />

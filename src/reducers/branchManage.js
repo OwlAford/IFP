@@ -12,8 +12,7 @@ const BRANCH_AFTER_TYPE = 'BRANCH_AFTER_TYPE'
 const SET_ADD_BRANCH_VISIBLE = 'SET_ADD_BRANCH_VISIBLE'
 
 export const resetForm = () => ({
-  type: RESET_FORM,
-  data: ''
+  type: RESET_FORM
 })
 
 export const applyBranch = branchList => ({
@@ -144,7 +143,8 @@ export default (state = initialState, action) => {
     case RESET_FORM:
       return {
         ...state,
-        selectedObject: {}
+        selectedObject: {},
+        brhId: ''
       }
 
     case APPLY_BRANCH:

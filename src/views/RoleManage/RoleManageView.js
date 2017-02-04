@@ -3,8 +3,8 @@ import { Row, Col } from 'antd'
 import NProgress from 'nprogress'
 import InputSearch from 'COMPONENT/InputSearch'
 import RoleTree from 'COMPONENT/RoleTree'
-import ModifyRole from './ModifyRole'
-import AddBindRole from './AddBindRole'
+import EditRole from './EditRole'
+import ItemsTable from './ItemsTable'
 
 
 export default class RoleManageView extends Component {
@@ -12,14 +12,19 @@ export default class RoleManageView extends Component {
   constructor(props) {
     super(props)
     this.onSearch = this.onSearch.bind(this)
+    this.roleSelected = this.roleSelected.bind(this)
   } 
 
-  onSearch(keyword) {
-    console.log(keyword)
+  onSearch(roleName) {
+    const { getInfoByRoleName } = this.props
+    getInfoByRoleName(roleName)
   }
 
   roleSelected(info) {
-    console.log(info)
+    const { roleId, title } = info
+    const { getAllRoleFnItems, getInfoByRoleId } = this.props
+    getAllRoleFnItems(1, roleId, title, 1)
+    getInfoByRoleId(roleId)
   }
 
   componentWillMount() {
@@ -27,11 +32,11 @@ export default class RoleManageView extends Component {
   }
 
   componentWillUnmount() {
-
+    this.props.clearCurRoleInfo()
   }
 
   render() {
-    const { getRoleTree, roleList } = this.props
+    const { getRoleTree, roleList, curRoleId } = this.props
     return (
       <div className="pageRoleManage">
         <Row>
@@ -43,23 +48,17 @@ export default class RoleManageView extends Component {
                 onSearch={this.onSearch}
               />
               <RoleTree
+                selectedKeys={[curRoleId]}
                 selected={this.roleSelected}
                 roleList={roleList}
               />
             </div>
           </Col>
           <Col span={19}>
-            <div className="app-search-panel">
-              <Row>
-                <Col span={11}>
-                  <AddBindRole/>
-                </Col>
-                <Col span={13}>
-                  <ModifyRole/>
-                </Col>
-              </Row>  
+            <EditRole/>
+            <div className="app-narrow-table" style={{padding: '0 20px'}}>
+              <ItemsTable/>
             </div>
-            新增角色管理页面
           </Col>
         </Row>
       </div>

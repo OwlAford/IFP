@@ -14,9 +14,12 @@ export default class BranchManageView extends Component {
   } 
 
   componentWillMount() {
+    const { initBranchList, resetForm } = this.props
+    // 重置表单信息
+    resetForm()
     // 初始化银行机构列表
     NProgress.start()
-    this.props.initBranchList(() => {
+    initBranchList(() => {
       NProgress.done()
       this.setState({
         loaded: true
@@ -36,7 +39,7 @@ export default class BranchManageView extends Component {
   }
 
   render() {
-    const { changeBranchSelected, branchList } = this.props
+    const { changeBranchSelected, branchList, branchId } = this.props
 
     return (
       <div className="pageBranchManage">
@@ -49,6 +52,7 @@ export default class BranchManageView extends Component {
                 onSearch={this.onSearch}
               />
               <BranchTree
+                selectedKeys={[branchId]}
                 selected={changeBranchSelected}
                 branchList={branchList}
               />

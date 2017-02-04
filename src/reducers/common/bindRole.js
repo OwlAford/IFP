@@ -103,6 +103,7 @@ export const updateSelectedRole = selectedRoleList => ({
   data: selectedRoleList
 })
 
+
 const initialState = {
   roleList: [],
   userGetRoleList: [],
