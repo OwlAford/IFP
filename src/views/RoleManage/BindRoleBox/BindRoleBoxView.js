@@ -21,7 +21,37 @@ export default class BindRoleBoxView extends Component {
   }
 
   render() {
-    const { visible } = this.props
+    const { visible, getAllRoleFnItems, totalSize, pageSize, curPage, curRoleId, selectKeys, dataSource, setAllMenuFnSelectKeys } = this.props
+
+    const columns = [{
+      title: '菜单名称',
+      dataIndex: 'menuName',
+      key: 'menuName'
+    }, {
+      title: '功能名称',
+      dataIndex: 'menuItemName',
+      key: 'menuItemName'
+    }]
+
+    let pagination = {
+      total: Number(totalSize),
+      showQuickJumper: true,
+      pageSize: pageSize,
+      current: curPage,
+      onChange(current) {
+        getAllRoleFnItems(current, curRoleId, '')
+      }
+    }
+
+    let rowSelection = {
+      selectedRowKeys: selectKeys,
+      onChange(selectedRowKeys) {
+        let newSelectKeys = [].concat(selectKeys, selectedRowKeys)
+        console.log(newSelectKeys, selectedRowKeys)
+        setAllMenuFnSelectKeys(newSelectKeys)
+      }
+    }
+
     return (
       <div className="BindRoleBox">
         <Modal
@@ -45,11 +75,19 @@ export default class BindRoleBoxView extends Component {
                 size="large"  
                 onClick={(e) => this.onSubmit()} 
               >
-                提 交
+                保存
               </Button>
             ]}
           >
-            111111111111
+            <div className="app-narrow-table">
+              <Table 
+                columns={columns} 
+                bordered 
+                rowSelection={rowSelection}
+                dataSource={dataSource} 
+                pagination={pagination}
+              />
+            </div>
             <Spin loading={this.state.loading}/>
           </Modal>
       </div>

@@ -33,7 +33,12 @@ let EditRole = class EditRoleView extends Component {
   }
 
   bindRole() {
-    this.props.setBindRoleBoxVisible(true)
+    const { info, setBindRoleBoxVisible } = this.props
+    if (!info.roleId) {
+      message.error('请先选择一个角色！')
+      return
+    } 
+    setBindRoleBoxVisible(true)
   }
 
   saveModify() {
@@ -107,7 +112,7 @@ let EditRole = class EditRoleView extends Component {
       <Button 
         size="large" 
         type="danger" 
-        onClick={(e) => this.handleClear()}
+        onClick={(e) => this.deleteRole()}
       >
         删除角色
       </Button>

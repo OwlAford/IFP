@@ -23,6 +23,8 @@ export default class RoleManageView extends Component {
     const { roleId, title } = info
     const { getAllRoleFnItems, getInfoByRoleId } = this.props
     getAllRoleFnItems(1, roleId, title, 1)
+    getAllRoleFnItems(1, roleId, title, 2)
+    getAllRoleFnItems(1, roleId, title)
     getInfoByRoleId(roleId)
   }
 
