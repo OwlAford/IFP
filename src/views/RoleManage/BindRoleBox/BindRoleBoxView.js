@@ -17,7 +17,30 @@ export default class BindRoleBoxView extends Component {
   }
 
   onSubmit() {
+    const { curRoleId, selectKeys, itemsBindRole } = this.props
+    let key = []
+    selectKeys.map(item => {
+      key.push({
+        menuItemId: item
+      })
+    })
+    const showSpin = () => {
+      this.setState({
+        loading: true
+      })
+    }
+    
+    const hideSpin = () => {
+      this.setState({
+        loading: false
+      })
+    }
 
+    showSpin()
+    itemsBindRole(curRoleId, key, () => {
+      hideSpin()
+      this.onClose()
+    }, hideSpin)
   }
 
   render() {
@@ -46,7 +69,7 @@ export default class BindRoleBoxView extends Component {
     let rowSelection = {
       selectedRowKeys: selectKeys,
       onChange(selectedRowKeys) {
-        let newSelectKeys = [].concat(selectKeys, selectedRowKeys)
+        let newSelectKeys = [].concat(selectedRowKeys)
         console.log(newSelectKeys, selectedRowKeys)
         setAllMenuFnSelectKeys(newSelectKeys)
       }

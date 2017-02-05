@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import { message, notification } from 'antd'
 import { getRoleTree } from './common/bindRole'
-import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction } from './request/role'
+import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction } from './request/role'
 
 const CLEAR_TABLE_ITEMS = 'CLEAR_TABLE_ITEMS'
 const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
@@ -206,6 +206,28 @@ export const setBindRoleBoxVisible = state => ({
   data: state
 })
 
+// 绑定功能列表到角色上
+export const itemsBindRole = (roleId, roleMenuItemRelList,  success, fail) => {
+  return (dispatch, getState) => {
+    dispatch(itemsBindRoleAction(roleId,roleMenuItemRelList)).then(action=>{
+      if (action.data.body.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '功能关联成功！'
+        })
+        dispatch(getAllRoleFnItems(1, roleId, '', 1))
+        // dispatch(getRoleTree())
+        if (success) success()
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '功能关联失败！'
+        })
+        if (fail) fail()
+      }
+    })
+  }
+}
 
 const initialState = {
   pageSize: 8,

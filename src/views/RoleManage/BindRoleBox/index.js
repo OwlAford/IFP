@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
-import { setBindRoleBoxVisible, getAllRoleFnItems, clearMenuFnItems, setAllMenuFnSelectKeys } from 'REDUCER/roleManage'
+import { setBindRoleBoxVisible, getAllRoleFnItems, clearMenuFnItems, setAllMenuFnSelectKeys, itemsBindRole } from 'REDUCER/roleManage'
 import BindRoleBoxView from './BindRoleBoxView'
 
 const mapDispatchToProps = {
   setBindRoleBoxVisible,
   getAllRoleFnItems,
   clearMenuFnItems,
-  setAllMenuFnSelectKeys
+  setAllMenuFnSelectKeys,
+  itemsBindRole
 }
 
 const mapStateToProps = (state) => ({

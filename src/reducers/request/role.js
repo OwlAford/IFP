@@ -112,3 +112,14 @@ export const addRoleAction = params => ({
     }
   }
 })
+
+export const itemsBindRoleAction = (roleId, roleMenuItemRelList) => ({
+  [BZ_REQUESTER]: {
+    types: [ROLE_SUBMIT_REQ, ROLE_SUBMIT_SUC, ROLE_SUBMIT_FAL],
+    url: API.ROLE_BIND_ITEM_URL,
+    body: {
+      roleId: roleId ? roleId : '',
+      roleMenuItemRelList: roleMenuItemRelList
+    }
+  }
+})
