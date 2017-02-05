@@ -8,7 +8,7 @@ const bindDataLoop = (item) => {
       <TreeNode title={item.name} key={item.id}>
         {item.children.map(bindDataLoop)}
       </TreeNode>
-      )
+    )
   } else {
     return <TreeNode title={item.name} key={item.id} isLeaf={true}/>
   }

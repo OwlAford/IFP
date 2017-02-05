@@ -32,7 +32,6 @@ export const userPageByBrh = (data, cb) => {
     NProgress.start()
     dispatch(userPageByBrhAction(data, getState().userManage.pageData.turnPageShowNum)).then(action => {
       let dataBody = action.data.body
-      console.log(dataBody)
       let userList = dataBody.userList.map(user => Object.assign(user, {
         key: user.userNo
       }))

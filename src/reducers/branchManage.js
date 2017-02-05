@@ -55,8 +55,8 @@ export const setAddBranchVisible = state => ({
 export const changeBranchSelected = data => {
   return (dispatch, state) => {
     if (data.brhId != null || data.brhId != undefined) {
-        NProgress.start()
-        dispatch(getBranchAction(data)).then(action => {
+      NProgress.start()
+      dispatch(getBranchAction(data)).then(action => {
         let brhParentId = action.data.body.brhParentId
         dispatch(applySelect(brhParentId))
         dispatch(applyBranch(action.data.body))

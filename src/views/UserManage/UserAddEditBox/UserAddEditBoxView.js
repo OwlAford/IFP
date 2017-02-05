@@ -74,7 +74,7 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onClear() {
-    this.props.cleanBranch()
+    // this.props.cleanBranch()
     this.props.form.resetFields()
   }
 
@@ -249,7 +249,7 @@ let BranchAdd = class BranchAddView extends Component {
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes, 
-      onChange: onChange, 
+      //onChange: onChange, 
       placeholder: '请选择',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
