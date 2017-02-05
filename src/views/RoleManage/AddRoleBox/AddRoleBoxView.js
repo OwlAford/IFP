@@ -87,7 +87,7 @@ let AddRoleBox = class AddRoleBoxView extends Component {
     }
 
     return (
-      <div className="BranchAdd">
+      <div className="AddRoleBox">
         <Modal
           title="添加角色"
           width={600}

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import { } from 'REDUCER/roleManage'
+import { setBindRoleBoxVisible } from 'REDUCER/roleManage'
 import BindRoleBoxView from './BindRoleBoxView'
 
 const mapDispatchToProps = {
-
+  setBindRoleBoxVisible
 }
 
 const mapStateToProps = (state) => ({
-  treeNodes: state.bindRole.getRoleList,
+  visible: state.roleManage.bindBoxVisible
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BindRoleBoxView)

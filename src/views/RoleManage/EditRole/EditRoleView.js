@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, TreeSelect, Select } from 'antd'
 import AU from 'UTIL/auth'
 import AddRoleBox from '../AddRoleBox'
+import BindRoleBox from '../BindRoleBox'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -29,6 +30,10 @@ let EditRole = class EditRoleView extends Component {
 
   addNewRole() {
     this.props.setAddRoleBoxVisible(true)
+  }
+
+  bindRole() {
+    this.props.setBindRoleBoxVisible(true)
   }
 
   saveModify() {
@@ -82,7 +87,7 @@ let EditRole = class EditRoleView extends Component {
       <Button 
         size="large" 
         type="ghost"
-        onClick={(e) => this.searchUser()}
+        onClick={(e) => this.bindRole()}
       >
         关联功能
       </Button>
@@ -213,6 +218,7 @@ let EditRole = class EditRoleView extends Component {
           </div>  
         </Form>
         <AddRoleBox/>
+        <BindRoleBox/>
       </div>  
     )
   }

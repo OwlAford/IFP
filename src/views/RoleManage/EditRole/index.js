@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
-import { setSelectTreeVal, updateRole, setAddRoleBoxVisible } from 'REDUCER/roleManage'
+import { setSelectTreeVal, updateRole, setAddRoleBoxVisible, setBindRoleBoxVisible } from 'REDUCER/roleManage'
 import EditRoleView from './EditRoleView'
 
 const mapDispatchToProps = {
   setSelectTreeVal,
   updateRole,
-  setAddRoleBoxVisible
+  setAddRoleBoxVisible,
+  setBindRoleBoxVisible
 }
 
 const mapStateToProps = (state) => ({

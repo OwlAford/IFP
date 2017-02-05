@@ -8,6 +8,7 @@ const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
 const UPDATE_CUR_ROLE_INFO = 'UPDATE_CUR_ROLE_INFO'
 const SET_SELECT_TREE_VAL = 'SET_SELECT_TREE_VAL'
 const SET_ADD_ROLE_VISIBLE = 'SET_ADD_ROLE_VISIBLE'
+const SET_BIND_ROLE_VISIBLE = 'SET_BIND_ROLE_VISIBLE'
 
 
 const updateTableItems = (tableCurPageItems, tableCurPage, tableTotalSize) => ({
@@ -170,6 +171,10 @@ export const addRole = (params, success, fail) => {
   }
 }
 
+export const setBindRoleBoxVisible = state => ({
+  type: SET_BIND_ROLE_VISIBLE,
+  data: state
+})
 
 
 const initialState = {
@@ -185,7 +190,8 @@ const initialState = {
     roleId: ''
   },
   selectModifyRole: '',
-  addBoxVisible: false
+  addBoxVisible: false,
+  bindBoxVisible: false
 }
 
 export default (state = initialState, action) => {
@@ -222,6 +228,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         addBoxVisible: action.data
+      }
+
+    case SET_BIND_ROLE_VISIBLE:
+      return {
+        ...state,
+        bindBoxVisible: action.data
       }
 
     default:
