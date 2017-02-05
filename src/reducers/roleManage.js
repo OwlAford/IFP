@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import { message, notification } from 'antd'
 import { getRoleTree } from './common/bindRole'
-import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction } from './request/role'
+import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction, delRoleAction } from './request/role'
 
 const CLEAR_TABLE_ITEMS = 'CLEAR_TABLE_ITEMS'
 const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
@@ -228,6 +228,28 @@ export const itemsBindRole = (roleId, roleMenuItemRelList,  success, fail) => {
     })
   }
 }
+
+// 删除角色
+export const delRole = roleId => {
+  return (dispatch, getState) => {
+    dispatch(delRoleAction(roleId)).then(action => {
+      if (action.data.body.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '角色删除成功！'
+        })
+        dispatch(getRoleTree())
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '角色删除失败！'
+        })
+      }
+    })
+  }
+}
+
+
 
 const initialState = {
   pageSize: 8,

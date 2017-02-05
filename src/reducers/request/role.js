@@ -123,3 +123,13 @@ export const itemsBindRoleAction = (roleId, roleMenuItemRelList) => ({
     }
   }
 })
+
+export const delRoleAction = roleId => ({
+  [BZ_REQUESTER]: {
+    types: [ROLE_QUERY_REQ, ROLE_QUERY_SUC, ROLE_QUERY_FAL],
+    url: API.ROLE_DEL_URL,
+    body: {
+      roleId: roleId
+    }
+  }
+})

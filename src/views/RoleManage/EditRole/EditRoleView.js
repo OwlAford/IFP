@@ -4,6 +4,7 @@ import AU from 'UTIL/auth'
 import AddRoleBox from '../AddRoleBox'
 import BindRoleBox from '../BindRoleBox'
 
+const confirm = Modal.confirm
 const FormItem = Form.Item
 const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
@@ -39,6 +40,21 @@ let EditRole = class EditRoleView extends Component {
       return
     } 
     setBindRoleBoxVisible(true)
+  }
+
+  deleteRole() {
+    const { info, delRole } = this.props
+    if (!info.roleId) {
+      message.error('请先选择一个角色！')
+      return
+    } 
+    confirm({
+      title: '删除角色',
+      content: '是否确认删除角色？',
+      onOk() {
+        delRole(info.roleId)
+      }
+    })
   }
 
   saveModify() {
