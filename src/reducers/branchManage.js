@@ -114,7 +114,8 @@ export const branchAdd = (params, success, fail) => {
     dispatch(changeBranchEmpty())
     dispatch(addBranchAction(params)).then(action => {
       if(action.data.body.errorCode == '0') {
-        dispatch(initBranchList())   
+        dispatch(initBranchList())
+        dispatch(changeBranchSelected(params))   
         dispatch(changeBranchAfterType({type: '5'}))
         if (success) success()
       } else { 

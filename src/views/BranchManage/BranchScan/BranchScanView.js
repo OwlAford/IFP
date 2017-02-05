@@ -112,9 +112,8 @@ let BranchScan = class BranchScanView extends Component {
         }
         showSpin()
         branchModify(data, () => {
-          resetForm()
+          // resetForm()
           hideSpin()
-          resetForm()
         }, hideSpin)
       }
     // 当点击删除机构  
