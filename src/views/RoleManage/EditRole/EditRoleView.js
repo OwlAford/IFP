@@ -11,31 +11,103 @@ let EditRole = class EditRoleView extends Component {
 
   constructor(props) {
     super(props)
-  } 
+    this.state = {
+      currentId: ''
+    }
+  }
 
-  handleClear() {
-    this.props.form.resetFields()
+  setChangeState(id) {
+    // id发生变化，则刷新表单
+    if (id != this.state.currentId) {
+      this.props.form.resetFields()
+      this.setState({
+        currentId: id
+      })
+    }
+  }
+
+  saveModify() {
+    const { form, info, selectModifyRole, updateRole } = this.props
+    const { getFieldsValue, validateFields, resetFields } = form
+    validateFields((errors, values) => {
+      if (!!errors) {
+        message.error('填写内容有错误，请仔细填写！')
+        resetFields()
+      } else {
+        let formData = Object.assign({}, getFieldsValue(), {
+          roleId: info.roleId ? info.roleId : '',
+          rolePId: selectModifyRole ? selectModifyRole : ''
+        })
+        console.log(formData)
+        updateRole(formData)
+      }
+    })
+  }
+
+  componentWillReceiveProps(newProps) {
+    // 通过监听属性的变化判断是否需要重置表单
+    this.setChangeState(newProps.info.roleId)
   }
 
 
   render() {
+
+    const { form, treeNodes, info, selectModifyRole, setSelectTreeVal, userMenu } = this.props
+    const { getFieldDecorator } = form
+
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 17 }
     }
 
-    const onChange = (value) => {
-      console.log(value)
-    }
+    const modBtn = (
+      <Button 
+        size="large" 
+        onClick={(e) => this.saveModify()}
+      >
+        保存修改
+      </Button>
+    )
 
-    const { form, treeNodes, info } = this.props
-    const { getFieldDecorator } = form
+    const bindBtn = (
+      <Button 
+        size="large" 
+        type="ghost"
+        onClick={(e) => this.searchUser()}
+      >
+        关联功能
+      </Button>
+    )
+
+    const addBtn = (
+      <Button 
+        size="large" 
+        type="primary" 
+        onClick={(e) => this.handleClear()}
+      >
+        添加角色
+      </Button>
+    )
+
+    const delBtn = (
+      <Button 
+        size="large" 
+        type="danger" 
+        onClick={(e) => this.handleClear()}
+      >
+        删除角色
+      </Button>
+    )
+
+    const onChange = (value) => {
+      setSelectTreeVal(value)
+    }
 
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: treeNodes,      
       onChange: onChange,      
-      value: info.selectModifyRole,     
+      value: selectModifyRole,     
       placeholder: '请选择所属角色',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
@@ -77,7 +149,13 @@ let EditRole = class EditRoleView extends Component {
               >
                 {
                   getFieldDecorator('roleStatus', {
-                    initialValue: info.roleStatus
+                    initialValue: info.roleStatus,
+                    rules: [
+                      {
+                        required: true, 
+                        message: '请选择状态'
+                      }
+                    ]
                   })(
                     <Select 
                       placeholder='请选择状态' 
@@ -120,33 +198,10 @@ let EditRole = class EditRoleView extends Component {
             </Col>
           </Row>
           <div className="button-group">
-            <Button 
-              size="large" 
-              onClick={(e) => this.searchUser()}
-            >
-              保存修改
-            </Button>
-            <Button 
-              size="large" 
-              type="ghost"
-              onClick={(e) => this.searchUser()}
-            >
-              关联功能
-            </Button>
-            <Button 
-              size="large" 
-              type="primary" 
-              onClick={(e) => this.handleClear()}
-            >
-              添加角色
-            </Button>
-            <Button 
-              size="large" 
-              type="danger" 
-              onClick={(e) => this.handleClear()}
-            >
-              删除角色
-            </Button>
+            {AU.checkButton(userMenu, 'F002', modBtn)}
+            {AU.checkButton(userMenu, 'F009', bindBtn)}
+            {AU.checkButton(userMenu, 'F001', addBtn)}
+            {AU.checkButton(userMenu, 'F004', delBtn)}
           </div>  
         </Form>
       </div>  

@@ -25,6 +25,9 @@ export default class myView extends Component {
 
   }
 
+  componentWillReceiveProps(newProps) {
+  }
+
   render() {
   	return (<div></div>)
   }

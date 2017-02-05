@@ -33,13 +33,6 @@ const converRoleField = role => ({
   children: []
 })
 
-// 查询用户与角色关联的
-// export const initGetRoleTree = userNo => {
-//   return (dispatch,getState) => {
-//     dispatch(getUserRoleTree(userNo)) 
-//   }
-// }
-
 export const getUserRoleTree = userNo => {
   return (dispatch, getState) => {
     dispatch(getUserRoleListAction(userNo)).then(action => {

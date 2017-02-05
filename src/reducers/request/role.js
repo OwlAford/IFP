@@ -13,6 +13,10 @@ const ITEM_QUERY_REQ = 'ITEM_QUERY_REQ'
 const ITEM_QUERY_SUC = 'ITEM_QUERY_SUC'
 const ITEM_QUERY_FAL = 'ITEM_QUERY_FAL'
 
+const ROLE_SUBMIT_REQ = 'ROLE_SUBMIT_REQ'
+const ROLE_SUBMIT_SUC = 'ROLE_SUBMIT_SUC'
+const ROLE_SUBMIT_FAL = 'ROLE_SUBMIT_FAL'
+
 export const getRoleListAction = () => ({
   [BZ_REQUESTER]: {
     types: [ROLE_QUERY_REQ, ROLE_QUERY_SUC, ROLE_QUERY_FAL],
@@ -84,6 +88,14 @@ export const getInfoByRoleNameAction = roleName => ({
     body: {
       roleName: roleName ? roleName : ''
     }
+  }
+})
+
+export const updateRoleAction = params => ({
+  [BZ_REQUESTER]: {
+    types: [ROLE_SUBMIT_REQ, ROLE_SUBMIT_SUC, ROLE_SUBMIT_FAL],
+    url: API.ROLE_UPDATE_URL,
+    body: params
   }
 })
 

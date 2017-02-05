@@ -1,10 +1,12 @@
 import NProgress from 'nprogress'
-import { message } from 'antd'
-import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction } from './request/role'
+import { message, notification } from 'antd'
+import { getRoleTree } from './common/bindRole'
+import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction } from './request/role'
 
 const CLEAR_TABLE_ITEMS = 'CLEAR_TABLE_ITEMS'
 const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
 const UPDATE_CUR_ROLE_INFO = 'UPDATE_CUR_ROLE_INFO'
+const SET_SELECT_TREE_VAL = 'SET_SELECT_TREE_VAL'
 
 
 const updateTableItems = (tableCurPageItems, tableCurPage, tableTotalSize) => ({
@@ -109,6 +111,35 @@ export const getInfoByRoleName = (roleName, cb) => {
   }
 }
 
+// 用户修改所属角色 selectTree
+export const setSelectTreeVal = val => ({
+  type: SET_SELECT_TREE_VAL,
+  data: val
+})
+
+// 更新角色信息
+export const updateRole = params => {
+  return (dispatch, getState) => {
+    dispatch(updateRoleAction(params)).then(action=>{
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '角色更新成功！'
+        })
+        // 刷新一次选择的树
+        dispatch(getRoleTree())
+        dispatch(getInfoByRoleId(params.roleId))
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '角色更新失败！'
+        })
+      }
+    })
+  }
+}
+
 
 const initialState = {
   pageSize: 8,
@@ -145,7 +176,14 @@ export default (state = initialState, action) => {
     case UPDATE_CUR_ROLE_INFO:
       return {
         ...state,
-        curRoleInfo: action.data
+        curRoleInfo: action.data,
+        selectModifyRole: action.data.selectModifyRole
+      }
+
+    case SET_SELECT_TREE_VAL:
+      return {
+        ...state,
+        selectModifyRole: action.data
       }
 
     default:
