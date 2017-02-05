@@ -70,7 +70,6 @@ export default class BindRoleBoxView extends Component {
       selectedRowKeys: selectKeys,
       onChange(selectedRowKeys) {
         let newSelectKeys = [].concat(selectedRowKeys)
-        console.log(newSelectKeys, selectedRowKeys)
         setAllMenuFnSelectKeys(newSelectKeys)
       }
     }

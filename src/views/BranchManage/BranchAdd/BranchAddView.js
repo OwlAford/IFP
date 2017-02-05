@@ -26,12 +26,11 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onClear() {
-    this.props.setAddSelectBrhId('')
     this.props.form.resetFields()
   }
 
   onSubmit() {
-    const { form, selectBranchId, branchList, branchAdd } = this.props
+    const { form, branchList, branchAdd } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
     validateFields((errors, values) => {
       if (!!errors) {
@@ -51,6 +50,7 @@ let BranchAdd = class BranchAddView extends Component {
             break
         }
 
+        let selectBranchId = params.brhId
         let brhPName = ''
         branchList.map(item => {
           if (selectBranchId && item.brhId == selectBranchId) {
@@ -98,16 +98,12 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   render() {
-    const { visible, branchNodes, selectBranchId, setAddSelectBrhId } = this.props
+    const { visible, branchNodes } = this.props
     const { getFieldDecorator, resetFields } = this.props.form
 
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 16 }
-    }
-
-    const onChange = (value) => {
-      setAddSelectBrhId(value)
     }
 
     // 机构等级选择
@@ -118,8 +114,6 @@ let BranchAdd = class BranchAddView extends Component {
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes, 
-      onChange: onChange, 
-      value: selectBranchId,
       placeholder: "请选择所属机构",
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
@@ -322,12 +316,18 @@ let BranchAdd = class BranchAddView extends Component {
                     label='所属机构：'
                     {...formItemLayout}
                   >
-                    {<TreeSelect 
-                      placeholder='请选择所属机构' 
-                      {...treeProps}
-                      allowClear={true}
-                    >
-                    </TreeSelect>}
+                  {
+                    getFieldDecorator('brhId', {
+                        initialValue: '',
+                      })(
+                      <TreeSelect 
+                        placeholder='请选择所属机构' 
+                        {...treeProps}
+                        allowClear={true}
+                      >
+                      </TreeSelect>
+                    )
+                  }
                   </FormItem>
                 </Col>
               </Row>    

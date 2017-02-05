@@ -20,12 +20,11 @@ let BranchScan = class BranchScanView extends Component {
 
   componentWillUnmount() {
     this.props.resetForm()   // 清空整个表单
-    this.props.cleanBranch() // 清空所属机构的选择框
   }
 
   componentWillReceiveProps(newProps) {
-    const { resetFields, getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form
-    const { selectedBranch, selectedOperate, selectBranchId, branchModify, resetForm, cleanBranch, afterOperateType, changeBranchAfterType, branchDelete } = newProps
+    const { form, selectedBranch, selectedOperate, branchModify, resetForm, afterOperateType, changeBranchAfterType, branchDelete } = newProps
+    const { resetFields, getFieldsValue, setFieldsValue } = form
 
     // 当选择侧边分支且分支进行了切换时
     if (!utils.isEmptyObject(selectedBranch) && this.state.brhId != selectedBranch.brhId) {
@@ -62,7 +61,6 @@ let BranchScan = class BranchScanView extends Component {
       let type = afterOperateType
       switch(type) {
         case '1':
-          console.log('修改成功！')
           MsgSuc('修改成功！')
           break
         case '2':
@@ -101,13 +99,22 @@ let BranchScan = class BranchScanView extends Component {
             break
         }
       }
-      let data = Object.assign({}, getFieldsValue(), {brhLevel: level}, {brhParentId: selectBranchId})
-      if (data.brhId != '' && data.brhId != undefined && data.brhId != null) {
+      let data = Object.assign({}, getFieldsValue(), {
+        brhLevel: level
+      })
+      if (data.brhId) {
+        // 纠错
+        if(selectedBranch.brhId == data.brhParentId) {
+          data.brhParentId = selectedBranch.brhParentId ? selectedBranch.brhParentId : ''
+          setFieldsValue({
+            brhParentId: data.brhParentId
+          })
+        }
         showSpin()
         branchModify(data, () => {
+          resetForm()
           hideSpin()
-          resetForm()       // 清空整个表单
-          cleanBranch()     // 清空所属机构的选择框
+          resetForm()
         }, hideSpin)
       }
     // 当点击删除机构  
@@ -117,7 +124,6 @@ let BranchScan = class BranchScanView extends Component {
         showSpin()
         branchDelete(params, () => {
           resetForm()
-          cleanBranch()
           hideSpin()
         }, hideSpin())
       }
@@ -126,8 +132,8 @@ let BranchScan = class BranchScanView extends Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form
-    const { selectedBranch, branchNodes, selectBranchId, updateBranch } = this.props
+    const { form, selectedBranch, branchNodes } = this.props
+    const { getFieldDecorator } = form
 
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -150,19 +156,9 @@ let BranchScan = class BranchScanView extends Component {
       item => <Option key={item} value={item}>{item}</Option>
     )
 
-    const onChange = (value) => {
-      if(selectedBranch.brhId == value) {
-        message.warning('不能选择当前机构,请重新选择!')
-      } else {
-        updateBranch(value)
-      }
-    }
-
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
-      treeData: branchNodes,      // 供用户选择的角色下拉列表
-      onChange: onChange,         // 改变角色的时候更新value的值
-      value: selectBranchId,      // 选中的时候的值传给状态树，然后再提交的时候再做处理
+      treeData: branchNodes,   
       placeholder: '请选择所属机构',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
@@ -329,11 +325,17 @@ let BranchScan = class BranchScanView extends Component {
                 label='所属机构：'
                 {...formItemLayout}
                 >
-                  {<TreeSelect 
-                    {...treeProps}
-                    allowClear={true}
-                  >
-                  </TreeSelect>}
+                  {
+                    getFieldDecorator('brhParentId', {
+                      initialValue: selectedBranch.brhParentId ? selectedBranch.brhParentId : '',
+                    })(
+                      <TreeSelect 
+                        {...treeProps}
+                        allowClear={true}
+                      >
+                      </TreeSelect>
+                    )
+                  }
               </FormItem>
             </Col>
           </Row>

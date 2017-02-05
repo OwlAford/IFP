@@ -82,10 +82,7 @@ export default class UserTableView extends Component {
       }, {
         title: '创建时间',
         dataIndex: 'createTime',
-        key: 'createTime',
-        render: (text, record) => {
-          return (<span>{text}</span>)
-        }
+        key: 'createTime'
       }, {
         title:'操作',
         key:'operation',

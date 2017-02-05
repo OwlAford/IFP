@@ -9,9 +9,6 @@ export default class UserManageView extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      selectedKeys: []
-    }
     this.branchSelected = this.branchSelected.bind(this)
     this.onSearch = this.onSearch.bind(this)
   } 
@@ -27,33 +24,27 @@ export default class UserManageView extends Component {
       currentPage: '1',
       brhId: info.brhId,
       brhName: info.title
-    }, () => {
-      this.setState({
-        selectedKeys: [info.brhId]
-      })
     })
   }
 
   onSearch(brhName) {
-    const { userPageByBrh } = this.props
+    const { userPageByBrh, flatBranchList } = this.props
+
+    // 取到 brhId
+    let id = ''
+    flatBranchList.map(item => {
+      item.brhName == brhName ? id = item.brhId : null
+    })
+
     userPageByBrh({
       currentPage: '1',
-      brhId: '',
+      brhId: id,
       brhName: brhName
-    })
-    this.setState({
-      selectedKeys: []
-    })
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      selectedKeys: []
     })
   }
 
   render() {
-    const { branchList } = this.props
+    const { branchList, selectedKeys } = this.props
     return (
       <div className="pageUserManage">
         <Row>
@@ -65,7 +56,7 @@ export default class UserManageView extends Component {
                 onSearch={this.onSearch}
               />
               <BranchTree
-                selectedKeys={this.state.selectedKeys}
+                selectedKeys={selectedKeys}
                 selected={this.branchSelected}
                 branchList={branchList}
               />

@@ -4,18 +4,8 @@ import { getBranchListAction } from '../request/branch'
 
 const GET_BRANCH_LIST = 'GET_BRANCH_LIST'
 const USER_GROUP_BRANCH = 'USER_GROUP_BRANCH'
-const CLEAN_BRANCH = 'CLEAN_BRANCH'
-const UPDATE_BRANACH = 'UPDATE_BRANACH'
 const APPLY_BRANCH_SELECT = 'APPLY_BRANCH_SELECT'
 
-export const cleanBranch = () => ({
-  type: CLEAN_BRANCH
-})
-
-export const updateBranch = selectBranchId => ({
-  type: UPDATE_BRANACH,
-  selectBranchId: selectBranchId ? selectBranchId : ''
-})
 
 const getBranch = branch => ({
   label: branch.brhName,
@@ -64,7 +54,6 @@ export const initBranchList = (cb) => {
 }
 
 const initialState = {
-  selectBranchId: '',
   branchList: [],
   getBranchList: [],
   userGetBranchList: []
@@ -72,24 +61,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-
-    case CLEAN_BRANCH:
-      return {
-        ...state,
-        selectBranchId: ''
-      }
-
-    case UPDATE_BRANACH:
-      return {
-        ...state,
-        selectBranchId: action.selectBranchId
-      }
-
-    case APPLY_BRANCH_SELECT:
-      return {
-        ...state,
-        selectBranchId: action.data
-      }
         
     case GET_BRANCH_LIST:
       return {

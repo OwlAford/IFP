@@ -16,6 +16,8 @@ export const CLOSE_MODIFY_USER = 'CLOSE_MODIFY_USER'
 
 export const SET_ADDUSER_VISIBLE = 'SET_ADDUSER_VISIBLE'
 
+export const UPDATE_SELECTE_KEYS = 'UPDATE_SELECTE_KEYS'
+
 
 const pageUsers = data => ({
   type: PAGE_USERS,
@@ -27,10 +29,11 @@ const pageUsers = data => ({
 
 
 // 查询用户信息 搜索功能 分页功能
-export const userPageByBrh = (data, cb) => { 
+export const userPageByBrh = (params, cb) => { 
   return (dispatch, getState) => {
     NProgress.start()
-    dispatch(userPageByBrhAction(data, getState().userManage.pageData.turnPageShowNum)).then(action => {
+    let pageShowNum = getState().userManage.pageData.turnPageShowNum
+    dispatch(userPageByBrhAction(params, pageShowNum)).then(action => {
       let dataBody = action.data.body
       let userList = dataBody.userList.map(user => Object.assign(user, {
         key: user.userNo
@@ -45,6 +48,7 @@ export const userPageByBrh = (data, cb) => {
       }, {
         currentPage: dataBody.currentPage
       })
+      dispatch(updateSelectKeys([params.brhId]))
       dispatch(pageUsers(data))
       NProgress.done()
       message.success('加载完毕！')
@@ -121,12 +125,16 @@ export const addUser = (params, success, fail) => {
         }
         dispatch(userPageByBrhAction(dataList, 10)).then(action => {
           const dataBody = action.data.body
+          let userList = dataBody.userList.map(user => Object.assign(user, {
+            key: user.userNo
+          }))
           let data = {
             totalSize: dataBody.turnPageTotalNum,
             turnPageShowNum: dataBody.turnPageShowNum,
             currentPage: dataBody.currentPage,
-            userList: dataBody.userList
+            userList: userList
           }
+          dispatch(updateSelectKeys([params.brhId]))
           dispatch(pageUsers(data))
         })
         notification.success({
@@ -182,7 +190,7 @@ export const delUserUpdate = (userNo, brhId, curPage) => {
           message: '成功',
           description: '用户删除成功！'
         })
-        dispatch(userPageByBrh(brhId, curPage))
+        dispatch(userPageByBrh({ brhId }))
       } else {
         notification.warning({
           message: '失败',
@@ -193,6 +201,10 @@ export const delUserUpdate = (userNo, brhId, curPage) => {
   }
 }
 
+export const updateSelectKeys = keys => ({
+  type: UPDATE_SELECTE_KEYS,
+  data: keys
+})
 
 const initialState = {
   count: 0,
@@ -214,7 +226,8 @@ const initialState = {
   pageData: {
     currentPage: 1,
     turnPageShowNum: 10
-  }
+  },
+  selectedKeys: []
 }
 
 export default (state = initialState, action) => {
@@ -295,6 +308,12 @@ export default (state = initialState, action) => {
           initVal: {},
           type: 'MODIFY'
         }
+      }
+
+    case UPDATE_SELECTE_KEYS:
+      return {
+        ...state,
+        selectedKeys: action.data
       }
           
     default:

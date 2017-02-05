@@ -38,7 +38,8 @@ let UserQuery = class UserQueryView extends Component {
   }
 
   searchUser() {
-    const { form, userPageByBrh } = this.props
+    const { form, userPageByBrh, updateSelectKeys } = this.props
+    updateSelectKeys([])
     let filter = form.getFieldsValue()
     form.validateFields((err, fieldsValue) => {
       if (err) {

@@ -9,7 +9,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  branchList: state.branchTree.userGetBranchList
+  branchList: state.branchTree.userGetBranchList,
+  flatBranchList: state.branchTree.branchList,
+  selectedKeys: state.userManage.selectedKeys
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManageView)

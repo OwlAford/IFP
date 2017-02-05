@@ -46,14 +46,13 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   componentWillMount() {
-    const { form, userBox, updateBranch } = this.props
+    const { form, userBox } = this.props
     form.resetFields()
     if (userBox.type == 'MODIFY') {
       this.setState({
         defaultPassword: '000000',
         boxTitle: '修改用户信息'
       })
-      updateBranch(userBox.initVal.brhId)
       let newInitVal = Object.assign(
         {}, 
         this.state.initVal, 
@@ -74,12 +73,11 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onClear() {
-    // this.props.cleanBranch()
     this.props.form.resetFields()
   }
 
   onSubmit() {
-    const { form, userBox, postList, addUser, updateUser, selectBranchId, branchList, branchAdd } = this.props
+    const { form, userBox, postList, addUser, updateUser, branchList, branchAdd } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
 
     validateFields((errors, values) => {
@@ -99,6 +97,7 @@ let BranchAdd = class BranchAddView extends Component {
 
         
         // 取到机构名
+        let selectBranchId = params.brhId
         let brhName = ''
         branchList.map(item => {
           if (selectBranchId && item.brhId == selectBranchId) {
@@ -107,11 +106,8 @@ let BranchAdd = class BranchAddView extends Component {
         })
 
         let data = Object.assign({
-        }, 
-        getFieldsValue(), 
-        {
+        }, getFieldsValue(), {
           brhName: brhName,
-          brhId: selectBranchId,
           postName: postName
         })
         
@@ -218,7 +214,7 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   render() {
-    const { userBox, certType, postList, level, updateBranch, branchNodes, selectBranchId } = this.props
+    const { userBox, certType, postList, level, branchNodes } = this.props
     const { getFieldDecorator, resetFields } = this.props.form
     const { initVal, defaultPassword, boxTitle } = this.state
 
@@ -230,10 +226,6 @@ let BranchAdd = class BranchAddView extends Component {
     const certTypeList = certType.map(item => <Option value={item.paramKey} key={item.paramKey} >{item.paramValue}</Option>)
 
     const postSelectList = postList.map(item => <Option key={item.postId} value={item.postId}>{item.postName}</Option>)
-
-    const onChange = (value) => {
-      updateBranch(value)
-    }
 
     // 用户等级
     const userLevelList = level.map(
@@ -249,7 +241,6 @@ let BranchAdd = class BranchAddView extends Component {
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes, 
-      //onChange: onChange, 
       placeholder: '请选择',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
