@@ -1,12 +1,13 @@
 import NProgress from 'nprogress'
 import { message, notification } from 'antd'
 import { getRoleTree } from './common/bindRole'
-import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction } from './request/role'
+import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction } from './request/role'
 
 const CLEAR_TABLE_ITEMS = 'CLEAR_TABLE_ITEMS'
 const UPDATE_TABLE_CUR_ITEMS = 'UPDATE_TABLE_CUR_ITEMS'
 const UPDATE_CUR_ROLE_INFO = 'UPDATE_CUR_ROLE_INFO'
 const SET_SELECT_TREE_VAL = 'SET_SELECT_TREE_VAL'
+const SET_ADD_ROLE_VISIBLE = 'SET_ADD_ROLE_VISIBLE'
 
 
 const updateTableItems = (tableCurPageItems, tableCurPage, tableTotalSize) => ({
@@ -70,7 +71,7 @@ const applyCurRoleInfo = (info) =>({
     selectModifyRole: info.rolePId,
     roleStatus: info.roleStatus,
     roleName: info.roleName,
-    roleId: info.roleId
+    roleId: info.roleId && info.roleId != 'undefined' ? info.roleId : '' // 数据库拿到的数据带有'undefined'字符串，他们的锅
   }
 })
 
@@ -114,7 +115,7 @@ export const getInfoByRoleName = (roleName, cb) => {
 // 用户修改所属角色 selectTree
 export const setSelectTreeVal = val => ({
   type: SET_SELECT_TREE_VAL,
-  data: val
+  data: val ? val : ''
 })
 
 // 更新角色信息
@@ -140,6 +141,36 @@ export const updateRole = params => {
   }
 }
 
+export const setAddRoleBoxVisible = state => ({
+  type: SET_ADD_ROLE_VISIBLE,
+  data: state
+})
+
+
+// 添加用户
+export const addRole = (params, success, fail) => {
+  return (dispatch,getState)=>{
+    dispatch(addRoleAction(params)).then(action => {
+      if (action.data.body.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '角色添加成功！'
+        })
+        // 刷新一次选择的树
+        dispatch(getRoleTree())
+        if (success) success()
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '角色添加失败！'
+        })
+        if (fail) fail()
+      }
+    })
+  }
+}
+
+
 
 const initialState = {
   pageSize: 8,
@@ -153,7 +184,8 @@ const initialState = {
     roleName: '',
     roleId: ''
   },
-  selectModifyRole: ''
+  selectModifyRole: '',
+  addBoxVisible: false
 }
 
 export default (state = initialState, action) => {
@@ -184,6 +216,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectModifyRole: action.data
+      }
+
+    case SET_ADD_ROLE_VISIBLE:
+      return {
+        ...state,
+        addBoxVisible: action.data
       }
 
     default:

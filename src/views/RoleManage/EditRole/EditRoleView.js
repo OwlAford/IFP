@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, TreeSelect, Select } from 'antd'
 import AU from 'UTIL/auth'
+import AddRoleBox from '../AddRoleBox'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -26,12 +27,20 @@ let EditRole = class EditRoleView extends Component {
     }
   }
 
+  addNewRole() {
+    this.props.setAddRoleBoxVisible(true)
+  }
+
   saveModify() {
     const { form, info, selectModifyRole, updateRole } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
+    if (!info.roleId) {
+      message.error('请先选择一个角色！')
+      return
+    } 
     validateFields((errors, values) => {
       if (!!errors) {
-        message.error('填写内容有错误，请仔细填写！')
+        message.error('请正确填写内容！')
         resetFields()
       } else {
         let formData = Object.assign({}, getFieldsValue(), {
@@ -83,7 +92,7 @@ let EditRole = class EditRoleView extends Component {
       <Button 
         size="large" 
         type="primary" 
-        onClick={(e) => this.handleClear()}
+        onClick={(e) => this.addNewRole()}
       >
         添加角色
       </Button>
@@ -99,8 +108,8 @@ let EditRole = class EditRoleView extends Component {
       </Button>
     )
 
-    const onChange = (value) => {
-      setSelectTreeVal(value)
+    const onChange = (val) => {
+      setSelectTreeVal(val)
     }
 
     const treeProps  = {
@@ -159,7 +168,6 @@ let EditRole = class EditRoleView extends Component {
                   })(
                     <Select 
                       placeholder='请选择状态' 
-                      allowClear
                     >
                       <Option value='1'>可用</Option>
                       <Option value='0'>禁用</Option>
@@ -204,6 +212,7 @@ let EditRole = class EditRoleView extends Component {
             {AU.checkButton(userMenu, 'F004', delBtn)}
           </div>  
         </Form>
+        <AddRoleBox/>
       </div>  
     )
   }

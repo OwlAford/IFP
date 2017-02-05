@@ -99,3 +99,16 @@ export const updateRoleAction = params => ({
   }
 })
 
+export const addRoleAction = params => ({
+  [BZ_REQUESTER]: {
+    types: [ROLE_SUBMIT_REQ, ROLE_SUBMIT_SUC, ROLE_SUBMIT_FAL],
+    url: API.ROLE_ADD_URL,
+    body: {
+      roleName: params.roleName,
+      roleStatus: params.roleStatus,
+      rolePId: params.rolePId,
+      roleDesc: params.roleDesc,
+      rolePName: params.rolePName
+    }
+  }
+})

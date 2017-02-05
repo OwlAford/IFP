@@ -59,11 +59,11 @@ let BranchAdd = class BranchAddView extends Component {
         })
 
         let data = Object.assign(
-          {}, 
-          getFieldsValue(), 
-          {brhLevel: level}, 
-          {brhPName: brhPName}, 
-          {brhParentId: selectBranchId}
+          {}, getFieldsValue(), {
+            brhLevel: level,
+            brhPName: brhPName, 
+            brhParentId: selectBranchId
+          }
         )
 
         const showSpin = () => {
@@ -71,6 +71,7 @@ let BranchAdd = class BranchAddView extends Component {
             loading: true
           })
         }
+        
         const hideSpin = () => {
           this.setState({
             loading: false
