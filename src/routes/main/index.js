@@ -36,7 +36,8 @@ export default (store) => ({
       cb(null, [
         require('./branchManage').default(store),
         require('./userManage').default(store),
-        require('./roleManage').default(store)
+        require('./roleManage').default(store),
+        require('./postManage').default(store)
       ])
     })
   }
