@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Table, Row, Col, Button } from 'antd'
+import utils from 'UTIL/public'
 import AU from 'UTIL/auth'
 
 
@@ -11,6 +12,14 @@ export default class PostManageView extends Component {
 
   addPost() {
 
+  }
+
+  modPost(info) {
+    console.log(info)
+  }
+
+  delPost(info) {
+    console.log(info)
   }
 
   componentWillMount() {
@@ -28,9 +37,13 @@ export default class PostManageView extends Component {
       }, {
         title: '岗位名称',
         dataIndex: 'postName',
-        key: 'postName',
+        key: 'postName'
+      }, {
+        title: '更新时间',
+        dataIndex: 'updateTime',
+        key: 'updateTime',
         render(text, record) {
-          return(<a onClick={e => {console.log(record)}}>{text}</a>)
+          return(<span>{text.substring(0, 4)}/{text.substring(4, 6)}/{text.substring(6, 8)}日 {text.substring(8, 10)}:{text.substring(10, 12)}</span>)
         }
       }, {
         title: '备注',
@@ -46,13 +59,13 @@ export default class PostManageView extends Component {
       }, {
         title: '操作',
         key: 'operation',
-        render(text, record) {
+        render: (text, record) => {
           const buttonList = [{
             item: 'F002',
-            button: <a onClick={e => {console.log(record)}}>修改</a>
+            button: <a onClick={e => {this.modPost(record)}}>修改</a>
           }, {
             item: 'F004', 
-            button: <a onClick={e => {console.log(record)}}>删除</a>
+            button: <a onClick={e => {this.delPost(record)}}>删除</a>
           }]
           return AU.handleItem(userMenu, buttonList)
         }
