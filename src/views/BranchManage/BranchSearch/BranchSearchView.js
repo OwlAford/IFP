@@ -44,7 +44,7 @@ export default class BranchSearchView extends Component {
   }
 
   render() {
-
+    const { userMenu } = this.props
     const addBtn = (
       <Button 
         size="large" 
@@ -53,7 +53,7 @@ export default class BranchSearchView extends Component {
       >
         新增机构
       </Button>
-      )
+    )
     const modBtn = (
       <Button 
         size="large" 
@@ -75,9 +75,9 @@ export default class BranchSearchView extends Component {
     return (
       <div className="app-search-panel">
         <div className="button-group">
-          {AU.checkButton(this.props.userMenu, 'F002', modBtn)}
-          {AU.checkButton(this.props.userMenu, 'F001', addBtn)}
-          {AU.checkButton(this.props.userMenu, 'F004', delBtn)}
+          {AU.checkButton(userMenu, 'F002', modBtn)}
+          {AU.checkButton(userMenu, 'F001', addBtn)}
+          {AU.checkButton(userMenu, 'F004', delBtn)}
         </div>
         <BranchAdd/>
       </div>

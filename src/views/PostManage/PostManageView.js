@@ -1,25 +1,105 @@
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Button } from 'antd'
+import { Table, Row, Col, Button } from 'antd'
+import AU from 'UTIL/auth'
 
 
-export default class BranchManageView extends Component {
+export default class PostManageView extends Component {
 
   constructor(props) {
     super(props)
   } 
 
-  componentWillMount() {
+  addPost() {
 
   }
 
-
+  componentWillMount() {
+    this.props.resetPageState()
+    this.props.getPostList()
+  }
 
   render() {
-    const { changeBranchSelected, branchList, branchId } = this.props
+    const { setCurPageState, setPageShowNum, getPostList, userMenu, postList, turnPageTotalNum, currentPage, turnPageShowNum } = this.props
+
+    const columns = [{
+        title: '岗位编号',
+        dataIndex: 'postId',
+        key: 'postId'
+      }, {
+        title: '岗位名称',
+        dataIndex: 'postName',
+        key: 'postName',
+        render(text, record) {
+          return(<a onClick={e => {console.log(record)}}>{text}</a>)
+        }
+      }, {
+        title: '备注',
+        dataIndex: 'remark',
+        key: 'remark',
+      }, {
+        title: '状态',
+        dataIndex: 'state',
+        key: 'state',
+        render(text, record) {
+          return <span>{text == '1' ? '可用' : '禁用'}</span>
+        }
+      }, {
+        title: '操作',
+        key: 'operation',
+        render(text, record) {
+          const buttonList = [{
+            item: 'F002',
+            button: <a onClick={e => {console.log(record)}}>修改</a>
+          }, {
+            item: 'F004', 
+            button: <a onClick={e => {console.log(record)}}>删除</a>
+          }]
+          return AU.handleItem(userMenu, buttonList)
+        }
+      }
+    ]
+
+    let pagination = {
+      total: Number(turnPageTotalNum),
+      defaultCurrent: 1,
+      current: Number(currentPage),
+      showSizeChanger: true,
+      pageSize: Number(turnPageShowNum),
+      onShowSizeChange(current, pageSize) {
+        setPageShowNum(pageSize)
+        getPostList()
+      },
+      onChange(current) {
+        setCurPageState(current)
+        getPostList()
+      },
+    }
+
+    const addBtn = (
+      <Button 
+        size="large" 
+        type="primary" 
+        icon="plus-circle-o"
+        onClick={(e) => this.addPost()}
+      >
+        新增岗位
+      </Button>
+    )
 
     return (
       <div className="pagePostManage">
-        111111111
+        <div style={{padding: '20px 30px', textAlign: 'right'}}>
+          {AU.checkButton(userMenu, 'F001', addBtn)}
+        </div>
+        <div style={{padding: '0 30px'}}>
+          <Table 
+            rowKey='updateTime'
+            columns={columns} 
+            dataSource={postList} 
+            pagination={pagination} 
+            bordered
+          />
+        </div>
       </div>
     )
   }

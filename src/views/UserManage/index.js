@@ -8,7 +8,7 @@ const mapDispatchToProps = {
   userPageByBrh
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   branchList: state.branchTree.userGetBranchList,
   flatBranchList: state.branchTree.branchList,
   selectedKeys: state.userManage.selectedKeys

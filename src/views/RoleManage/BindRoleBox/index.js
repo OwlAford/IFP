@@ -10,7 +10,7 @@ const mapDispatchToProps = {
   itemsBindRole
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   visible: state.roleManage.bindBoxVisible,
   pageSize: state.roleManage.pageSize,
   totalSize: state.roleManage.allMenuTotalSize,

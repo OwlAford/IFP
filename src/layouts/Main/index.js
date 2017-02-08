@@ -8,7 +8,7 @@ const mapDispatchToProps = {
   initUserForm
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView)

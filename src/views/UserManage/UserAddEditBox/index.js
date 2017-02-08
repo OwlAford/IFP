@@ -9,7 +9,7 @@ const mapDispatchToProps = {
   updateUser
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userBox: state.userManage.userBox,
   branchNodes: state.branchTree.getBranchList,
   branchList: state.branchTree.branchList,

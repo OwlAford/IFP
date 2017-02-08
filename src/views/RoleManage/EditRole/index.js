@@ -10,7 +10,7 @@ const mapDispatchToProps = {
   delRole
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userMenu: state.menu.userMenu,
   treeNodes: state.bindRole.getRoleList,
   info: state.roleManage.curRoleInfo,

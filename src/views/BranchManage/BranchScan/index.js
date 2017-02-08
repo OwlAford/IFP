@@ -9,7 +9,7 @@ const mapDispatchToProps = {
   branchDelete
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   selectedBranch: state.branchManage.selectedObject,
   branchNodes: state.branchTree.getBranchList,
   selectedOperate: state.branchManage.selectedOperate,

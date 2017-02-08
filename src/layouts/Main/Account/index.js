@@ -8,7 +8,7 @@ const mapDispatchToProps = {
   setPasswordVisible
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loginInfo: state.login
 })
 

@@ -7,7 +7,7 @@ const mapDispatchToProps = {
   addRole
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   treeNodes: state.bindRole.getRoleList,
   visible: state.roleManage.addBoxVisible
 })

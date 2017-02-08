@@ -5,7 +5,7 @@ const mapDispatchToProps = {
 
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   items: state.menu.items,
   passwordVisible: state.main.passwordVisible
 })

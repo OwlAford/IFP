@@ -7,7 +7,7 @@ const mapDispatchToProps = {
   clearTableItems
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   pageSize: state.roleManage.pageSize,
   totalSize: state.roleManage.tableTotalSize,
   curPage: state.roleManage.tableCurPage,

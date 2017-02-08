@@ -9,7 +9,7 @@ const mapDispatchToProps = {
   resetForm
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   branchList: state.branchTree.userGetBranchList,
   branchId: state.branchManage.brhId
 })

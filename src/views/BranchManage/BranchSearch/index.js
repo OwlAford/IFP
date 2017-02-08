@@ -9,7 +9,7 @@ const mapDispatchToProps = {
   setAddBranchVisible
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userMenu: state.menu.userMenu,
   branchList: state.branchTree.branchList,
   selectedBranch: state.branchManage.selectedObject

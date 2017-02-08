@@ -16,4 +16,3 @@ export const postListAction = (currentPage, turnPageShowNum, state) => ({
     }
   }
 })
-  

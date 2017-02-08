@@ -8,7 +8,7 @@ const mapDispatchToProps = {
   changePassword
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 
 })
 

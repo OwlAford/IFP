@@ -14,7 +14,7 @@ const mapDispatchToProps = {
   delUserUpdate
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   dataSource: state.userManage.userList,
   userMenu: state.menu.userMenu,
   totalSize: state.userManage.totalSize,

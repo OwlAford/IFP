@@ -8,7 +8,7 @@ const mapDispatchToProps = {
   updateSelectKeys
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userMenu: state.menu.userMenu,
   level: state.config.level,
   userBox: state.userManage.userBox

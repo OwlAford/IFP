@@ -11,7 +11,7 @@ const mapDispatchToProps = {
   getInfoByRoleName
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   roleList: state.bindRole.roleList,
   curRoleId: state.roleManage.curRoleInfo.roleId
 })

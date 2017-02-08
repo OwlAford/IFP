@@ -7,7 +7,7 @@ const mapDispatchToProps = {
   branchAdd
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   visible: state.branchManage.addBranchBoxVisible,
   branchNodes: state.branchTree.getBranchList,
   branchList: state.branchTree.branchList

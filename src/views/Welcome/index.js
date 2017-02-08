@@ -5,7 +5,7 @@ const mapDispatchToProps = {
 
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   main: state.main
 })
 

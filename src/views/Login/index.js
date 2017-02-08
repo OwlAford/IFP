@@ -7,7 +7,7 @@ const mapDispatchToProps = {
   validateLogin
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   vcodeSrc : state.login.checkCodeSrc
 })
 

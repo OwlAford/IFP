@@ -6,7 +6,7 @@ const mapDispatchToProps = {
   closePreviewUser
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   visible: state.userManage.previewBox.visible,
   level: state.config.level,
   certType: state.config.certType,

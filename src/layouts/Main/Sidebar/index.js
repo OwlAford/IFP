@@ -6,7 +6,7 @@ const mapDispatchToProps = {
   selectMenu
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 
 })
 
