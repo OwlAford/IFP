@@ -43,7 +43,7 @@ export default class PostManageView extends Component {
         dataIndex: 'updateTime',
         key: 'updateTime',
         render(text, record) {
-          return(<span>{text.substring(0, 4)}/{text.substring(4, 6)}/{text.substring(6, 8)}日 {text.substring(8, 10)}:{text.substring(10, 12)}</span>)
+          return(<span>{text.substring(0, 4)}/{text.substring(4, 6)}/{text.substring(6, 8)} {text.substring(8, 10)}:{text.substring(10, 12)}</span>)
         }
       }, {
         title: '备注',
