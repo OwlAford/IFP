@@ -17,11 +17,10 @@ export default class PostManageView extends Component {
 
   modPost(info) {
     this.props.setEditPostState(info)
-    console.log(info)
   }
 
   delPost(info) {
-    console.log(info)
+    this.props.deletePost(info.postId)
   }
 
   componentWillMount() {

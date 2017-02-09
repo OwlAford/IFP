@@ -28,15 +28,20 @@ let AddEditPostBox = class AddEditPostBoxView extends Component {
   }
 
   onSubmit() {
-    const { form, addPostList } = this.props
+    const { form, formType, addPostList, modifyPost, initVals } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
     validateFields((errors, values) => {
       if (!!errors) {
         message.error('请正确填写内容！')
       } else {
         let formData = getFieldsValue()
-        console.log(formData)
+        let handle = addPostList
 
+        if (formType == 'edit') {
+          formData.postId = initVals.postId
+          handle = modifyPost
+        }
+        
         const showSpin = () => {
           this.setState({
             loading: true
@@ -50,7 +55,7 @@ let AddEditPostBox = class AddEditPostBoxView extends Component {
         }
 
         showSpin()
-        addPostList(formData, () => {
+        handle(formData, () => {
           this.onClear()
           this.onClose()
           hideSpin()

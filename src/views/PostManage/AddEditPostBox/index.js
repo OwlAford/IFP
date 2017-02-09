@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { closeAddEditBox, addPostList } from 'REDUCER/postManage'
+import { closeAddEditBox, addPostList, modifyPost } from 'REDUCER/postManage'
 import AddEditPostBoxView from './AddEditPostBoxView'
 
 const mapDispatchToProps = {
   closeAddEditBox,
-  addPostList
+  addPostList,
+  modifyPost
 }
 
 const mapStateToProps = state => ({

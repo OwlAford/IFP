@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getPostList, resetPageState, setPageShowNum, setCurPageState, setAddPostState, setEditPostState } from 'REDUCER/postManage'
+import { getPostList, resetPageState, setPageShowNum, setCurPageState, setAddPostState, setEditPostState, deletePost } from 'REDUCER/postManage'
 import PostManageView from './PostManageView'
 
 const mapDispatchToProps = {
@@ -8,7 +8,8 @@ const mapDispatchToProps = {
   setPageShowNum,
   setCurPageState,
   setAddPostState,
-  setEditPostState
+  setEditPostState,
+  deletePost
 }
 
 const mapStateToProps = state => ({

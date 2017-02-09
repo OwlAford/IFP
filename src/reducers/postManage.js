@@ -1,6 +1,6 @@
 import NProgress from 'nprogress'
 import { message, notification } from 'antd'
-import { postListAction, addPostListAction } from './request/post'
+import { postListAction, addPostListAction, modifyPostAction, delPostAction } from './request/post'
 
 const SET_POST_LIST = 'SET_POST_LIST'
 const RESET_PAGE_STATE = 'RESET_PAGE_STATE'
@@ -90,6 +90,52 @@ export const addPostList = (data, success, fail) => {
     })
   }
 }
+
+// 修改岗位到服务器
+export const modifyPost = (data, success, fail) => {
+  return (dispatch, state) => {
+    dispatch(modifyPostAction(data)).then(action => {
+      if (action.data.body.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '岗位修改成功！'
+        })
+        // 刷新一次岗位列表
+         dispatch(getPostList())
+        if (success) success()
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '岗位修改失败！'
+        })
+        if (fail) fail()
+      }
+    })
+  }
+}
+
+// 删除岗位
+export const deletePost = data => {
+  return (dispatch, state) => {
+    dispatch(delPostAction(data)).then(action => {
+      if (action.data.body.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '岗位删除成功！'
+        })
+        // 刷新一次岗位列表
+         dispatch(getPostList())
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '岗位删除失败！'
+        })
+      }
+    })
+  }
+}
+
+
 
 
 const initialState = {

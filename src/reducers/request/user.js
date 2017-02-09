@@ -2,19 +2,14 @@ import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import { API } from 'CONSTANT/globals'
 import { md5 } from 'UTIL/md5'
 
-const USER_COMMON_REQ = 'USER_COMMON_REQ'
-const USER_COMMON_SUC = 'USER_COMMON_SUC'
-const USER_COMMON_FAL = 'USER_COMMON_FAL'
-
-const USR_ADD_REQ = 'USR_ADD_REQ'
-const USR_ADD_SUC = 'USR_ADD_SUC'
-const USR_ADD_FAL = 'USR_ADD_FAL'
+const USER_COMMON = ['USER_COMMON_REQ', 'USER_COMMON_SUC', 'USER_COMMON_FAL']
+const USR_ADD = ['USR_ADD_REQ', 'USR_ADD_SUC', 'USR_ADD_FAL']
 
 const strFormat = (str, dft) => (str ? str : dft ? dft : '')
 
 export const userPageByBrhAction = (data, showNum) => ({
   [BZ_REQUESTER]: {
-    types: [USER_COMMON_REQ, USER_COMMON_SUC, USER_COMMON_FAL],
+    types: USER_COMMON,
     url: API.USER_PAGE_BY_BRH_URL,
     body:{
       userNo: strFormat(data.userNo),
@@ -35,7 +30,7 @@ export const userPageByBrhAction = (data, showNum) => ({
 
 export const addUserAction = data => ({
   [BZ_REQUESTER]: {
-    types: [USR_ADD_REQ, USR_ADD_SUC, USR_ADD_FAL],
+    types: USR_ADD,
     url: API.USER_ADD_URL,
     body: {
       userName: strFormat(data.userName),
@@ -59,7 +54,7 @@ export const addUserAction = data => ({
 
 export const updateUserAction = params => ({
   [BZ_REQUESTER]: {
-    types: [USR_ADD_REQ, USR_ADD_REQ, USR_ADD_FAL],
+    types: USR_ADD,
     url: API.USER_UPDATE_URL,
     body: {
       userNo: params.userNo,
@@ -83,7 +78,7 @@ export const updateUserAction = params => ({
 
 export const delUserAction = userNo => ({
   [BZ_REQUESTER]: {
-    types: [USER_COMMON_REQ, USER_COMMON_SUC, USER_COMMON_FAL],
+    types: USER_COMMON,
     url: API.USER_DEL_URL,
     body: {
       userNo: userNo
