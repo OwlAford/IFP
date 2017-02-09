@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { API } from 'CONSTANT/globals'
 import { message } from 'antd'
 
@@ -8,7 +8,7 @@ const error = function () {
 
 export default class NotFound extends Component {
   static contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
   }
 
   componentWillMount() {

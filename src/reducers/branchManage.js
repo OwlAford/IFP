@@ -127,6 +127,7 @@ export const branchAdd = (params, success, fail) => {
   }
 }
 
+
 const initialState = {
   selectedObject: {},
   afterOperateType:'0',

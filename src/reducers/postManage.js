@@ -136,8 +136,6 @@ export const deletePost = data => {
 }
 
 
-
-
 const initialState = {
   postListData: [],
   currentPage: 1,

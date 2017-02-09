@@ -11,6 +11,14 @@ class AppContainer extends Component {
     store  : PropTypes.object.isRequired
   }
 
+  // componentDidMount() {
+  //   window.onbeforeunload = function(e) {
+  //     e = e || window.event
+  //     e.returnValue = '不让刷新'
+  //     return false
+  //   }
+  // }
+
   // 组件在决定重新渲染（虚拟dom比对完毕生成最终的dom后）之前会调用该函数
   shouldComponentUpdate () {
     return false

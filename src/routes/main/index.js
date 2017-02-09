@@ -37,7 +37,9 @@ export default (store) => ({
         require('./branchManage').default(store),
         require('./userManage').default(store),
         require('./roleManage').default(store),
-        require('./postManage').default(store)
+        require('./postManage').default(store),
+        require('./reviewSettings').default(store),
+        require('./policySettings').default(store)
       ])
     })
   }
