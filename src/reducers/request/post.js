@@ -16,3 +16,11 @@ export const postListAction = (currentPage, turnPageShowNum, state) => ({
     }
   }
 })
+
+export const addPostListAction = data => ({
+  [BZ_REQUESTER]: {
+    types: [POST_QUERY_REQ, POST_QUERY_SUC, POST_QUERY_FAL],
+    url: API.GET_POST_LIST_URL,
+    body: data
+  }
+})

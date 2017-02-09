@@ -1,11 +1,14 @@
 import NProgress from 'nprogress'
-import { message } from 'antd'
-import { postListAction } from './request/post'
+import { message, notification } from 'antd'
+import { postListAction, addPostListAction } from './request/post'
 
 const SET_POST_LIST = 'SET_POST_LIST'
 const RESET_PAGE_STATE = 'RESET_PAGE_STATE'
 const SET_CUR_PAGE_STATE = 'SET_CUR_PAGE_STATE'
 const SET_PAGE_SHOW_NUM = 'SET_PAGE_SHOW_NUM'
+const CLOSE_ADD_EDT_BOX = 'CLOSE_ADD_EDT_BOX'
+const SET_ADD_POST_STATE = 'SET_ADD_POST_STATE'
+const SET_EDT_POST_STATE = 'SET_EDT_POST_STATE'
 
 
 // 查询所有岗位
@@ -19,6 +22,7 @@ export const getPostList = () => {
           type: SET_POST_LIST,
           data: action.data.body
         })
+        message.success("加载完毕！")
       } else {
         message.error('获取列表失败！')
       }
@@ -44,11 +48,58 @@ export const setPageShowNum = num => ({
   data: num
 })
 
+// 关闭新增&修改弹框显示状态
+export const closeAddEditBox = () => ({
+  type: CLOSE_ADD_EDT_BOX
+})
+
+// 设置新增岗位弹框
+export const setAddPostState = () => ({
+  type: SET_ADD_POST_STATE
+})
+
+// 设置修改岗位弹框
+export const setEditPostState = params => ({
+  type: SET_EDT_POST_STATE,
+  data: {
+    addEditBoxVisible: true,
+    addEditBoxType: 'edit',
+    addEditBoxInitVals: params
+  }
+})
+
+// 新增岗位到服务器
+export const addPostList = (data, success, fail) => {
+  return (dispatch, state) => {
+    dispatch(addPostListAction(data)).then(action => {
+      if (action.data.body.errorCode == '0') {
+        notification.success({
+          message: '成功',
+          description: '岗位添加成功！'
+        })
+        // 刷新一次岗位列表
+         dispatch(getPostList())
+        if (success) success()
+      } else {
+        notification.warning({
+          message: '失败',
+          description: '岗位添加失败！'
+        })
+        if (fail) fail()
+      }
+    })
+  }
+}
+
 
 const initialState = {
   postListData: [],
   currentPage: 1,
-  turnPageShowNum: 10
+  turnPageShowNum: 10,
+
+  addEditBoxVisible: false,
+  addEditBoxType: 'add',
+  addEditBoxInitVals: {}
 }
 
 export default (state = initialState, action) => {
@@ -77,6 +128,26 @@ export default (state = initialState, action) => {
         ...state,
         currentPage: 1,
         turnPageShowNum: 10
+      }
+
+    case CLOSE_ADD_EDT_BOX:
+      return {
+        ...state,
+        addEditBoxVisible: false
+      }
+
+    case SET_ADD_POST_STATE:
+      return {
+        ...state,
+        addEditBoxVisible: true,
+        addEditBoxType: 'add',
+        addEditBoxInitVals: {}
+      }
+
+    case SET_EDT_POST_STATE:
+      return {
+        ...state,
+        ...action.data
       }
 
     default:

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Table, Row, Col, Button } from 'antd'
 import utils from 'UTIL/public'
 import AU from 'UTIL/auth'
+import AddEditPostBox from './AddEditPostBox'
 
 
 export default class PostManageView extends Component {
@@ -11,10 +12,11 @@ export default class PostManageView extends Component {
   } 
 
   addPost() {
-
+    this.props.setAddPostState()
   }
 
   modPost(info) {
+    this.props.setEditPostState(info)
     console.log(info)
   }
 
@@ -113,6 +115,7 @@ export default class PostManageView extends Component {
             bordered
           />
         </div>
+        <AddEditPostBox/>
       </div>
     )
   }
