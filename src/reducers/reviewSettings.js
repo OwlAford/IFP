@@ -19,7 +19,6 @@ export const getBsnList = selectOpt => {
             bsnSelectOpt: selectOpt
           }
         })
-        message.success("加载完毕！")
       } else {
         message.error('获取列表失败！')
       }

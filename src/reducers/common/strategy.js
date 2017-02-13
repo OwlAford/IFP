@@ -1,11 +1,13 @@
 import { message } from 'antd'
 import { getStrategyListAction } from '../request/strategy'
+import NProgress from 'nprogress'
 
 const SET_STRATEGY_LIST = 'SET_STRATEGY_LIST'
 
 
 export const getStrategyList = selOpt => {
   return (dispatch, getState) => {
+    NProgress.start()
     dispatch(getStrategyListAction(selOpt)).then(action => {
       const dataBody = action.data.body
       const authDefList = dataBody.authDefList
@@ -30,6 +32,7 @@ export const getStrategyList = selOpt => {
           strategyListSelOpt: selOpt
         }
       })
+      NProgress.done()
     })
   } 
 }
