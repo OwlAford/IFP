@@ -1,28 +1,48 @@
 import NProgress from 'nprogress'
 import { message, notification } from 'antd'
-import { postListAction, addPostListAction, modifyPostAction, delPostAction } from './request/post'
+import { getBsnListAction } from './request/strategy'
 
-const SET_POST_LIST = 'SET_POST_LIST'
+const GET_BSN_LIST = 'GET_BSN_LIST'
 
 
-// 设置翻页状态
-export const setCurPageState = current => ({
-  type: SET_POST_LIST,
-  data: current
-})
+export const getBsnList = selectOpt => {
+  return (dispatch, getState) => {
+    NProgress.start()
+    dispatch(getBsnListAction(selectOpt)).then(action => {
+      const dataBody = action.data.body
+      if (dataBody.errorCode == '0') {
+        dispatch({
+          type: GET_BSN_LIST,
+          data: {
+            bsnList: dataBody.bsnList,
+            bsnListTotalNum: dataBody.turnPageTotalNum,
+            bsnSelectOpt: selectOpt
+          }
+        })
+        message.success("加载完毕！")
+      } else {
+        message.error('获取列表失败！')
+      }
+      NProgress.done()
+    })
+  } 
+}
 
 
 const initialState = {
-  pageName: 'ReviewSettings'
+  pageName: 'ReviewSettings',
+  bsnList: [],
+  bsnListTotalNum: 0,
+  bsnSelectOpt: {}
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case SET_POST_LIST:
+    case GET_BSN_LIST:
       return {
         ...state,
-        Data: action.data
+        ...action.data
       }
 
     default:
