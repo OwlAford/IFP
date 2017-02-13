@@ -10,3 +10,29 @@ export const getBsnListAction = selectOpt => ({
     body: selectOpt
   }
 })
+
+export const getStrategyAction = authId => ({
+  [BZ_REQUESTER]: {
+    types: REL_MEUITM,
+    url: API.GET_STRATEGY_URL, 
+    body: {
+      authId
+    }
+  }
+})
+
+export const getStrategyListAction = params => ({
+  [BZ_REQUESTER]: {
+    types: REL_MEUITM,
+    url: API.GET_STRATEGY_LIST_URL, 
+    body: params
+  }
+})
+
+export const setRelationAction = params => ({
+  [BZ_REQUESTER]: {
+    types: REL_MEUITM,
+    url: API.SET_CONNECTION_URL, 
+    body: params
+  }
+})

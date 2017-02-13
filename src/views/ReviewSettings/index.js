@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
-import { getBsnList } from 'REDUCER/reviewSettings'
+import { getBsnList, getStrategy, getStrategyList } from 'REDUCER/reviewSettings'
 import ReviewSettingsView from './ReviewSettingsView'
 
 const mapDispatchToProps = {
-  getBsnList
+  getBsnList,
+  getStrategy,
+  getStrategyList
 }
 
 const mapStateToProps = state => ({

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { Row, Col, Table, Button } from 'antd'
+import { Row, Col, Table, Button, Modal } from 'antd'
 import InputSearch from 'COMPONENT/InputSearch'
+import DetailBox from './DetailBox'
+import RelSetBox from './RelSetBox'
+import Spin from 'COMPONENT/Spin'
 import AU from 'UTIL/auth'
 
 
@@ -8,7 +11,26 @@ export default class ReviewSettingsView extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      modalVisible: false,
+      modalType: 'detail',
+      modalDetailInfo: {},
+      modalRelSetInfo: {},
+      loading: false
+    }
     this.onSearch = this.onSearch.bind(this)
+  }
+
+  showSpin() {
+    this.setState({
+      loading: true
+    })
+  }
+  
+  hideSpin() {
+    this.setState({
+      loading: false
+    })
   }
 
   initTable() {
@@ -17,11 +39,13 @@ export default class ReviewSettingsView extends Component {
       turnPageShowNum: 10,
       bsnName: ''
     })
-  } 
-
-  componentWillMount() {
-    this.initTable()
   }
+
+  onCloseModal() {
+    this.setState({
+      modalVisible: false
+    })
+  } 
 
   onSearch(bsnName) {
     const { getBsnList, bsnSelectOpt } = this.props
@@ -32,8 +56,38 @@ export default class ReviewSettingsView extends Component {
     })
   }
 
+  setRelStrategy(info) {
+    this.setState({
+      modalVisible: true,
+      modalType: 'set',
+      modalRelSetInfo: info
+    })
+  }
+
+  viewRelStrategy(info) {
+    this.showSpin()
+    this.props.getStrategy(info.authId, () => {
+      this.setState({
+        modalVisible: true,
+        modalType: 'detail',
+        modalDetailInfo: info
+      }, () => {
+        this.hideSpin()
+      })
+    })
+  }
+
+  componentWillMount() {
+    this.initTable()
+    this.props.getStrategyList({
+      currentPage: 1,
+      turnPageShowNum: 10
+    })
+  }
+
   render() {
     const { userMenu, bsnList, getBsnList, bsnListTotalNum, bsnSelectOpt } = this.props
+    const { modalVisible, modalType, modalRelSetInfo, modalDetailInfo } = this.state
 
     const columns = [{
       title: '交易编号',
@@ -52,7 +106,7 @@ export default class ReviewSettingsView extends Component {
       dataIndex: 'alias',
       key: 'alias',
       render: (text, record) => {
-        return <a>{text}</a>
+        return <a onClick={ e => this.viewRelStrategy(record) }>{text}</a>
       }
     }, {
       title: '关联策略设置',
@@ -60,7 +114,7 @@ export default class ReviewSettingsView extends Component {
       render: (text, record) => {
         const buttonList = [{
           item: 'F009', 
-          button: <a>设置</a>
+          button: <a onClick={ e => this.setRelStrategy(record) }>设置</a>
         }]
         return AU.handleItem(userMenu, buttonList)
       }
@@ -89,7 +143,7 @@ export default class ReviewSettingsView extends Component {
 
     return (
       <div className="pageReviewSettings">
-        <div style={{ padding: '20px 30px', height: '72px' }}>
+        <div style={{ padding: '20px 20px 20px 30px', height: '72px' }}>
           <Button onClick={ e => this.initTable() }>重置</Button>
           <div style={{ float: 'right' }}>
             <InputSearch
@@ -108,6 +162,29 @@ export default class ReviewSettingsView extends Component {
             bordered
           />
         </div>
+        <Modal
+          visible={modalVisible}
+          title={modalType == 'detail' ? '策略详情' : '设置策略'}
+          onCancel={ () => this.onCloseModal() }
+          width={1000}
+          footer={[
+            <Button 
+              key="back" 
+              type="ghost" 
+              size="large"  
+              onClick={ () => this.onCloseModal() }
+            >
+              退出
+            </Button>
+          ]}
+        >
+          {
+            modalType == 'detail' ? 
+            <DetailBox info={modalDetailInfo}/> : 
+            <RelSetBox info={modalRelSetInfo}/>
+          }
+        </Modal>
+        <Spin loading={this.state.loading}/>
       </div>
     )
   }
