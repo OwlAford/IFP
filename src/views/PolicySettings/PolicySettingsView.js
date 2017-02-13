@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd'
-
+import { Row, Col, Button } from 'antd'
+import AU from 'UTIL/auth'
 
 
 export default class PolicySettingsView extends Component {
 
   constructor(props) {
     super(props)
+
+  }
+
+  addPolicy() {
 
   } 
 
@@ -19,10 +23,22 @@ export default class PolicySettingsView extends Component {
   }
 
   render() {
-    const { name } = this.props
+    const { userMenu } = this.props
+    const addBtn = (
+      <Button 
+        size="large" 
+        type="primary" 
+        icon="plus-circle-o"
+        onClick={(e) => this.addPolicy()}
+      >
+        新增策略
+      </Button>
+    )
     return (
       <div className="pagePolicySettings">
-        {name}
+        <div style={{padding: '20px 30px', textAlign: 'right'}}>
+          {AU.checkButton(userMenu, 'F001', addBtn)}
+        </div>
       </div>
     )
   }

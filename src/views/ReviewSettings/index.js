@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { getBsnList, getStrategy, getStrategyList } from 'REDUCER/reviewSettings'
+import { getBsnList, getStrategy} from 'REDUCER/reviewSettings'
+import { getStrategyList } from 'REDUCER/common/strategy'
 import ReviewSettingsView from './ReviewSettingsView'
 
 const mapDispatchToProps = {

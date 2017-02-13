@@ -1,23 +1,45 @@
 import React, { Component } from 'react'
-import { Table } from 'antd'
+import { Row, Col, Button, Table } from 'antd'
+import AU from 'UTIL/auth'
 
 
-export default class RelSetBoxView extends Component {
-  
+export default class StrategySettingsView extends Component {
+
   constructor(props) {
     super(props)
   }
 
-  setRelStrgy(record) {
-    this.props.setRelation({
-      bsnCode: this.props.info.bsnCode,
-      authId: record.authId
+  addPolicy() {
+    console.log('新增策略')
+  }
+
+  modStrategy(info) {
+    console.log(info)
+  } 
+
+  delStrategy(info) {
+    console.log(info)
+  } 
+
+  componentWillMount() {
+    this.props.getStrategyList({
+      currentPage: 1,
+      turnPageShowNum: 10
     })
   }
 
-
   render() {
-    const { info, strategyList, getStrategyList, totalNum, strategyListSelOpt } = this.props
+    const { userMenu, strategyList, getStrategyList, totalNum, strategyListSelOpt } = this.props
+    const addBtn = (
+      <Button 
+        size="large" 
+        type="primary" 
+        icon="plus-circle-o"
+        onClick={(e) => this.addPolicy()}
+      >
+        新增策略
+      </Button>
+    )
 
     const columns = [{
       title: '策略编号',
@@ -58,10 +80,19 @@ export default class RelSetBoxView extends Component {
         key: 'add5'
       }]
     }, {
-      title: '操作',
-      key: 'operation',
-      render: (text, record) => <a onClick={ e => this.setRelStrgy(record) }>设置关联</a>
-    }]
+        title: '操作',
+        key: 'operation',
+        render: (text, record) => {
+          const buttonList = [{
+            item: 'F002',
+            button: <a onClick={e => {this.modStrategy(record)}}>修改</a>
+          }, {
+            item: 'F004', 
+            button: <a onClick={e => {this.delStrategy(record)}}>删除</a>
+          }]
+          return AU.handleItem(userMenu, buttonList)
+        }
+      }]
 
     const pagination = {
       total: Number(totalNum),
@@ -85,9 +116,11 @@ export default class RelSetBoxView extends Component {
     }
 
     return (
-      <div className="relSetBox">
-        <h4 style={{ paddingBottom: '15px' }}>交易名称：{info.bsnName}</h4>
-        <div className='app-narrow-table'>
+      <div className="pagePolicySettings">
+        <div style={{padding: '20px 30px', textAlign: 'right'}}>
+          {AU.checkButton(userMenu, 'F001', addBtn)}
+        </div>
+        <div className='app-narrow-table' style={{ padding: '0 30px' }}>
           <Table
             rowKey='authId'
             bordered
@@ -96,7 +129,8 @@ export default class RelSetBoxView extends Component {
             pagination={pagination}
           />
         </div>
-      </div>
+        </div>
     )
   }
+
 }

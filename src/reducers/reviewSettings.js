@@ -4,8 +4,6 @@ import { getBsnListAction, getStrategyAction, getStrategyListAction, setRelation
 
 const GET_BSN_LIST = 'GET_BSN_LIST'
 const SET_STRATEGY = 'SET_STRATEGY'
-const SET_STRATEGY_LIST = 'SET_STRATEGY_LIST'
-
 
 export const getBsnList = selectOpt => {
   return (dispatch, getState) => {
@@ -61,36 +59,6 @@ export const getStrategy = (authId, success, fail) => {
   } 
 }
 
-export const getStrategyList = selOpt => {
-  return (dispatch, getState) => {
-    dispatch(getStrategyListAction(selOpt)).then(action => {
-      const dataBody = action.data.body
-      const authDefList = dataBody.authDefList
-      let strategyList = []
-      authDefList.map(item => {
-        let tmp = {}
-        const def = item.authDefine.split('')
-        Object.assign(tmp, item, {
-          add1: def[0],
-          add2: def[1],
-          add3: def[2],
-          add4: def[3],
-          add5: def[4]
-        })
-        strategyList.push(tmp)
-      })
-      dispatch({
-        type: SET_STRATEGY_LIST,
-        data: {
-          strategyList,
-          strategyListTotalNum: dataBody.turnPageTotalNum,
-          strategyListSelOpt: selOpt
-        }
-      })
-    })
-  } 
-}
-
 export const setRelation = params => {
   return (dispatch, getState) => {
     dispatch(setRelationAction(params)).then(action => {
@@ -112,14 +80,10 @@ export const setRelation = params => {
 }
 
 const initialState = {
-  pageName: 'ReviewSettings',
   bsnList: [],
   bsnListTotalNum: 0,
   bsnSelectOpt: {},
-  strategyDetail: {},
-  strategyList: [],
-  strategyListTotalNum: 0,
-  strategyListSelOpt: {}
+  strategyDetail: {}
 }
 
 export default (state = initialState, action) => {
@@ -135,12 +99,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         strategyDetail: action.data
-      }
-
-    case SET_STRATEGY_LIST:
-      return {
-        ...state,
-        ...action.data
       }
 
     default:

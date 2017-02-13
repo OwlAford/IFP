@@ -105,7 +105,7 @@ export default class PostManageView extends Component {
         <div style={{padding: '20px 30px', textAlign: 'right'}}>
           {AU.checkButton(userMenu, 'F001', addBtn)}
         </div>
-        <div style={{padding: '0 30px'}}>
+        <div className='app-narrow-table' style={{padding: '0 30px'}}>
           <Table 
             rowKey='updateTime'
             columns={columns} 

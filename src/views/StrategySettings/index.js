@@ -1,18 +1,16 @@
 import { connect } from 'react-redux'
-import { setRelation } from 'REDUCER/reviewSettings'
 import { getStrategyList } from 'REDUCER/common/strategy'
-import RelSetBoxView from './RelSetBoxView'
+import StrategySettingsView from './StrategySettingsView'
 
 const mapDispatchToProps = {
-  getStrategyList,
-  setRelation
+  getStrategyList
 }
 
 const mapStateToProps = state => ({
+  userMenu: state.menu.userMenu,
   strategyList: state.strategy.strategyList,
   strategyListSelOpt: state.strategy.strategyListSelOpt,
   totalNum: state.strategy.strategyListTotalNum
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RelSetBoxView)
-
+export default connect(mapStateToProps, mapDispatchToProps)(StrategySettingsView)

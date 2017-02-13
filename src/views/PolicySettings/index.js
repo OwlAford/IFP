@@ -7,7 +7,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-  name: state.policySettings.pageName
+  userMenu: state.menu.userMenu,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PolicySettingsView)

@@ -153,7 +153,7 @@ export default class ReviewSettingsView extends Component {
             />
           </div>
         </div>
-        <div style={{ padding: '0 30px' }}>
+        <div className='app-narrow-table' style={{ padding: '0 30px' }}>
           <Table 
             rowKey='tranCode'
             columns={columns} 

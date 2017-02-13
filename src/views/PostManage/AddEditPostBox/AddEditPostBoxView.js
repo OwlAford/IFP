@@ -84,101 +84,101 @@ let AddEditPostBox = class AddEditPostBoxView extends Component {
           onOk={this.onSubmit}
           onCancel={e => this.onClose()}
           footer={[
-              <Button 
-                key="back" 
-                type="ghost" 
-                size="large" 
-                onClick={(e) => this.onClose()}
-              >
-                返 回
-              </Button>,
+            <Button 
+              key="back" 
+              type="ghost" 
+              size="large" 
+              onClick={(e) => this.onClose()}
+            >
+              返 回
+            </Button>,
 
-              addType ? <Button 
-                key="clean" 
-                type="ghost" 
-                size="large" 
-                onClick={(e) => this.onClear()}
-              >
-                清除
-              </Button> : '',
+            addType ? <Button 
+              key="clean" 
+              type="ghost" 
+              size="large" 
+              onClick={(e) => this.onClear()}
+            >
+              清除
+            </Button> : '',
 
-              <Button 
-                key="submit" 
-                type="primary" 
-                size="large"  
-                onClick={(e) => this.onSubmit()} 
-              >
-                提 交
-              </Button>
-            ]}
-          >
-            <Form horizontal>
-              <Row>
-                <Col span={11}>
-                  <FormItem 
-                    label='岗位名称：'
-                    {...formItemLayout}
-                    required
-                  >
-                    {
-                      getFieldDecorator('postName', {
-                        initialValue: addType ? '' : initVals.postName,
-                        rules: [
-                          {
-                            required: true, 
-                            message: '请输入岗位名称'
-                          }
-                        ]
-                      })(
-                        <Input 
-                          placeholder='请输入岗位名称' 
-                          size='large' 
-                        />
-                      )
-                    }
-                  </FormItem>
-                  <FormItem 
-                    label='状态：'
-                    {...formItemLayout}
-                    required
-                  >
-                    {
-                      getFieldDecorator('state', {
-                        initialValue: addType ? '0' : initVals.state,
-                        rules: [{
-                          message: ' '
-                        }]
-                      })(
-                        <RadioGroup>
-                          <Radio key='a' value='1'>可用</Radio>
-                          <Radio key='b' value='0'>禁用</Radio>
-                        </RadioGroup>
-                      )
-                    }
-                  </FormItem>
-                </Col>
+            <Button 
+              key="submit" 
+              type="primary" 
+              size="large"  
+              onClick={(e) => this.onSubmit()} 
+            >
+              提 交
+            </Button>
+          ]}
+        >
+          <Form horizontal>
+            <Row>
+              <Col span={11}>
+                <FormItem 
+                  label='岗位名称：'
+                  {...formItemLayout}
+                  required
+                >
+                  {
+                    getFieldDecorator('postName', {
+                      initialValue: addType ? '' : initVals.postName,
+                      rules: [
+                        {
+                          required: true, 
+                          message: '请输入岗位名称'
+                        }
+                      ]
+                    })(
+                      <Input 
+                        placeholder='请输入岗位名称' 
+                        size='large' 
+                      />
+                    )
+                  }
+                </FormItem>
+                <FormItem 
+                  label='状态：'
+                  {...formItemLayout}
+                  required
+                >
+                  {
+                    getFieldDecorator('state', {
+                      initialValue: addType ? '0' : initVals.state,
+                      rules: [{
+                        message: ' '
+                      }]
+                    })(
+                      <RadioGroup>
+                        <Radio key='a' value='1'>可用</Radio>
+                        <Radio key='b' value='0'>禁用</Radio>
+                      </RadioGroup>
+                    )
+                  }
+                </FormItem>
+              </Col>
 
-                <Col span={13}>
-                  <FormItem 
-                    label='备注：'
-                    {...formItemLayout}
-                  >
-                    {
-                      getFieldDecorator('remark', {
-                        initialValue: addType ? '' : initVals.remark
-                      })(
-                        <Input 
-                          placeholder='请输入备注' 
-                          size='large' 
-                        />
-                      )
-                    }
-                  </FormItem>
-                </Col>
-              </Row>
-            </Form>
-            <Spin loading={this.state.loading}/>
-          </Modal>
+              <Col span={13}>
+                <FormItem 
+                  label='备注：'
+                  {...formItemLayout}
+                >
+                  {
+                    getFieldDecorator('remark', {
+                      initialValue: addType ? '' : initVals.remark
+                    })(
+                      <Input 
+                        placeholder='请输入备注' 
+                        size='large' 
+                      />
+                    )
+                  }
+                </FormItem>
+              </Col>
+            </Row>
+          </Form>
+          <Spin loading={this.state.loading}/>
+        </Modal>
       </div>
     )
   }

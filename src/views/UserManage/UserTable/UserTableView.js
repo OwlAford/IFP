@@ -122,7 +122,7 @@ export default class UserTableView extends Component {
     }
 
     return (
-      <div className="userQuery" style={{padding: '0 20px'}}>
+      <div className="userQuery app-narrow-table" style={{padding: '0 20px'}}>
         <Table columns={columns} dataSource={dataSource} bordered pagination={pagination}/>
         <PreviewBox/>
         <BindRoleBox/>

@@ -57,12 +57,14 @@ export default class DetailBoxView extends Component {
     return (
       <div className="detailBox">
         <h4 style={{ paddingBottom: '15px' }}>交易名称：{info.bsnName}</h4>
-        <Table
-          bordered
-          columns={columns}
-          dataSource={dataSource}
-          pagination={false}
-        />
+        <div className='app-narrow-table'>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={dataSource}
+            pagination={false}
+          />
+        </div>
       </div>
     )
   }

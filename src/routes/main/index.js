@@ -26,6 +26,9 @@ export default (store) => ({
       }, {
         key: 'config',
         reducer: require('REDUCER/common/config').default
+      }, {
+        key: 'strategy',
+        reducer: require('REDUCER/common/strategy').default
       }])
       cb(null, Main)
     }, 'main')
@@ -39,7 +42,7 @@ export default (store) => ({
         require('./roleManage').default(store),
         require('./postManage').default(store),
         require('./reviewSettings').default(store),
-        require('./policySettings').default(store)
+        require('./strategySettings').default(store)
       ])
     })
   }
