@@ -236,11 +236,7 @@ let BranchAdd = class BranchAddView extends Component {
                     {
                       getFieldDecorator('brhPhone', {
                         initialValue: '',
-                        rules: [
-                          {
-                            required: true, 
-                            message: ' '
-                          }, {
+                        rules: [{
                             validator: this.phoneNumberCheck
                           }
                         ]
