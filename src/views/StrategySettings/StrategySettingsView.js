@@ -1,24 +1,48 @@
 import React, { Component } from 'react'
-import { Row, Col, Button, Table } from 'antd'
+import { Button, Table, Modal } from 'antd'
+import StrategyAddEditBox from './StrategyAddEditBox'
 import AU from 'UTIL/auth'
 
+const confirm = Modal.confirm
 
 export default class StrategySettingsView extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      modalType: 'add',
+      initVal: null
+    }
+  }
+
+  showModal() {
+    this.props.setAddEditModalVisible(true)
   }
 
   addPolicy() {
-    console.log('新增策略')
+    this.showModal()
+    this.setState({
+      modalType: 'add',
+      initVal: null
+    })
   }
 
   modStrategy(info) {
-    console.log(info)
+    this.showModal()
+    this.setState({
+      modalType: 'edit',
+      initVal: info
+    })
   } 
 
   delStrategy(info) {
-    console.log(info)
+    confirm({
+      title: '删除策略',
+      content: '是否确认删除策略？',
+      onOk: () => {
+        this.props.deleteStrategy(info)
+      }
+    })
   } 
 
   componentWillMount() {
@@ -29,7 +53,8 @@ export default class StrategySettingsView extends Component {
   }
 
   render() {
-    const { userMenu, strategyList, getStrategyList, totalNum, strategyListSelOpt } = this.props
+    const { userMenu, strategyList, getStrategyList, totalNum, strategyListSelOpt, addEditBoxVisible } = this.props
+    const { modalType, initVal } = this.state
     const addBtn = (
       <Button 
         size="large" 
@@ -129,7 +154,15 @@ export default class StrategySettingsView extends Component {
             pagination={pagination}
           />
         </div>
-        </div>
+        {
+          addEditBoxVisible ? 
+          <StrategyAddEditBox 
+            modalType={modalType} 
+            initVal={initVal} 
+          /> : 
+          null
+        }
+      </div>
     )
   }
 

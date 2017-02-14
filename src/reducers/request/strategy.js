@@ -36,3 +36,27 @@ export const setRelationAction = params => ({
     body: params
   }
 })
+
+export const addStrategyAction = params => ({
+  [BZ_REQUESTER]: {
+    types: REL_MEUITM,
+    url: API.ADD_STRATEGY_URL, 
+    body: params
+  }
+})
+
+export const editStrategyAction = params => ({
+  [BZ_REQUESTER]: {
+    types: REL_MEUITM,
+    url: API.EDIT_STRATEGY_URL, 
+    body: params
+  }
+})
+
+export const deleteStrategyAction = params => ({
+  [BZ_REQUESTER]: {
+    types: REL_MEUITM,
+    url: API.DELETE_STRATEGY_URL, 
+    body: params
+  }
+})

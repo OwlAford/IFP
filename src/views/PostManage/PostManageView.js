@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Table, Row, Col, Button } from 'antd'
+import { Table, Row, Col, Button, Modal } from 'antd'
 import utils from 'UTIL/public'
 import AU from 'UTIL/auth'
 import AddEditPostBox from './AddEditPostBox'
 
+const confirm = Modal.confirm
 
 export default class PostManageView extends Component {
 
@@ -20,7 +21,13 @@ export default class PostManageView extends Component {
   }
 
   delPost(info) {
-    this.props.deletePost(info.postId)
+    confirm({
+      title: '删除岗位',
+      content: '是否确认删除岗位？',
+      onOk: () => {
+        this.props.deletePost(info.postId)
+      }
+    })
   }
 
   componentWillMount() {

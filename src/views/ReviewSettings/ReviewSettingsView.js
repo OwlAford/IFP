@@ -165,14 +165,14 @@ export default class ReviewSettingsView extends Component {
         <Modal
           visible={modalVisible}
           title={modalType == 'detail' ? '策略详情' : '设置策略'}
-          onCancel={ () => this.onCloseModal() }
+          onCancel={() => this.onCloseModal()}
           width={1000}
           footer={[
             <Button 
               key="back" 
               type="ghost" 
               size="large"  
-              onClick={ () => this.onCloseModal() }
+              onClick={() => this.onCloseModal()}
             >
               退出
             </Button>
