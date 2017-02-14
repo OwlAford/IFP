@@ -6,9 +6,6 @@ import createStore from 'STORE/createStore'
 // 应用容器模块
 import AppContainer from 'CONTAINER/AppContainer'
 
-// 引入全局配置文件
-import './config'
-
 // 创建初始化状态容器，指向一个window全局变量
 const initialState = window.___INITIAL_STATE__
 // 创建一个全局的store状态管理器

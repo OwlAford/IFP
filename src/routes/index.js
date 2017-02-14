@@ -1,7 +1,7 @@
 import CoreLayout from 'LAYOUT/CoreLayout'
-import { API } from 'CONSTANT/globals'
+import { CONTENTNAME } from 'GLOBAL'
 
-const rootPath = (API.CONTENTNAME == '') ? '/' : API.CONTENTNAME
+const rootPath = CONTENTNAME == '' ? '/' : CONTENTNAME
 
 // 配置路由
 export const createRoutes = (store) => ({
@@ -10,7 +10,7 @@ export const createRoutes = (store) => ({
 
   indexRoute  : {
     onEnter: (nextState,replace) => {
-      replace(API.CONTENTNAME + '/login')
+      replace(CONTENTNAME + '/login')
     }
   },
 
@@ -20,10 +20,10 @@ export const createRoutes = (store) => ({
         require('./main').default(store),
         require('./login').default(store), 
         { 
-          path: API.CONTENTNAME + '/redirect', 
+          path: CONTENTNAME + '/redirect', 
           component: require('VIEW/Redirect').default 
         }, { 
-          path: API.CONTENTNAME + '/*', 
+          path: CONTENTNAME + '/*', 
           component: require('VIEW/NoFound').default 
         }
       ])

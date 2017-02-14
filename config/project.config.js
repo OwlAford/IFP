@@ -40,7 +40,7 @@ const config = {
     'react-redux',
     'react-router',
     'redux',
-    // 'antd',
+    'antd',
     'NProgress',
     // 'echarts',
   ]

@@ -1,5 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 
 const APP_MGR = ['APP_MGR_REQ', 'APP_MGR_SUC', 'APP_MGR_FAL']
 

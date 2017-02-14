@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { API } from 'CONSTANT/globals'
 import handleChange from 'UTIL/handleChange'
 import { md5 } from 'UTIL/md5'
 import { message } from 'antd'

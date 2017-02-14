@@ -1,5 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 
 const POST_QUERY = ['POST_QUERY_REQ', 'POST_QUERY_SUC', 'POST_QUERY_FAL']
 

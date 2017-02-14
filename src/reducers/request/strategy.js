@@ -1,4 +1,4 @@
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 
 const REL_MEUITM = ['REL_MEUITM_REQ', 'REL_MEUITM_SUC', 'REL_MEUITM_FAL']

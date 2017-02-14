@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import NProgress from 'nprogress'
 import { message } from 'antd'
+import { HOME_PATH, CONTENTNAME } from 'GLOBAL'
 import { Link } from 'react-router'
-import { API } from 'CONSTANT/globals'
 import handleChange from 'UTIL/handleChange'
 import 'STYLE/pages/login.scss'
 import avatarImg from 'IMAGE/avatar.png'
@@ -39,7 +39,7 @@ export default class LoginView extends Component {
   handleSubmit() {
     const showHome = () => {
       NProgress.done()
-      this.props.router.push(API.CONTENTNAME + '/' + window.globalConfig.HOME_PATH)
+      this.props.router.push(CONTENTNAME + '/' + HOME_PATH)
     }
 
     if (this.state.userName.trim() == '') {
@@ -53,10 +53,6 @@ export default class LoginView extends Component {
       this.props.validateLogin(this.state, showHome)
     }
   }
-
-  // componentWillUnmount() {
-  //   console.log('视图销毁')
-  // }
 
   render() {
     const { userName, pswd, vcode } = this.state

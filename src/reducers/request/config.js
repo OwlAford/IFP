@@ -1,5 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 
 const CONFIG_DATA = ['CONFIG_DATA_REQ', 'CONFIG_DATA_SUC', 'CONFIG_DATA_FAL']
 

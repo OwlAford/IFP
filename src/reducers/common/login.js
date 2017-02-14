@@ -2,7 +2,7 @@ import { delCookies, setCookie } from 'UTIL/cookie'
 import NProgress from 'nprogress'
 import { message } from 'antd'
 import { md5 } from 'UTIL/md5'
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 import { setSessionIDAction, loginAction, logoutAction } from '../request/login'
 
 export const LOGONIN = 'LOGONIN'

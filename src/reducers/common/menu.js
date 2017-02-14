@@ -1,5 +1,6 @@
 import utils from 'UTIL/public'
 import NProgress from 'nprogress'
+import { HOME_MENU } from 'GLOBAL'
 import { getMenuAction } from '../request/menu'
 import { refreshInfo } from './main'
 
@@ -88,7 +89,7 @@ const initialState = {
   items: [],
   topMenu: [],
   userMenu: {},
-  currentMenu: window.globalConfig.HOME_MENU
+  currentMenu: HOME_MENU
 }
 
 export default (state = initialState, action) => {

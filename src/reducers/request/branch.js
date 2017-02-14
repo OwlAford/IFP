@@ -1,5 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 
 const GET_BRANCH_LIST = ['GET_BRANCH_LIST_REQ', 'GET_BRANCH_LIST_SUC', 'GET_BRANCH_LIST_FAL']
 const BRACH_MODIFY = ['BRACH_MODIFY_REQ', 'BRACH_MODIFY_SUC', 'BRACH_MODIFY_FAL']
@@ -32,7 +32,9 @@ export const modifyBranchAction = params => ({
     types: BRACH_MODIFY,   
     url: API.GET_BRANCH_MODIFY,
     body: params,
-    header: {type: 'K'}
+    header: {
+      type: 'K'
+    }
   }
 })
 
@@ -44,7 +46,9 @@ export const deleteBranchAction = params => ({
     body: {
       brhId: params.brhId
     },
-    header: {type: 'K'}
+    header: {
+      type: 'K'
+    }
   }
 }) 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { API } from 'CONSTANT/globals'
+import { CONTENTNAME } from 'GLOBAL'
 
 export default class SidebarView extends Component {
 
@@ -88,7 +88,7 @@ export default class SidebarView extends Component {
     }
 
     let menus = this.props.menus
-    let preUrl = API.CONTENTNAME + '/' + this.props.parentUrl
+    let preUrl = CONTENTNAME + '/' + this.props.parentUrl
 
     return (
       <div className="app-sidebar">

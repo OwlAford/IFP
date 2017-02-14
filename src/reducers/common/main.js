@@ -1,4 +1,5 @@
 import { message } from 'antd'
+import { HOME_PATH } from 'GLOBAL'
 import { getUserConfigData, postList } from './config'
 
 const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
@@ -29,7 +30,7 @@ const initialState = {
   lastCstIP: '',
   lastLoginTime: '',
   loginCount: '',
-  currentPath: window.globalConfig.HOME_PATH,
+  currentPath: HOME_PATH,
   passwordVisible: false
 }
 

@@ -1,4 +1,4 @@
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 
 const APP_PSWD = ['APP_PSWD_REQ', 'APP_PSWD_SUC', 'APP_PSWD_FAL']

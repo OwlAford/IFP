@@ -62,7 +62,7 @@ export const userRoleAssociation = (userNo, userName, roleList) => {
       } else {
         notification.warning({
           message: '失败',
-          description: `绑定失败，errCode:${dataBody.errorCode}，errMsg:${dataBody.errorMsg}`
+          description: '绑定失败！'
         })
       }
     })

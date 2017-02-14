@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { injectReducers } from 'STORE/reducers'
-import { API } from 'CONSTANT/globals'
 
 export default (store) => ({
   path : 'home',
@@ -42,7 +41,8 @@ export default (store) => ({
         require('./roleManage').default(store),
         require('./postManage').default(store),
         require('./reviewSettings').default(store),
-        require('./strategySettings').default(store)
+        require('./strategySettings').default(store),
+        require('./checkList').default(store)
       ])
     })
   }

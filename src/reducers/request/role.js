@@ -1,5 +1,5 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
-import { API } from 'CONSTANT/globals'
+import API from 'CONSTANT/api'
 
 const ROLE_QUERY = ['ROLE_QUERY_REQ', 'ROLE_QUERY_SUC', 'ROLE_QUERY_FAL']
 const USER_COMMON = ['USER_COMMON_REQ', 'USER_COMMON_SUC', 'USER_COMMON_FAL']

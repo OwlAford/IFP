@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { API } from 'CONSTANT/globals'
+import { CONTENTNAME } from 'GLOBAL'
 import Account from '../Account'
 import Sidebar from '../Sidebar'
 import ChangePswd from '../ChangePswd'
@@ -40,7 +40,7 @@ export default class HeaderView extends Component {
             return (
               <Link 
                 key={i}
-                to={API.CONTENTNAME + '/' + item.url} 
+                to={CONTENTNAME + '/' + item.url} 
                 activeClassName='active' 
                 onClick={(e) => this.handleMenu(i)}
               >

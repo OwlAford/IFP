@@ -31,6 +31,7 @@ const webpackConfig = {
       STYLE: path.join(src, 'assets/styles'),
       IMAGE: path.join(src, 'assets/img'),
       CONSTANT: path.join(src, 'constants'),
+      GLOBAL: path.join(src, 'globals'),
       MIDDLEWARE: path.join(src, 'middleware'),
       CONTAINER: path.join(src, 'containers'),
       LAYOUT: path.join(src, 'layouts'),
