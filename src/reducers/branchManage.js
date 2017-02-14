@@ -52,7 +52,7 @@ export const setAddBranchVisible = state => ({
 
 // 树选择的节点
 export const changeBranchSelected = data => {
-  return (dispatch, state) => {
+  return (dispatch, getState) => {
     if (data.brhId != null || data.brhId != undefined) {
       NProgress.start()
       dispatch(getBranchAction(data)).then(action => {
@@ -72,7 +72,7 @@ export const changeBranchSelected = data => {
 
 // 修改机构
 export const branchModify = (params, success, fail) => {
-  return (dispatch,state) => {
+  return (dispatch, getState) => {
     dispatch(changeBranchEmpty())
     dispatch(modifyBranchAction(params)).then(action => {
       if (action.data.body.errorCode=='0') {
@@ -91,7 +91,7 @@ export const branchModify = (params, success, fail) => {
 
 // 删除机构
 export const branchDelete = (params, success, fail) => {
-  return (dispatch, state) => {
+  return (dispatch, getState) => {
     dispatch(changeBranchEmpty())
     dispatch(deleteBranchAction(params)).then( action => {
       if (action.data.body.errorCode == '0' && action.data.body.op_result != '0') {     

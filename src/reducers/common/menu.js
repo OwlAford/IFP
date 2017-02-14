@@ -41,7 +41,7 @@ const addWithoutParentNode = (id, sourceList, targetList) => {
   addWithoutParentNode(node.parentId, sourceList, targetList)
 }
 
-export const initUserMenu = (cb) => {
+export const initUserMenu = cb => {
   let authMenu = []
   let userMenu = []
   let topMenu = []

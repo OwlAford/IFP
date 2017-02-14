@@ -70,7 +70,7 @@ export const setEditPostState = params => ({
 
 // 新增岗位到服务器
 export const addPostList = (data, success, fail) => {
-  return (dispatch, state) => {
+  return (dispatch, getState) => {
     dispatch(addPostListAction(data)).then(action => {
       if (action.data.body.errorCode == '0') {
         notification.success({
@@ -93,7 +93,7 @@ export const addPostList = (data, success, fail) => {
 
 // 修改岗位到服务器
 export const modifyPost = (data, success, fail) => {
-  return (dispatch, state) => {
+  return (dispatch, getState) => {
     dispatch(modifyPostAction(data)).then(action => {
       if (action.data.body.errorCode == '0') {
         notification.success({
@@ -116,7 +116,7 @@ export const modifyPost = (data, success, fail) => {
 
 // 删除岗位
 export const deletePost = data => {
-  return (dispatch, state) => {
+  return (dispatch, getState) => {
     dispatch(delPostAction(data)).then(action => {
       if (action.data.body.errorCode == '0') {
         notification.success({

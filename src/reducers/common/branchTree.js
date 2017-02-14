@@ -38,7 +38,7 @@ const converRoleField = branch => ({
 })
 
 export const initBranchList = (cb) => {
-  return (dispatch,state) => {
+  return (dispatch, getState) => {
     NProgress.start()
     dispatch(getBranchListAction()).then(action => {
       let branchList = action.data.body.branchList
