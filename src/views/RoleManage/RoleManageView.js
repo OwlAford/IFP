@@ -37,7 +37,7 @@ export default class RoleManageView extends Component {
   }
 
   render() {
-    const { getRoleTree, roleList, curRoleId } = this.props
+    const { getRoleTree, roleTreeList, curRoleId } = this.props
     return (
       <div className="pageRoleManage">
         <Row>
@@ -51,7 +51,7 @@ export default class RoleManageView extends Component {
               <RoleTree
                 selectedKeys={[curRoleId]}
                 selected={this.roleSelected}
-                roleList={roleList}
+                roleList={roleTreeList}
               />
             </div>
           </Col>

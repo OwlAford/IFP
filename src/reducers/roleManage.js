@@ -207,16 +207,15 @@ export const setBindRoleBoxVisible = state => ({
 })
 
 // 绑定功能列表到角色上
-export const itemsBindRole = (roleId, roleMenuItemRelList,  success, fail) => {
+export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => {
   return (dispatch, getState) => {
-    dispatch(itemsBindRoleAction(roleId,roleMenuItemRelList)).then(action=>{
+    dispatch(itemsBindRoleAction(roleId, roleMenuItemRelList)).then(action => {
       if (action.data.body.errorCode == '0') {
         notification.success({
           message: '成功',
           description: '功能关联成功！'
         })
         dispatch(getAllRoleFnItems(1, roleId, '', 1))
-        // dispatch(getRoleTree())
         if (success) success()
       } else {
         notification.warning({

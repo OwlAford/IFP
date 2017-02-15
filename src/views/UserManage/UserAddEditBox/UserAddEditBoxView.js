@@ -77,7 +77,7 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onSubmit() {
-    const { form, userBox, postList, addUser, updateUser, branchList, branchAdd } = this.props
+    const { form, userBox, postList, addUser, updateUser, allBranchList, branchAdd } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
 
     validateFields((errors, values) => {
@@ -99,7 +99,7 @@ let BranchAdd = class BranchAddView extends Component {
         // 取到机构名
         let selectBranchId = params.brhId
         let brhName = ''
-        branchList.map(item => {
+        allBranchList.map(item => {
           if (selectBranchId && item.brhId == selectBranchId) {
             brhName = item.brhName
           }

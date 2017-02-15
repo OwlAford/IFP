@@ -1,7 +1,7 @@
 // PropTypes props类型校验
 import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
-// 通过 Provider 将store传递给组件
+// 通过 Provider 将 store 传递给组件
 import { Provider } from 'react-redux'
 
 class AppContainer extends Component {

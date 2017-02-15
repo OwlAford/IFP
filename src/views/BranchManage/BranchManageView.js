@@ -28,7 +28,7 @@ export default class BranchManageView extends Component {
   }
 
   render() {
-    const { changeBranchSelected, branchList, branchId } = this.props
+    const { changeBranchSelected, treeBranchList, branchId } = this.props
 
     return (
       <div className="pageBranchManage">
@@ -43,7 +43,7 @@ export default class BranchManageView extends Component {
               <BranchTree
                 selectedKeys={[branchId]}
                 selected={changeBranchSelected}
-                branchList={branchList}
+                branchList={treeBranchList}
               />
             </div>
           </Col>

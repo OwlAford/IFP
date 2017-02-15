@@ -11,8 +11,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   userBox: state.userManage.userBox,
-  branchNodes: state.branchTree.getBranchList,
-  branchList: state.branchTree.branchList,
+  branchNodes: state.branchTree.selectTreeBranchList,
+  allBranchList: state.branchTree.allBranchList,
   certType: state.config.certType,
   postList: state.config.post.postList,
   level: state.config.level

@@ -28,11 +28,11 @@ export default class UserManageView extends Component {
   }
 
   onSearch(brhName) {
-    const { userPageByBrh, flatBranchList } = this.props
+    const { userPageByBrh, allBranchList } = this.props
 
     // 取到 brhId
     let id = ''
-    flatBranchList.map(item => {
+    allBranchList.map(item => {
       item.brhName == brhName ? id = item.brhId : null
     })
 
@@ -44,7 +44,7 @@ export default class UserManageView extends Component {
   }
 
   render() {
-    const { branchList, selectedKeys } = this.props
+    const { treeBranchList, selectedKeys } = this.props
     return (
       <div className="pageUserManage">
         <Row>
@@ -58,7 +58,7 @@ export default class UserManageView extends Component {
               <BranchTree
                 selectedKeys={selectedKeys}
                 selected={this.branchSelected}
-                branchList={branchList}
+                branchList={treeBranchList}
               />
             </div>
           </Col>

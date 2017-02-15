@@ -12,7 +12,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-  roleList: state.bindRole.roleList,
+  roleTreeList: state.bindRole.roleTreeList,
   curRoleId: state.roleManage.curRoleInfo.roleId
 })
 

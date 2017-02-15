@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Modal } from 'antd'
 import Spin from 'COMPONENT/Spin'
-import AU from 'UTIL/auth'
+import { checkBtnList } from 'UTIL/authButton'
 import PreviewBox from '../PreviewBox'
 import BindRoleBox from '../BindRoleBox'
 
@@ -87,16 +87,19 @@ export default class UserTableView extends Component {
         title:'操作',
         key:'operation',
         render: (text, record) => {
-          const buttonList = [{
-            item: 'F002', button: <a onClick={e => this.modify(record)}>修改</a>
+          return checkBtnList(userMenu, [{
+            item: 'F002', 
+            button: <a onClick={e => this.modify(record)}>修改</a>
           }, {
-            item: 'F004', button: <a onClick={e => this.delUser(record)}>删除</a>
+            item: 'F004', 
+            button: <a onClick={e => this.delUser(record)}>删除</a>
           }, {
-            item: 'F003', button: <a onClick={e => this.preview(record)}>查看</a>
+            item: 'F003', 
+            button: <a onClick={e => this.preview(record)}>查看</a>
           }, {
-            item: 'F009', button: <a onClick={e => this.bindRole(record)}>绑定角色</a>
-          }]
-          return AU.handleItem(this.props.userMenu, buttonList)
+            item: 'F009', 
+            button: <a onClick={e => this.bindRole(record)}>绑定角色</a>
+          }])
         }
       }
     ]

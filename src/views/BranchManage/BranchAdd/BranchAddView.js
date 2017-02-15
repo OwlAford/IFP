@@ -30,7 +30,7 @@ let BranchAdd = class BranchAddView extends Component {
   }
 
   onSubmit() {
-    const { form, branchList, branchAdd } = this.props
+    const { form, allBranchList, branchAdd } = this.props
     const { getFieldsValue, validateFields, resetFields } = form
     validateFields((errors, values) => {
       if (!!errors) {
@@ -52,7 +52,7 @@ let BranchAdd = class BranchAddView extends Component {
 
         let selectBranchId = params.brhId
         let brhPName = ''
-        branchList.map(item => {
+        allBranchList.map(item => {
           if (selectBranchId && item.brhId == selectBranchId) {
             brhPName = item.brhName
           }
@@ -111,7 +111,7 @@ let BranchAdd = class BranchAddView extends Component {
       item => <Option key={item} value={item}>{item}</Option>
     )
 
-    const treeProps  = {
+    const treeProps = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes, 
       placeholder: "请选择所属机构",

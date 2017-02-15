@@ -19,11 +19,13 @@ export default class BindRoleBoxView extends Component {
   onSubmit() {
     const { curRoleId, selectKeys, itemsBindRole } = this.props
     let key = []
+
     selectKeys.map(item => {
       key.push({
         menuItemId: item
       })
     })
+
     const showSpin = () => {
       this.setState({
         loading: true

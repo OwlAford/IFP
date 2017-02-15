@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import utils from 'UTIL/public'
+import { groupList } from 'UTIL/formatList'
 import { getBranchListAction } from '../request/branch'
 
 const GET_BRANCH_LIST = 'GET_BRANCH_LIST'
@@ -14,39 +14,40 @@ const getBranch = branch => ({
   children: []
 })
 
-export const applySelect = data => ({
-  type: APPLY_BRANCH_SELECT,
-  data
-})
-
-const groupGetBranch = getBranchList => ({
-  type: GET_BRANCH_LIST,
-  data: getBranchList
-})
-
-const groupBranch = (branchList, userGetBranchList) => ({
-  type: USER_GROUP_BRANCH,
-  branchList: branchList,
-  userGetBranchList: userGetBranchList
-})
-
-const converRoleField = branch => ({
+const converRole = branch => ({
   id: branch.brhId,
   parentId: branch.brhParentId,
   name: branch.brhName,
   children: []
 })
 
+export const applySelect = data => ({
+  type: APPLY_BRANCH_SELECT,
+  data
+})
+
 export const initBranchList = (cb) => {
   return (dispatch, getState) => {
     NProgress.start()
     dispatch(getBranchListAction()).then(action => {
-      let branchList = action.data.body.branchList
-      let userGetBranchList = utils.groupList(branchList, 'brhId', 'brhParentId', 'children', converRoleField)
-    
-      let getBranchList = utils.groupList(branchList, 'brhId', 'brhParentId', 'children', getBranch)
-      dispatch(groupGetBranch(getBranchList)) //新增的时候查机构列表
-      dispatch(groupBranch(branchList, userGetBranchList))
+      const allBranchList = action.data.body.branchList
+      const treeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', converRole)
+      const selectTreeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', getBranch)
+
+      // 新增的时候查机构列表
+      dispatch({
+        type: GET_BRANCH_LIST,
+        data: { 
+          selectTreeBranchList
+        }
+      })
+      dispatch({
+        type: USER_GROUP_BRANCH,
+        data: {
+          allBranchList,
+          treeBranchList
+        }
+      })
       NProgress.done()
       if (cb) cb()
     })
@@ -54,9 +55,9 @@ export const initBranchList = (cb) => {
 }
 
 const initialState = {
-  branchList: [],
-  getBranchList: [],
-  userGetBranchList: []
+  allBranchList: [],
+  selectTreeBranchList: [],
+  treeBranchList: []
 }
 
 export default (state = initialState, action) => {
@@ -65,14 +66,13 @@ export default (state = initialState, action) => {
     case GET_BRANCH_LIST:
       return {
         ...state,
-        getBranchList: action.data
+        ...action.data
       }
 
     case USER_GROUP_BRANCH:
       return {
         ...state,
-        branchList: action.branchList,
-        userGetBranchList: action.userGetBranchList
+        ...action.data
       }
 
     default:

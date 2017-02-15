@@ -57,7 +57,6 @@ let StrategyAddEditBox = class StrategyAddEditBoxView extends Component {
           authId: initVal.authId,
           areaNo: initVal.areaNo
         })
-        console.log(params)
         
         showSpin()
         handleFn(params, () => {

@@ -1,13 +1,11 @@
-import utils from './public'
-
-export const getCookieVal = (offset) => {
+export const getCookieVal = offset => {
   var endstr = window.document.cookie.indexOf(";", offset)
   if (endstr == -1) 
     endstr = window.document.cookie.length
   return unescape(window.document.cookie.substring(offset, endstr))
 }
 
-export const getCookie = (name) => {
+export const getCookie = name => {
   var arg = name + "="
   var alen = arg.length
   var clen = window.document.cookie.length
@@ -30,15 +28,15 @@ export const setCookie = (name, value) => {
 }
 
 
-export const delCookie = (name) => {
+export const delCookie = name => {
   var exp = new Date()
   exp.setTime(exp.getTime() - 100)
   var cval = getCookie(name)
   window.document.cookie = `${name} = ${cval}; expires=${exp.toGMTString()}; path=/`
 }
 
-export const delCookies = (nameArray) => {
-  if (utils.isArray(nameArray)) {
+export const delCookies = nameArray => {
+  if (Array.isArray(nameArray)) {
     nameArray.map(item => delCookie(item))
   }
 }

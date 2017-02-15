@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Table, Row, Col, Button, Modal } from 'antd'
-import utils from 'UTIL/public'
-import AU from 'UTIL/auth'
+import { checkBtn, checkBtnList } from 'UTIL/authButton'
 import AddEditPostBox from './AddEditPostBox'
 
 const confirm = Modal.confirm
@@ -75,7 +74,7 @@ export default class PostManageView extends Component {
             item: 'F004', 
             button: <a onClick={e => {this.delPost(record)}}>删除</a>
           }]
-          return AU.handleItem(userMenu, buttonList)
+          return checkBtnList(userMenu, buttonList)
         }
       }
     ]
@@ -110,7 +109,7 @@ export default class PostManageView extends Component {
     return (
       <div className="pagePostManage">
         <div style={{padding: '20px 30px', textAlign: 'right'}}>
-          {AU.checkButton(userMenu, 'F001', addBtn)}
+          {checkBtn(userMenu, 'F001', addBtn)}
         </div>
         <div className='app-narrow-table' style={{padding: '0 30px'}}>
           <Table 

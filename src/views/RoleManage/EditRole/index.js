@@ -12,7 +12,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   userMenu: state.menu.userMenu,
-  treeNodes: state.bindRole.getRoleList,
+  treeNodes: state.bindRole.selectRoleTreeList,
   info: state.roleManage.curRoleInfo,
   selectModifyRole: state.roleManage.selectModifyRole
 })

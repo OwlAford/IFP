@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, TreeSelect, Select } from 'antd'
-import AU from 'UTIL/auth'
+import { checkBtnList } from 'UTIL/authButton'
 import AddRoleBox from '../AddRoleBox'
 import BindRoleBox from '../BindRoleBox'
 
@@ -73,7 +73,6 @@ let EditRole = class EditRoleView extends Component {
           roleId: info.roleId ? info.roleId : '',
           rolePId: selectModifyRole ? selectModifyRole : ''
         })
-        console.log(formData)
         updateRole(formData)
       }
     })
@@ -232,10 +231,19 @@ let EditRole = class EditRoleView extends Component {
             </Col>
           </Row>
           <div className="button-group">
-            {AU.checkButton(userMenu, 'F002', modBtn)}
-            {AU.checkButton(userMenu, 'F009', bindBtn)}
-            {AU.checkButton(userMenu, 'F001', addBtn)}
-            {AU.checkButton(userMenu, 'F004', delBtn)}
+            {checkBtnList(userMenu, [{
+              item: 'F002',
+              button: modBtn
+            }, {
+              item: 'F009',
+              button: bindBtn
+            }, {
+              item: 'F001',
+              button: addBtn
+            }, {
+              item: 'F004',
+              button: delBtn
+            }], true)}
           </div>  
         </Form>
         <AddRoleBox/>

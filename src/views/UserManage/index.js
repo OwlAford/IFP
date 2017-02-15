@@ -9,8 +9,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-  branchList: state.branchTree.userGetBranchList,
-  flatBranchList: state.branchTree.branchList,
+  treeBranchList: state.branchTree.treeBranchList,
+  allBranchList: state.branchTree.allBranchList,
   selectedKeys: state.userManage.selectedKeys
 })
 

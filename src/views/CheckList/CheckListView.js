@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Table } from 'antd'
-import AU from 'UTIL/auth'
+import { checkBtnList } from 'UTIL/authButton'
 
 export default class CheckListView extends Component {
 
@@ -56,7 +56,7 @@ export default class CheckListView extends Component {
           item: 'F006', 
           button: <a onClick={e => {this.checkReject(record)}}>驳回</a>
         }]
-        return AU.handleItem(userMenu, buttonList)
+        return checkBtnList(userMenu, buttonList)
       }
     }]
 

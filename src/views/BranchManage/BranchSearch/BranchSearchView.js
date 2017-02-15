@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal } from 'antd'
 import BranchAdd from '../BranchAdd'
-import AU from 'UTIL/auth'
+import { checkBtnList } from 'UTIL/authButton'
 
 const FormItem = Form.Item
 const Confirm = Modal.confirm
@@ -75,9 +75,16 @@ export default class BranchSearchView extends Component {
     return (
       <div className="app-search-panel">
         <div className="button-group">
-          {AU.checkButton(userMenu, 'F002', modBtn)}
-          {AU.checkButton(userMenu, 'F001', addBtn)}
-          {AU.checkButton(userMenu, 'F004', delBtn)}
+          {checkBtnList(userMenu, [{
+            item: 'F002',
+            button: modBtn
+          }, {
+            item: 'F001',
+            button: addBtn
+          }, {
+            item: 'F004',
+            button: delBtn
+          }], true)}
         </div>
         <BranchAdd/>
       </div>

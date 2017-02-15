@@ -11,9 +11,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   visible: state.userManage.bindRoleBox.visible,
-  treeNodes: state.bindRole.userGetRoleList,
-  selectRoleList: state.bindRole.selectedRoleList,
-  roleRelList: state.bindRole.roleRelList,
+  treeNodes: state.bindRole.selectRoleTreeList,
+  selectedRoleList: state.bindRole.selectedRoleList,
+  allSelectRoleList: state.bindRole.allSelectRoleList,
   info: state.userManage.bindRoleBox.info
 })
 

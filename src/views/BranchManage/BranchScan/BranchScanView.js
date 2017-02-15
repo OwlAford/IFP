@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, DatePicker, Select, message, Modal, TreeSelect, notification } from 'antd'
 import Spin from 'COMPONENT/Spin'
-import utils from 'UTIL/public'
+import { isEmptyObject } from 'UTIL/filters'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -19,7 +19,7 @@ let BranchScan = class BranchScanView extends Component {
   }
 
   componentWillUnmount() {
-    this.props.resetForm()   // 清空整个表单
+    this.props.resetForm()
   }
 
   componentWillReceiveProps(newProps) {
@@ -27,7 +27,7 @@ let BranchScan = class BranchScanView extends Component {
     const { resetFields, getFieldsValue, setFieldsValue } = form
 
     // 当选择侧边分支且分支进行了切换时
-    if (!utils.isEmptyObject(selectedBranch) && this.state.brhId != selectedBranch.brhId) {
+    if (!isEmptyObject(selectedBranch) && this.state.brhId != selectedBranch.brhId) {
       this.setState({
         brhId: selectedBranch.brhId
       })
@@ -85,7 +85,7 @@ let BranchScan = class BranchScanView extends Component {
     // 当点击修改机构
     if (selectedOperate == 'MODIFY_BRANCH') {    
       let level = ''
-      if (!utils.isEmptyObject(selectedBranch)) {
+      if (!isEmptyObject(selectedBranch)) {
         let params = getFieldsValue()
         switch (params.brhLevel) {
           case '等级1':
@@ -103,7 +103,10 @@ let BranchScan = class BranchScanView extends Component {
         brhLevel: level
       })
       if (data.brhId) {
-        // 纠错
+        // 避免将空字段保存为 'undefined'
+        data.brhParentId ? null : data.brhParentId = ''
+
+        // 强制纠错，避免选中节点自身作为所属机构
         if(selectedBranch.brhId == data.brhParentId) {
           data.brhParentId = selectedBranch.brhParentId ? selectedBranch.brhParentId : ''
           setFieldsValue({
@@ -116,16 +119,14 @@ let BranchScan = class BranchScanView extends Component {
           hideSpin()
         }, hideSpin)
       }
-    // 当点击删除机构  
-    } else if (selectedOperate == 'DELETE_BRANCH') {
-      if (!utils.isEmptyObject(selectedBranch)) {
-        let params = getFieldsValue()
-        showSpin()
-        branchDelete(params, () => {
-          resetForm()
-          hideSpin()
-        }, hideSpin())
-      }
+    } else if (selectedOperate == 'DELETE_BRANCH' && !isEmptyObject(selectedBranch)) {
+      // 当点击删除机构  
+      let params = getFieldsValue()
+      showSpin()
+      branchDelete(params, () => {
+        resetForm()
+        hideSpin()
+      }, hideSpin())
     }
 
   }

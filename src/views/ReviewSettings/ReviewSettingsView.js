@@ -4,7 +4,7 @@ import InputSearch from 'COMPONENT/InputSearch'
 import DetailBox from './DetailBox'
 import RelSetBox from './RelSetBox'
 import Spin from 'COMPONENT/Spin'
-import AU from 'UTIL/auth'
+import { checkBtn } from 'UTIL/authButton'
 
 
 export default class ReviewSettingsView extends Component {
@@ -112,11 +112,7 @@ export default class ReviewSettingsView extends Component {
       title: '关联策略设置',
       key: 'relation',
       render: (text, record) => {
-        const buttonList = [{
-          item: 'F009', 
-          button: <a onClick={ e => this.setRelStrategy(record) }>设置</a>
-        }]
-        return AU.handleItem(userMenu, buttonList)
+        return checkBtn(userMenu, 'F009', <a onClick={ e => this.setRelStrategy(record) }>设置</a>)
       }
     }]
 

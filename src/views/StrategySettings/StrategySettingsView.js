@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Table, Modal } from 'antd'
 import StrategyAddEditBox from './StrategyAddEditBox'
-import AU from 'UTIL/auth'
+import { checkBtn, checkBtnList } from 'UTIL/authButton'
 
 const confirm = Modal.confirm
 
@@ -108,14 +108,13 @@ export default class StrategySettingsView extends Component {
         title: '操作',
         key: 'operation',
         render: (text, record) => {
-          const buttonList = [{
+          return checkBtnList(userMenu, [{
             item: 'F002',
             button: <a onClick={e => {this.modStrategy(record)}}>修改</a>
           }, {
             item: 'F004', 
             button: <a onClick={e => {this.delStrategy(record)}}>删除</a>
-          }]
-          return AU.handleItem(userMenu, buttonList)
+          }])
         }
       }]
 
@@ -143,7 +142,7 @@ export default class StrategySettingsView extends Component {
     return (
       <div className="pagePolicySettings">
         <div style={{padding: '20px 30px', textAlign: 'right'}}>
-          {AU.checkButton(userMenu, 'F001', addBtn)}
+          {checkBtn(userMenu, 'F001', addBtn)}
         </div>
         <div className='app-narrow-table' style={{ padding: '0 30px' }}>
           <Table

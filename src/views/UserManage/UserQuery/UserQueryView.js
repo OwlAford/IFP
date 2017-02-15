@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, message, Modal, Select, DatePicker } from 'antd'
 import UserAddEditBox from '../UserAddEditBox'
-import AU from 'UTIL/auth'
+import { checkBtn } from 'UTIL/authButton'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -194,7 +194,7 @@ let UserQuery = class UserQueryView extends Component {
           >
             清除条件
           </Button>
-          {AU.checkButton(this.props.userMenu, 'F001', addUserBtn)}
+          {checkBtn(this.props.userMenu, 'F001', addUserBtn)}
         </div>
         {userBox.visible ? <UserAddEditBox/> : ''}
       </div>

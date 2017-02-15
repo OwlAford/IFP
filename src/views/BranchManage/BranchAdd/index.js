@@ -9,8 +9,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   visible: state.branchManage.addBranchBoxVisible,
-  branchNodes: state.branchTree.getBranchList,
-  branchList: state.branchTree.branchList
+  branchNodes: state.branchTree.selectTreeBranchList,
+  allBranchList: state.branchTree.allBranchList
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BranchAddView)

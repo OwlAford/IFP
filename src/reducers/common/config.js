@@ -1,4 +1,3 @@
-import utils from 'UTIL/public'
 import { getUserConfigDataAction } from '../request/config'
 import { postListAction } from '../request/post'
 

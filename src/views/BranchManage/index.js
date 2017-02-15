@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-  branchList: state.branchTree.userGetBranchList,
+  treeBranchList: state.branchTree.treeBranchList,
   branchId: state.branchManage.brhId
 })
 

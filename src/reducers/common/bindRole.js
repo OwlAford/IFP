@@ -1,21 +1,16 @@
-import utils from 'UTIL/public'
+import { groupList } from 'UTIL/formatList'
 import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../request/role'
 import { notification } from 'antd'
 
 const USER_GET_ROLE = 'USER_GET_ROLE'
 const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'
-const ROLE_TREE_LIST = 'ROLE_TREE_LIST'
+const UPDATE_ROLE_TREE_LIST = 'UPDATE_ROLE_TREE_LIST'
 const UPDATE_ROLE_TREE = 'UPDATE_ROLE_TREE'
 
-const getRoleTreeField = (userGetRoleList, roleRelList) => ({
-  type: USER_GET_ROLE,
-  userGetRoleList,
-  roleRelList
-})
 
 // 用户绑定角色所需要数据的类型
-const getRoleField = roleList => ({
+const converTreeSelectRole = roleList => ({
   label: roleList.roleName,
   value: roleList.roleId,
   key: roleList.roleId,
@@ -23,7 +18,7 @@ const getRoleField = roleList => ({
 })
 
 // 查询所有角色时，树所需要的类型
-const converRoleField = role => ({
+const converTreeRole = role => ({
   roleId: role.roleId,
   rolePId: role.rolePId,
   roleName: role.roleName,
@@ -36,15 +31,22 @@ const converRoleField = role => ({
 export const getUserRoleTree = userNo => {
   return (dispatch, getState) => {
     dispatch(getUserRoleListAction(userNo)).then(action => {
+      const dataBody = action.data.body
       let selectKeys = []
-      let userRoleRelList = action.data.body.userRoleRelList
+      let userRoleRelList = dataBody.userRoleRelList
       userRoleRelList.map(item => {
         item.state == '1' ? selectKeys.push(item.roleId) : null
       })
       dispatch(updateSelectedRole(selectKeys))
-      let roleRelList = action.data.body.userRoleRelList
-      let userGetRoleList = utils.groupList(roleRelList, 'roleId', 'rolePId', 'children', getRoleField)
-      dispatch(getRoleTreeField(userGetRoleList, roleRelList))
+      let allSelectRoleList = dataBody.userRoleRelList
+      let selectRoleTreeList = groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
+      dispatch({
+        type: USER_GET_ROLE,
+        data: {
+          selectRoleTreeList,
+          allSelectRoleList
+        }
+      })
     })
   }
 }
@@ -69,30 +71,26 @@ export const userRoleAssociation = (userNo, userName, roleList) => {
   }
 }
 
-const updateRoleTree = roleList => ({
-  type: UPDATE_ROLE_TREE,
-  data: roleList
-})
-
 export const getRoleTree = () => {
   return (dispatch, getState) => {
     NProgress.start()
     dispatch(getRoleListAction()).then(action => {
       const dataBody = action.data.body
-      let roleList = utils.groupList(dataBody.roleList, 'roleId', 'rolePId', 'children', converRoleField)
-      let getRoleList = utils.groupList(dataBody.roleList, 'roleId', 'rolePId', 'children', getRoleField)
-      dispatch(roleTreeList(getRoleList))
-      dispatch(updateRoleTree(roleList))
+      const flatRoleList = dataBody.roleList
+      let roleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)
+      let selectRoleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
+      dispatch({
+        type: UPDATE_ROLE_TREE_LIST,
+        data: selectRoleTreeList
+      })
+      dispatch({
+        type: UPDATE_ROLE_TREE,
+        data: roleTreeList
+      })
       NProgress.done()
     })
   }
 }
-
-const roleTreeList = getRoleList => ({
-  type: ROLE_TREE_LIST,
-  data: getRoleList
-})
-
 
 export const updateSelectedRole = selectedRoleList => ({
   type: UPDATE_USER_ROLE,
@@ -101,10 +99,9 @@ export const updateSelectedRole = selectedRoleList => ({
 
 
 const initialState = {
-  roleList: [],
-  userGetRoleList: [],
-  getRoleList: [],
-  roleRelList: [],
+  roleTreeList: [],
+  selectRoleTreeList: [],
+  allSelectRoleList: [],
   selectedRoleList: []
 }
 
@@ -114,14 +111,13 @@ export default (state = initialState, action) => {
     case USER_GET_ROLE:
       return {
         ...state,
-        userGetRoleList: action.userGetRoleList,
-        roleRelList: action.roleRelList
+        ...action.data
       }
 
     case UPDATE_ROLE_TREE:
       return {
         ...state,
-        roleList: action.data
+        roleTreeList: action.data
       }
 
     case UPDATE_USER_ROLE:
@@ -130,10 +126,10 @@ export default (state = initialState, action) => {
         selectedRoleList: action.data
       }
 
-    case ROLE_TREE_LIST:
+    case UPDATE_ROLE_TREE_LIST:
       return {
         ...state,
-        getRoleList: action.data
+        selectRoleTreeList: action.data
       }
 
     default:

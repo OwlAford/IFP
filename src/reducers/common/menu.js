@@ -1,4 +1,4 @@
-import utils from 'UTIL/public'
+import { groupList, getNodeFromList } from 'UTIL/formatList'
 import NProgress from 'nprogress'
 import { HOME_MENU } from 'GLOBAL'
 import { getMenuAction } from '../request/menu'
@@ -13,12 +13,7 @@ export const selectMenu = currentMenu => ({
   currentMenu: currentMenu
 })
 
-const mergeFinalMenu = menu => ({
-  type: MERGE_FINAL_MENU,
-  items: menu
-})
-
-const converMenuField = menu => ({
+const converMenu = menu => ({
   id: menu.menuId,
   parentId: menu.menuParentId,
   logo: menu.menuLogo,
@@ -29,17 +24,24 @@ const converMenuField = menu => ({
   branchList: []
 })
 
-const addWithoutParentNode = (id, sourceList, targetList) => {
-  let sourcenode = utils.getNodeFromGroupList(id, sourceList, 'id', 'menus', treeNodeToMenu)
-  if (sourcenode)
-    return
+const treeNodeToMenu = item => ({
+  id: item.id,
+  parentId: item.parentId,
+  logo: item.logo,
+  url: item.url,
+  level: item.level,
+  name: item.title
+})
 
-  let node = utils.getNodeFromGroupList(id, targetList, 'id', 'menus', treeNodeToMenu)
-  if (!node)
+const addWithoutPNode = (id, sourceList, targetList) => {
+  let sourceNode = getNodeFromList(id, sourceList, 'id', 'menus', treeNodeToMenu)
+  let node = getNodeFromList(id, targetList, 'id', 'menus', treeNodeToMenu)
+
+  if (sourceNode || !node)
     return
 
   sourceList.push(node)
-  addWithoutParentNode(node.parentId, sourceList, targetList)
+  addWithoutPNode(node.parentId, sourceList, targetList)
 }
 
 export const initUserMenu = cb => {
@@ -47,37 +49,33 @@ export const initUserMenu = cb => {
   let userMenu = []
   let topMenu = []
   return (dispatch, getState) => {
-    let currentPath = getState().main.currentPath
     NProgress.start()
     dispatch(getMenuAction()).then(action => {
       const dataBody = action.data.body
+      const sourceList = dataBody.menuList
+
       dispatch({
         type: SAVE_USER_MENU,
         userMenu: {
-          menuList: dataBody.menuList,
+          menuList: sourceList,
           menuItemList: dataBody.menuItemList
         }
       })
-      authMenu = utils.groupList(dataBody.menuList, 'id', 'parentId', 'menus', converMenuField)
-      authMenu.map(data => {
-        data.level == '0' ? topMenu.push(data) : null
-      })
+
+      authMenu = groupList(dataBody.menuList, 'id', 'parentId', 'menus', converMenu)
+      authMenu.map(data => data.level == '0' ? topMenu.push(data) : null)
 
       let userMenuMap = {}
-      let rawUserMenu = dataBody.menuList
-      rawUserMenu.forEach(value => {
-        userMenuMap[value.id] = value
+      sourceList.map(item => userMenuMap[item.id] = item)
+      sourceList.map(item => item.parentId && !userMenuMap[item.parentId] ? addWithoutPNode(item.parentId, sourceList, authMenu) : null)
+
+      userMenu = groupList(sourceList, 'menuId', 'menuParentId', 'menus', converMenu)
+      dispatch({
+        type: MERGE_FINAL_MENU,
+        items: userMenu
       })
-      rawUserMenu.forEach(value => {
-        if(value.parentId && !userMenuMap[value.parentId]) {
-          addWithoutParentNode(value.parentId, rawUserMenu, authMenu)
-        }
-      })
-      userMenu = utils.groupList(rawUserMenu, 'menuId', 'menuParentId', 'menus', converMenuField)
-      // 其分发的为侧边栏的 reducer
-      dispatch(mergeFinalMenu(userMenu))
+
       dispatch(refreshInfo(action.data))
-      // 传入回调函数
       NProgress.done()
       if (cb) cb()
     })
@@ -108,12 +106,10 @@ export default (state = initialState, action) => {
       }
 
     case SELECT_LEFT_MENU:
-      let userMenu = state.userMenu
-      userMenu = Object.assign({}, userMenu, {currentMenu: action.currentMenu})  
       return {
         ...state,
         currentMenu: action.currentMenu,
-        userMenu: userMenu
+        userMenu: Object.assign({}, state.userMenu, {currentMenu: action.currentMenu}) 
       }
 
     default:

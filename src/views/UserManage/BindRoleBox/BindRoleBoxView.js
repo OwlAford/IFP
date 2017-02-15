@@ -16,11 +16,11 @@ let BindRoleBox = class BindRoleBoxView extends Component {
   }
 
   onSubmit() {
-    const { info, selectRoleList, roleRelList, userRoleAssociation } = this.props
+    const { info, selectedRoleList, allSelectRoleList, userRoleAssociation } = this.props
     const { userNo, userName } = info
     let roleList = []
-    selectRoleList.map((sr, i) => {
-      roleRelList.map((rr, j) => {
+    selectedRoleList.map((sr, i) => {
+      allSelectRoleList.map((rr, j) => {
         let outerkey = rr.roleId
         outerkey == sr ? roleList.push({
           roleId: sr,
@@ -35,14 +35,14 @@ let BindRoleBox = class BindRoleBoxView extends Component {
   }
 
   render() {
-    const { visible, treeNodes, selectRoleList, updateSelectedRole } = this.props
+    const { visible, treeNodes, selectedRoleList, updateSelectedRole } = this.props
     const onChange = value => updateSelectedRole(value)
     const treeProps  = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
-      treeData: treeNodes,             // 供用户选择的角色下拉列表
-      onChange: onChange,              // 改变角色的时候更新value的值
-      value: selectRoleList,           // 选中的时候的值
-      defaultValue: selectRoleList,    // 默认值
+      treeData: treeNodes,               
+      onChange: onChange,                
+      value: selectedRoleList,           
+      defaultValue: selectedRoleList,    
       placeholder: '请选择',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,

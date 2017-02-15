@@ -11,7 +11,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   selectedBranch: state.branchManage.selectedObject,
-  branchNodes: state.branchTree.getBranchList,
+  branchNodes: state.branchTree.selectTreeBranchList,
   selectedOperate: state.branchManage.selectedOperate,
   afterOperateType: state.branchManage.afterOperateType,
 })
