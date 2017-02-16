@@ -14,7 +14,7 @@ const bindDataLoop = (item) => {
   }
 }
 
-export const BranchTreeView = ({ selected, branchList, selectedKeys }) => {
+const BranchTreeView = ({ selected, branchList, selectedKeys }) => {
   if (!branchList) {
     return null
   }

@@ -7,7 +7,7 @@ const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
-let AddRoleBox = class AddRoleBoxView extends Component {
+const AddRoleBox = class AddRoleBoxView extends Component {
   
   constructor(props) {
     super(props)

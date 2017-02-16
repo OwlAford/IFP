@@ -33,7 +33,6 @@ const webpackConfig = {
       CONSTANT: path.join(src, 'constants'),
       GLOBAL: path.join(src, 'globals'),
       MIDDLEWARE: path.join(src, 'middleware'),
-      CONTAINER: path.join(src, 'containers'),
       LAYOUT: path.join(src, 'layouts'),
       UTIL: path.join(src, 'utils'),
       ROUTE: path.join(src, 'routes')

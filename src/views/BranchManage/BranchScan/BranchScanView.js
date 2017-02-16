@@ -8,7 +8,7 @@ const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
-let BranchScan = class BranchScanView extends Component {
+const BranchScan = class BranchScanView extends Component {
 
   constructor(props) {
     super(props)

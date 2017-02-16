@@ -1,15 +1,14 @@
 import React from 'react'
 import 'STYLE'
 
-// 构建页面主视图
-export const CoreLayout = ({ children }) => (
+const Core = ({ children }) => (
   <div className='app-container'>
     { children }
   </div>
 )
 
-CoreLayout.propTypes = {
+Core.propTypes = {
   children : React.PropTypes.element.isRequired
 }
 
-export default CoreLayout
+export default Core

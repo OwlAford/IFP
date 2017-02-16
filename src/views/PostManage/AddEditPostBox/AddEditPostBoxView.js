@@ -5,7 +5,7 @@ import Spin from 'COMPONENT/Spin'
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 
-let AddEditPostBox = class AddEditPostBoxView extends Component {
+const AddEditPostBox = class AddEditPostBoxView extends Component {
   
   constructor(props) {
     super(props)

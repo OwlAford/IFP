@@ -6,7 +6,7 @@ import { checkBtn } from 'UTIL/authButton'
 const FormItem = Form.Item
 const Option = Select.Option
 
-let UserQuery = class UserQueryView extends Component {
+const UserQuery = class UserQueryView extends Component {
 
   constructor(props) {
     super(props)

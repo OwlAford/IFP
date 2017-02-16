@@ -5,7 +5,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
-let BindRoleBox = class BindRoleBoxView extends Component {
+const BindRoleBox = class BindRoleBoxView extends Component {
 
   constructor(props) {
     super(props)

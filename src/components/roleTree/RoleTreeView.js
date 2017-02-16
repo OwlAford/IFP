@@ -14,7 +14,7 @@ const bindDataLoop = (item) => {
   }
 }
 
-export const RoleTreeView = ({ selected, roleList, selectedKeys }) => {
+const RoleTreeView = ({ selected, roleList, selectedKeys }) => {
   if (!roleList) {
     return null
   }

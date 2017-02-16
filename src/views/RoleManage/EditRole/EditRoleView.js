@@ -10,7 +10,7 @@ const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
-let EditRole = class EditRoleView extends Component {
+const EditRole = class EditRoleView extends Component {
 
   constructor(props) {
     super(props)

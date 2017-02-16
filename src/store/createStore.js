@@ -1,14 +1,10 @@
 // applyMiddleware 为应用middleware中间件方法
 // compose 一般用于将多个middleware中间件合并
-// createStore 用于创建store状态管理器
 import { applyMiddleware, compose, createStore } from 'redux'
 // redux-thunk 帮助你统一了异步和同步 action 的调用方式，把异步过程放在 action 级别解决edux-thunk 帮助你统一了异步和同步 action 的调用方式，把异步过程放在 action 级别解决
 import thunk from 'redux-thunk'
-// 浏览器的History API模块
 import { browserHistory } from 'react-router'
-// 创建一个reducers，包含同步reducers和异步reducers
 import makeRootReducer from './reducers'
-// 获取url更新后回调方法，用于触发新store的注入
 import { updateLocation } from './location'
 // 每次action操作及对应的state变化，都可以在控制台打印打印
 import createLogger from 'redux-logger'
@@ -21,7 +17,6 @@ export default (initialState = {}) => {
   // 定义合并增强器方法用户合并enhancers
   let composeEnhancers = compose
 
-  // 中间件方法扩展
   let middleware = [thunk, requester]
 
   // 在开发环境并且开启devtools的条件下，替换成devtools的增强器扩展
@@ -43,7 +38,7 @@ export default (initialState = {}) => {
     )
   )
 
-  // 定义一个异步的 reducuers容器
+  // 定义一个异步的 reducuers 容器
   store.asyncReducers = {}
   // 取消订阅，可调用 store.unsubscribeHistory()，浏览器 History 监听url变化，实时更新store
   store.unsubscribeHistory = browserHistory.listen(updateLocation(store))

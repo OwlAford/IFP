@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form, Input, Icon, message } from 'antd'
 const FormItem = Form.Item
 
-let InputSearch = class InputSearchView extends Component {
+const InputSearch = class InputSearchView extends Component {
 
   render() {
     const { form, placeholder, initialValue, onSearch } = this.props
