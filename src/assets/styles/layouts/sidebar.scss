@@ -13,6 +13,10 @@ $sidebarWidth : 200px;
   z-index: 99;
   overflow: auto;
   
+  .iScrollVerticalScrollbar {
+    opacity: .3
+  }
+
   .menu {
     .menu-title {
       text-align: center;

@@ -9,11 +9,11 @@ export default class App extends Component {
     store  : PropTypes.object.isRequired
   }
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate() {
     return false
   }
 
-  render () {
+  render() {
     const { routes, store } = this.props
 
   	return (

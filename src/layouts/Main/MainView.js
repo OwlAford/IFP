@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../Header'
+import Scroll from 'COMPONENT/Scroll'
 
 export default class MainView extends Component {
   constructor(props) {
@@ -19,18 +20,20 @@ export default class MainView extends Component {
   }
 
   render() {
-    // 若数据未准备好，则放弃渲染，以免报错
-    if (!this.state.loaded) {
-      return false
-    }
     const { router, children } = this.props
-    return (
+
+    const view = (
       <div className="app-main">
         <Header router={router}/>
         <div className="app-content">
-          { children }
+          <Scroll bgColor='#fff'>
+            { children }
+          </Scroll>
         </div>
       </div>        
     )
+
+    // 若菜单未准备好，则放弃渲染，以免报错
+    return this.state.loaded ? view : null
   }
 }

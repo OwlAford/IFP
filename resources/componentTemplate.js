@@ -25,6 +25,10 @@ export default class myView extends Component {
 
   }
 
+  shouldComponentUpdate(){
+    
+  }
+
   componentWillReceiveProps(newProps) {
   }
 
