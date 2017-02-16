@@ -31,7 +31,8 @@ export default class Scroll extends Component {
     const conHeight = container.offsetHeight
     const scrHeight = scroller.offsetHeight
     const ratio = conHeight / scrHeight
-    const barHeight = conHeight * ratio
+    let barHeight = conHeight * ratio
+    barHeight < 50 ? barHeight = 50 : null
 
     if (ratio >= 1) {
       this.setState({
