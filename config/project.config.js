@@ -42,6 +42,7 @@ const config = {
     'redux',
     'antd',
     'NProgress',
+    // 'underscore',
     // 'echarts',
   ]
 }
