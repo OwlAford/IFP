@@ -18,7 +18,7 @@ export default class ApplyHistoryListView extends Component {
   }
 
   resetStateList() {
-    this.props.getStateList({
+    this.props.getHistoryList({
       currentPage: 1,
       turnPageShowNum: 10,
       beginTime: '',
@@ -52,10 +52,14 @@ export default class ApplyHistoryListView extends Component {
   }
 
   render() {
-    const { getStateList, stateList, stateListSelectOpt, totalNum } = this.props
+    const { getHistoryList, historyList, historyListSelectOpt, totalNum } = this.props
 
     const columns = [{
-      title: '申请流水号',
+      title: '授权流水号',
+      dataIndex: 'hisId',
+      key: 'hisId'
+    }, {
+      title: '审批流水号',
       dataIndex: 'flowId',
       key: 'flowId'
     }, {
@@ -70,16 +74,22 @@ export default class ApplyHistoryListView extends Component {
         return <a onClick={e => {this.stateReview(record)}}>{text}</a>
       }
     }, {
+      title: '授权人编号',
+      dataIndex: 'cstNo',
+      key: 'cstNo'
+    }, {
+      title: '授权人姓名',
+      dataIndex: 'cstName',
+      key: 'cstName'
+    }, {
       title: '授权结果',
       dataIndex: 'authFlag',
       key: 'authFlag',
-      render: (text, record) => {
-        return text == '1' || text == 1 ? <span>进行中</span> : text == '0' || text == 0 ? <span>通过</span> : <span>驳回</span>
-      }
+      render: (text, record) => text == '0' || text == 0 ? <span>同意</span> : <span>驳回</span>
     }, {
       title: '授权时间',
-      dataIndex: 'applyDate',
-      key: 'applyDate',
+      dataIndex: 'authTime',
+      key: 'authTime',
       render(text, record) {
         return(<span>{formatDateTime(text)}</span>)
       }
@@ -91,11 +101,11 @@ export default class ApplyHistoryListView extends Component {
 
     const pagination = {
       total: Number(totalNum),
-      current: Number(stateListSelectOpt.currentPage),
+      current: Number(historyListSelectOpt.currentPage),
       showSizeChanger: true,
-      pageSize: Number(stateListSelectOpt.turnPageShowNum),
+      pageSize: Number(historyListSelectOpt.turnPageShowNum),
       onShowSizeChange: (current, pageSize) => {
-        getStateList({
+        getHistoryList({
           currentPage: 1,
           turnPageShowNum: pageSize,
           beginTime: this.state.beginTime,
@@ -103,9 +113,9 @@ export default class ApplyHistoryListView extends Component {
         })
       },
       onChange: (current) => {
-        getStateList({
+        getHistoryList({
           currentPage: current,
-          turnPageShowNum: stateListSelectOpt.turnPageShowNum,
+          turnPageShowNum: historyListSelectOpt.turnPageShowNum,
           beginTime: this.state.beginTime,
           endTime: this.state.endTime
         })
@@ -119,9 +129,9 @@ export default class ApplyHistoryListView extends Component {
         beginTime: start,
         endTime: end
       })
-      getStateList({
+      getHistoryList({
         currentPage: 1,
-        turnPageShowNum: stateListSelectOpt.turnPageShowNum,
+        turnPageShowNum: historyListSelectOpt.turnPageShowNum,
         beginTime: start,
         endTime: end
       })
@@ -180,10 +190,10 @@ export default class ApplyHistoryListView extends Component {
         </div>
         <div className='app-narrow-table'>
           <Table
-            rowKey='flowId'
+            rowKey='hisId'
             bordered
             columns={columns}
-            dataSource={stateList}
+            dataSource={historyList}
             pagination={pagination}
           />
         </div>

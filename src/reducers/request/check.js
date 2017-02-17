@@ -19,4 +19,12 @@ export const getStateListAction = data => ({
   }
 })
 
+export const getHistoryListAction = data => ({
+  [BZ_REQUESTER]: {
+    types: CHECK,
+    url: API.GET_CHECK_HISTORY_LIST_URL, 
+    body: data
+  }
+})
+
 

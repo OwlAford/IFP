@@ -44,6 +44,7 @@ export default (store) => ({
         require('./reviewSettings').default(store),
         require('./strategySettings').default(store),
         require('./checkList').default(store),
+        require('./checkHistoryList').default(store),
         require('./applyHistoryList').default(store)
       ])
     })

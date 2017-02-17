@@ -8,6 +8,6 @@ export default (store) => ({
       const reducer = require('REDUCER/applyHistoryList').default
       injectReducer(store, { key: 'applyHistoryList', reducer })
       cb(null, ApplyHistoryList)
-    }, 'checkList')
+    }, 'applyHistoryList')
   }
 })
