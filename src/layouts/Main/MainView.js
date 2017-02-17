@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from '../Header'
-import Scroll from 'COMPONENT/Scroll'
 
 export default class MainView extends Component {
   constructor(props) {
@@ -26,9 +25,7 @@ export default class MainView extends Component {
       <div className="app-main">
         <Header router={router}/>
         <div className="app-content">
-          <Scroll bgColor='#fff'>
-            { children }
-          </Scroll>
+          { children }
         </div>
       </div>        
     )

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Table, Row, Col, Button, Modal } from 'antd'
 import { checkBtn, checkBtnList } from 'UTIL/authButton'
+import { formatDateTime } from 'UTIL/filters'
 import AddEditPostBox from './AddEditPostBox'
 
 const confirm = Modal.confirm
@@ -50,7 +51,7 @@ export default class PostManageView extends Component {
         dataIndex: 'updateTime',
         key: 'updateTime',
         render(text, record) {
-          return(<span>{text.substring(0, 4)}/{text.substring(4, 6)}/{text.substring(6, 8)} {text.substring(8, 10)}:{text.substring(10, 12)}</span>)
+          return(<span>{formatDateTime(text)}</span>)
         }
       }, {
         title: '备注',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Modal } from 'antd'
 import Spin from 'COMPONENT/Spin'
+import { formatDateTime } from 'UTIL/filters'
 import { checkBtnList } from 'UTIL/authButton'
 import PreviewBox from '../PreviewBox'
 import BindRoleBox from '../BindRoleBox'
@@ -82,7 +83,10 @@ export default class UserTableView extends Component {
       }, {
         title: '创建时间',
         dataIndex: 'createTime',
-        key: 'createTime'
+        key: 'createTime',
+        render(text, record) {
+          return(<span>{formatDateTime(text)}</span>)
+        }
       }, {
         title:'操作',
         key:'operation',

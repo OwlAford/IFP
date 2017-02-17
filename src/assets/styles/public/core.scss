@@ -16,7 +16,6 @@ body {
 .app-wrap, 
 .app-container {
   @include fullScreen;
-  overflow: auto;
   font-size: 14px;
 }
 

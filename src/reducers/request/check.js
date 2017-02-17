@@ -10,3 +10,13 @@ export const getCheckListAction = data => ({
     body: data
   }
 })
+
+export const getStateListAction = data => ({
+  [BZ_REQUESTER]: {
+    types: CHECK,
+    url: API.GET_STATE_LIST_URL, 
+    body: data
+  }
+})
+
+

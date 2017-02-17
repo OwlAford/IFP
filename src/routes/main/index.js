@@ -7,9 +7,10 @@ export default (store) => ({
     component: require('VIEW/Welcome').default
   },
 
-  getComponents(nextState, cb){
+  getComponents(nextState, cb) {
     require.ensure([], require => {
       const Main = require('LAYOUT/Main').default
+      // 注入公用 reducers
       injectReducers(store, [{ 
         key: 'main', 
         reducer: require('REDUCER/common/main').default
@@ -42,7 +43,8 @@ export default (store) => ({
         require('./postManage').default(store),
         require('./reviewSettings').default(store),
         require('./strategySettings').default(store),
-        require('./checkList').default(store)
+        require('./checkList').default(store),
+        require('./applyHistoryList').default(store)
       ])
     })
   }

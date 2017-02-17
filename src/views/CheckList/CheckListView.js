@@ -82,6 +82,7 @@ export default class CheckListView extends Component {
     return (
       <div className="pageCheckList" style={{ padding: '20px 30px' }}>
         <Table
+          rowKey='flowId'
           bordered
           columns={columns}
           dataSource={checkList}
