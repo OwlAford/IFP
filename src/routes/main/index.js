@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import { injectReducers } from 'STORE/reducers'
 
 export default (store) => ({
-  path : 'home',
-  indexRoute : {
+  path: 'home',
+  indexRoute: {
     component: require('VIEW/Welcome').default
   },
 

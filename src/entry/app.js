@@ -1,4 +1,4 @@
-import 'UTIL/polyfills'
+import 'core-js/shim'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from 'STORE/createStore'

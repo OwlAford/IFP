@@ -25,5 +25,4 @@ export const injectReducers = (store, reducerArray) => {
   reducerArray.map(item => injectReducer(store, item))
 }
 
-// 默认导出reducers生成器
 export default makeRootReducer

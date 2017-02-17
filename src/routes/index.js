@@ -1,34 +1,27 @@
-import Core from 'COMPONENT/Core'
 import { CONTENTNAME } from 'GLOBAL'
-
-const rootPath = CONTENTNAME == '' ? '/' : CONTENTNAME
 
 // 配置路由
 export const createRoutes = (store) => ({
-  path        : rootPath,
-  component   : Core,
+  path: CONTENTNAME == '' ? '/' : CONTENTNAME,
+  component: require('COMPONENT/Core').default,
 
-  indexRoute  : {
+  indexRoute: {
     onEnter: (nextState, replace) => {
       replace(`${CONTENTNAME}/login`)
     }
   },
 
-  getChildRoutes(location, cb) {
-    require.ensure([], (require) => {
-      cb(null, [
-        require('./main').default(store),
-        require('./login').default(store), 
-        { 
-          path: `${CONTENTNAME}/redirect`, 
-          component: require('VIEW/Redirect').default 
-        }, { 
-          path: `${CONTENTNAME}/*`, 
-          component: require('VIEW/NoFound').default 
-        }
-      ])
-    })
-  }
+  childRoutes: [
+    require('./main').default(store),
+    require('./login').default(store), 
+    { 
+      path: `${CONTENTNAME}/redirect`, 
+      component: require('VIEW/Redirect').default 
+    }, { 
+      path: `${CONTENTNAME}/*`, 
+      component: require('VIEW/NoFound').default 
+    }
+  ]
   
 })
 
