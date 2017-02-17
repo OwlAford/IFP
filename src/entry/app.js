@@ -1,4 +1,5 @@
 import 'core-js/shim'
+import 'UTIL/eventSource'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from 'STORE/createStore'

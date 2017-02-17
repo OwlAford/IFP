@@ -36,7 +36,15 @@
 
 .app-narrow-table {
   line-height: 1;
+
   .ant-table-tbody >tr >td {
     padding: 14px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    visibility: hidden;
+    clear: both;
   }
 }
