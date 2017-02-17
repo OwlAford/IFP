@@ -8,13 +8,9 @@
   .logo {
     height: 60px;
     width: 240px;
-    line-height: 60px;
     float: left;
-    padding-left: 60px;
-    font-size: 20px;
-    font-weight: 700;
     color: #333;
-    background: url(setBg('logo.png')) no-repeat 15px center / 38px auto;
+    background: url(setBg('logo.png')) no-repeat 10px center / auto 30px;
   }
 
   .guide {

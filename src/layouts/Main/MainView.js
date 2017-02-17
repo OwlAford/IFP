@@ -25,7 +25,9 @@ export default class MainView extends Component {
       <div className="app-main">
         <Header router={router}/>
         <div className="app-content">
-          { children }
+          <div className="app-page-wrapper">
+            { children }
+          </div>
         </div>
       </div>        
     )

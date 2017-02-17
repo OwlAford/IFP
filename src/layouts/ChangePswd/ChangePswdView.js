@@ -46,8 +46,8 @@ export default class ChangePswdView extends Component {
   render() {
     const { oldPswd, newPswd, newAgainPswd } = this.state
     return (
-      <div className="app-modalBox-mask">
-        <div className="app-modalBox">
+      <div className="app-modal-box-mask">
+        <div className="app-modal-box">
           <div className="title">修改密码</div>
           <div className="content">
             <div className="app-form-item">

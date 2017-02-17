@@ -6,7 +6,7 @@ $sidebarWidth : 200px;
 
 .app-sidebar {
   width: $sidebarWidth;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 60px;
   bottom: 0;

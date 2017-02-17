@@ -26,14 +26,18 @@ body {
   bottom: 0;
   top: 60px;
   background-color: #fff;
-  border: 1px solid #E2E8EC;
-  border-bottom: none;
   @include contentRadius;
-  > * {
-    @include contentRadius;
+  
+  .app-page-wrapper {
     background-color: #fff;
+    border: 1px solid #E2E8EC;
+    border-bottom: none;
+    @include contentRadius;
+    position: relative;
+    min-height: 100%;
   }
 }
+
 
 @font-face {font-family: "iconfont";
   src: url(setPath('iconfont.eot'));
@@ -51,13 +55,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-modalBox-mask {
+.app-modal-box-mask {
   @include fixedEdge;
   background-color: $maskOpacity;
   z-index: 999;
   animation: fadeIn .2s;
   
-  .app-modalBox {
+  .app-modal-box {
     @include centerMiddle(520px, 360px)
     @include bgWhite;
     border-radius: 8px;

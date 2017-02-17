@@ -56,7 +56,7 @@ export default class HeaderView extends Component {
     const { currentMenus, currentUrl } = this.state
     return (
       <div className="app-header">
-        <div className="logo">IFP内部管理系统</div>
+        <div className="logo"></div>
         {LnkList(items)}
         <Sidebar 
           menus={currentMenus} 

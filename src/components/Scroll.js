@@ -27,7 +27,8 @@ export default class Scroll extends Component {
 
   initScrollerBar() {
     const { container, scroller, scrollbar } = this.refs
-
+    if (!container || !scroller)
+      return
     const conHeight = container.offsetHeight
     const scrHeight = scroller.offsetHeight
     const ratio = conHeight / scrHeight
