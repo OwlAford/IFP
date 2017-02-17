@@ -2,7 +2,7 @@ import { injectReducer } from 'STORE/reducers'
 
 export default (store) => ({
   path : 'login',
-  getComponent (nextState, cb) {
+  getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const Login = require('VIEW/Login').default
       const LoginReducer = require('REDUCER/common/login').default
