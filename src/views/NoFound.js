@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { CONTENTNAME } from 'GLOBAL'
+import { HOME_PATH } from 'GLOBAL'
 import { message } from 'UTIL/antd'
 
 const error = function () {
@@ -14,7 +14,7 @@ export default class NotFound extends Component {
   componentWillMount() {
     error()
     let timer = setTimeout(() => {
-      this.context.router.replace(CONTENTNAME)
+      this.context.router.replace(HOME_PATH)
       clearTimeout(timer)
     }, 2000)
   }

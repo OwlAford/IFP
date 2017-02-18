@@ -1,6 +1,6 @@
 # IFP Internal Management System
 
-##对IFP内部管理系统进行改造和重构
+##对IFP内部管理系统进行改造和重构(hash路由版)
 
 ###主要改造内容
 
