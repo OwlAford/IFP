@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import NProgress from 'nprogress'
-import { message } from 'antd'
+import { message } from 'UTIL/antd'
 import { HOME_PATH, CONTENTNAME } from 'GLOBAL'
 import { Link } from 'react-router'
 import handleChange from 'UTIL/handleChange'

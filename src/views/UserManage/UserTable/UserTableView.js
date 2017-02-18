@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Modal } from 'antd'
+import { Table, Modal } from 'UTIL/antd'
 import Spin from 'COMPONENT/Spin'
 import { formatDateTime } from 'UTIL/filters'
 import { checkBtnList } from 'UTIL/authButton'

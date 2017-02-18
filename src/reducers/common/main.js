@@ -1,4 +1,4 @@
-import { message } from 'antd'
+import { message } from 'UTIL/antd'
 import { HOME_PATH } from 'GLOBAL'
 import { getUserConfigData, postList } from './config'
 

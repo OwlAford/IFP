@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Table, Modal } from 'antd'
+import { Button, Table, Modal } from 'UTIL/antd'
 import StrategyAddEditBox from './StrategyAddEditBox'
 import { checkBtn, checkBtnList } from 'UTIL/authButton'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Button, Modal } from 'antd'
+import { Row, Col, Button, Modal } from 'UTIL/antd'
 
 export default class PreviewBoxView extends Component {
 

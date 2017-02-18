@@ -1,4 +1,4 @@
-import { message } from 'antd'
+import { message } from 'UTIL/antd'
 import { getStrategyListAction } from '../request/strategy'
 import NProgress from 'nprogress'
 

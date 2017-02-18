@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { CONTENTNAME } from 'GLOBAL'
-import { message } from 'antd'
+import { message } from 'UTIL/antd'
 
 const error = function () {
   message.error('找不到该页面！')

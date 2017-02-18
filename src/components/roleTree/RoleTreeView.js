@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tree } from 'antd'
+import { Tree } from 'UTIL/antd'
 const TreeNode = Tree.TreeNode
 
 const bindDataLoop = (item) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Row, Col, message, Modal, TreeSelect, Select } from 'antd'
+import { Form, Button, Input, Row, Col, message, Modal, TreeSelect, Select } from 'UTIL/antd'
 import { checkBtnList } from 'UTIL/authButton'
 import AddRoleBox from '../AddRoleBox'
 import BindRoleBox from '../BindRoleBox'

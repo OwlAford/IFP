@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Table, Button, Modal } from 'antd'
+import { Row, Col, Table, Button, Modal } from 'UTIL/antd'
 import InputSearch from 'COMPONENT/InputSearch'
 import DetailBox from './DetailBox'
 import RelSetBox from './RelSetBox'

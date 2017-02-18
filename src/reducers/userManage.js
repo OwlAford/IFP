@@ -1,7 +1,7 @@
 import { getRoleByUserAction } from './request/role'
 import { userPageByBrhAction, addUserAction, updateUserAction, delUserAction } from './request/user'
 import NProgress from 'nprogress'
-import { message, notification } from 'antd'
+import { message, notification } from 'UTIL/antd'
 
 export const PAGE_USERS = 'PAGE_USERS'
 

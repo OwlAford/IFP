@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col } from 'UTIL/antd'
 import BranchTree from 'COMPONENT/BranchTree'
 import InputSearch from 'COMPONENT/InputSearch'
 import UserQuery from './UserQuery'

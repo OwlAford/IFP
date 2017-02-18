@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Table } from 'antd'
+import { Button, Table } from 'UTIL/antd'
 import { checkBtnList } from 'UTIL/authButton'
 
 export default class CheckListView extends Component {

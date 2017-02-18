@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'antd'
+import { message, notification } from 'UTIL/antd'
 import { getCheckListAction } from './request/check'
 
 const GET_CHECK_LIST = 'GET_CHECK_LIST'

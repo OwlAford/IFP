@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin } from 'antd'
+import { Spin } from 'UTIL/antd'
 
 const SpinView = ({ loading }) => {
   return (

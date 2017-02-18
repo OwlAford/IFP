@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'antd'
+import { message, notification } from 'UTIL/antd'
 import { getHistoryListAction } from './request/check'
 
 const GET_HISTORY_LIST = 'GET_HISTORY_LIST'

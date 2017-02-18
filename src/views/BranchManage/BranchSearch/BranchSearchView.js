@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Row, Col, message, Modal } from 'antd'
+import { Form, Button, Input, Row, Col, message, Modal } from 'UTIL/antd'
 import BranchAdd from '../BranchAdd'
 import { checkBtnList } from 'UTIL/authButton'
 

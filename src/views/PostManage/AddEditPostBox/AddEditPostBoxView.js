@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Row, Col, message, Modal, Radio } from 'antd'
+import { Form, Button, Input, Row, Col, message, Modal, Radio } from 'UTIL/antd'
 import Spin from 'COMPONENT/Spin'
 
 const FormItem = Form.Item

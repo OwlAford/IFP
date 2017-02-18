@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Row, Col, DatePicker, Select, message, Modal, TreeSelect, notification } from 'antd'
+import { Form, Button, Input, Row, Col, DatePicker, Select, message, Modal, TreeSelect, notification } from 'UTIL/antd'
 import Spin from 'COMPONENT/Spin'
 import { isEmptyObject } from 'UTIL/filters'
 
