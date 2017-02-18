@@ -1,4 +1,4 @@
-import 'core-js/shim'
+import 'babel-polyfill'
 import 'UTIL/eventSource'
 import React from 'react'
 import ReactDOM from 'react-dom'
