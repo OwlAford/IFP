@@ -19,7 +19,7 @@ export default class App extends Component {
   	return (
       <Provider store={store}>
         <div className='app-wrap'>
-          <Router history={hashHistory} children={routes}/>
+          <Router history={hashHistory} routes={routes}/>
         </div>
       </Provider>
     )
