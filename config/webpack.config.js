@@ -20,7 +20,7 @@ const webpackConfig = {
   devtool : project.compiler_devtool,
   resolve : {
     root       : project.paths.client(),
-    extensions : ['', '.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions : ['', '.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       // 自定义路径别名
       ASSET: path.join(src, 'assets'),

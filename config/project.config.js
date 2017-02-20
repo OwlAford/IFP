@@ -22,8 +22,8 @@ const config = {
   // 编译配置
   compiler_babel : {
     cacheDirectory : true,
-    plugins        : ['transform-runtime'],
-    presets        : ['es2015', 'react', 'stage-0']
+    plugins        : ['transform-runtime', 'transform-decorators-legacy'],
+    presets        : ['es2015', 'react', 'stage-2']
   },
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
@@ -36,14 +36,13 @@ const config = {
     colors : true
   },
   compiler_vendors : [
+    'core-js/shim',
+    'promise-polyfill',
     'react',
     'react-redux',
     'react-router',
     'redux',
-    // 'antd',
-    'NProgress',
-    // 'underscore',
-    // 'echarts',
+    'NProgress'
   ]
 }
 

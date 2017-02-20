@@ -6,7 +6,7 @@ import { Modal } from 'UTIL/antd'
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
 
 const PREFIX_HEADER = {
-  'Accept': 'application/json',
+  Accept: 'application/json',
   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 
@@ -107,7 +107,8 @@ const getRequestHeader = (header, type, url) => {
     channelDate: `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`,
     channelTime: `${date.getHours()}${date.getMinutes()}${date.getSeconds()}`,
     iCIFID: iCIFID ? iCIFID : '',
-    eCIFID: eCIFID ? eCIFID : ''
+    eCIFID: eCIFID ? eCIFID : '',
+    'Access-Control-Allow-Headers': 'eCIFID,iCIFID,channelTime,channelDate,transCode,channelFlow,transId'
   }
 
   return type == 'J' ? Object.assign({}, PREFIX_HEADER, {'Content-Type': 'application/json; charset=UTF-8', 'type': 'J'}, header) : Object.assign({}, PREFIX_HEADER, header)

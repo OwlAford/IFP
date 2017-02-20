@@ -1,5 +1,4 @@
-import 'babel-polyfill'
-import 'UTIL/eventSource'
+import 'UTIL/polyfills'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from 'STORE/createStore'

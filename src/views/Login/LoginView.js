@@ -37,10 +37,7 @@ export default class LoginView extends Component {
   }
 
   handleSubmit() {
-    const showHome = () => {
-      NProgress.done()
-      this.props.router.push(HOME_PATH)
-    }
+    const { router, validateLogin } = this.props
 
     if (this.state.userName.trim() == '') {
       message.error('请输入用户名！')
@@ -50,7 +47,15 @@ export default class LoginView extends Component {
       message.error('请输入验证码！')
     } else {
       NProgress.start()
-      this.props.validateLogin(this.state, showHome)
+      validateLogin(this.state, () => {
+        NProgress.done()
+        router.push(HOME_PATH)
+      }, () => {
+        NProgress.done()
+        this.setState({
+          vcode: ''
+        })
+      })
     }
   }
 
