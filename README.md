@@ -1,12 +1,23 @@
 # IFP Internal Management System
 
-##对IFP内部管理系统进行改造和重构(hash路由版)
+##Reconstruction Internal Management System
 
-###主要改造内容
+###Usage:
+Run the following command to the local debugging environment
 
-1. 统一规范使用ES6语法
-2. 更新antd组件及其调用
-3. 重新规划store结构
-4. request请求分离
-5. 模块路由划分配置
-6. sass样式组件化及模块化
+    npm run dev
+
+Package the output files by running the following command
+
+	npm run build
+
+Run the following command to check the syntax of the project
+	
+	npm run lint
+
+###Update log:
+1. Encapsulates request middleware components.
+2. Add ES6 polyfill to project.
+3. Modify webpack package plan.
+4. Optimization the bundle size.
+
