@@ -1,5 +1,7 @@
 import CK from 'UTIL/cookie'
-import { REQ_TYPE_LIST, ROUTER_ACTION_TYPE } from 'CONSTANT/types/common'
+const ROUTER_ACTION_TYPE = '@@router/LOCATION_CHANGE'
+const REQ_TYPE_LIST = ['APP_MGR_REQ']
+
 export function logger({ dispatch, getState }) {
   return next => action => {
     if (window.globalConfig && window.globalConfig.LOG_ACTION === 'true') {
