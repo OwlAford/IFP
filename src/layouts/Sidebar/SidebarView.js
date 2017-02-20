@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { CONTENTNAME } from 'GLOBAL'
 import Scroll from 'COMPONENT/Scroll'
 
 export default class SidebarView extends Component {
@@ -87,10 +88,12 @@ export default class SidebarView extends Component {
       </div>
     )
 
+    const preUrl = CONTENTNAME + '/' + parentUrl
+
     return (
       <div className="app-sidebar">
         <Scroll>
-          {Menu(menus, parentUrl)}
+          {Menu(menus, preUrl)}
         </Scroll>
       </div>
     )

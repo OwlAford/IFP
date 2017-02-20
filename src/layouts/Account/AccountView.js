@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { CONTENTNAME } from 'GLOBAL'
 import avatarImg from 'IMAGE/avatar.png'
 import { getCookie } from 'UTIL/cookie' 
 
@@ -30,7 +31,7 @@ export default class AccountView extends Component {
   handleLogout() {
     const Props = this.props
     Props.logout()
-    Props.router.replace('/')
+    Props.router.replace(CONTENTNAME)
     Props.setPasswordVisible(false)
   }
 

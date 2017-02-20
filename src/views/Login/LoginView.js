@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import NProgress from 'nprogress'
 import { message } from 'UTIL/antd'
-import { HOME_PATH } from 'GLOBAL'
+import { HOME_PATH, CONTENTNAME } from 'GLOBAL'
 import { Link } from 'react-router'
 import handleChange from 'UTIL/handleChange'
 import 'STYLE/pages/login.scss'
@@ -39,7 +39,7 @@ export default class LoginView extends Component {
   handleSubmit() {
     const showHome = () => {
       NProgress.done()
-      this.props.router.push(HOME_PATH)
+      this.props.router.push(CONTENTNAME + '/' + HOME_PATH)
     }
 
     if (this.state.userName.trim() == '') {

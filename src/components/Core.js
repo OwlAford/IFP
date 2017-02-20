@@ -8,7 +8,7 @@ const Core = ({ children }) => (
 )
 
 Core.propTypes = {
-  children: React.PropTypes.element.isRequired
+  children : React.PropTypes.element.isRequired
 }
 
 export default Core

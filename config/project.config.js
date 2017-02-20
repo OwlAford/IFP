@@ -17,7 +17,7 @@ const config = {
 
   // 运行服务配置
   server_host : ip.address(),
-  server_port : process.env.PORT || 3001,
+  server_port : process.env.PORT || 3000,
 
   // 编译配置
   compiler_babel : {

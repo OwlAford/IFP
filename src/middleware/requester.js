@@ -143,12 +143,7 @@ const requestSuccess = (next, actionWith, successType, json, success, url) => {
         onOk: onClose => {
           // 数据校验失败返回登录页
           if (errorCode == 'BLEC0001' || errorCode == 'SYEC0002') {
-            if (__DEV__) {
-              window.location.replace('/')
-            }
-            if (__PROD__) {
-              window.location.href = REMOTE_URL
-            }
+            window.location.href = REMOTE_URL
           }
           onClose()
         }

@@ -1,12 +1,13 @@
+import { CONTENTNAME } from 'GLOBAL'
 
 // 配置路由
 export const createRoutes = (store) => ({
-  path: '/',
+  path: CONTENTNAME == '' ? '/' : CONTENTNAME,
   component: require('COMPONENT/Core').default,
 
   indexRoute: {
     onEnter: (nextState, replace) => {
-      replace('/login')
+      replace(`${CONTENTNAME}/login`)
     }
   },
 
@@ -14,10 +15,10 @@ export const createRoutes = (store) => ({
     require('./main').default(store),
     require('./login').default(store), 
     { 
-      path: 'redirect', 
+      path: `${CONTENTNAME}/redirect`, 
       component: require('VIEW/Redirect').default 
     }, { 
-      path: '*', 
+      path: `${CONTENTNAME}/*`, 
       component: require('VIEW/NoFound').default 
     }
   ]
