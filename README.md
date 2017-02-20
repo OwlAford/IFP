@@ -16,6 +16,14 @@ Run the following command to check the syntax of the project
 	npm run lint
 
 ###Update log:
+
+
+----------
+
+**Date:2017-02-20**
+
+**Members: Aford**
+
 1. Encapsulates request middleware components.
 2. Add ES6 polyfill to project.
 3. Modify webpack package plan.
