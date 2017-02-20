@@ -3,7 +3,7 @@
 ##Reconstruction Internal Management System
 
 ###Usage:
-Run the following command to the local debugging environment
+Run the following command to the local debugging environment, then open `http://localhost:3001` in browser.
 
     npm run dev
 
@@ -20,7 +20,7 @@ Run the following command to check the syntax of the project
 
 ----------
 
-**Date:2017-02-20**
+**Date: 2017-02-20**
 
 **Members: Aford**
 
