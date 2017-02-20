@@ -18,6 +18,7 @@ export default class LoginView extends Component {
     }
     this.handleChange = handleChange.bind(this)
     this.reloadCode = this.reloadCode.bind(this)
+    this.triggerSubmit = this.triggerSubmit.bind(this)
   }
 
   reloadCode() {
@@ -32,8 +33,21 @@ export default class LoginView extends Component {
     e.currentTarget.parentNode.classList.remove('focus')
   }
 
+  triggerSubmit(e) {
+    if (e.key == 'Enter')
+      this.handleSubmit()
+  }
+
   componentWillMount() {
     this.reloadCode()
+  }
+
+  componentDidMount() {
+    window.addEventListener('keyup', this.triggerSubmit, false)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.triggerSubmit)
   }
 
   handleSubmit() {
