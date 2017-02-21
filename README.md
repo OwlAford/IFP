@@ -17,6 +17,14 @@ Run the following command to check the syntax of the project
 
 ###Update log:
 
+----------
+
+**Date: 2017-02-21**
+
+**Members: Aford**
+
+1. Solve the problem of MS Edge fetch request failed
+
 
 ----------
 
