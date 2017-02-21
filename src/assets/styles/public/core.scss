@@ -66,6 +66,7 @@ body {
     @include bgWhite;
     border-radius: 8px;
     animation: zoomIn .3s .2s both;
+    box-shadow: 0 12px 24px -6px rgba(0,0,0,.34);
     
     .close {
       width: 52px;
