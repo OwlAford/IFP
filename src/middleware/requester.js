@@ -107,10 +107,7 @@ const getRequestHeader = (header, type, url) => {
     channelDate: `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`,
     channelTime: `${date.getHours()}${date.getMinutes()}${date.getSeconds()}`,
     iCIFID: iCIFID ? iCIFID : '',
-    eCIFID: eCIFID ? eCIFID : '',
-    // Accept: '*/*',
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Headers': 'Accept, eCIFID, iCIFID, channelTime, channelDate, transCode, channelFlow, transId'
+    eCIFID: eCIFID ? eCIFID : ''
   }
 
   return type == 'J' ? Object.assign({}, PREFIX_HEADER, {'Content-Type': 'application/json; charset=UTF-8', 'type': 'J'}, header) : Object.assign({}, PREFIX_HEADER, header)
