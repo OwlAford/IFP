@@ -1,18 +1,18 @@
-# IFP Internal Management System
+# IFP Internal Management System 2.0
 
 
 > **Reconstruction Internal Management System**
 
-- ###Usage:
-Run the following command to the local debugging environment, then open `http://localhost:3001` in browser.
+###Usage:
+- Run the following command to the local debugging environment, then open `http://localhost:3001` in browser.
 
-    npm run dev
+	npm run dev
 
-Package the output files by running the following command
+- Package the output files by running the following command
 
 	npm run build
 
-Run the following command to check the syntax of the project
+- Run the following command to check the syntax of the project
 	
 	npm run lint
 
