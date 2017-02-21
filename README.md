@@ -1,8 +1,9 @@
 # IFP Internal Management System
 
-##Reconstruction Internal Management System
 
-###Usage:
+> **Reconstruction Internal Management System**
+
+- ###Usage:
 Run the following command to the local debugging environment, then open `http://localhost:3001` in browser.
 
     npm run dev
