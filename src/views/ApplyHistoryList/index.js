@@ -9,7 +9,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   stateList: state.applyHistoryList.stateList,
   stateListSelectOpt: state.applyHistoryList.stateListSelectOpt,
-  totalNum: state.applyHistoryList.stateListTotalNum,
+  totalNum: state.applyHistoryList.stateListTotalNum
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyHistoryListView)
