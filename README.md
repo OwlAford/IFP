@@ -3,34 +3,42 @@
 
 > **Reconstruction Internal Management System**
 
-###Usage:
+## Install
+
+```bash
+npm install
+```
+
+##Usage
 - Run the following command to the local debugging environment, then open `http://localhost:3001` in browser.
 
-	npm run dev
+```bash
+npm run dev
+```
 
 - Package the output files by running the following command
 
-	npm run build
+```bash
+npm run build
+```
 
 - Run the following command to check the syntax of the project
 	
-	npm run lint
+```bash
+npm run lint
+```
 
-###Update log:
+##Update log
 
-----------
 
-**Date: 2017-02-21**
+###2017/02/21
 
 **Members: Aford**
 
 1. Solve the problem of MS Edge fetch request failed
 
 
-----------
-
-**Date: 2017-02-20**
-
+###2017/02/20
 **Members: Aford**
 
 1. Encapsulates request middleware components.
