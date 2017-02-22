@@ -27,4 +27,12 @@ export const getHistoryListAction = data => ({
   }
 })
 
+export const checkDecideAction = data => ({
+  [BZ_REQUESTER]: {
+    types: CHECK,
+    url: API.OPERATE_CHECK_URL, 
+    body: data
+  }
+})
+
 
