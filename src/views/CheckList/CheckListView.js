@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Button, Table, Modal, Input, message } from 'UTIL/antd'
 import { checkBtnList } from 'UTIL/authButton'
+import { str2json } from 'UTIL/filters'
+import InfoTable from 'COMPONENT/InfoTable'
 import Spin from 'COMPONENT/Spin'
 const FormItem = Form.Item
 
@@ -11,8 +13,10 @@ const CheckList = class CheckListView extends Component {
     this.state = {
       loading: false,
       modalVisible: false,
+      reviewVisible: false,
       type: 'agree',
-      currentItem: {}
+      currentItem: {},
+      currentDetail: ''
     }
   }
 
@@ -70,6 +74,7 @@ const CheckList = class CheckListView extends Component {
   }
 
   openAgreeModal(info) {
+    console.log(info)
     this.setState({
       modalVisible: true,
       currentItem: info,
@@ -87,7 +92,17 @@ const CheckList = class CheckListView extends Component {
   }
 
   checkReview(data) {
-    console.log(data)
+    this.setState({
+      reviewVisible: true,
+      currentDetail: data.flowDetail
+    })
+  }
+
+  closeReview() {
+    this.setState({
+      reviewVisible: false,
+      currentItem: {}
+    })
   }
 
   componentWillMount() {
@@ -99,8 +114,8 @@ const CheckList = class CheckListView extends Component {
 
   render() {
     const { form, userMenu, getCheckList, checkList, checkListSelectOpt, totalNum } = this.props
-    const { getFieldDecorator } = this.props.form
-    const { currentItem, type } = this.state
+    const { getFieldDecorator } = form
+    const { loading, currentItem, currentDetail, type, modalVisible, reviewVisible } = this.state
 
     const itemLayout = {
       labelCol: { 
@@ -184,7 +199,7 @@ const CheckList = class CheckListView extends Component {
         <Modal
           title="同意审批"
           width={600}
-          visible={this.state.modalVisible}
+          visible={modalVisible}
           onOk={this.checkSubmit}
           onCancel={e => this.closeModal()}
           footer={[
@@ -244,12 +259,33 @@ const CheckList = class CheckListView extends Component {
               </FormItem>
             }
           </Form>  
+          <Spin loading={loading}/>
         </Modal>
-        <Spin loading={this.state.loading}/>
+        <Modal
+          title="交易详情"
+          width={600}
+          visible={reviewVisible}
+          onCancel={e => this.closeReview()}
+          footer={[
+            <Button 
+              key="back" 
+              type="ghost" 
+              size="large" 
+              onClick={(e) => this.closeReview()}
+            >
+              返 回
+            </Button>
+          ]}
+        >
+          <div style={{ padding: '0 20px' }}>
+            <InfoTable
+              data={str2json(currentDetail)}
+            /> 
+          </div>
+        </Modal>
       </div>
     )
   }
-
 }
 
 export default Form.create()(CheckList)

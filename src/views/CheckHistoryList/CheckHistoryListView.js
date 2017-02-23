@@ -181,7 +181,7 @@ export default class ApplyHistoryListView extends Component {
             style={{float: 'right'}}
             ranges={{ 
               '今日': [moment(), moment()], 
-              '本月': [moment(), moment().endOf('month')] 
+              // '本月': [moment(), moment().endOf('month')] 
             }}
             format="YYYY-MM-DD" 
             disabledDate={disabledDate}

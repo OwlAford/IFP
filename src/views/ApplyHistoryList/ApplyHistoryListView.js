@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Table, DatePicker, Modal } from 'UTIL/antd'
 import moment from 'moment'
-import { formatDateTime } from 'UTIL/filters'
+import InfoTable from 'COMPONENT/InfoTable'
+import { formatDateTime, str2json } from 'UTIL/filters'
 
 const RangePicker = DatePicker.RangePicker
 
@@ -130,39 +131,6 @@ export default class ApplyHistoryListView extends Component {
     // 今日以后的未来日子不允许选择
     const disabledDate = current => current && current.valueOf() > Date.now()
 
-    const formatStr = str => {
-      let paramsArr = str.split(',')
-      let jsonArr = []
-      paramsArr.map(item => {
-        let tmp = {}
-        let li = item.split('=')
-        let key = li[0]
-        let val = li[1]
-        key ? null : key = '未知'
-        if (val) {
-          tmp.key = key
-          val.indexOf(':') > 0 ? val = val.replace(/:/g, '， ') : null
-          tmp.value = val
-          jsonArr.push(tmp)
-        } else {
-          jsonArr.push({
-            key: key,
-            value: '暂无'
-          })
-        }
-      })
-      return jsonArr
-    }  
-
-    const formatForm = str => formatStr(str).map((item, i) => {
-      return (
-        <tr key={i}>
-          <td style={{ padding: '5px 0', textAlign: 'right', fontWeight: 'bold' }}>{item.key}：</td>
-          <td style={{ padding: '5px 0' }}>{item.value}</td>
-        </tr>
-      )
-    })
-
     return (
       <div className="applyHistoryList" style={{ padding: '20px 30px' }}>
         <div style={{ width: '100%', paddingBottom: '20px', height: '48px' }}>
@@ -171,7 +139,7 @@ export default class ApplyHistoryListView extends Component {
             style={{float: 'right'}}
             ranges={{ 
               '今日': [moment(), moment()], 
-              '本月': [moment(), moment().endOf('month')] 
+              // '本月': [moment(), moment().endOf('month')] 
             }}
             format="YYYY-MM-DD" 
             disabledDate={disabledDate}
@@ -202,14 +170,11 @@ export default class ApplyHistoryListView extends Component {
             </Button>
           ]}
         >
-          <div style={{ padding: '0 20px' }}> 
-            <table>
-              <tbody>
-                {formatForm(this.state.detailparams)}
-              </tbody>
-            </table>
+          <div style={{ padding: '0 20px' }}>
+            <InfoTable
+              data={str2json(this.state.detailparams)}
+            /> 
           </div>
-
         </Modal>
       </div>
     )

@@ -22,9 +22,6 @@ export const getPostList = () => {
           type: SET_POST_LIST,
           data: action.data.body
         })
-        message.success("加载完毕！")
-      } else {
-        message.error('获取列表失败！')
       }
       NProgress.done()
     })
