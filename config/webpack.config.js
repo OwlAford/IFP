@@ -24,18 +24,19 @@ const webpackConfig = {
     alias: {
       // 自定义路径别名
       ASSET: path.join(src, 'assets'),
-      STORE: path.join(src, 'store'),
-      VIEW: path.join(src, 'views'),
       COMPONENT: path.join(src, 'components'),
-      REDUCER: path.join(src, 'reducers'),
-      STYLE: path.join(src, 'assets/styles'),
-      IMAGE: path.join(src, 'assets/img'),
       CONSTANT: path.join(src, 'constants'),
+      CORE: path.join(src, 'core'),
       GLOBAL: path.join(src, 'globals'),
-      MIDDLEWARE: path.join(src, 'middleware'),
+      IMAGE: path.join(src, 'assets/img'),
       LAYOUT: path.join(src, 'layouts'),
+      MIDDLEWARE: path.join(src, 'middleware'),
+      REDUCER: path.join(src, 'reducers'),
+      ROUTE: path.join(src, 'routes'),
+      STORE: path.join(src, 'store'),
+      STYLE: path.join(src, 'assets/styles'),
       UTIL: path.join(src, 'utils'),
-      ROUTE: path.join(src, 'routes')
+      VIEW: path.join(src, 'views')
     }  
   },
   module : {}

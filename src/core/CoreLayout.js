@@ -1,14 +1,14 @@
 import React from 'react'
 import 'STYLE'
 
-const Core = ({ children }) => (
+const CoreLayout = ({ children }) => (
   <div className='app-container'>
     { children }
   </div>
 )
 
-Core.propTypes = {
+CoreLayout.propTypes = {
   children: React.PropTypes.element.isRequired
 }
 
-export default Core
+export default CoreLayout

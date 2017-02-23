@@ -2,7 +2,7 @@ import 'UTIL/polyfills'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from 'STORE/createStore'
-import App from 'COMPONENT/App'
+import AppContainer from 'CORE/AppContainer'
 
 const initialState = window.___INITIAL_STATE__
 const store = createStore(initialState)
@@ -12,7 +12,7 @@ const MOUNT_NODE = document.getElementById('root')
 let render = () => {
   const routes = require('ROUTE').default(store)
   ReactDOM.render(
-    <App store={store} routes={routes}/>,
+    <AppContainer store={store} routes={routes}/>,
     MOUNT_NODE
   )
 }

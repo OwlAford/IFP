@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { hashHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
 
-export default class App extends Component {
+export default class AppContainer extends Component {
 
   static propTypes = {
     routes : PropTypes.object.isRequired,

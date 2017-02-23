@@ -1,8 +1,7 @@
 
-// 配置路由
 export const createRoutes = (store) => ({
   path: '/',
-  component: require('COMPONENT/Core').default,
+  component: require('CORE/CoreLayout').default,
 
   indexRoute: {
     onEnter: (nextState, replace) => {
