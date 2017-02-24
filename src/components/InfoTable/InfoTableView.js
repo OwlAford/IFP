@@ -9,7 +9,7 @@ const InfoTableTr = data => data.map((item, i) => {
   )
 })
 
-const InfoTable = ({ data }) => {
+const InfoTableView = ({ data }) => {
   return (
     <table>
       <tbody>
@@ -19,4 +19,4 @@ const InfoTable = ({ data }) => {
   )
 }
 
-export default InfoTable
+export default InfoTableView

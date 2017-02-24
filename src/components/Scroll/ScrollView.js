@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Scroll extends Component {
+export default class ScrollView extends Component {
   constructor(props) {
     super(props)
     this.state = {
