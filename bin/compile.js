@@ -17,7 +17,6 @@ const webpackCompiler = (webpackConfig) =>
       const jsonStats = stats.toJson()
       debug('Webpack compile completed.')
       debug(stats.toString(project.compiler_stats))
-
       if (jsonStats.errors.length > 0) {
         debug('Webpack compiler encountered errors.')
         debug(jsonStats.errors.join('\n'))
@@ -46,7 +45,7 @@ const compile = () => {
     .then(() => {
       debug('Compilation completed successfully.')
     })
-    .catch((err) => {
+    .catch(err => {
       debug('Compiler encountered an error.', err)
       process.exit(1)
     })

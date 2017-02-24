@@ -2,6 +2,7 @@ const path = require('path')
 const debug = require('debug')('app:config:project')
 const argv = require('yargs').argv
 const ip = require('ip')
+
 debug('Creating default configuration.')
 
 // 默认配置
@@ -61,19 +62,15 @@ config.globals = {
 // 校验组件模块依赖
 const pkg = require('../package.json')
 
-config.compiler_vendors = config.compiler_vendors
-  .filter((dep) => {
+config.compiler_vendors = config.compiler_vendors.filter(dep => {
     if (pkg.dependencies[dep]) return true
 
-    debug(
-      `Package "${dep}" was not found as an npm dependency in package.json; ` +
-      `it won't be included in the webpack vendor bundle.
-       Consider removing it from \`compiler_vendors\` in ~/config/index.js`
-    )
+    debug(`Package "${dep}" was not found as an npm dependency in package.json; 
+      it won't be included in the webpack vendor bundle.`)
   })
 
 // 基础路径配置
-function base () {
+function base() {
   const args = [config.path_base].concat([].slice.call(arguments))
   return path.resolve.apply(path, args)
 }
@@ -87,7 +84,7 @@ config.paths = {
 
 // 调试环境配置
 debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
-const environments = require('./environments.config')
+const environments = require('./env.config')
 const overrides = environments[config.env]
 if (overrides) {
   debug('Found overrides, applying to default configuration.')

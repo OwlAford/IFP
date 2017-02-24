@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
 const debug = require('debug')('app:config:webpack')
-// 定义根目录
+
 const path = require('path')
 const rootPath = path.resolve(__dirname, '..')
 const src = path.join(rootPath, 'src')
@@ -14,6 +14,7 @@ const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
 
 debug('Creating configuration.')
+
 const webpackConfig = {
   name    : 'client',
   target  : 'web',
@@ -23,20 +24,20 @@ const webpackConfig = {
     extensions : ['', '.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       // 自定义路径别名
-      ASSET: path.join(src, 'assets'),
-      COMPONENT: path.join(src, 'components'),
-      CONSTANT: path.join(src, 'constants'),
-      CORE: path.join(src, 'core'),
-      GLOBAL: path.join(src, 'globals'),
-      IMAGE: path.join(src, 'assets/img'),
-      LAYOUT: path.join(src, 'layouts'),
-      MIDDLEWARE: path.join(src, 'middleware'),
-      REDUCER: path.join(src, 'reducers'),
-      ROUTE: path.join(src, 'routes'),
-      STORE: path.join(src, 'store'),
-      STYLE: path.join(src, 'assets/styles'),
-      UTIL: path.join(src, 'utils'),
-      VIEW: path.join(src, 'views')
+      ASSET      : path.join(src, 'assets'),
+      COMPONENT  : path.join(src, 'components'),
+      CONSTANT   : path.join(src, 'constants'),
+      CORE       : path.join(src, 'core'),
+      GLOBAL     : path.join(src, 'globals'),
+      IMAGE      : path.join(src, 'assets/img'),
+      LAYOUT     : path.join(src, 'layouts'),
+      MIDDLEWARE : path.join(src, 'middleware'),
+      REDUCER    : path.join(src, 'reducers'),
+      ROUTE      : path.join(src, 'routes'),
+      STORE      : path.join(src, 'store'),
+      STYLE      : path.join(src, 'assets/styles'),
+      UTIL       : path.join(src, 'utils'),
+      VIEW       : path.join(src, 'views')
     }  
   },
   module : {}
@@ -74,7 +75,7 @@ webpackConfig.plugins = [
     filename : 'index.html',
     inject   : 'body',
     minify   : {
-      removeComments : true,    
+      removeComments     : true,    
       collapseWhitespace : true
     }
   })
@@ -82,12 +83,10 @@ webpackConfig.plugins = [
 
 // 确保编译器不被跳过和误报
 if (!argv.watch) {
-  webpackConfig.plugins.push(function () {
-    this.plugin('done', function (stats) {
+  webpackConfig.plugins.push(function() {
+    this.plugin('done', function(stats) {
       if (stats.compilation.errors.length) {
-        throw new Error(
-          stats.compilation.errors.map(err => err.message || err)
-        )
+        throw new Error(stats.compilation.errors.map(err => err.message || err))
       }
     })
   })
@@ -129,8 +128,8 @@ webpackConfig.module.loaders = [{
   loader  : 'babel',
   query   : project.compiler_babel
 }, {
-  test   : /\.json$/,
-  loader : 'json'
+  test    : /\.json$/,
+  loader  : 'json'
 }]
 
 
@@ -190,21 +189,35 @@ webpackConfig.postcss = [
 ]
 
 // 文件加载器
-webpackConfig.module.loaders.push(
-  { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-  { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
-  { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-  { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
-)
+const fileLoaderPrefix = 'prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype='
+webpackConfig.module.loaders.push({ 
+  test: /\.woff(\?.*)?$/,  
+  loader: `url?${fileLoaderPrefix}application/font-woff`
+}, { 
+  test: /\.woff2(\?.*)?$/, 
+  loader: `url?${fileLoaderPrefix}application/font-woff2` 
+}, { 
+  test: /\.otf(\?.*)?$/,   
+  loader: `file?${fileLoaderPrefix}font/opentype` 
+}, { 
+  test: /\.ttf(\?.*)?$/,   
+  loader: `url?${fileLoaderPrefix}application/octet-stream` 
+}, { 
+  test: /\.eot(\?.*)?$/,   
+  loader: 'file?prefix=fonts/&name=[path][name].[ext]' 
+}, { 
+  test: /\.svg(\?.*)?$/,   
+  loader: `url?${fileLoaderPrefix}image/svg+xml`
+},{ 
+  test: /\.(png|jpg)$/,    
+  loader: 'url?limit=8192' 
+})
 
 if (!__DEV__) {
   debug('Applying ExtractTextPlugin to CSS loaders.')
-  webpackConfig.module.loaders.filter((loader) =>
+  webpackConfig.module.loaders.filter(loader =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
-  ).forEach((loader) => {
+  ).forEach(loader => {
     const first = loader.loaders[0]
     const rest = loader.loaders.slice(1)
     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
