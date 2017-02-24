@@ -34,7 +34,7 @@ export default store => ({
   },
 
   getChildRoutes(location, cb) {
-    require.ensure([], (require) => {
+    require.ensure([], require => {
       cb(null, [
         require('./branchManage').default(store),
         require('./userManage').default(store),

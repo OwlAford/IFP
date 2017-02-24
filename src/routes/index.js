@@ -20,7 +20,7 @@ export const createRoutes = store => ({
       component: require('VIEW/NoFound').default 
     }
   ]
-  
+
 })
 
 export default createRoutes
