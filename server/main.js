@@ -35,8 +35,8 @@ if (project.env === 'development') {
 
   //代理转发，解决跨域问题
   app.use('/', function(req, res) {
-    var url = 'http://139.224.128.69:8060' + req.url
-    console.log('[PROXY]: ' + url)
+    var url = `http://139.224.128.69:8060${req.url}`
+    console.log(`[PROXY]: ${url}`)
     req.pipe(request(url)).pipe(res)
   })
 
