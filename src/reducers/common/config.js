@@ -10,36 +10,32 @@ const setUserTypeLevel = (certType, level) => ({
   level: level
 })
 
-export const getUserConfigData = () => {
-  return (dispatch, getState) => {
-    dispatch(getUserConfigDataAction('')).then(action => {
-      let paramList = action.data.body.paramList
-      let levelList = [],
-          certTypeList = []
-      if (paramList) {  
-        paramList.filter((item) => {
-          if (item.paramType == 'level') {
-            levelList.push(item)
-          } else if (item.paramType == 'certType') {
-            certTypeList.push(item)
-          }
-        })
-        dispatch(setUserTypeLevel(certTypeList, levelList))
-      }
-    })
-  }
+export const getUserConfigData = () => (dispatch, getState) => {
+  dispatch(getUserConfigDataAction('')).then(action => {
+    let paramList = action.data.body.paramList
+    let levelList = [],
+        certTypeList = []
+    if (paramList) {  
+      paramList.filter(item => {
+        if (item.paramType == 'level') {
+          levelList.push(item)
+        } else if (item.paramType == 'certType') {
+          certTypeList.push(item)
+        }
+      })
+      dispatch(setUserTypeLevel(certTypeList, levelList))
+    }
+  })
 }
 
 // 查询所有岗位
-export const postList = data => {
-  return (dispatch, getState) => {
-    dispatch(postListAction(data)).then(action => {
-        dispatch({
-          type: POST_LIST,
-          data: action.data.body
-        })
-    })
-  }
+export const postList = data => (dispatch, getState) => {
+  dispatch(postListAction(data)).then(action => {
+      dispatch({
+        type: POST_LIST,
+        data: action.data.body
+      })
+  })
 }
 
 

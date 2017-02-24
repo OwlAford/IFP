@@ -51,80 +51,73 @@ export const setAddBranchVisible = state => ({
 })
 
 // 树选择的节点
-export const changeBranchSelected = data => {
-  return (dispatch, getState) => {
-    if (data.brhId != null || data.brhId != undefined) {
-      NProgress.start()
-      dispatch(getBranchAction(data)).then(action => {
-        let brhParentId = action.data.body.brhParentId
-        dispatch(applySelect(brhParentId))
-        dispatch(applyBranch(action.data.body))
-        NProgress.done()
-        message.success("加载完毕！")
-      })
-    } else {
-      message.warning("当前未选中机构！")
-      dispatch(applySelect(''))
-      dispatch(applyBranch())
-    }
+export const changeBranchSelected = data => (dispatch, getState) => {
+  if (data.brhId != null || data.brhId != undefined) {
+    NProgress.start()
+    dispatch(getBranchAction(data)).then(action => {
+      let brhParentId = action.data.body.brhParentId
+      dispatch(applySelect(brhParentId))
+      dispatch(applyBranch(action.data.body))
+      NProgress.done()
+      message.success("加载完毕！")
+    })
+  } else {
+    message.warning("当前未选中机构！")
+    dispatch(applySelect(''))
+    dispatch(applyBranch())
   }
 }
 
+
 // 修改机构
-export const branchModify = (params, success, fail) => {
-  return (dispatch, getState) => {
+export const branchModify = (params, success, fail) => (dispatch, getState) => {
+  dispatch(changeBranchEmpty())
+  dispatch(modifyBranchAction(params)).then(action => {
+    if (action.data.body.errorCode=='0') {
+      dispatch(initBranchList())      
+      dispatch(changeBranchAfterType({type: '1'}))
+    } else {   
+      dispatch(changeBranchAfterType({type: '2'}))
+    }
+    if (success) success()
+  }, () => {
+    if (fail) fail()
     dispatch(changeBranchEmpty())
-    dispatch(modifyBranchAction(params)).then(action => {
-      if (action.data.body.errorCode=='0') {
-        dispatch(initBranchList())      
-        dispatch(changeBranchAfterType({type: '1'}))
-      } else {   
-        dispatch(changeBranchAfterType({type: '2'}))
-      }
-      if (success) success()
-    }, () => {
-      if (fail) fail()
-      dispatch(changeBranchEmpty())
-    })   
-  }
+  })   
 }
 
 // 删除机构
-export const branchDelete = (params, success, fail) => {
-  return (dispatch, getState) => {
+export const branchDelete = (params, success, fail) => (dispatch, getState) => {
+  dispatch(changeBranchEmpty())
+  dispatch(deleteBranchAction(params)).then( action => {
+    if (action.data.body.errorCode == '0' && action.data.body.op_result != '0') {     
+      dispatch(changeBranchAfterType({type: '3'}))
+      dispatch(initBranchList())
+    } else { 
+      dispatch(changeBranchAfterType({type: '4'}))
+    }
+    if (success) success()
+  }, () => {
+    if (fail) fail()
     dispatch(changeBranchEmpty())
-    dispatch(deleteBranchAction(params)).then( action => {
-      if (action.data.body.errorCode == '0' && action.data.body.op_result != '0') {     
-        dispatch(changeBranchAfterType({type: '3'}))
-        dispatch(initBranchList())
-      } else { 
-        dispatch(changeBranchAfterType({type: '4'}))
-      }
-      if (success) success()
-    }, () => {
-      if (fail) fail()
-      dispatch(changeBranchEmpty())
-    })  
-  }
+  })  
 }
 
 // 添加机构
-export const branchAdd = (params, success, fail) => {
-  return (dispatch, getState) => {
-    dispatch(changeBranchEmpty())
-    dispatch(addBranchAction(params)).then(action => {
-      if(action.data.body.errorCode == '0') {
-        dispatch(initBranchList())
-        dispatch(changeBranchSelected(params))   
-        dispatch(changeBranchAfterType({type: '5'}))
-        if (success) success()
-      } else { 
-        dispatch(changeBranchAfterType({type: '6'}))
-        dispatch(changeBranchEmpty())
-        if (fail) fail()
-      }
-    })
-  }
+export const branchAdd = (params, success, fail) => (dispatch, getState) => {
+  dispatch(changeBranchEmpty())
+  dispatch(addBranchAction(params)).then(action => {
+    if(action.data.body.errorCode == '0') {
+      dispatch(initBranchList())
+      dispatch(changeBranchSelected(params))   
+      dispatch(changeBranchAfterType({type: '5'}))
+      if (success) success()
+    } else { 
+      dispatch(changeBranchAfterType({type: '6'}))
+      dispatch(changeBranchEmpty())
+      if (fail) fail()
+    }
+  })
 }
 
 

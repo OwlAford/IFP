@@ -11,7 +11,7 @@ export const SETSESSIONID = 'SETSESSIONID'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 
 
-export const setSesionId_OP = (data) => {
+export const setSesionId_OP = data => {
   const checkCodeSrc = `${API.CHECKCODE_URL}?nocache=${Date.now()}&iCIFID=${data}`
   return {
     type: SETSESSIONID,
@@ -20,20 +20,18 @@ export const setSesionId_OP = (data) => {
   }
 }
 
-export const setSessionID = () => {
+export const setSessionID = () => (dispatch, getState) => {
   delCookies(['cstName', 'iCIFID', 'eCIFID'])
-  return (dispatch, getState) => {
-    dispatch(setSessionIDAction()).then(action => {
-      const { header, body } = action.data
-      if (header.iCIFID) {
-        setCookie('iCIFID', header.iCIFID)
-        dispatch(setSesionId_OP(header.iCIFID))
-      } else {
-        setCookie('iCIFID', body.iCIFID)
-        dispatch(setSesionId_OP(body.iCIFID))
-      }
-    })
-  }
+  dispatch(setSessionIDAction()).then(action => {
+    const { header, body } = action.data
+    if (header.iCIFID) {
+      setCookie('iCIFID', header.iCIFID)
+      dispatch(setSesionId_OP(header.iCIFID))
+    } else {
+      setCookie('iCIFID', body.iCIFID)
+      dispatch(setSesionId_OP(body.iCIFID))
+    }
+  })
 }
 
 export const login_OP = (name) => ({
@@ -49,40 +47,36 @@ export const loginFailed = () => ({
   type: LOGIN_FAIL
 })
 
-export const logout = () => {
-  return (dispatch, getState) => {
-    dispatch(logoutAction())
-    dispatch(logout_OP())
-  }
+export const logout = () => (dispatch, getState) => {
+  dispatch(logoutAction())
+  dispatch(logout_OP())
 }
 
 //验证登陆
-export const validateLogin = (data, success, fail) => {
+export const validateLogin = (data, success, fail) => (dispatch, getState) => {
   const newData = {
     loginName: data.userName,
     loginPassword: md5(data.pswd.toString()),
     isLogin: data.isLogin,
     validateCodeText: data.vcode
   }
-  return (dispatch, getState) => {
-    dispatch(loginAction(newData)).then(action => {
-      NProgress.done()
-      const dataBody = action.data.body
-      if (dataBody.result == '1') {
-        setCookie('eCIFID', dataBody.cstNo)
-        setCookie('cstName', dataBody.cstName)
-        dispatch(login_OP(dataBody.cstName))
-        if (success) success()
-       } else {
-        dataBody.errorMsg ? 
-        message.error(dataBody.errorMsg) : 
-        message.error('登录信息有误！')
-        dispatch(loginFailed())
-        dispatch(setSessionID())
-        if (fail) fail()
-       }
-    })
-  }
+  dispatch(loginAction(newData)).then(action => {
+    NProgress.done()
+    const dataBody = action.data.body
+    if (dataBody.result == '1') {
+      setCookie('eCIFID', dataBody.cstNo)
+      setCookie('cstName', dataBody.cstName)
+      dispatch(login_OP(dataBody.cstName))
+      if (success) success()
+     } else {
+      dataBody.errorMsg ? 
+      message.error(dataBody.errorMsg) : 
+      message.error('登录信息有误！')
+      dispatch(loginFailed())
+      dispatch(setSessionID())
+      if (fail) fail()
+     }
+  })
 }
 
 

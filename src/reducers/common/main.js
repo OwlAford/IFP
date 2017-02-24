@@ -17,11 +17,9 @@ export const refreshInfo = data => ({
 })
 
 // 查询用户等级 + 证件类型配置信息 + 角色树 + 岗位列表
-export const initUserForm = () => {
-  return (dispatch, getState) => {
-    dispatch(getUserConfigData())
-    dispatch(postList())
-  }
+export const initUserForm = () => (dispatch, getState) => {
+  dispatch(getUserConfigData())
+  dispatch(postList())
 }
 
 const initialState = {

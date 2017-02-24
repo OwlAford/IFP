@@ -44,42 +44,38 @@ const addWithoutPNode = (id, sourceList, targetList) => {
   addWithoutPNode(node.parentId, sourceList, targetList)
 }
 
-export const initUserMenu = cb => {
-  let authMenu = []
-  let userMenu = []
-  let topMenu = []
-  return (dispatch, getState) => {
-    NProgress.start()
-    dispatch(getMenuAction()).then(action => {
-      const dataBody = action.data.body
-      const sourceList = dataBody.menuList
+export const initUserMenu = cb => (dispatch, getState) => {
+  let authMenu = [], userMenu = [], topMenu = []
+  NProgress.start()
+  dispatch(getMenuAction()).then(action => {
+    const dataBody = action.data.body
+    const sourceList = dataBody.menuList
 
-      dispatch({
-        type: SAVE_USER_MENU,
-        userMenu: {
-          menuList: sourceList,
-          menuItemList: dataBody.menuItemList
-        }
-      })
-
-      authMenu = groupList(dataBody.menuList, 'id', 'parentId', 'menus', converMenu)
-      authMenu.map(data => data.level == '0' ? topMenu.push(data) : null)
-
-      let userMenuMap = {}
-      sourceList.map(item => userMenuMap[item.id] = item)
-      sourceList.map(item => item.parentId && !userMenuMap[item.parentId] ? addWithoutPNode(item.parentId, sourceList, authMenu) : null)
-
-      userMenu = groupList(sourceList, 'menuId', 'menuParentId', 'menus', converMenu)
-      dispatch({
-        type: MERGE_FINAL_MENU,
-        items: userMenu
-      })
-
-      dispatch(refreshInfo(action.data))
-      NProgress.done()
-      if (cb) cb()
+    dispatch({
+      type: SAVE_USER_MENU,
+      userMenu: {
+        menuList: sourceList,
+        menuItemList: dataBody.menuItemList
+      }
     })
-  }
+
+    authMenu = groupList(dataBody.menuList, 'id', 'parentId', 'menus', converMenu)
+    authMenu.map(data => data.level == '0' ? topMenu.push(data) : null)
+
+    let userMenuMap = {}
+    sourceList.map(item => userMenuMap[item.id] = item)
+    sourceList.map(item => item.parentId && !userMenuMap[item.parentId] ? addWithoutPNode(item.parentId, sourceList, authMenu) : null)
+
+    userMenu = groupList(sourceList, 'menuId', 'menuParentId', 'menus', converMenu)
+    dispatch({
+      type: MERGE_FINAL_MENU,
+      items: userMenu
+    })
+
+    dispatch(refreshInfo(action.data))
+    NProgress.done()
+    if (cb) cb()
+  })
 }
 
 

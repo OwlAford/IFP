@@ -12,11 +12,10 @@ export default class LoginView extends Component {
     super(props)
     this.state = {
       isLogin: 'false',
-      userName: 'admin',
-      pswd: '123456',
+      userName: '',
+      pswd: '',
       vcode: ''
     }
-    this.handleChange = handleChange.bind(this)
     this.reloadCode = this.reloadCode.bind(this)
     this.triggerSubmit = this.triggerSubmit.bind(this)
   }
@@ -85,7 +84,7 @@ export default class LoginView extends Component {
               placeholder="请输入用户名"
               value={userName}
               name="userName"
-              onChange={this.handleChange}
+              onChange={this::handleChange}
               onFocus={(e) => this.handleFocus(e)}
               onBlur={(e) => this.handleBlur(e)}
               ref={node => this.userNameInput = node}
@@ -100,7 +99,7 @@ export default class LoginView extends Component {
               name="pswd"
               onFocus={(e) => this.handleFocus(e)}
               onBlur={(e) => this.handleBlur(e)}
-              onChange={this.handleChange}
+              onChange={this::handleChange}
               ref={node => this.pswdInput = node}
             />
           </div>
@@ -111,7 +110,7 @@ export default class LoginView extends Component {
               name="vcode"
               onFocus={(e) => this.handleFocus(e)}
               onBlur={(e) => this.handleBlur(e)}
-              onChange={this.handleChange}
+              onChange={this::handleChange}
             />
             <img 
               src={this.props.vcodeSrc} 

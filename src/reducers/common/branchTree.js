@@ -26,32 +26,30 @@ export const applySelect = data => ({
   data
 })
 
-export const initBranchList = (cb) => {
-  return (dispatch, getState) => {
-    NProgress.start()
-    dispatch(getBranchListAction()).then(action => {
-      const allBranchList = action.data.body.branchList
-      const treeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', converRole)
-      const selectTreeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', getBranch)
+export const initBranchList = cb => (dispatch, getState) => {
+  NProgress.start()
+  dispatch(getBranchListAction()).then(action => {
+    const allBranchList = action.data.body.branchList
+    const treeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', converRole)
+    const selectTreeBranchList = groupList(allBranchList, 'brhId', 'brhParentId', 'children', getBranch)
 
-      // 新增的时候查机构列表
-      dispatch({
-        type: GET_BRANCH_LIST,
-        data: { 
-          selectTreeBranchList
-        }
-      })
-      dispatch({
-        type: USER_GROUP_BRANCH,
-        data: {
-          allBranchList,
-          treeBranchList
-        }
-      })
-      NProgress.done()
-      if (cb) cb()
+    // 新增的时候查机构列表
+    dispatch({
+      type: GET_BRANCH_LIST,
+      data: { 
+        selectTreeBranchList
+      }
     })
-  }
+    dispatch({
+      type: USER_GROUP_BRANCH,
+      data: {
+        allBranchList,
+        treeBranchList
+      }
+    })
+    NProgress.done()
+    if (cb) cb()
+  })
 }
 
 const initialState = {

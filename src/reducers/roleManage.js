@@ -48,39 +48,34 @@ const updateMenuFnPageItems = (allMenuFnCurPageItems, allMenuFnCurPage, allMenuT
 })
 
 // 获取角色详情和功能列表
-export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) => {
-  return (dispatch, getState) => {
-    if (!roleId) {
-      dispatch(clearTableItems())
-    } else {
-      dispatch(getAllRoleFnItemsAction(curPage, roleId, roleName, reqType, getState().roleManage.pageSize)).then(action => { 
-        const dataBody = action.data.body
-        if (dataBody.errorCode == '0') {
-          const roleMenuItemRelList = dataBody.roleMenuItemRelList
-          const turnPageTotalNum = dataBody.turnPageTotalNum
-          // 复制数组，并为其添加key属性，用于table遍历生成
-          let tableCurPageItems = [].concat(roleMenuItemRelList)
-          roleMenuItemRelList.map((item, i) => {
-            tableCurPageItems[i].key = item.menuItemId
-          })
-          if (reqType == 1) {
-            dispatch(updateTableItems(tableCurPageItems, curPage, turnPageTotalNum))
-          } else if (reqType == 2) {
-            let selectKeys = []
-            roleMenuItemRelList.map(item => {
-              selectKeys.push(item.menuItemId)
-            })
-            dispatch(setAllMenuFnSelectKeys(selectKeys))
-          } else {
-            dispatch(updateMenuFnPageItems(tableCurPageItems, curPage, turnPageTotalNum))
-          }
-        } else {
-          message.error('获取列表失败！')
-        }
-
+export const getAllRoleFnItems = (curPage, roleId, roleName, reqType) => (dispatch, getState) => {
+  !roleId ?
+  dispatch(clearTableItems()) :
+  dispatch(getAllRoleFnItemsAction(curPage, roleId, roleName, reqType, getState().roleManage.pageSize)).then(action => { 
+    const dataBody = action.data.body
+    if (dataBody.errorCode == '0') {
+      const roleMenuItemRelList = dataBody.roleMenuItemRelList
+      const turnPageTotalNum = dataBody.turnPageTotalNum
+      // 复制数组，并为其添加key属性，用于table遍历生成
+      let tableCurPageItems = [].concat(roleMenuItemRelList)
+      roleMenuItemRelList.map((item, i) => {
+        tableCurPageItems[i].key = item.menuItemId
       })
+      if (reqType == 1) {
+        dispatch(updateTableItems(tableCurPageItems, curPage, turnPageTotalNum))
+      } else if (reqType == 2) {
+        let selectKeys = []
+        roleMenuItemRelList.map(item => {
+          selectKeys.push(item.menuItemId)
+        })
+        dispatch(setAllMenuFnSelectKeys(selectKeys))
+      } else {
+        dispatch(updateMenuFnPageItems(tableCurPageItems, curPage, turnPageTotalNum))
+      }
+    } else {
+      message.error('获取列表失败！')
     }
-  }
+  })
 }
 
 // 清除当前选中角色信息
@@ -95,52 +90,48 @@ export const clearCurRoleInfo = () => ({
   }
 })
 
-const applyCurRoleInfo = (info) =>({
+const applyCurRoleInfo = info =>({
   type: UPDATE_CUR_ROLE_INFO,
   data: {
     roleDesc: info.roleDesc,
     selectModifyRole: info.rolePId,
     roleStatus: info.roleStatus,
     roleName: info.roleName,
-    roleId: info.roleId && info.roleId != 'undefined' ? info.roleId : '' // 数据库拿到的数据带有'undefined'字符串，他们的锅
+    roleId: info.roleId && info.roleId != 'undefined' ? info.roleId : '' // 数据库拿到的数据带有'undefined'字符串，他们的锅，这个坑我填了
   }
 })
 
 // 通过角色id获取当前选中角色信息
-export const getInfoByRoleId = roleId => {
-  return (dispatch, getState) => {
-    NProgress.start()
-    dispatch(getInfoByRoleIdAction(roleId)).then(action => {
-      const dataBody = action.data.body
-      if (dataBody.errorCode == '0') {
-        dispatch(applyCurRoleInfo(dataBody))
-        NProgress.done()
-        message.success("加载完毕！")
-      } else {
-        NProgress.done()
-        message.error('获取信息失败！')
-      }
-    })
-  }
+export const getInfoByRoleId = roleId => (dispatch, getState) => {
+  NProgress.start()
+  dispatch(getInfoByRoleIdAction(roleId)).then(action => {
+    const dataBody = action.data.body
+    if (dataBody.errorCode == '0') {
+      dispatch(applyCurRoleInfo(dataBody))
+      NProgress.done()
+      message.success("加载完毕！")
+    } else {
+      NProgress.done()
+      message.error('获取信息失败！')
+    }
+  })
 }
 
 // 通过角色名搜索相关信息
-export const getInfoByRoleName = (roleName, cb) => {
-  return (dispatch, getState) => {
-    NProgress.start()
-    dispatch(getInfoByRoleNameAction(roleName)).then(action => {
-      const dataBody = action.data.body
-      if (dataBody.errorCode == '0') {
-        dispatch(applyCurRoleInfo(dataBody))
-        NProgress.done()
-        message.success("加载完毕！")
-        if (cb) cb(dataBody)
-      } else {
-        NProgress.done()
-        message.error('获取信息失败！')
-      }
-    })
-  }
+export const getInfoByRoleName = (roleName, cb) => (dispatch, getState) => {
+  NProgress.start()
+  dispatch(getInfoByRoleNameAction(roleName)).then(action => {
+    const dataBody = action.data.body
+    if (dataBody.errorCode == '0') {
+      dispatch(applyCurRoleInfo(dataBody))
+      NProgress.done()
+      message.success("加载完毕！")
+      if (cb) cb(dataBody)
+    } else {
+      NProgress.done()
+      message.error('获取信息失败！')
+    }
+  })
 }
 
 // 用户修改所属角色 selectTree
@@ -150,26 +141,24 @@ export const setSelectTreeVal = val => ({
 })
 
 // 更新角色信息
-export const updateRole = params => {
-  return (dispatch, getState) => {
-    dispatch(updateRoleAction(params)).then(action => {
-      const dataBody = action.data.body
-      if (dataBody.errorCode == '0') {
-        notification.success({
-          message: '成功',
-          description: '角色更新成功！'
-        })
-        // 刷新一次选择的树
-        dispatch(getRoleTree())
-        dispatch(getInfoByRoleId(params.roleId))
-      } else {
-        notification.warning({
-          message: '失败',
-          description: '角色更新失败！'
-        })
-      }
-    })
-  }
+export const updateRole = params => (dispatch, getState) => {
+  dispatch(updateRoleAction(params)).then(action => {
+    const dataBody = action.data.body
+    if (dataBody.errorCode == '0') {
+      notification.success({
+        message: '成功',
+        description: '角色更新成功！'
+      })
+      // 刷新一次选择的树
+      dispatch(getRoleTree())
+      dispatch(getInfoByRoleId(params.roleId))
+    } else {
+      notification.warning({
+        message: '失败',
+        description: '角色更新失败！'
+      })
+    }
+  })
 }
 
 export const setAddRoleBoxVisible = state => ({
@@ -179,26 +168,24 @@ export const setAddRoleBoxVisible = state => ({
 
 
 // 添加用户
-export const addRole = (params, success, fail) => {
-  return (dispatch,getState)=>{
-    dispatch(addRoleAction(params)).then(action => {
-      if (action.data.body.errorCode == '0') {
-        notification.success({
-          message: '成功',
-          description: '角色添加成功！'
-        })
-        // 刷新一次选择的树
-        dispatch(getRoleTree())
-        if (success) success()
-      } else {
-        notification.warning({
-          message: '失败',
-          description: '角色添加失败！'
-        })
-        if (fail) fail()
-      }
-    })
-  }
+export const addRole = (params, success, fail) => (dispatch, getState) => {
+  dispatch(addRoleAction(params)).then(action => {
+    if (action.data.body.errorCode == '0') {
+      notification.success({
+        message: '成功',
+        description: '角色添加成功！'
+      })
+      // 刷新一次选择的树
+      dispatch(getRoleTree())
+      if (success) success()
+    } else {
+      notification.warning({
+        message: '失败',
+        description: '角色添加失败！'
+      })
+      if (fail) fail()
+    }
+  })
 }
 
 export const setBindRoleBoxVisible = state => ({
@@ -207,45 +194,41 @@ export const setBindRoleBoxVisible = state => ({
 })
 
 // 绑定功能列表到角色上
-export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => {
-  return (dispatch, getState) => {
-    dispatch(itemsBindRoleAction(roleId, roleMenuItemRelList)).then(action => {
-      if (action.data.body.errorCode == '0') {
-        notification.success({
-          message: '成功',
-          description: '功能关联成功！'
-        })
-        dispatch(getAllRoleFnItems(1, roleId, '', 1))
-        if (success) success()
-      } else {
-        notification.warning({
-          message: '失败',
-          description: '功能关联失败！'
-        })
-        if (fail) fail()
-      }
-    })
-  }
+export const itemsBindRole = (roleId, roleMenuItemRelList, success, fail) => (dispatch, getState) => {
+  dispatch(itemsBindRoleAction(roleId, roleMenuItemRelList)).then(action => {
+    if (action.data.body.errorCode == '0') {
+      notification.success({
+        message: '成功',
+        description: '功能关联成功！'
+      })
+      dispatch(getAllRoleFnItems(1, roleId, '', 1))
+      if (success) success()
+    } else {
+      notification.warning({
+        message: '失败',
+        description: '功能关联失败！'
+      })
+      if (fail) fail()
+    }
+  })
 }
 
 // 删除角色
-export const delRole = roleId => {
-  return (dispatch, getState) => {
-    dispatch(delRoleAction(roleId)).then(action => {
-      if (action.data.body.errorCode == '0') {
-        notification.success({
-          message: '成功',
-          description: '角色删除成功！'
-        })
-        dispatch(getRoleTree())
-      } else {
-        notification.warning({
-          message: '失败',
-          description: '角色删除失败！'
-        })
-      }
-    })
-  }
+export const delRole = roleId => (dispatch, getState) => {
+  dispatch(delRoleAction(roleId)).then(action => {
+    if (action.data.body.errorCode == '0') {
+      notification.success({
+        message: '成功',
+        description: '角色删除成功！'
+      })
+      dispatch(getRoleTree())
+    } else {
+      notification.warning({
+        message: '失败',
+        description: '角色删除失败！'
+      })
+    }
+  })
 }
 
 
