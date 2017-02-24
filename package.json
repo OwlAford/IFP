@@ -1,8 +1,13 @@
 {
   "name": "ifp-internal-management-system",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Internal Management System!",
-  "main": "index.js",
+  "author": "OwlAford <zhangyh@belink.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OwlAford/IFP"
+  },
   "engines": {
     "node": ">=4.5.0",
     "npm": "^3.0.0"
@@ -10,9 +15,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "compile": "better-npm-run compile",
-    "start": "better-npm-run start",
-    "dev": "better-npm-run dev",
     "deploy": "better-npm-run deploy",
+    "dev": "better-npm-run dev",
     "build": "better-npm-run build",
     "lint": "eslint . --ext \"js,jsx\"",
     "lint:fix": "eslint --fix . --ext \"js,jsx\""
@@ -24,16 +28,16 @@
         "DEBUG": "app:*"
       }
     },
+    "deploy": {
+      "command": "npm run clean && npm run compile",
+      "env": {
+        "DEBUG": "app:*"
+      }
+    },
     "dev": {
       "command": "node bin/dev-server --ignore dist --ignore src",
       "env": {
         "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy": {
-      "command": "npm run clean && npm run compile",
-      "env": {
         "DEBUG": "app:*"
       }
     },
@@ -43,20 +47,8 @@
         "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
-    },
-    "start": {
-      "command": "node bin/dev-server",
-      "env": {
-        "DEBUG": "app:*"
-      }
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/OwlAford/IFP"
-  },
-  "author": "Aford",
-  "license": "MIT",
   "dependencies": {
     "antd": "^2.7.2",
     "moment": "^2.17.1",
@@ -64,7 +56,7 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^4.4.5",
-    "react-router": "^3.0.0",
+    "react-router": "^3.0.2",
     "redbox-react": "^1.2.10",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
