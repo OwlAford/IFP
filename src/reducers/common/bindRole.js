@@ -28,68 +28,62 @@ const converTreeRole = role => ({
   children: []
 })
 
-export const getUserRoleTree = userNo => {
-  return (dispatch, getState) => {
-    dispatch(getUserRoleListAction(userNo)).then(action => {
-      const dataBody = action.data.body
-      let selectKeys = []
-      let userRoleRelList = dataBody.userRoleRelList
-      userRoleRelList.map(item => {
-        item.state == '1' ? selectKeys.push(item.roleId) : null
-      })
-      dispatch(updateSelectedRole(selectKeys))
-      let allSelectRoleList = dataBody.userRoleRelList
-      let selectRoleTreeList = groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
-      dispatch({
-        type: USER_GET_ROLE,
-        data: {
-          selectRoleTreeList,
-          allSelectRoleList
-        }
-      })
+export const getUserRoleTree = userNo => (dispatch, getState) => {
+  dispatch(getUserRoleListAction(userNo)).then(action => {
+    const dataBody = action.data.body
+    let selectKeys = []
+    let userRoleRelList = dataBody.userRoleRelList
+    userRoleRelList.map(item => {
+      item.state == '1' ? selectKeys.push(item.roleId) : null
     })
-  }
+    dispatch(updateSelectedRole(selectKeys))
+    let allSelectRoleList = dataBody.userRoleRelList
+    let selectRoleTreeList = groupList(allSelectRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
+    dispatch({
+      type: USER_GET_ROLE,
+      data: {
+        selectRoleTreeList,
+        allSelectRoleList
+      }
+    })
+  })
 }
 
 // 绑定角色的方法
-export const userRoleAssociation = (userNo, userName, roleList) => {
-    return (dispatch, getState) => {
-    dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action => {
-      const dataBody = action.data.body
-      if (dataBody.errorCode == '0') {
-        notification.success({
-          message: '成功',
-          description: '綁定成功！'
-        })
-      } else {
-        notification.warning({
-          message: '失败',
-          description: '绑定失败！'
-        })
-      }
-    })
-  }
+export const userRoleAssociation = (userNo, userName, roleList) => (dispatch, getState) => {
+  dispatch(userRoleAssociationAction(userNo, userName, roleList)).then(action => {
+    const dataBody = action.data.body
+    if (dataBody.errorCode == '0') {
+      notification.success({
+        message: '成功',
+        description: '綁定成功！'
+      })
+    } else {
+      notification.warning({
+        message: '失败',
+        description: '绑定失败！'
+      })
+    }
+  })
 }
 
-export const getRoleTree = () => {
-  return (dispatch, getState) => {
-    NProgress.start()
-    dispatch(getRoleListAction()).then(action => {
-      const dataBody = action.data.body
-      const flatRoleList = dataBody.roleList
-      let roleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)
-      let selectRoleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
-      dispatch({
-        type: UPDATE_ROLE_TREE_LIST,
-        data: selectRoleTreeList
-      })
-      dispatch({
-        type: UPDATE_ROLE_TREE,
-        data: roleTreeList
-      })
-      NProgress.done()
+export const getRoleTree = () => (dispatch, getState) => {
+  NProgress.start()
+  dispatch(getRoleListAction()).then(action => {
+    const dataBody = action.data.body
+    const flatRoleList = dataBody.roleList
+    let roleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeRole)
+    let selectRoleTreeList = groupList(flatRoleList, 'roleId', 'rolePId', 'children', converTreeSelectRole)
+    dispatch({
+      type: UPDATE_ROLE_TREE_LIST,
+      data: selectRoleTreeList
     })
-  }
+    dispatch({
+      type: UPDATE_ROLE_TREE,
+      data: roleTreeList
+    })
+    NProgress.done()
+  })
 }
 
 export const updateSelectedRole = selectedRoleList => ({

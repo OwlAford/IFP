@@ -1,5 +1,5 @@
 
-export const createRoutes = (store) => ({
+export const createRoutes = store => ({
   path: '/',
   component: require('CORE/CoreLayout').default,
 

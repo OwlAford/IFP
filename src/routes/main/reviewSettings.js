@@ -1,8 +1,8 @@
 import { injectReducer } from 'STORE/reducers'
 
-export default (store) => ({
+export default store => ({
   path : 'relationList.html',
-  getComponent (nextState, cb) {
+  getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const ReviewSettings = require('VIEW/ReviewSettings').default
       const reducer = require('REDUCER/reviewSettings').default

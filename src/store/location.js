@@ -1,10 +1,8 @@
 const LOCATION_CHANGE = 'LOCATION_CHANGE'
 
-export const updateLocation = ({ dispatch }) => {
-  return (nextLocation) => dispatch({
-  	type    : LOCATION_CHANGE,
-    payload : nextLocation
-  })
-}
+export const updateLocation = ({ dispatch }) => nextLocation => dispatch({
+  type: LOCATION_CHANGE,
+  payload: nextLocation
+})
 
-export default (state = null, action) => action.type === LOCATION_CHANGE ? action.payload : state
+export default (state = {}, action) => action.type === LOCATION_CHANGE ? action.payload : state

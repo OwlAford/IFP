@@ -4,18 +4,13 @@ import NProgress from 'nprogress'
 import { message, notification } from 'UTIL/antd'
 
 export const PAGE_USERS = 'PAGE_USERS'
-
 export const SET_PREV_USER = 'SET_PREV_USER'
 export const CLOSE_PREV_USER = 'CLOSE_PREV_USER'
-
 export const SET_BIND_USER = 'SET_BIND_USER'
 export const CLOSE_BIND_USER = 'CLOSE_BIND_USER'
-
 export const APPLY_MODIFY_USER = 'APPLY_MODIFY_USER'
 export const CLOSE_MODIFY_USER = 'CLOSE_MODIFY_USER'
-
 export const SET_ADDUSER_VISIBLE = 'SET_ADDUSER_VISIBLE'
-
 export const UPDATE_SELECTE_KEYS = 'UPDATE_SELECTE_KEYS'
 
 

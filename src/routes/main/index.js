@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { injectReducers } from 'STORE/reducers'
+import { injectReducer } from 'STORE/reducers'
 
-export default (store) => ({
+export default store => ({
   path: 'home',
   indexRoute: {
     component: require('VIEW/Welcome').default
@@ -10,8 +10,7 @@ export default (store) => ({
   getComponents(nextState, cb) {
     require.ensure([], require => {
       const Main = require('LAYOUT/Main').default
-      // 注入公用 reducers
-      injectReducers(store, [{ 
+      injectReducer(store, [{ 
         key: 'main', 
         reducer: require('REDUCER/common/main').default
       }, {

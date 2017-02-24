@@ -1,8 +1,8 @@
 import { injectReducer } from 'STORE/reducers'
 
-export default (store) => ({
+export default store => ({
   path : 'postList.html',
-  getComponent (nextState, cb) {
+  getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const PostManage = require('VIEW/PostManage').default
       const reducer = require('REDUCER/postManage').default

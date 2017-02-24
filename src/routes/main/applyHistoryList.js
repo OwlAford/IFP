@@ -1,8 +1,8 @@
 import { injectReducer } from 'STORE/reducers'
 
-export default (store) => ({
+export default store => ({
   path : 'pendHistoryList.html',
-  getComponent (nextState, cb) {
+  getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const ApplyHistoryList = require('VIEW/ApplyHistoryList').default
       const reducer = require('REDUCER/applyHistoryList').default

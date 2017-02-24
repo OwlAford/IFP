@@ -1,15 +1,12 @@
 import { injectReducer } from 'STORE/reducers'
 
-export default (store) => ({
+export default store => ({
   path: 'login',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const Login = require('VIEW/Login').default
-      const LoginReducer = require('REDUCER/common/login').default
-      injectReducer(store, { 
-      	key: 'login', 
-      	reducer: LoginReducer 
-      })
+      const reducer = require('REDUCER/common/login').default
+      injectReducer(store, {key: 'login', reducer})
       cb(null, Login)
     }, 'login')
   }
