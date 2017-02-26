@@ -35,7 +35,12 @@ $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);
     margin-bottom: 15px;
     position: relative;
     transition: border .6s;
-    
+
+    input::-webkit-input-placeholder {
+      color: #ccc;
+      font-size: 13px;
+    }
+
     &:after {
       content: "";
       display: block;
