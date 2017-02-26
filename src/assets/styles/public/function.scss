@@ -1,7 +1,7 @@
 @function setPath($file) {
-  @return "../../font/" + $file
+  @return "../../fonts/" + $file
 }
 
 @function setBg($img) {
-  @return "../../img/" + $img
+  @return "../../images/" + $img
 }

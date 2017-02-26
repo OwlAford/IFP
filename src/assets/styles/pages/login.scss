@@ -10,7 +10,7 @@
 }
 
 @function setBg($img) {
-  @return "../../img/" + $img
+  @return "../../images/" + $img
 }
 
 $foorShadow: 0 9px 28px -4px rgba(73, 89, 238, 0.24);

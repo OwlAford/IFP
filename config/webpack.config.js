@@ -29,7 +29,7 @@ const webpackConfig = {
       CONSTANT   : path.join(src, 'constants'),
       CORE       : path.join(src, 'core'),
       GLOBAL     : path.join(src, 'globals'),
-      IMAGE      : path.join(src, 'assets/img'),
+      IMAGE      : path.join(src, 'assets/images'),
       LAYOUT     : path.join(src, 'layouts'),
       MIDDLEWARE : path.join(src, 'middleware'),
       REDUCER    : path.join(src, 'reducers'),

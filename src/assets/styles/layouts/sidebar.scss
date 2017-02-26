@@ -1,7 +1,7 @@
 $sidebarWidth : 200px;
 
 @function setBg($img) {
-  @return "../../img/" + $img
+  @return "../../images/" + $img
 }
 
 .app-sidebar {

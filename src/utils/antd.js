@@ -1,7 +1,7 @@
 import 'antd/lib/style'
 
-export { default as Alert } from 'antd/lib/alert'
-import 'antd/lib/alert/style/css'
+// export { default as Alert } from 'antd/lib/alert'
+// import 'antd/lib/alert/style/css'
 
 export { default as Button } from 'antd/lib/button'
 import 'antd/lib/button/style/css'

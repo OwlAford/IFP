@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Table, DatePicker, Modal } from 'UTIL/antd'
-import moment from 'moment'
+// import moment from 'moment'
 import { formatDateTime } from 'UTIL/filters'
 
 const RangePicker = DatePicker.RangePicker
@@ -179,10 +179,10 @@ export default class ApplyHistoryListView extends Component {
           <Button onClick={ e => this.initTable() }>重置</Button>
           <RangePicker
             style={{float: 'right'}}
-            ranges={{ 
-              '今日': [moment(), moment()], 
-              // '本月': [moment(), moment().endOf('month')] 
-            }}
+            // ranges={{ 
+            //   '今日': [moment(), moment()], 
+            //   '本月': [moment(), moment().endOf('month')] 
+            // }}
             format="YYYY-MM-DD" 
             disabledDate={disabledDate}
             onChange={onChangeTime}

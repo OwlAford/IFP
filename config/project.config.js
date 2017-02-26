@@ -40,13 +40,14 @@ const config = {
     'core-js/shim',
     'promise-polyfill',
     'react',
+    'react-dom',
     'react-redux',
     'react-router',
     'redux',
-    'NProgress'
+    'redux-thunk',
+    'nprogress'
   ]
 }
-
 
 // 全局环境配置参数
 config.globals = {
@@ -58,16 +59,6 @@ config.globals = {
   '__PROD__'     : config.env === 'production',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }
-
-// 校验组件模块依赖
-const pkg = require('../package.json')
-
-config.compiler_vendors = config.compiler_vendors.filter(dep => {
-    if (pkg.dependencies[dep]) return true
-
-    debug(`Package "${dep}" was not found as an npm dependency in package.json; 
-      it won't be included in the webpack vendor bundle.`)
-  })
 
 // 基础路径配置
 function base() {
