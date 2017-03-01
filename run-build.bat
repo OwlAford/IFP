@@ -1,5 +1,5 @@
 @echo off
 set currentPath=%cd%
 echo The current directory is: %currentPath%
-echo Start packing bundles ...
+echo [NODE_ENV=production]
 npm run build

@@ -1,5 +1,5 @@
 @echo off
 set currentPath=%cd%
 echo The current directory is: %currentPath%
-echo Start development mode ...
+echo [NODE_ENV=development]
 npm run dev
