@@ -3,6 +3,7 @@ import { Form, Button, Input, Row, Col, message, Modal, Select, DatePicker } fro
 import UserAddEditBox from '../UserAddEditBox'
 import { checkBtn } from 'UTIL/authButton'
 
+const { RangePicker } = DatePicker
 const FormItem = Form.Item
 const Option = Select.Option
 
@@ -45,11 +46,15 @@ const UserQuery = class UserQueryView extends Component {
       if (err) {
         return
       } else {
-        const beginTime = fieldsValue['beginTime']
-        const endTime = fieldsValue['endTime']
+        const filterTime = fieldsValue['filterTime']
+        !filterTime ? 
         Object.assign(filter, {
-          beginTime: beginTime ? beginTime.format('YYYYMMDD') : '',
-          endTime: endTime ? endTime.format('YYYYMMDD') : ''
+          beginTime: '',
+          endTime: ''
+        }) :
+        Object.assign(filter, {
+          beginTime: filterTime[0].format('YYYYMMDD'),
+          endTime: filterTime[1].format('YYYYMMDD')
         })
       }
     })
@@ -88,6 +93,9 @@ const UserQuery = class UserQueryView extends Component {
       item => <Option value={item.paramKey} key={item.paramKey} >{item.paramValue}</Option>
     )
 
+    // 今日以后的未来日子不允许选择
+    const disabledDate = current => current && current.valueOf() > Date.now()
+
     return (
       <div className="app-search-panel">
         <Form horizontal>
@@ -112,8 +120,7 @@ const UserQuery = class UserQueryView extends Component {
             <Col span={13}>
               <FormItem 
                 label='用户名称：'
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 17 }}
+                {...formItemLayout}
               >
                 {
                   getFieldDecorator('userName', {
@@ -135,7 +142,9 @@ const UserQuery = class UserQueryView extends Component {
                 {...formItemLayout}
               >
                 {
-                  getFieldDecorator('userLevel')(
+                  getFieldDecorator('userLevel', {
+                    initialValue: ''
+                  })(
                     <Select 
                       placeholder='请选择用户级别' 
                       allowClear
@@ -147,36 +156,21 @@ const UserQuery = class UserQueryView extends Component {
               </FormItem>
             </Col>
             <Col span={13}>
-              <Row>
-                <Col span={12}>
-                  <FormItem 
-                    label='创建日期：'
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 14 }}
-                  >
-                    {
-                      getFieldDecorator('beginTime', datePickerConfig)(
-                        <DatePicker
-                          placeholder='请选择开始日期' 
-                          disabledDate={this.disabledStartDate}
-                        />
-                      )
-                    }
-                  </FormItem>
-                </Col>
-                <Col span={12}>
-                  <FormItem>
-                    {
-                      getFieldDecorator('endTime', datePickerConfig)(
-                        <DatePicker
-                          placeholder='请选择结束日期'
-                          disabledDate={this.disabledEndDate}
-                        />
-                      )
-                    }
-                  </FormItem>
-                </Col>
-              </Row>
+              <FormItem 
+                label='创建日期：'
+                {...formItemLayout}
+              >
+                {
+                  getFieldDecorator('filterTime', {
+                    initialValue: ''
+                  })(
+                    <RangePicker
+                      format="YYYY/MM/DD" 
+                      disabledDate={disabledDate}
+                    />
+                  )
+                }
+              </FormItem>
             </Col>
           </Row>  
         </Form>
