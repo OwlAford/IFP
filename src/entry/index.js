@@ -28,12 +28,12 @@ if (isIE) {
       require('es6-promise').polyfill()
       require('./main')
     }, 'es6')
-  } else if(window.Promise && !window.fetch) {
+  } else if (window.Promise && !window.fetch) {
     require.ensure('isomorphic-fetch', require => {
       require('isomorphic-fetch')
       require('./main')
     }, 'fetch')
-  } else if(!window.Promise && !window.fetch) {
+  } else if (!window.Promise && !window.fetch) {
     require.ensure(['es6-promise', 'isomorphic-fetch'], require => {
       require('es6-promise').polyfill()
       require('isomorphic-fetch')
