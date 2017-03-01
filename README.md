@@ -39,6 +39,7 @@ npm run lint
 3. Replace some js files to npm packages.
 4. Remove ES polyfill from vendor bundle.
 5. Add ES polyfill to index page.
+6. Add batch operation script.
 
 ###2017/02/21
 
