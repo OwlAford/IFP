@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Table, Row, Col, Button, Modal } from 'UTIL/antd'
+import { Table, Row, Col, Button, Modal } from 'antd'
 import { checkBtn, checkBtnList } from 'UTIL/authButton'
 import { formatDateTime } from 'UTIL/filters'
 import AddEditPostBox from './AddEditPostBox'

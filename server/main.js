@@ -20,6 +20,7 @@ if (project.env === 'development') {
   const compiler = webpack(webpackConfig)
 
   debug('Enabling webpack dev and HMR middleware')
+  
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath  : webpackConfig.output.publicPath,
     contentBase : project.paths.client(),
@@ -34,11 +35,13 @@ if (project.env === 'development') {
   app.use(express.static(project.paths.public()))
 
   //代理转发，解决跨域问题
-  app.use('/', function(req, res) {
-    var url = `http://139.224.128.69:8060${req.url}`
-    console.log(`[PROXY]: ${url}`)
-    req.pipe(request(url)).pipe(res)
-  })
+  if (project.service_agent) {
+    app.use('/', function(req, res) {
+      const url = `${project.remote_host}${req.url}`
+      debug(`[PROXY]: ${url}`)
+      req.pipe(request(url)).pipe(res)
+    })
+  }
 
 } else {
   debug('Server is being run outside of live development mode')

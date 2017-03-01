@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import handleChange from 'UTIL/handleChange'
-import { md5 } from 'UTIL/md5'
-import { message } from 'UTIL/antd'
+import md5 from 'md5'
+import { message } from 'antd'
 
 export default class ChangePswdView extends Component {
 

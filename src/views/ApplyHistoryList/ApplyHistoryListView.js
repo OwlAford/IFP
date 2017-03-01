@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Table, DatePicker, Modal } from 'UTIL/antd'
+import { Button, Table, DatePicker, Modal } from 'antd'
 // import moment from 'moment'
 import InfoTable from 'COMPONENT/InfoTable'
 import { formatDateTime, str2json } from 'UTIL/filters'

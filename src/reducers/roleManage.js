@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'UTIL/antd'
+import { message, notification } from 'antd'
 import { getRoleTree } from './common/bindRole'
 import { getAllRoleFnItemsAction, getInfoByRoleIdAction, getInfoByRoleNameAction, updateRoleAction, addRoleAction, itemsBindRoleAction, delRoleAction } from './request/role'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table } from 'UTIL/antd'
+import { Table } from 'antd'
 
 
 export default class RelSetBoxView extends Component {

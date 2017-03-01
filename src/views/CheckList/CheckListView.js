@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Table, Modal, Input, message } from 'UTIL/antd'
+import { Form, Button, Table, Modal, Input, message } from 'antd'
 import { checkBtnList } from 'UTIL/authButton'
 import { str2json } from 'UTIL/filters'
 import InfoTable from 'COMPONENT/InfoTable'

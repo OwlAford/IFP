@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Row, Col, Button } from 'UTIL/antd'
+import { Row, Col, Button } from 'antd'
 import BranchTree from 'COMPONENT/BranchTree'
 import InputSearch from 'COMPONENT/InputSearch'
 import BranchSearch from './BranchSearch'

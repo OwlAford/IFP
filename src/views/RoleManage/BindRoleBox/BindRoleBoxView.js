@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Row, Col, Modal } from 'UTIL/antd'
+import { Table, Button, Row, Col, Modal } from 'antd'
 import Spin from 'COMPONENT/Spin'
 
 

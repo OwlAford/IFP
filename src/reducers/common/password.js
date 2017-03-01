@@ -1,4 +1,4 @@
-import { message } from 'UTIL/antd'
+import { message } from 'antd'
 import { changePasswordAction } from '../request/password'
 
 export const changePassword = (data, cb) => (dispatch, getState) => {

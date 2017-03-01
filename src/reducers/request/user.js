@@ -1,6 +1,6 @@
 import { BZ_REQUESTER } from 'MIDDLEWARE/requester'
 import API from 'CONSTANT/api'
-import { md5 } from 'UTIL/md5'
+import md5 from 'md5'
 
 const USER_COMMON = ['USER_COMMON_REQ', 'USER_COMMON_SUC', 'USER_COMMON_FAL']
 const USR_ADD = ['USR_ADD_REQ', 'USR_ADD_SUC', 'USR_ADD_FAL']

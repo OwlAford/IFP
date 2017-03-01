@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'UTIL/antd'
+import { message, notification } from 'antd'
 import { getStrategyList } from './common/strategy'
 import { addStrategyAction, editStrategyAction, deleteStrategyAction } from './request/strategy'
 

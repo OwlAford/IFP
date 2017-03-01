@@ -1,7 +1,7 @@
 import NProgress from 'nprogress'
 import { initBranchList, applySelect } from './common/branchTree'
 import { getBranchAction, modifyBranchAction, deleteBranchAction, addBranchAction } from './request/branch'
-import { message } from 'UTIL/antd'
+import { message } from 'antd'
 
 const RESET_FORM = 'RESET_FORM'
 const EMPTY_BRANCH = 'EMPTY_BRANCH'

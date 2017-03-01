@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'UTIL/antd'
+import { Row, Col } from 'antd'
 import InputSearch from 'COMPONENT/InputSearch'
 import RoleTree from 'COMPONENT/RoleTree'
 import EditRole from './EditRole'

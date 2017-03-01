@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Modal, Select, TreeSelect } from 'UTIL/antd'
+import { Form, Button, Modal, Select, TreeSelect } from 'antd'
 
 const FormItem = Form.Item
 const Option = Select.Option

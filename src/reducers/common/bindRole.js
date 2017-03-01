@@ -1,7 +1,7 @@
 import { groupList } from 'UTIL/formatList'
 import NProgress from 'nprogress'
 import { getUserRoleListAction, userRoleAssociationAction, getRoleListAction } from '../request/role'
-import { notification } from 'UTIL/antd'
+import { notification } from 'antd'
 
 const USER_GET_ROLE = 'USER_GET_ROLE'
 const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE'

@@ -16,9 +16,15 @@ const config = {
   dir_public : 'public',
   dir_server : 'server',
 
-  // 运行服务配置
-  server_host : ip.address(),
-  server_port : process.env.PORT || 3001,
+  // 远程服务配置，默认开启代理
+  service_agent : true,
+  remote_host   : 'http://139.224.128.69:9080',
+  project_name  : 'inmanage',
+
+  // 本地服务配置
+  server_host  : ip.address(),
+  server_port  : process.env.PORT || 8000,
+  autoOpenBrowser: true,
 
   // 编译配置
   compiler_babel : {
@@ -37,15 +43,33 @@ const config = {
     colors : true
   },
   compiler_vendors : [
-    'core-js/shim',
-    'promise-polyfill',
     'react',
     'react-dom',
     'react-redux',
     'react-router',
     'redux',
     'redux-thunk',
-    'nprogress'
+    'md5',
+    'nprogress',
+    // 将部分 antd 组件打包在 vendor 内
+    'antd/lib/button',
+    'antd/lib/checkbox',
+    'antd/lib/col',
+    'antd/lib/date-picker',
+    'antd/lib/form',
+    'antd/lib/icon',
+    'antd/lib/input',
+    'antd/lib/message',
+    'antd/lib/modal',
+    'antd/lib/notification',
+    'antd/lib/radio',
+    'antd/lib/row',
+    'antd/lib/select',
+    'antd/lib/slider',
+    'antd/lib/spin',
+    'antd/lib/table',
+    'antd/lib/tree',
+    'antd/lib/tree-select'
   ]
 }
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { HOME_PATH } from 'GLOBAL'
-import { message } from 'UTIL/antd'
+import { message } from 'antd'
 
 export default class NotFound extends Component {
   static contextTypes = {

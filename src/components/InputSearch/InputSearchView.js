@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Icon, message } from 'UTIL/antd'
+import { Form, Input, Icon, message } from 'antd'
 const FormItem = Form.Item
 
 const InputSearch = class InputSearchView extends Component {

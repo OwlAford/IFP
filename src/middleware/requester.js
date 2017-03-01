@@ -1,7 +1,7 @@
-import 'isomorphic-fetch'
+// import 'isomorphic-fetch'
 import { REMOTE_URL } from 'GLOBAL'
 import { getCookie, setCookie } from 'UTIL/cookie'
-import { Modal } from 'UTIL/antd'
+import { Modal } from 'antd'
 
 export const BZ_REQUESTER = Symbol('BZ REQUESTER')
 

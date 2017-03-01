@@ -10,7 +10,7 @@ npm install
 ```
 
 ##Usage
-- Run the following command to the local debugging environment, then open `http://localhost:3001` in browser.
+- Run the following command to the local debugging environment, then open `http://localhost:8000` in browser.
 
 ```bash
 npm run dev

@@ -216,7 +216,7 @@ webpackConfig.module.loaders.push({
 if (!__DEV__) {
   debug('Applying ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders.filter(loader =>
-    loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
+    loader.loaders && loader.loaders.find(name => /css/.test(name.split('?')[0]))
   ).forEach(loader => {
     const first = loader.loaders[0]
     const rest = loader.loaders.slice(1)

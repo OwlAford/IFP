@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'UTIL/antd'
+import { message, notification } from 'antd'
 import { getBsnListAction, getStrategyAction, getStrategyListAction, setRelationAction } from './request/strategy'
 
 const GET_BSN_LIST = 'GET_BSN_LIST'

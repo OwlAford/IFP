@@ -8,15 +8,32 @@
   border-top-right-radius: 8px;
 }
 
+@mixin inputPlaceholder {
+  color: #ccc;
+  font-size: 13px;
+}
+
 body {
   background-color: #eff4f8;
 }
 
-#root, 
+.root, 
 .app-wrap, 
 .app-container {
   @include fullScreen;
   font-size: 14px;
+}
+
+.app-wrap {
+  input {
+    &:-ms-input-placeholder {
+      @include inputPlaceholder;
+    }
+
+    &::-webkit-input-placeholder {
+      @include inputPlaceholder;
+    }
+  }
 }
 
 .app-content {
@@ -112,12 +129,7 @@ body {
 
     &:focus {
       @include inputFocus;
-    }
-
-    &::-webkit-input-placeholder {
-      color: #ccc;
-      font-size: 13px;
-    }
+    }    
   }
 }
 

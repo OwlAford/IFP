@@ -4,7 +4,7 @@ const debug = require('debug')('app:bin:compile')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 
-const webpackCompiler = (webpackConfig) =>
+const webpackCompiler = webpackConfig =>
   new Promise((resolve, reject) => {
     const compiler = webpack(webpackConfig)
 

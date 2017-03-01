@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { message, notification } from 'UTIL/antd'
+import { message, notification } from 'antd'
 import { postListAction, addPostListAction, modifyPostAction, delPostAction } from './request/post'
 
 const SET_POST_LIST = 'SET_POST_LIST'
