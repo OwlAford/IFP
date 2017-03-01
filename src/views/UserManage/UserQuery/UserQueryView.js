@@ -165,6 +165,7 @@ const UserQuery = class UserQueryView extends Component {
                     initialValue: ''
                   })(
                     <RangePicker
+                      style={{ width: '100%' }}
                       format="YYYY/MM/DD" 
                       disabledDate={disabledDate}
                     />

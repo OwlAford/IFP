@@ -25,6 +25,8 @@ body {
 }
 
 .app-wrap {
+  animation: fadeIn .6s;
+
   input {
     &:-ms-input-placeholder {
       @include inputPlaceholder;
@@ -54,7 +56,6 @@ body {
     min-height: 100%;
   }
 }
-
 
 @font-face {font-family: "iconfont";
   src: url(setPath('iconfont.eot'));
