@@ -43,7 +43,7 @@ const webpackConfig = {
   module : {}
 }
 // 文件入口
-const APP_ENTRY = project.paths.client('entry/main.js')
+const APP_ENTRY = project.paths.client('entry')
 
 webpackConfig.entry = {
   app : __DEV__
