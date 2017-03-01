@@ -30,12 +30,21 @@ npm run lint
 
 ##Update log
 
+###2017/03/01
+
+**Members: Aford**
+
+1. Optimization the antd bundle size.
+2. Modify project config.
+3. Replace some js files to npm packages.
+4. Remove ES polyfill from vendor bundle.
+5. Add ES polyfill to index page.
 
 ###2017/02/21
 
 **Members: Aford**
 
-1. Solve the problem of MS Edge fetch request failed
+1. Solve the problem of MS Edge fetch request failed.
 
 
 ###2017/02/20
@@ -43,6 +52,6 @@ npm run lint
 
 1. Encapsulates request middleware components.
 2. Add ES6 polyfill to project.
-3. Modify webpack package plan.
+3. Modify webpack config.
 4. Optimization the bundle size.
 
