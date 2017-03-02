@@ -57,12 +57,13 @@ body {
   }
 }
 
-@font-face {font-family: "iconfont";
-  src: url(setPath('iconfont.eot'));
-  src: url(setPath('iconfont.eot#iefix')) format('embedded-opentype'),
-  url(setPath('iconfont.woff')) format('woff'),
-  url(setPath('iconfont.ttf')) format('truetype'),
-  url(setPath('iconfont.svg#iconfont')) format('svg');
+@font-face {
+  font-family: 'iconfont';
+  src: url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.eot');
+  src: url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.svg#iconfont') format('svg');
 }
 
 .iconfont {

@@ -189,7 +189,7 @@ webpackConfig.postcss = [
 ]
 
 // 文件加载器
-const fileLoaderPrefix = 'prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype='
+const fileLoaderPrefix = 'prefix=fonts/&name=[path][name].[ext]&limit=8192&mimetype='
 webpackConfig.module.loaders.push({ 
   test: /\.woff(\?.*)?$/,  
   loader: `url?${fileLoaderPrefix}application/font-woff`
