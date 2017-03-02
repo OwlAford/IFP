@@ -1,19 +1,19 @@
 import { connect } from 'react-redux'
-import { resetForm, branchModify, changeBranchAfterType, branchDelete } from 'REDUCER/branchManage'
+import { resetForm, setAddBranchVisible, branchModify, branchDelete, changeBranchSelected } from 'REDUCER/branchManage'
 import BranchScanView from './BranchScanView'
 
 const mapDispatchToProps = {
   resetForm,
-  branchModify,
-  changeBranchAfterType,
-  branchDelete
+  setAddBranchVisible,
+  branchModify, 
+  branchDelete,
+  changeBranchSelected
 }
 
 const mapStateToProps = state => ({
+  userMenu: state.menu.userMenu,
   selectedBranch: state.branchManage.selectedObject,
-  branchNodes: state.branchTree.selectTreeBranchList,
-  selectedOperate: state.branchManage.selectedOperate,
-  afterOperateType: state.branchManage.afterOperateType,
+  branchNodes: state.branchTree.selectTreeBranchList
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BranchScanView)

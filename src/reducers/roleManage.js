@@ -251,6 +251,7 @@ const initialState = {
     roleName: '',
     roleId: ''
   },
+  
   selectModifyRole: '',
   addBoxVisible: false,
   bindBoxVisible: false

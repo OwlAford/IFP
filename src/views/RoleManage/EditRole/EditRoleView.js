@@ -69,11 +69,15 @@ const EditRole = class EditRoleView extends Component {
         message.error('请正确填写内容！')
         resetFields()
       } else {
-        let formData = Object.assign({}, getFieldsValue(), {
-          roleId: info.roleId ? info.roleId : '',
-          rolePId: selectModifyRole ? selectModifyRole : ''
-        })
-        updateRole(formData)
+        if (selectModifyRole == info.roleId) {
+          message.error('不可选择该角色为所属角色！')
+        } else {
+          updateRole({
+            ...getFieldsValue(),
+            roleId: info.roleId ? info.roleId : '',
+            rolePId: selectModifyRole ? selectModifyRole : ''
+          })
+        }
       }
     })
   }

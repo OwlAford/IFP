@@ -4,7 +4,6 @@ import { getBranchListAction } from '../request/branch'
 
 const GET_BRANCH_LIST = 'GET_BRANCH_LIST'
 const USER_GROUP_BRANCH = 'USER_GROUP_BRANCH'
-const APPLY_BRANCH_SELECT = 'APPLY_BRANCH_SELECT'
 
 
 const getBranch = branch => ({
@@ -19,11 +18,6 @@ const converRole = branch => ({
   parentId: branch.brhParentId,
   name: branch.brhName,
   children: []
-})
-
-export const applySelect = data => ({
-  type: APPLY_BRANCH_SELECT,
-  data
 })
 
 export const initBranchList = cb => (dispatch, getState) => {

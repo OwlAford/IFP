@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Row, Col, Button } from 'antd'
 import BranchTree from 'COMPONENT/BranchTree'
 import InputSearch from 'COMPONENT/InputSearch'
-import BranchSearch from './BranchSearch'
 import BranchScan from './BranchScan'
 
 export default class BranchManageView extends Component {
@@ -48,7 +47,6 @@ export default class BranchManageView extends Component {
             </div>
           </Col>
           <Col span={19}>
-            <BranchSearch/>
             <BranchScan/>
           </Col>
         </Row>

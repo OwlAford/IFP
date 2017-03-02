@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Row, Col, DatePicker, Select, message, Modal, TreeSelect, notification } from 'antd'
 import Spin from 'COMPONENT/Spin'
+import BranchAdd from '../BranchAdd'
+import { checkBtnList } from 'UTIL/authButton'
 import { isEmptyObject } from 'UTIL/filters'
 
 const FormItem = Form.Item
+const Confirm = Modal.confirm
 const Option = Select.Option
 const TreeNode = TreeSelect.TreeNode
 const SHOW_PARENT = TreeSelect.SHOW_PARENT
@@ -18,122 +21,128 @@ const BranchScan = class BranchScanView extends Component {
     }
   }
 
+  showSpin() {
+    this.setState({
+      loading: true
+    })
+  }
+
+  hideSpin() {
+    this.setState({
+      loading: false
+    })
+  }
+
+  addBranch() {
+    this.props.setAddBranchVisible(true)
+  }
+
+  modBranch() {
+    const { form, selectedBranch, branchModify, changeBranchSelected } = this.props
+    const { getFieldsValue, resetFields } = form
+
+    if (!isEmptyObject(selectedBranch) && selectedBranch.brhId) {
+      Confirm({
+        title: '确认修改这项内容？',
+        content: '点击确认修改',
+        onOk: () => {
+          let level = ''
+          let params = getFieldsValue()
+          switch (params.brhLevel) {
+            case '等级1':
+              level = '1'
+              break
+            case '等级2':
+              level = '2'
+              break
+            case '等级3':
+              level = '3'  
+              break
+          }
+          params = Object.assign({}, getFieldsValue(), {
+            brhLevel: level
+          })
+          // 避免将空字段保存为 'undefined'
+          params.brhParentId ? null : params.brhParentId = ''
+
+          // 避免选中节点自身作为所属机构
+          if (selectedBranch.brhId == params.brhParentId) {
+            message.error('不允许选择当前机构为所属机构！')
+          } else {
+            const reolad = () => {
+              resetFields()
+              changeBranchSelected(params)
+              this.hideSpin()
+            }
+
+            this.showSpin()
+            branchModify(params, reolad, reolad)
+          }
+        }
+      })
+    } else {
+      message.warning('请先选择一个机构节点！')
+    }
+  }
+
+  delBranch() {
+    const { form, selectedBranch, branchDelete, resetForm } = this.props
+    const { getFieldsValue } = form
+    if (!isEmptyObject(selectedBranch) && selectedBranch.brhId) {
+      Confirm({
+        title: '确认删除这项内容？',
+        content: '点击确认删除',
+        onOk: () => {
+          // 当点击删除机构  
+          const params = getFieldsValue()
+          this.showSpin()
+          branchDelete(params, () => {
+            resetForm()
+            this.hideSpin()
+          }, () => {
+            this.hideSpin()
+          })
+        }
+      })
+    } else {
+      message.warning('请先选择一个机构节点！')
+    }
+  }
+
   componentWillUnmount() {
     this.props.resetForm()
   }
 
-  componentWillReceiveProps(newProps) {
-    const { form, selectedBranch, selectedOperate, branchModify, resetForm, afterOperateType, changeBranchAfterType, branchDelete } = newProps
-    const { resetFields, getFieldsValue, setFieldsValue } = form
-
-    // 当选择侧边分支且分支进行了切换时
-    if (!isEmptyObject(selectedBranch) && this.state.brhId != selectedBranch.brhId) {
-      this.setState({
-        brhId: selectedBranch.brhId
-      })
-      resetFields()
-    }
-
-    // 增删改操作后响应
-    const MsgSuc = (d) => {
-      notification.success({
-        message: '成功',
-        description: d
-      })
-    }
-    const MsgFal = (d) => {
-      notification.warning({
-        message: '失败',
-        description: d
-      })
-    }
-    const showSpin = () => {
-      this.setState({
-        loading: true
-      })
-    }
-    const hideSpin = () => {
-      this.setState({
-        loading: false
-      })
-    }
-    if (afterOperateType != '0') {
-      let type = afterOperateType
-      switch(type) {
-        case '1':
-          MsgSuc('修改成功！')
-          break
-        case '2':
-          MsgFal('修改失败！')
-          break
-        case '3':
-          MsgSuc('删除成功！')
-          break
-        case '4':
-          MsgFal('删除失败！')
-          break
-        case '5':
-          MsgSuc('添加成功！')
-          break
-        case '6':
-          MsgFal('添加失败！')
-          break
-      }
-      changeBranchAfterType({type: '0'})
-    }
-
-    // 当点击修改机构
-    if (selectedOperate == 'MODIFY_BRANCH') {    
-      let level = ''
-      if (!isEmptyObject(selectedBranch)) {
-        let params = getFieldsValue()
-        switch (params.brhLevel) {
-          case '等级1':
-            level = '1'
-            break
-          case '等级2':
-            level = '2'
-            break
-          case '等级3':
-            level = '3'  
-            break
-        }
-      }
-      let data = Object.assign({}, getFieldsValue(), {
-        brhLevel: level
-      })
-      if (data.brhId) {
-        // 避免将空字段保存为 'undefined'
-        data.brhParentId ? null : data.brhParentId = ''
-
-        // 强制纠错，避免选中节点自身作为所属机构
-        if(selectedBranch.brhId == data.brhParentId) {
-          data.brhParentId = selectedBranch.brhParentId ? selectedBranch.brhParentId : ''
-          setFieldsValue({
-            brhParentId: data.brhParentId
-          })
-        }
-        showSpin()
-        branchModify(data, () => {
-          // resetForm()
-          hideSpin()
-        }, hideSpin)
-      }
-    } else if (selectedOperate == 'DELETE_BRANCH' && !isEmptyObject(selectedBranch)) {
-      // 当点击删除机构  
-      let params = getFieldsValue()
-      showSpin()
-      branchDelete(params, () => {
-        resetForm()
-        hideSpin()
-      }, hideSpin())
-    }
-
-  }
-
   render() {
-    const { form, selectedBranch, branchNodes } = this.props
-    const { getFieldDecorator } = form
+    const { userMenu, form, selectedBranch, branchNodes } = this.props
+    const { getFieldDecorator, resetFields } = form
+
+    const addBtn = (
+      <Button 
+        size="large" 
+        type="primary" 
+        onClick={e => this.addBranch()}
+      >
+        新增机构
+      </Button>
+    )
+    const modBtn = (
+      <Button 
+        size="large" 
+        onClick={e => this.modBranch()}
+      >
+        保存修改
+      </Button>
+    )
+    const delBtn = (
+      <Button 
+        size="large" 
+        type="danger" 
+        onClick={e => this.delBranch()}
+      >
+        删除机构
+      </Button>
+    )
 
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -164,11 +173,32 @@ const BranchScan = class BranchScanView extends Component {
       treeCheckStrictly: false,
       treeCheckable: false,
       showCheckedStrategy: SHOW_PARENT
-
     }
 
     return (
       <div className="app-form-scan">
+        <div className="app-search-panel">
+          <div className="button-group">
+            <Button 
+              size="large" 
+              type="ghost" 
+              onClick={e => resetFields()}
+            >
+              重置修改
+            </Button>
+            {checkBtnList(userMenu, [{
+              item: 'F002',
+              button: modBtn
+            }, {
+              item: 'F001',
+              button: addBtn
+            }, {
+              item: 'F004',
+              button: delBtn
+            }], true)}
+          </div>
+          <BranchAdd/>
+        </div>
         <Form horizontal>
           <Row>
             <Col span={12}>
