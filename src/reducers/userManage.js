@@ -45,7 +45,6 @@ export const userPageByBrh = (params, cb) => (dispatch, getState) => {
     dispatch(updateSelectKeys([params.brhId]))
     dispatch(pageUsers(data))
     NProgress.done()
-    message.success('加载完毕！')
     if (cb) cb()
   })
 }

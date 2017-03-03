@@ -109,7 +109,6 @@ export const getInfoByRoleId = roleId => (dispatch, getState) => {
     if (dataBody.errorCode == '0') {
       dispatch(applyCurRoleInfo(dataBody))
       NProgress.done()
-      message.success("加载完毕！")
     } else {
       NProgress.done()
       message.error('获取信息失败！')
@@ -125,7 +124,6 @@ export const getInfoByRoleName = (roleName, cb) => (dispatch, getState) => {
     if (dataBody.errorCode == '0') {
       dispatch(applyCurRoleInfo(dataBody))
       NProgress.done()
-      message.success("加载完毕！")
       if (cb) cb(dataBody)
     } else {
       NProgress.done()

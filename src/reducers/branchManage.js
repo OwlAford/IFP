@@ -32,7 +32,6 @@ export const changeBranchSelected = data => (dispatch, getState) => {
       let brhParentId = dataBody.brhParentId
       dispatch(applyBranch(dataBody))
       NProgress.done()
-      message.success("加载完毕！")
     })
   } else {
     message.warning("当前未选中机构！")
