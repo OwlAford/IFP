@@ -79,7 +79,7 @@ const UserQuery = class UserQueryView extends Component {
       <Button 
         size="large" 
         type="primary" 
-        onClick={(e) => this.addUser()}
+        onClick={e => this.addUser()}
       >
         新增用户
       </Button>
@@ -178,14 +178,14 @@ const UserQuery = class UserQueryView extends Component {
         <div className="button-group">
           <Button 
             size="large" 
-            onClick={(e) => this.searchUser()}
+            onClick={e => this.searchUser()}
           >
             搜索用户
           </Button>
           <Button 
             size="large" 
             type="ghost" 
-            onClick={(e) => this.handleClear()}
+            onClick={e => this.handleClear()}
           >
             清除条件
           </Button>

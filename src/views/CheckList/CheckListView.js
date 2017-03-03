@@ -207,7 +207,7 @@ const CheckList = class CheckListView extends Component {
               key="back" 
               type="ghost" 
               size="large" 
-              onClick={(e) => this.closeModal()}
+              onClick={e => this.closeModal()}
             >
               返 回
             </Button>,
@@ -216,7 +216,7 @@ const CheckList = class CheckListView extends Component {
               key="submit" 
               type="primary" 
               size="large"  
-              onClick={(e) => this.checkSubmit()} 
+              onClick={e => this.checkSubmit()} 
             >
               确定
             </Button>
@@ -271,7 +271,7 @@ const CheckList = class CheckListView extends Component {
               key="back" 
               type="ghost" 
               size="large" 
-              onClick={(e) => this.closeReview()}
+              onClick={e => this.closeReview()}
             >
               返 回
             </Button>

@@ -88,7 +88,7 @@ const AddEditPostBox = class AddEditPostBoxView extends Component {
               key="back" 
               type="ghost" 
               size="large" 
-              onClick={(e) => this.onClose()}
+              onClick={e => this.onClose()}
             >
               返 回
             </Button>,
@@ -97,7 +97,7 @@ const AddEditPostBox = class AddEditPostBoxView extends Component {
               key="clean" 
               type="ghost" 
               size="large" 
-              onClick={(e) => this.onClear()}
+              onClick={e => this.onClear()}
             >
               清除
             </Button> : '',
@@ -106,7 +106,7 @@ const AddEditPostBox = class AddEditPostBoxView extends Component {
               key="submit" 
               type="primary" 
               size="large"  
-              onClick={(e) => this.onSubmit()} 
+              onClick={e => this.onSubmit()} 
             >
               提 交
             </Button>

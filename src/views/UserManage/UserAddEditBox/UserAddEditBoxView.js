@@ -235,7 +235,7 @@ const BranchAdd = class BranchAddView extends Component {
     // 清除按钮
     let clearBtn = ''
     userBox.type == 'ADD' 
-    ? clearBtn = <Button key='clean' type='ghost' size='large' onClick={(e) => this.onClear()}>清除所有</Button> 
+    ? clearBtn = <Button key='clean' type='ghost' size='large' onClick={e => this.onClear()}>清除所有</Button> 
     : null
 
     const treeProps  = {
@@ -261,7 +261,7 @@ const BranchAdd = class BranchAddView extends Component {
                 key='back' 
                 type='ghost' 
                 size='large' 
-                onClick={(e) => this.onClose()}
+                onClick={e => this.onClose()}
               >
                 返 回
               </Button>,
@@ -272,7 +272,7 @@ const BranchAdd = class BranchAddView extends Component {
                 key='submit' 
                 type='primary' 
                 size='large'  
-                onClick={(e) => this.onSubmit()} 
+                onClick={e => this.onSubmit()} 
               >
                 提 交
               </Button>

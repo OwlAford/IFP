@@ -44,7 +44,7 @@ export default class SidebarView extends Component {
                     <Link 
                       to={preUrl + item.url} 
                       activeClassName='active' 
-                      onClick={(e) => {selectMenu(item.id)}}
+                      onClick={e => {selectMenu(item.id)}}
                     >
                       <i className={'iconfont ' + CSS[item.id]}></i>
                       {item.title}
@@ -69,7 +69,7 @@ export default class SidebarView extends Component {
                               <Link 
                                 to={preUrl + item.url} 
                                 activeClassName='active'
-                                onClick={(e) => {selectMenu(item.id)}}
+                                onClick={e => {selectMenu(item.id)}}
                               >
                                 {item.title}
                               </Link>

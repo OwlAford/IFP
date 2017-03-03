@@ -101,7 +101,7 @@ const EditRole = class EditRoleView extends Component {
     const modBtn = (
       <Button 
         size="large" 
-        onClick={(e) => this.saveModify()}
+        onClick={e => this.saveModify()}
       >
         保存修改
       </Button>
@@ -111,7 +111,7 @@ const EditRole = class EditRoleView extends Component {
       <Button 
         size="large" 
         type="ghost"
-        onClick={(e) => this.bindRole()}
+        onClick={e => this.bindRole()}
       >
         关联功能
       </Button>
@@ -121,7 +121,7 @@ const EditRole = class EditRoleView extends Component {
       <Button 
         size="large" 
         type="primary" 
-        onClick={(e) => this.addNewRole()}
+        onClick={e => this.addNewRole()}
       >
         添加角色
       </Button>
@@ -131,7 +131,7 @@ const EditRole = class EditRoleView extends Component {
       <Button 
         size="large" 
         type="danger" 
-        onClick={(e) => this.deleteRole()}
+        onClick={e => this.deleteRole()}
       >
         删除角色
       </Button>

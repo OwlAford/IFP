@@ -41,7 +41,7 @@ export default class HeaderView extends Component {
                 key={i}
                 to={item.url} 
                 activeClassName='active' 
-                onClick={(e) => this.handleMenu(i)}
+                onClick={e => this.handleMenu(i)}
               >
                 {item.title}
               </Link>

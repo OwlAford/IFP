@@ -89,7 +89,7 @@ export default class BindRoleBoxView extends Component {
                 key="back" 
                 type="ghost" 
                 size="large" 
-                onClick={(e) => this.onClose()}
+                onClick={e => this.onClose()}
               >
                 返 回
               </Button>,
@@ -97,7 +97,7 @@ export default class BindRoleBoxView extends Component {
                 key="submit" 
                 type="primary" 
                 size="large"  
-                onClick={(e) => this.onSubmit()} 
+                onClick={e => this.onSubmit()} 
               >
                 保存
               </Button>

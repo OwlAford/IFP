@@ -60,7 +60,7 @@ export default class StrategySettingsView extends Component {
         size="large" 
         type="primary" 
         icon="plus-circle-o"
-        onClick={(e) => this.addPolicy()}
+        onClick={e => this.addPolicy()}
       >
         新增策略
       </Button>

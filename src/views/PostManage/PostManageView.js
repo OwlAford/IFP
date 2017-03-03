@@ -101,7 +101,7 @@ export default class PostManageView extends Component {
         size="large" 
         type="primary" 
         icon="plus-circle-o"
-        onClick={(e) => this.addPost()}
+        onClick={e => this.addPost()}
       >
         新增岗位
       </Button>

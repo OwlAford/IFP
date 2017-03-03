@@ -85,8 +85,8 @@ export default class LoginView extends Component {
               value={userName}
               name="userName"
               onChange={this::handleChange}
-              onFocus={(e) => this.handleFocus(e)}
-              onBlur={(e) => this.handleBlur(e)}
+              onFocus={e => this.handleFocus(e)}
+              onBlur={e => this.handleBlur(e)}
               ref={node => this.userNameInput = node}
             />
           </div>
@@ -97,8 +97,8 @@ export default class LoginView extends Component {
               type="password"
               value={pswd}
               name="pswd"
-              onFocus={(e) => this.handleFocus(e)}
-              onBlur={(e) => this.handleBlur(e)}
+              onFocus={e => this.handleFocus(e)}
+              onBlur={e => this.handleBlur(e)}
               onChange={this::handleChange}
               ref={node => this.pswdInput = node}
             />
@@ -108,8 +108,8 @@ export default class LoginView extends Component {
               placeholder="请输入验证码"
               value={vcode}
               name="vcode"
-              onFocus={(e) => this.handleFocus(e)}
-              onBlur={(e) => this.handleBlur(e)}
+              onFocus={e => this.handleFocus(e)}
+              onBlur={e => this.handleBlur(e)}
               onChange={this::handleChange}
             />
             <img 
@@ -118,7 +118,7 @@ export default class LoginView extends Component {
             />
           </div>
           <div className="btn-wrap">
-            <button onClick={(e) => this.handleSubmit()}>立即登录</button>
+            <button onClick={e => this.handleSubmit()}>立即登录</button>
           </div>
         </div>
       </div>

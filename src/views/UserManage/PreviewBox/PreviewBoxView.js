@@ -60,7 +60,7 @@ export default class PreviewBoxView extends Component {
           visible={visible}
           onCancel={e => this.onClose()}
           footer={[
-              <Button key="back" type="ghost" size="large" onClick={(e) => this.onClose()}>
+              <Button key="back" type="ghost" size="large" onClick={e => this.onClose()}>
                 返 回
               </Button>
             ]}

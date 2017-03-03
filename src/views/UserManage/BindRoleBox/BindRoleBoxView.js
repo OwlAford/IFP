@@ -60,14 +60,14 @@ const BindRoleBox = class BindRoleBoxView extends Component {
           onOk={this.onSubmit}
           onCancel={e => this.onClose()}
           footer={[
-              <Button key="back" type="ghost" size="large" onClick={(e) => this.onClose()}>
+              <Button key="back" type="ghost" size="large" onClick={e => this.onClose()}>
                 返 回
               </Button>,
               <Button 
                 key='submit' 
                 type='primary' 
                 size='large'  
-                onClick={(e) => this.onSubmit()} 
+                onClick={e => this.onSubmit()} 
               >
                 提 交
               </Button>
