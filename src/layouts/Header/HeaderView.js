@@ -31,7 +31,7 @@ export default class HeaderView extends Component {
 
   render() {
 
-    const LnkList = (params) => {
+    const LnkList = params => {
       return (
         <div className="guide">
         {params.map(

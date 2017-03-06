@@ -106,13 +106,13 @@ export default class ReviewSettingsView extends Component {
       dataIndex: 'alias',
       key: 'alias',
       render: (text, record) => {
-        return <a onClick={ e => this.viewRelStrategy(record) }>{text}</a>
+        return <a onClick={e => this.viewRelStrategy(record)}>{text}</a>
       }
     }, {
       title: '关联策略设置',
       key: 'relation',
       render: (text, record) => {
-        return checkBtn(userMenu, 'F009', <a onClick={ e => this.setRelStrategy(record) }>设置</a>)
+        return checkBtn(userMenu, 'F009', <a onClick={e => this.setRelStrategy(record)}>设置</a>)
       }
     }]
 
@@ -128,7 +128,7 @@ export default class ReviewSettingsView extends Component {
           bsnName: bsnSelectOpt.bsnName
         })
       },
-      onChange: (current) => {
+      onChange: current => {
         getBsnList({
           currentPage: current,
           turnPageShowNum: bsnSelectOpt.turnPageShowNum,
@@ -140,7 +140,7 @@ export default class ReviewSettingsView extends Component {
     return (
       <div className="pageReviewSettings">
         <div style={{ padding: '20px 20px 20px 30px', height: '72px' }}>
-          <Button onClick={ e => this.initTable() }>重置</Button>
+          <Button onClick={e => this.initTable()}>重置</Button>
           <div style={{ float: 'right' }}>
             <InputSearch
               placeholder='请输入交易名称'

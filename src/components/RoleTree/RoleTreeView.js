@@ -2,7 +2,7 @@ import React from 'react'
 import { Tree } from 'antd'
 const TreeNode = Tree.TreeNode
 
-const bindDataLoop = (item) => {
+const bindDataLoop = item => {
   if (item.children.length >= 1) {
     return (
       <TreeNode key={item.roleId} title={item.roleName}>
@@ -24,13 +24,11 @@ const RoleTreeView = ({ selected, roleList, selectedKeys }) => {
       <Tree 
         autoExpandParent={true}
         selectedKeys={selectedKeys ? selectedKeys : []}
-        onSelect={
-          (info, node) => {
-            selected({
-              roleId: info[0],
-              title: node.node.props.title 
-            })
-          }
+        onSelect={(info, node) =>
+          selected({
+            roleId: info[0],
+            title: node.node.props.title 
+          })
         }
       >
         {roleList.map(bindDataLoop)}

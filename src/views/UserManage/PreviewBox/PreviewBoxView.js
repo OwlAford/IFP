@@ -15,7 +15,7 @@ export default class PreviewBoxView extends Component {
     const { visible, level, certType, info } = this.props
     const { userLevel, userCertType, userName, userEmail, userMobile, postName, userRight, userLoginName, userDesc, userAddress, userCertNo, brhName, roleList } = info
 
-    const getRoleName = (roleList) => {
+    const getRoleName = roleList => {
       let roleName = ''
       if (!roleList) 
         return ''

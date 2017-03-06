@@ -93,7 +93,8 @@ const AddEditPostBox = class AddEditPostBoxView extends Component {
               返 回
             </Button>,
 
-            addType ? <Button 
+            addType ? 
+            <Button 
               key="clean" 
               type="ghost" 
               size="large" 

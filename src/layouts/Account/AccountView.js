@@ -19,9 +19,8 @@ export default class AccountView extends Component {
   }
 
   handleMouseout() {
-    let self = this
-    this.avatarTimer = setTimeout(function() {
-      self.setState({
+    this.avatarTimer = setTimeout(() => {
+      this.setState({
         showCard: false
       })
     }, 300)
@@ -52,7 +51,7 @@ export default class AccountView extends Component {
         <span className="welcome">欢迎回来，{userName}</span>
         <span className="cancel" onClick={e => this.handleLogout(e)}>退出登录</span>
         <div 
-          className={this.state.showCard ? "card show" : "card"}
+          className={this.state.showCard ? 'card show' : 'card'}
           onMouseEnter={e => this.handleMouseover(e)}
           onMouseLeave={e => this.handleMouseout(e)}
         >

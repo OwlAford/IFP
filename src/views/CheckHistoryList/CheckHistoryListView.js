@@ -71,7 +71,7 @@ export default class ApplyHistoryListView extends Component {
       dataIndex: 'bsnName',
       key: 'bsnName',
       render: (text, record) => {
-        return <a onClick={e => {this.stateReview(record)}}>{text}</a>
+        return <a onClick={e => this.stateReview(record)}>{text}</a>
       }
     }, {
       title: '授权人编号',
@@ -176,7 +176,7 @@ export default class ApplyHistoryListView extends Component {
     return (
       <div className="applyHistoryList" style={{ padding: '20px 30px' }}>
         <div style={{ width: '100%', paddingBottom: '20px', height: '48px' }}>
-          <Button onClick={ e => this.initTable() }>重置</Button>
+          <Button onClick={e => this.initTable()}>重置</Button>
           <RangePicker
             style={{float: 'right'}}
             // ranges={{ 
@@ -219,7 +219,6 @@ export default class ApplyHistoryListView extends Component {
               </tbody>
             </table>
           </div>
-
         </Modal>
       </div>
     )

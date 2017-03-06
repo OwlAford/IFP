@@ -2,7 +2,7 @@ import React from 'react'
 import { Tree } from 'antd'
 const TreeNode = Tree.TreeNode
 
-const bindDataLoop = (item) => {
+const bindDataLoop = item => {
   if (item.children.length >= 1) {
     return (
       <TreeNode title={item.name} key={item.id}>

@@ -60,7 +60,7 @@ export default class RelSetBoxView extends Component {
     }, {
       title: '操作',
       key: 'operation',
-      render: (text, record) => <a onClick={ e => this.setRelStrgy(record) }>设置关联</a>
+      render: (text, record) => <a onClick={e => this.setRelStrgy(record)}>设置关联</a>
     }]
 
     const pagination = {

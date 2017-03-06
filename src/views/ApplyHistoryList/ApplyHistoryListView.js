@@ -68,7 +68,7 @@ export default class ApplyHistoryListView extends Component {
       dataIndex: 'bsnName',
       key: 'bsnName',
       render: (text, record) => {
-        return <a onClick={e => {this.stateReview(record)}}>{text}</a>
+        return <a onClick={e => this.stateReview(record)}>{text}</a>
       }
     }, {
       title: '授权结果',
@@ -103,7 +103,7 @@ export default class ApplyHistoryListView extends Component {
           endTime: this.state.endTime
         })
       },
-      onChange: (current) => {
+      onChange: current => {
         getStateList({
           currentPage: current,
           turnPageShowNum: stateListSelectOpt.turnPageShowNum,
@@ -134,7 +134,7 @@ export default class ApplyHistoryListView extends Component {
     return (
       <div className="applyHistoryList" style={{ padding: '20px 30px' }}>
         <div style={{ width: '100%', paddingBottom: '20px', height: '48px' }}>
-          <Button onClick={ e => this.initTable() }>重置</Button>
+          <Button onClick={e => this.initTable()}>重置</Button>
           <RangePicker
             style={{float: 'right'}}
             // ranges={{ 

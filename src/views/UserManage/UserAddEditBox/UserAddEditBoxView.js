@@ -53,8 +53,7 @@ const BranchAdd = class BranchAddView extends Component {
         defaultPassword: '000000',
         boxTitle: '修改用户信息'
       })
-      let newInitVal = Object.assign(
-        {}, 
+      let newInitVal = Object.assign({}, 
         this.state.initVal, 
         userBox.initVal
       )

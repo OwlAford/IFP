@@ -58,13 +58,11 @@ const BranchAdd = class BranchAddView extends Component {
           }
         })
 
-        let data = Object.assign(
-          {}, getFieldsValue(), {
-            brhLevel: level,
-            brhPName: brhPName, 
-            brhParentId: selectBranchId
-          }
-        )
+        let data = Object.assign({}, getFieldsValue(), {
+          brhLevel: level,
+          brhPName: brhPName, 
+          brhParentId: selectBranchId
+        })
 
         const showSpin = () => {
           this.setState({
@@ -114,7 +112,7 @@ const BranchAdd = class BranchAddView extends Component {
     const treeProps = {
       dropdownStyle: { maxHeight: 400, overflow: 'auto' },
       treeData: branchNodes, 
-      placeholder: "请选择所属机构",
+      placeholder: '请选择所属机构',
       treeDefaultExpandAll: true,
       treeCheckStrictly: false,
       treeCheckable: false,

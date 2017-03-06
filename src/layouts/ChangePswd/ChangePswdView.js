@@ -23,16 +23,16 @@ export default class ChangePswdView extends Component {
   onSubmit() {
     let { oldPswd, newPswd, newAgainPswd } = this.state
     let pswdReg = new RegExp(/^[a-zA-Z0-9]{6,10}$/)
-    if (oldPswd == "") {
-      message.error("请输入旧密码！")
-    } else if (newPswd == "" || !pswdReg.test(newPswd)) {
-      message.error("请输入正确的新密码！")
-    } else if (newAgainPswd == "" || !pswdReg.test(newAgainPswd)) {
-      message.error("请再次输入正确的新密码！")
+    if (oldPswd == '') {
+      message.error('请输入旧密码！')
+    } else if (newPswd == '' || !pswdReg.test(newPswd)) {
+      message.error('请输入正确的新密码！')
+    } else if (newAgainPswd == '' || !pswdReg.test(newAgainPswd)) {
+      message.error('请再次输入正确的新密码！')
     } else if (oldPswd == newPswd) {
-      message.error("新密码不能和旧密码相同!")
+      message.error('新密码不能和旧密码相同!')
     } else if (newPswd !== newAgainPswd) {
-      message.error("请确认两次输入的新密码一致!")
+      message.error('请确认两次输入的新密码一致!')
     } else {
       let data = {
         oldPassword: md5(oldPswd),

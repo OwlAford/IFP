@@ -44,9 +44,9 @@ export default class SidebarView extends Component {
                     <Link 
                       to={preUrl + item.url} 
                       activeClassName='active' 
-                      onClick={e => {selectMenu(item.id)}}
+                      onClick={e => selectMenu(item.id)}
                     >
-                      <i className={'iconfont ' + CSS[item.id]}></i>
+                      <i className={`iconfont ${CSS[item.id]}`}></i>
                       {item.title}
                     </Link>
                   </div>
@@ -57,7 +57,7 @@ export default class SidebarView extends Component {
               return (
                 <div className="subMenu" key={i}>
                   <div className="title arr" data-state="0" onClick={e => this.handleActive(e)}>
-                    <i className={'iconfont ' + CSS[item.id]}></i>
+                    <i className={`iconfont ${CSS[item.id]}`}></i>
                     {item.title}
                   </div>
                   <div className="menuList">
@@ -69,7 +69,7 @@ export default class SidebarView extends Component {
                               <Link 
                                 to={preUrl + item.url} 
                                 activeClassName='active'
-                                onClick={e => {selectMenu(item.id)}}
+                                onClick={e => selectMenu(item.id)}
                               >
                                 {item.title}
                               </Link>

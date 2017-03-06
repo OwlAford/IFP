@@ -16,8 +16,7 @@ const InputSearch = class InputSearchView extends Component {
             })(
               <Input 
                 addonAfter={
-                  <Icon type="search" onClick={
-                    e => {
+                  <Icon type="search" onClick={e => {
                       let keyword = getFieldsValue().keyword
                       if (!keyword.trim()) {
                         message.warning('请输入搜索关键字！')
