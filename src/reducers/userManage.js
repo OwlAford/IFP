@@ -32,16 +32,12 @@ export const userPageByBrh = (params, cb) => (dispatch, getState) => {
     let userList = dataBody.userList.map(user => Object.assign(user, {
       key: user.userNo
     }))
-    let data = Object.assign({
-    }, {
-      userList: userList
-    }, {
-      totalSize: dataBody.turnPageTotalNum
-    }, {
-      turnPageShowNum: dataBody.turnPageShowNum
-    }, {
+    let data = {
+      userList: userList,
+      totalSize: dataBody.turnPageTotalNum,
+      turnPageShowNum: dataBody.turnPageShowNum,
       currentPage: dataBody.currentPage
-    })
+    }
     dispatch(updateSelectKeys([params.brhId]))
     dispatch(pageUsers(data))
     NProgress.done()
