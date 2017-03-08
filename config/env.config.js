@@ -6,7 +6,7 @@ module.exports = {
 
   // 生产环境编译配置
   production : config => ({
-    compiler_public_path     : `/${config.project_name}/`,
+    compiler_public_path     : config.project_name ? `/${config.project_name}/` : '/',
     compiler_fail_on_warning : false,
     compiler_hash_type       : 'chunkhash',
     compiler_devtool         : null,
