@@ -1,15 +1,17 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { setPasswordVisible } from 'REDUCER/common/main'
 import { changePassword } from 'REDUCER/common/password'
 import ChangePswdView from './ChangePswdView'
 
-const mapDispatchToProps = {
-  setPasswordVisible,
-  changePassword
-}
+export default connect(
 
-const mapStateToProps = state => ({
+  state => ({
+  }),
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePswdView)
+  {
+    setPasswordVisible,
+    changePassword
+  },
+  
+  ChangePswdView
+)

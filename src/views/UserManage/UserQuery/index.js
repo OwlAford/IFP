@@ -1,17 +1,21 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { userPageByBrh, setAddUserBoxVsisible, updateSelectKeys } from 'REDUCER/userManage'
 import UserQueryView from './UserQueryView'
 
-const mapDispatchToProps = {
-  userPageByBrh,
-  setAddUserBoxVsisible,
-  updateSelectKeys
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  userMenu: state.menu.userMenu,
-  level: state.config.level,
-  userBox: state.userManage.userBox
-})
+  state => ({
+    userMenu: state.menu.userMenu,
+    level: state.config.level,
+    userBox: state.userManage.userBox
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserQueryView)
+  {
+    userPageByBrh,
+    setAddUserBoxVsisible,
+    updateSelectKeys
+  },
+  
+  UserQueryView
+)
+

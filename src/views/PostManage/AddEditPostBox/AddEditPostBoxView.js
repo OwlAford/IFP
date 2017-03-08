@@ -113,7 +113,7 @@ const AddEditPostBox = class AddEditPostBoxView extends Component {
             </Button>
           ]}
         >
-          <Form horizontal>
+          <Form layout="horizontal">
             <Row>
               <Col span={11}>
                 <FormItem 

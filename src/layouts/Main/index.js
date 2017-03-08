@@ -1,15 +1,17 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { initUserForm } from 'REDUCER/common/main'
 import { initUserMenu } from 'REDUCER/common/menu'
 import MainView from './MainView'
 
-const mapDispatchToProps = {
-  initUserMenu,
-  initUserForm
-}
+export default connect(
 
-const mapStateToProps = state => ({
+  state => ({
+  }),
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainView)
+  {
+    initUserMenu,
+    initUserForm
+  },
+  
+  MainView
+)

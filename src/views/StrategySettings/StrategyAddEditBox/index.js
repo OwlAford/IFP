@@ -1,16 +1,20 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { setAddEditModalVisible, addStrategy, editStrategy } from 'REDUCER/strategySettings'
 import StrategyAddEditBoxView from './StrategyAddEditBoxView'
 
-const mapDispatchToProps = {
-  setAddEditModalVisible,
-  addStrategy,
-  editStrategy
-}
+export default connect(
 
-const mapStateToProps = state => ({
+  state => ({
 
-})
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(StrategyAddEditBoxView)
+  {
+    setAddEditModalVisible,
+    addStrategy,
+    editStrategy
+  },
+  
+  StrategyAddEditBoxView
+)
+
 

@@ -1,14 +1,14 @@
-import { connect } from 'react-redux'
-import {  } from 'REDUCER/reviewSettings'
+import connect from 'STORE/connect'
 import DetailBoxView from './DetailBoxView'
 
-const mapDispatchToProps = {
+export default connect(
 
-}
+  state => ({
+    detail: state.reviewSettings.strategyDetail
+  }),
 
-const mapStateToProps = state => ({
-  detail: state.reviewSettings.strategyDetail
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(DetailBoxView)
+  {},
+  
+  DetailBoxView
+)
 

@@ -1,22 +1,25 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { setAddUserBoxVsisible, addUser, colseModifyUser, updateUser } from 'REDUCER/userManage'
 import UserAddEditBoxView from './UserAddEditBoxView'
 
-const mapDispatchToProps = {
-  setAddUserBoxVsisible,
-  addUser,
-  colseModifyUser,
-  updateUser
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  userBox: state.userManage.userBox,
-  branchNodes: state.branchTree.selectTreeBranchList,
-  allBranchList: state.branchTree.allBranchList,
-  certType: state.config.certType,
-  postList: state.config.post.postList,
-  level: state.config.level
-})
+  state => ({
+    userBox: state.userManage.userBox,
+    branchNodes: state.branchTree.selectTreeBranchList,
+    allBranchList: state.branchTree.allBranchList,
+    certType: state.config.certType,
+    postList: state.config.post.postList,
+    level: state.config.level
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserAddEditBoxView)
+  {
+    setAddUserBoxVsisible,
+    addUser,
+    colseModifyUser,
+    updateUser
+  },
+  
+  UserAddEditBoxView
+)
 

@@ -1,19 +1,22 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { resetForm, setAddBranchVisible, branchModify, branchDelete, changeBranchSelected } from 'REDUCER/branchManage'
 import BranchScanView from './BranchScanView'
 
-const mapDispatchToProps = {
-  resetForm,
-  setAddBranchVisible,
-  branchModify, 
-  branchDelete,
-  changeBranchSelected
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  userMenu: state.menu.userMenu,
-  selectedBranch: state.branchManage.selectedObject,
-  branchNodes: state.branchTree.selectTreeBranchList
-})
+  state => ({
+    userMenu: state.menu.userMenu,
+    selectedBranch: state.branchManage.selectedObject,
+    branchNodes: state.branchTree.selectTreeBranchList
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(BranchScanView)
+  {
+    resetForm,
+    setAddBranchVisible,
+    branchModify, 
+    branchDelete,
+    changeBranchSelected
+  }, 
+  
+  BranchScanView
+)

@@ -156,7 +156,7 @@ const BranchAdd = class BranchAddView extends Component {
               </Button>
             ]}
           >
-            <Form horizontal>
+            <Form layout="horizontal">
               <Row>
                 <Col span={12}>
                   <FormItem 

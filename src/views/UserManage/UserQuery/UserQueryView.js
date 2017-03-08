@@ -98,7 +98,7 @@ const UserQuery = class UserQueryView extends Component {
 
     return (
       <div className="app-search-panel">
-        <Form horizontal>
+        <Form layout="horizontal">
           <Row>
             <Col span={11}>
               <FormItem 

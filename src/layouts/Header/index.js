@@ -1,14 +1,16 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import HeaderView from './HeaderView'
 
-const mapDispatchToProps = {
+export default connect(
 
-}
+  state => ({
+    items: state.menu.items,
+    passwordVisible: state.main.passwordVisible
+  }),
 
-const mapStateToProps = state => ({
-  items: state.menu.items,
-  passwordVisible: state.main.passwordVisible
-})
+  {},
+  
+  HeaderView
+)
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderView)
 

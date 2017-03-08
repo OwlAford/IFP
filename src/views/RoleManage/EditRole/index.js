@@ -1,20 +1,23 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { setSelectTreeVal, updateRole, setAddRoleBoxVisible, setBindRoleBoxVisible, delRole } from 'REDUCER/roleManage'
 import EditRoleView from './EditRoleView'
 
-const mapDispatchToProps = {
-  setSelectTreeVal,
-  updateRole,
-  setAddRoleBoxVisible,
-  setBindRoleBoxVisible,
-  delRole
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  userMenu: state.menu.userMenu,
-  treeNodes: state.bindRole.selectRoleTreeList,
-  info: state.roleManage.curRoleInfo,
-  selectModifyRole: state.roleManage.selectModifyRole
-})
+  state => ({
+    userMenu: state.menu.userMenu,
+    treeNodes: state.bindRole.selectRoleTreeList,
+    info: state.roleManage.curRoleInfo,
+    selectModifyRole: state.roleManage.selectModifyRole
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditRoleView)
+  {
+    setSelectTreeVal,
+    updateRole,
+    setAddRoleBoxVisible,
+    setBindRoleBoxVisible,
+    delRole
+  },
+  
+  EditRoleView
+)

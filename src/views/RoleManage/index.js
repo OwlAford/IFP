@@ -1,19 +1,23 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { getRoleTree } from 'REDUCER/common/bindRole'
 import { getAllRoleFnItems, getInfoByRoleId, clearCurRoleInfo, getInfoByRoleName } from 'REDUCER/roleManage'
 import RoleManageView from './RoleManageView'
 
-const mapDispatchToProps = {
-  getRoleTree,
-  getAllRoleFnItems,
-  getInfoByRoleId,
-  clearCurRoleInfo,
-  getInfoByRoleName
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  roleTreeList: state.bindRole.roleTreeList,
-  curRoleId: state.roleManage.curRoleInfo.roleId
-})
+  state => ({
+    roleTreeList: state.bindRole.roleTreeList,
+    curRoleId: state.roleManage.curRoleInfo.roleId
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoleManageView)
+  {
+    getRoleTree,
+    getAllRoleFnItems,
+    getInfoByRoleId,
+    clearCurRoleInfo,
+    getInfoByRoleName
+  },
+  
+  RoleManageView
+)
+

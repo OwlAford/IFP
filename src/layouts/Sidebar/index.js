@@ -1,15 +1,17 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { selectMenu } from 'REDUCER/common/menu'
 import SidebarView from './SidebarView'
 
-const mapDispatchToProps = {
-  selectMenu
-}
+export default connect(
 
-const mapStateToProps = state => ({
+  state => ({
+  }),
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarView)
+  {
+    selectMenu
+  },
+  
+  SidebarView
+)
 
 

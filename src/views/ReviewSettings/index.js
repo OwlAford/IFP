@@ -1,19 +1,22 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { getBsnList, getStrategy} from 'REDUCER/reviewSettings'
 import { getStrategyList } from 'REDUCER/common/strategy'
 import ReviewSettingsView from './ReviewSettingsView'
 
-const mapDispatchToProps = {
-  getBsnList,
-  getStrategy,
-  getStrategyList
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  userMenu: state.menu.userMenu,
-  bsnList: state.reviewSettings.bsnList,
-  bsnListTotalNum: state.reviewSettings.bsnListTotalNum,
-  bsnSelectOpt: state.reviewSettings.bsnSelectOpt
-})
+  state => ({
+    userMenu: state.menu.userMenu,
+    bsnList: state.reviewSettings.bsnList,
+    bsnListTotalNum: state.reviewSettings.bsnListTotalNum,
+    bsnSelectOpt: state.reviewSettings.bsnSelectOpt
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewSettingsView)
+  {
+    getBsnList,
+    getStrategy,
+    getStrategyList
+  },
+  
+  ReviewSettingsView
+)

@@ -73,7 +73,7 @@ const BindRoleBox = class BindRoleBoxView extends Component {
               </Button>
             ]}
           >           
-            <Form horizontal>
+            <Form layout="horizontal">
               <FormItem 
                 label='角色选择：'
                 required

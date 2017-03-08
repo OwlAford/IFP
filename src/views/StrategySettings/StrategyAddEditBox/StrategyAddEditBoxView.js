@@ -122,7 +122,7 @@ const StrategyAddEditBox = class StrategyAddEditBoxView extends Component {
               </Button>
             ]}
           >
-            <Form horizontal>
+            <Form layout="horizontal">
               {
                 isAdd ? 
                 null : 

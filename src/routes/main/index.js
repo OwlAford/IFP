@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import { injectReducer } from 'STORE/reducers'
 
 export default store => ({

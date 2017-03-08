@@ -1,12 +1,13 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import WelcomeView from './WelcomeView'
 
-const mapDispatchToProps = {
+export default connect(
 
-}
+  state => ({
+    main: state.main
+  }),
 
-const mapStateToProps = state => ({
-  main: state.main
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(WelcomeView)
+  {},
+  
+  WelcomeView
+)

@@ -123,7 +123,7 @@ const AddRoleBox = class AddRoleBoxView extends Component {
               </Button>
             ]}
           >
-            <Form horizontal>
+            <Form layout="horizontal">
               <Row>
                 <Col span={11}>
                   <FormItem 

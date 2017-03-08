@@ -199,7 +199,7 @@ const BranchScan = class BranchScanView extends Component {
           </div>
           <BranchAdd/>
         </div>
-        <Form horizontal>
+        <Form layout="horizontal">
           <Row>
             <Col span={12}>
               <FormItem 

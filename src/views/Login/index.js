@@ -1,14 +1,17 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { setSessionID, validateLogin } from 'REDUCER/common/login'
 import LoginView from './LoginView'
 
-const mapDispatchToProps = {
-  setSessionID,
-  validateLogin
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  vcodeSrc : state.login.checkCodeSrc
-})
+  state => ({
+    vcodeSrc : state.login.checkCodeSrc
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginView)
+  {
+    setSessionID,
+    validateLogin
+  }, 
+
+  LoginView
+)

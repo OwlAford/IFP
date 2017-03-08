@@ -1,18 +1,21 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { getAllRoleFnItems, clearTableItems } from 'REDUCER/roleManage'
 import ItemsTableView from './ItemsTableView'
 
-const mapDispatchToProps = {
-  getAllRoleFnItems,
-  clearTableItems
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  pageSize: state.roleManage.pageSize,
-  totalSize: state.roleManage.tableTotalSize,
-  curPage: state.roleManage.tableCurPage,
-  dataSource: state.roleManage.tableCurPageItems,
-  curRoleId: state.roleManage.curRoleInfo.roleId
-})
+  state => ({
+    pageSize: state.roleManage.pageSize,
+    totalSize: state.roleManage.tableTotalSize,
+    curPage: state.roleManage.tableCurPage,
+    dataSource: state.roleManage.tableCurPageItems,
+    curRoleId: state.roleManage.curRoleInfo.roleId
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemsTableView)
+  {
+    getAllRoleFnItems,
+    clearTableItems
+  },
+  
+  ItemsTableView
+)

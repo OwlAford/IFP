@@ -1,16 +1,19 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { setAddRoleBoxVisible, addRole } from 'REDUCER/roleManage'
 import AddRoleBoxView from './AddRoleBoxView'
 
-const mapDispatchToProps = {
-  setAddRoleBoxVisible,
-  addRole
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  treeNodes: state.bindRole.selectRoleTreeList,
-  visible: state.roleManage.addBoxVisible
-})
+  state => ({
+    treeNodes: state.bindRole.selectRoleTreeList,
+    visible: state.roleManage.addBoxVisible
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddRoleBoxView)
+  {
+    setAddRoleBoxVisible,
+    addRole
+  },
+  
+  AddRoleBoxView
+)
 

@@ -222,7 +222,7 @@ const CheckList = class CheckListView extends Component {
             </Button>
           ]}
         >
-          <Form horizontal>
+          <Form layout="horizontal">
             <FormItem
               label="审批流水号"
               {...itemLayout}

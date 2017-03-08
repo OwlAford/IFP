@@ -1,15 +1,18 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { getHistoryList } from 'REDUCER/checkHistoryList'
 import CheckHistoryListView from './CheckHistoryListView'
 
-const mapDispatchToProps = {
-  getHistoryList
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  historyList: state.checkHistoryList.historyList,
-  historyListSelectOpt: state.checkHistoryList.historyListSelectOpt,
-  totalNum: state.checkHistoryList.historyListTotalNum,
-})
+  state => ({
+    historyList: state.checkHistoryList.historyList,
+    historyListSelectOpt: state.checkHistoryList.historyListSelectOpt,
+    totalNum: state.checkHistoryList.historyListTotalNum
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckHistoryListView)
+  {
+    getHistoryList
+  }, 
+  
+  CheckHistoryListView
+)

@@ -1,17 +1,20 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { getCheckList, checkDecide } from 'REDUCER/checkList'
 import CheckListView from './CheckListView'
 
-const mapDispatchToProps = {
-  getCheckList,
-  checkDecide
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  userMenu: state.menu.userMenu,
-  checkList: state.checkList.checkList,
-  checkListSelectOpt: state.checkList.checkListSelectOpt,
-  totalNum: state.checkList.checkListTotalNum
-})
+  state => ({
+    userMenu: state.menu.userMenu,
+    checkList: state.checkList.checkList,
+    checkListSelectOpt: state.checkList.checkListSelectOpt,
+    totalNum: state.checkList.checkListTotalNum
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckListView)
+  {
+    getCheckList,
+    checkDecide
+  }, 
+  
+  CheckListView
+)

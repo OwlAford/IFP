@@ -1,20 +1,23 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { closeBindRole } from 'REDUCER/userManage'
 import { updateSelectedRole, userRoleAssociation } from 'REDUCER/common/bindRole'
 import BindRoleBoxView from './BindRoleBoxView'
 
-const mapDispatchToProps = {
-  closeBindRole,
-  updateSelectedRole,
-  userRoleAssociation
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  visible: state.userManage.bindRoleBox.visible,
-  treeNodes: state.bindRole.selectRoleTreeList,
-  selectedRoleList: state.bindRole.selectedRoleList,
-  allSelectRoleList: state.bindRole.allSelectRoleList,
-  info: state.userManage.bindRoleBox.info
-})
+  state => ({
+    visible: state.userManage.bindRoleBox.visible,
+    treeNodes: state.bindRole.selectRoleTreeList,
+    selectedRoleList: state.bindRole.selectedRoleList,
+    allSelectRoleList: state.bindRole.allSelectRoleList,
+    info: state.userManage.bindRoleBox.info
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(BindRoleBoxView)
+  {
+    closeBindRole,
+    updateSelectedRole,
+    userRoleAssociation
+  },
+  
+  BindRoleBoxView
+)

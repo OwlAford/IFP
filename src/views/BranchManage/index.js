@@ -1,17 +1,20 @@
-import { connect } from 'react-redux'
+import connect from 'STORE/connect'
 import { initBranchList } from 'REDUCER/common/branchTree'
 import { changeBranchSelected, resetForm } from 'REDUCER/branchManage'
 import BranchManageView from './BranchManageView'
 
-const mapDispatchToProps = {
-  initBranchList,
-  changeBranchSelected,
-  resetForm
-}
+export default connect(
 
-const mapStateToProps = state => ({
-  treeBranchList: state.branchTree.treeBranchList,
-  branchId: state.branchManage.brhId
-})
+  state => ({
+    treeBranchList: state.branchTree.treeBranchList,
+    branchId: state.branchManage.brhId
+  }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(BranchManageView)
+  {
+    initBranchList,
+    changeBranchSelected,
+    resetForm
+  }, 
+  
+  BranchManageView
+)

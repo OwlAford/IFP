@@ -9,7 +9,7 @@ const InputSearch = class InputSearchView extends Component {
     const { getFieldDecorator, getFieldsValue } = form
     return (
       <div className="app-input-search">
-        <Form inline>
+        <Form layout="inline">
           <FormItem>
             {getFieldDecorator('keyword', {
               initialValue: initialValue
