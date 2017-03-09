@@ -1,10 +1,11 @@
 const userAgent = navigator.userAgent 
-const isOpera = userAgent.indexOf('Opera') > -1
-const isIE = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1 && !isOpera
-const isEdge = userAgent.indexOf('Edge') > -1 || !isIE && userAgent.indexOf('Windows NT') > -1 && userAgent.indexOf(' Trident/7.0;') > -1
-const isFF = userAgent.indexOf('Firefox') > -1
-const isSafari = userAgent.indexOf('Safari') > -1 && userAgent.indexOf('Chrome') == -1
-const isChrome = userAgent.indexOf('Chrome') > -1 && userAgent.indexOf('Safari') > -1
+const hasString = str => userAgent.indexOf(str) > -1
+const isOpera = hasString('Opera')
+const isIE = hasString('compatible') && hasString('MSIE') && !isOpera
+const isEdge = hasString('Edge') || !isIE && hasString('Windows NT') && hasString(' Trident/7.0;')
+const isFF = hasString('Firefox')
+const isSafari = hasString('Safari') && !hasString('Chrome')
+const isChrome = hasString('Chrome') && hasString('Safari')
 let IEVersion = ''
 
 if (isIE) {  
