@@ -189,7 +189,7 @@ webpackConfig.postcss = [
   })
 ]
 
-const loaderGenerator = (loader, prefix, path, limit, mimetype) => `${loader}?${prefix ? 'prefix=fonts/': ''}&name=${path}/[name].[hash:7].[ext]${limit ? '&limit=8192' : ''}${mimetype ? '' : '&mimetype=' + mimetype}`
+const loaderGenerator = (loader, prefix, path, limit, mimetype) => `${loader}?${prefix ? 'prefix=fonts/' : ''}&name=${path}/[name].[hash:7].[ext]${limit ? '&limit=8192' : ''}${mimetype ? '' : '&mimetype=' + mimetype}`
 
 // 文件加载器
 webpackConfig.module.loaders.push({ 
