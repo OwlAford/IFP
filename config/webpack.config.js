@@ -54,9 +54,10 @@ webpackConfig.entry = {
 
 // 打包输出目录
 webpackConfig.output = {
-  filename   : `[name].[${project.compiler_hash_type}].js`,
-  path       : project.paths.dist(),
-  publicPath : project.compiler_public_path
+  filename      : `js/[name].[${project.compiler_hash_type}].js`,
+  chunkFilename : `js/[name].[${project.compiler_hash_type}].js`,
+  path          : project.paths.dist(),
+  publicPath    : project.compiler_public_path
 }
 
 // Externals
@@ -188,29 +189,30 @@ webpackConfig.postcss = [
   })
 ]
 
+const loaderGenerator = (loader, prefix, path, limit, mimetype) => `${loader}?${prefix ? 'prefix=fonts/': ''}&name=${path}/[name].[hash:7].[ext]${limit ? '&limit=8192' : ''}${mimetype ? '' : '&mimetype=' + mimetype}`
+
 // 文件加载器
-const fileLoaderPrefix = 'prefix=fonts/&name=[path][name].[ext]&limit=8192&mimetype='
 webpackConfig.module.loaders.push({ 
   test: /\.woff(\?.*)?$/,  
-  loader: `url?${fileLoaderPrefix}application/font-woff`
+  loader: loaderGenerator('url', true, 'img/fonts', true, 'application/font-woff')
 }, { 
   test: /\.woff2(\?.*)?$/, 
-  loader: `url?${fileLoaderPrefix}application/font-woff2` 
+  loader: loaderGenerator('url', true, 'img/fonts', true, 'application/font-woff2') 
 }, { 
   test: /\.otf(\?.*)?$/,   
-  loader: `file?${fileLoaderPrefix}font/opentype` 
+  loader: loaderGenerator('file', true, 'img/fonts', true, 'font/opentype') 
 }, { 
   test: /\.ttf(\?.*)?$/,   
-  loader: `url?${fileLoaderPrefix}application/octet-stream` 
+  loader:  loaderGenerator('url', true, 'img/fonts', true, 'application/octet-stream') 
 }, { 
   test: /\.eot(\?.*)?$/,   
-  loader: 'file?prefix=fonts/&name=[path][name].[ext]' 
+  loader: loaderGenerator('file', true, 'img/fonts', false, false) 
 }, { 
   test: /\.svg(\?.*)?$/,   
-  loader: `url?${fileLoaderPrefix}image/svg+xml`
+  loader: loaderGenerator('url', true, 'img/fonts', true, 'image/svg+xml') 
 },{ 
-  test: /\.(png|jpg)$/,    
-  loader: 'url?limit=8192' 
+  test: /\.(png|jpg|gif)$/,    
+  loader: loaderGenerator('url', false, 'img', true, false) 
 })
 
 if (!__DEV__) {
@@ -225,7 +227,7 @@ if (!__DEV__) {
   })
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('[name].[contenthash].css', {
+    new ExtractTextPlugin('css/[name].[contenthash].css', {
       allChunks : true
     })
   )
