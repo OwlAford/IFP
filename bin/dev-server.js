@@ -5,7 +5,7 @@ const opn = require('opn')
 
 const uri = `http://localhost:${project.server_port}`
 
-server.listen(project.server_port, function(err) {
+server.listen(project.server_port, err => {
   if (err) {
     debug(err)
     return
