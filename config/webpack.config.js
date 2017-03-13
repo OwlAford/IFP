@@ -62,9 +62,6 @@ webpackConfig.output = {
 
 // Externals
 webpackConfig.externals = {}
-webpackConfig.externals['react/lib/ExecutionEnvironment'] = true
-webpackConfig.externals['react/lib/ReactContext'] = true
-webpackConfig.externals['react/addons'] = true
 
 // Plugins
 webpackConfig.plugins = [
