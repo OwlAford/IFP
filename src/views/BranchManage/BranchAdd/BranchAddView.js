@@ -298,7 +298,7 @@ const BranchAdd = class BranchAddView extends Component {
                         initialValue: '',
                       })(
                         <Input  
-                          placeholder='请输入机构地址' 
+                          placeholder='请填写机构地址' 
                           size='large' 
                         />
                       )

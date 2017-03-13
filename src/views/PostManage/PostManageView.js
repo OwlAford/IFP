@@ -23,7 +23,7 @@ export default class PostManageView extends Component {
   delPost(info) {
     confirm({
       title: '删除岗位',
-      content: '是否确认删除岗位？',
+      content: '确认删除岗位？',
       onOk: () => {
         this.props.deletePost(info.postId)
       }

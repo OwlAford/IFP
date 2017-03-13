@@ -36,7 +36,7 @@ if (project.env === 'development') {
 
   //代理转发，解决跨域问题
   if (project.service_agent) {
-    app.use('/', function(req, res) {
+    app.use('/', (req, res) => {
       const url = `${project.remote_host}${req.url}`
       debug(`[PROXY]: ${url}`)
       req.pipe(request(url)).pipe(res)

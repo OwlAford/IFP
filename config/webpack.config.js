@@ -85,7 +85,7 @@ webpackConfig.plugins = [
 // 确保编译器不被跳过和误报
 if (!argv.watch) {
   webpackConfig.plugins.push(function() {
-    this.plugin('done', function(stats) {
+    this.plugin('done', stats => {
       if (stats.compilation.errors.length) {
         throw new Error(stats.compilation.errors.map(err => err.message || err))
       }
@@ -114,13 +114,11 @@ if (__DEV__) {
   )
 }
 
-
 webpackConfig.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     names : ['vendor']
   })
 )
-
 
 // 配置加载器
 webpackConfig.module.loaders = [{
@@ -132,7 +130,6 @@ webpackConfig.module.loaders = [{
   test    : /\.json$/,
   loader  : 'json'
 }]
-
 
 // 样式加载器
 const BASE_CSS_LOADER = 'css?sourceMap&-minimize'
@@ -189,7 +186,7 @@ webpackConfig.postcss = [
   })
 ]
 
-const loaderGenerator = (loader, prefix, path, limit, mimetype) => `${loader}?${prefix ? 'prefix=fonts/' : ''}&name=${path}/[name].[hash:7].[ext]${limit ? '&limit=8192' : ''}${mimetype ? '' : '&mimetype=' + mimetype}`
+const loaderGenerator = (loader, prefix, path, limit, mimetype) => `${loader}?${prefix ? 'prefix=fonts/' : ''}&name=${path}/[name].[hash:8].[ext]${limit ? '&limit=8192' : ''}${mimetype ? '' : '&mimetype=' + mimetype}`
 
 // 文件加载器
 webpackConfig.module.loaders.push({ 
@@ -227,7 +224,7 @@ if (!__DEV__) {
   })
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('css/[name].[contenthash].css', {
+    new ExtractTextPlugin('css/[name].[contenthash:8].css', {
       allChunks : true
     })
   )

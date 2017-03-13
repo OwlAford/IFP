@@ -22,9 +22,9 @@ const config = {
   project_name  : 'inmanage',
 
   // 本地服务配置
-  server_host  : ip.address(),
-  server_port  : process.env.PORT || 8000,
-  autoOpenBrowser: true,
+  server_host     : ip.address(),
+  server_port     : process.env.PORT || 8000,
+  autoOpenBrowser : true,
 
   // 编译配置
   compiler_babel : {
@@ -33,7 +33,7 @@ const config = {
     presets        : ['es2015', 'react', 'stage-0']
   },
   compiler_devtool         : 'source-map',
-  compiler_hash_type       : 'hash',
+  compiler_hash_type       : 'hash:8',
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
   compiler_public_path     : '/',
