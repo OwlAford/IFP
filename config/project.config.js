@@ -38,9 +38,9 @@ const config = {
   compiler_quiet           : false,
   compiler_public_path     : '/',
   compiler_stats           : {
-    chunks : false,
+    chunks       : false,
     chunkModules : false,
-    colors : true
+    colors       : true
   },
   compiler_vendors : [
     'react',

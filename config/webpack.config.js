@@ -102,7 +102,7 @@ if (__DEV__) {
 } else if (__PROD__) {
   debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
   webpackConfig.plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress : {
@@ -116,7 +116,7 @@ if (__DEV__) {
 
 webpackConfig.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
-    names : ['vendor']
+    names : ['vendor', 'manifest']
   })
 )
 

@@ -5,7 +5,7 @@ export default class WelcomeView extends Component {
 
   render () {
     const { main } = this.props
-    const format = str => str ? str : ''
+    const format = str => str ? str : '暂无'
     return (
       <div className="page-welcome">
         <div className="title">欢迎使用IFP内部管理系统！</div>
@@ -26,7 +26,7 @@ export default class WelcomeView extends Component {
                   label: '最后一次登录时间：',
                   info: format(main.lastLoginTime)
                 },{
-                  label: '登录次数：',
+                  label: '当前登录次数：',
                   info: format(main.loginCount)
                 }].map((item, i) => {
                   return (
