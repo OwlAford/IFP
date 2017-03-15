@@ -9,7 +9,7 @@
 npm install
 ```
 
-##Usage
+## Usage
 
 - Run the following command to the local debugging environment, then open `http://localhost:8000` in browser.
 
@@ -29,9 +29,9 @@ npm run build
 npm run lint
 ```
 
-##Update log
+## Update log
 
-###2017/03/01
+### 2017/03/01
 
 **Members: Aford**
 
@@ -41,14 +41,14 @@ npm run lint
 4. Modify polyfill inject plan.
 5. Add batch operation script.
 
-###2017/02/21
+### 2017/02/21
 
 **Members: Aford**
 
 1. Solve the problem of MS Edge fetch request failed.
 
 
-###2017/02/20
+### 2017/02/20
 
 **Members: Aford**
 
