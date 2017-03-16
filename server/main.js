@@ -34,7 +34,7 @@ if (project.env === 'development') {
 
   app.use(express.static(project.paths.public()))
 
-  //代理转发，解决跨域问题
+  // 代理转发，解决跨域问题
   if (project.service_agent) {
     app.use('/', (req, res) => {
       const url = `${project.remote_host}${req.url}`
