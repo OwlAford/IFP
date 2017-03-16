@@ -15,7 +15,7 @@ export default class AppContainer extends Component {
 
   render() {
     const { routes, store } = this.props
-  	return (
+    return (
       <Provider store={store}>
         <div className='app-wrap'>
           <Router history={hashHistory} routes={routes}/>
