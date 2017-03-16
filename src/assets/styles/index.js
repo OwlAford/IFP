@@ -6,4 +6,4 @@ import './public/core.scss'
 import './layouts'
 import './pages/common.scss'
 
-import './loading.scss'
+import './loading2.scss'
