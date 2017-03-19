@@ -20,7 +20,7 @@ const Object2KeyValue = obj => {
   if (typeof obj != 'object') {
     throw Error('only transform simple Object to k-v params!')
   }
-  var kvArray = []
+  let kvArray = []
   for (let key in obj) {
     let item = obj[key]
     if (item instanceof Array) {
@@ -37,9 +37,9 @@ const arrayFormatter = (tar, arrName, arr) => {
     let son = arr[i]
     for (let j in son) {
       let grandson = son[j]
-      typeof grandson == 'object' ?
-      tar.push(`${arrName}[${i}][${j}]=${JSON.stringify(grandson)}`) :
-      tar.push(`${arrName}[${i}][${j}]=${grandson}`)
+      typeof grandson == 'object' 
+      ? tar.push(`${arrName}[${i}][${j}]=${JSON.stringify(grandson)}`) 
+      : tar.push(`${arrName}[${i}][${j}]=${grandson}`)
     }
   }
 }
