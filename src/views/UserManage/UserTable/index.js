@@ -1,5 +1,5 @@
 import connect from 'STORE/connect'
-import { userPageByBrh, setPreviewBoxVsisible, setBindRoleBoxVsisible, previewUser, modifyUser, userBindRole, delUserUpdate } from 'REDUCER/userManage'
+import { userPageByBrh, previewUser, modifyUser, userBindRole, delUserUpdate } from 'REDUCER/userManage'
 import { getUserRoleTree } from 'REDUCER/common/bindRole'
 import UserTableView from './UserTableView'
 
@@ -14,8 +14,6 @@ export default connect(
 
   {
     userPageByBrh,
-    setPreviewBoxVsisible,
-    setBindRoleBoxVsisible,
     previewUser,
     modifyUser,
     userBindRole,
